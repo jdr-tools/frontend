@@ -4,7 +4,7 @@ const accountsRoute = function ($stateProvider) {
     views: {
       'main@': {
         templateUrl: 'src/modules/accounts/template.html',
-        controller: 'accountsController'
+        controller: 'accountsController as vm'
       }
     }
   })

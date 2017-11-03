@@ -4,7 +4,7 @@ const dashboardRoute = function ($stateProvider) {
     views: {
       'main@': {
         templateUrl: 'src/modules/dashboard/template.html',
-        controller: 'dashboardController'
+        controller: 'dashboardController as vm'
       }
     }
   })
