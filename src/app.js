@@ -1,6 +1,4 @@
-import angular from 'angular'
-import uirouter from 'angular-ui-router'
-
 import dashboard from './modules/dashboard/'
+import accounts from './modules/accounts/'
 
-angular.module('arkaan.frontend', [uirouter, dashboard])
+angular.module('arkaan.frontend', ['ui.router', dashboard, accounts])
