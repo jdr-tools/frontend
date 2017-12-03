@@ -5,10 +5,16 @@ class Controller < Sinatra::Base
 
   set :root, File.join(File.dirname(__FILE__), '..')
   set :public_folder, File.join(settings.root, 'client')
-  set :public, File.join(settings.root, 'client')
   set :views, settings.public_folder
 
-  puts settings.public_folder
+  configure do
+    use Rack::Session::Cookie, secret: ENV['SESSION_SECRET']
+    use Rack::Csrf, raise: true
+  end
+
+  helpers do
+    def csrf_tag; Rack::Csrf.tag(env); end
+  end
 
   attr_reader :connection
 
@@ -25,12 +31,8 @@ class Controller < Sinatra::Base
     erb :index
   end
 
-  get '/api' do
-    if params['data'].nil?
-      params['data'] = {'app_key' => ENV['APP_KEY']}
-    else
-      params['data']['app_key'] = ENV['APP_KEY']
-    end
+  post '/api' do
+    add_data_to_params
     @forwarded = connection.send(params['method']) do |req|
       forward.url params['url'], params['data']
       forward.body = params['body']
@@ -40,5 +42,15 @@ class Controller < Sinatra::Base
     end
     status @forwarded.status
     body @forwarded.body
+  end
+
+  private
+
+  def add_data_to_params
+    if params['data'].nil?
+      params['data'] = {'app_key' => ENV['APP_KEY']}
+    else
+      params['data']['app_key'] = ENV['APP_KEY']
+    end
   end
 end

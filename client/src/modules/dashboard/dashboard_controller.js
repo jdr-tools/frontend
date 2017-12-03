@@ -1,7 +1,7 @@
 const dashboardController = class DashboardController {
-  constructor() {
+  constructor(Api) {
     'ngInject'
-    this.dashboardMessage = "Bienvenue sur l'écran d'accueil"
+    this.dashboardMessage = Api.post('url', {}, {})
   }
 }
 
