@@ -2,8 +2,6 @@
   "version": "0.0.0",
   "name": "arkaan-frontend",
   "devDependencies": {
-    "angular": "^1.6.6",
-    "angular-ui-router": "^0.4.3",
     "babel-core": "^6.26.0",
     "babel-plugin-angularjs-annotate": "^0.8.2",
     "babel-plugin-transform-decorators": "^6.24.1",
@@ -31,10 +29,5 @@
     "require-dir": "^0.3.2",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.9.0"
-  },
-  "dependencies": {
-    "bootstrap": "^4.0.0-beta.2",
-    "jquery": "^3.2.1",
-    "popper.js": "^1.12.9"
   }
 }
