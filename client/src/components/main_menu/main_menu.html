@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="/">{{vm.authenticated}}</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- This menu  is displayed on the left, only when you're authenticated. -->
+    <div class="collapse navbar-collapse" ng-if="vm.authenticated">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" ui-sref="dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" ui-sref="accounts">Accounts</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="collapse navbar-collapse flex-row-reverse">
+      <!-- The menu displayed on the right if you're not connected -->
+      <ul class="navbar-nav" ng-if="!vm.authenticated">
+        <li class="nav-item">
+          <a class="nav-link" ui-sref="login">Log in</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

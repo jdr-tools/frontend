@@ -1,8 +1,0 @@
-{
-  "balancers": [
-    {
-      "secured": true,
-      "uri": "arkaan-load-balancer.herokuapp.com"
-    }
-  ]
-}

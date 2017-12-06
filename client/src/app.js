@@ -1,7 +1,6 @@
-import dashboard from './modules/dashboard/'
-import accounts from './modules/accounts/'
-import login from './modules/login/'
-import services from './services'
+import components from './components'
 import configuration from './configuration'
+import modules from './modules'
+import services from './services'
 
-angular.module('arkaan.frontend', ['ui.router', dashboard, accounts, login, services, configuration])
+angular.module('arkaan.frontend', ['ui.router', 'ngStorage', components, configuration, modules, services])

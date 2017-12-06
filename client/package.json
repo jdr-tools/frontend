@@ -29,5 +29,15 @@
     "require-dir": "^0.3.2",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.9.0"
-  }
+  },
+  "dependencies": {
+    "@uirouter/angularjs": "^1.0.11",
+    "angular": "^1.6.7",
+    "bootstrap": "^4.0.0-beta.2",
+    "jquery": "^3.2.1",
+    "ngstorage": "^0.3.11",
+    "popper.js": "^1.12.9"
+  },
+  "main": "app.js",
+  "license": "MIT"
 }
