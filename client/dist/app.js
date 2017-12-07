@@ -373,7 +373,7 @@ var Api = function () {
         method: verb,
         url: uri,
         headers: {
-          X_CSRF_TOKEN: this.jquery('input[name=_csrf]')
+          X_CSRF_TOKEN: this.jquery('input[name=_csrf]').val()
         }
       };
       var successCallback = function successCallback(response) {
