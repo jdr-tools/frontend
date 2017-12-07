@@ -11,7 +11,7 @@ const Api = class ApiClass {
   constructor ($http, $window) {
     'ngInject'
     this.http = $http
-    this.jquery = $window.jquery
+    this.jquery = $window.jQuery
   }
 
   /**

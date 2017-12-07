@@ -354,7 +354,7 @@ var Api = function () {
     _classCallCheck(this, ApiClass);
 
     this.http = $http;
-    this.jquery = $window.jquery;
+    this.jquery = $window.jQuery;
   }
 
 
