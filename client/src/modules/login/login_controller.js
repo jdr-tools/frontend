@@ -3,10 +3,15 @@
  * @author Vincent Courtois <courtois.vincent@outlook.com>
  */
 const loginController = class LoginController {
-  constructor() {
+  constructor(Authentication) {
     'ngInject'
     this.username = ''
     this.password = ''
+    this.auth = Authentication
+  }
+
+  authenticate () {
+    this.auth.createUserSession(this.username, this.password)
   }
   
 }

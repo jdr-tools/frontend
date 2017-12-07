@@ -4,9 +4,10 @@
  */
 const Authentication = class AuthenticationClass {
 
-  constructor ($localStorage) {
+  constructor ($localStorage, Api) {
     'ngInject'
     this.storage = $localStorage
+    this.api = Api
   }
 
   /**
@@ -16,17 +17,22 @@ const Authentication = class AuthenticationClass {
    * @return {Boolean} TRUE if the user session is currently valid, FALSE otherwise.
    */
   checkUserSession (username, token) {
-    return !(this.storage.username !== undefined || this.storage.token !== undefined)
+    return (this.storage.username && this.storage.token)
   }
 
   /**
    * Creates a user session with the given parameters
    * @param {String} username - the username to create the session with.
-   * @param {String} token - the token of the session, identifying it server-side.
+   * @param {String} token - the password of the user, used to identify him server-side.
    */
-  createUserSession (username, token) {
-    this.storage.username = username
-    this.storage.token = token
+  createUserSession (username, password) {
+    const me = this
+    const successCallback = (response) => console.log(response)
+    const errorCallback = (response) => console.log(response)
+    this.api.post('/sessions', {username: username, password: password}, {
+      successCallback: successCallback,
+      errorCallback: errorCallback
+    })
   }
 
   /**

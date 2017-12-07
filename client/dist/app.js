@@ -288,16 +288,30 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var loginController = function LoginController() {
-  'ngInject';
+var loginController = function () {
+  function LoginController(Authentication) {
+    'ngInject';
 
-  _classCallCheck(this, LoginController);
+    _classCallCheck(this, LoginController);
 
-  this.username = '';
-  this.password = '';
-};
+    this.username = '';
+    this.password = '';
+    this.auth = Authentication;
+  }
+
+  _createClass(LoginController, [{
+    key: 'authenticate',
+    value: function authenticate() {
+      this.auth.createUserSession(this.username, this.password);
+    }
+  }]);
+
+  return LoginController;
+}();
 
 exports.default = loginController;
 
@@ -334,20 +348,41 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var Api = function () {
 
-  function ApiClass($http) {
+  function ApiClass($http, $window) {
     'ngInject';
 
     _classCallCheck(this, ApiClass);
 
     this.http = $http;
+    this.jquery = $window.jquery;
   }
 
 
 
   _createClass(ApiClass, [{
     key: 'post',
-    value: function post(url, parameters, options) {
-      return 'Je compte faire une requête en post pour vérifier un truc sur l\'API';
+    value: function post(uri, parameters, options) {
+      this.makeRequest('POST', uri, parameters, options);
+    }
+
+
+  }, {
+    key: 'makeRequest',
+    value: function makeRequest(verb, uri, parameter, options) {
+      var configuration = {
+        method: verb,
+        url: uri,
+        headers: {
+          X_CSRF_TOKEN: this.jquery('input[name=_csrf]')
+        }
+      };
+      var successCallback = function successCallback(response) {
+        if (options.successCallback) options.successCallback(response);
+      };
+      var errorCallback = function errorCallback(response) {
+        if (options.errorCallback) options.errorCallback(response);
+      };
+      return this.http(configuration).then(successCallback, errorCallback);
     }
   }]);
 
@@ -357,7 +392,7 @@ var Api = function () {
 exports.default = Api;
 
 },{}],18:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -368,16 +403,46 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Authentication = function () {
-  function AuthenticationClass() {
+  function AuthenticationClass($localStorage, Api) {
+    'ngInject';
+
     _classCallCheck(this, AuthenticationClass);
+
+    this.storage = $localStorage;
+    this.api = Api;
   }
 
+
+
   _createClass(AuthenticationClass, [{
-    key: "checkUserSession",
-
-
+    key: 'checkUserSession',
     value: function checkUserSession(username, token) {
-      return false;
+      return this.storage.username && this.storage.token;
+    }
+
+
+  }, {
+    key: 'createUserSession',
+    value: function createUserSession(username, password) {
+      var me = this;
+      var successCallback = function successCallback(response) {
+        return console.log(response);
+      };
+      var errorCallback = function errorCallback(response) {
+        return console.log(response);
+      };
+      this.api.post('/sessions', { username: username, password: password }, {
+        successCallback: successCallback,
+        errorCallback: errorCallback
+      });
+    }
+
+
+  }, {
+    key: 'destroyUserSession',
+    value: function destroyUserSession() {
+      delete this.storage.username;
+      delete this.storage.token;
     }
   }]);
 
