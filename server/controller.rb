@@ -33,7 +33,7 @@ class Controller < Sinatra::Base
 
   post '/api' do
     @body = parse_body
-    @forwarded = connection.send(@body['method'].downcase rescue 'get') do |req|
+    @forwarded = connection.send(@body['method'].downcase) do |req|
       forward.url @body['url'], @body['data']
       forward.body = @body['body']
       forward.headers['Content-Type'] = 'application/json'
