@@ -50,7 +50,7 @@ class Controller < Sinatra::Base
 
   def parse_body
     body = JSON.parse(request.body.read.to_s) rescue {}
-    body['app_key'] = ENV['APP_KEY']
+    body['app_key'] = ENV['INIT_APPKEY']
     return body
   end
 end
