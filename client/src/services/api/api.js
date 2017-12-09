@@ -37,7 +37,7 @@ const Api = class ApiClass {
       url: '/api',
       headers: {
         X_CSRF_TOKEN: this.jquery('input[name=_csrf]').val()
-      }
+      },
       data: angular.extend({}, parameters, {url: uri, method: verb})
     }
     const successCallback = (response) => {

@@ -368,13 +368,14 @@ var Api = function () {
 
   }, {
     key: 'makeRequest',
-    value: function makeRequest(verb, uri, parameter, options) {
+    value: function makeRequest(verb, uri, parameters, options) {
       var configuration = {
         method: verb,
-        url: uri,
+        url: '/api',
         headers: {
           X_CSRF_TOKEN: this.jquery('input[name=_csrf]').val()
-        }
+        },
+        data: angular.extend({}, parameters, { url: uri, method: verb })
       };
       var successCallback = function successCallback(response) {
         if (options.successCallback) options.successCallback(response);
