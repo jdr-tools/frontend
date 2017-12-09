@@ -6,6 +6,6 @@ require './server/seeder.rb'
 
 Mongoid.load!('./config/mongoid.yml')
 
-Seeder.instance.create_init_account
+Seeder.instance.create_init_application
 
 map('/') { run Controller.new }

@@ -33,9 +33,11 @@ class Controller < Sinatra::Base
 
   post '/api' do
     @body = parse_body
-    @forwarded = connection.send(@body['method'].downcase) do |forwarded_request|
-      forwarded_request.url @body['url'], @body['data']
-      forwarded_request.body = @body['body']
+    @url = @body.delete('url')
+    @verb = @body.delete('method') || 'get'
+    @forwarded = connection.send(@verb) do |forwarded_request|
+      forwarded_request.url @url
+      forwarded_request.body = @body
       forwarded_request.headers['Content-Type'] = 'application/json'
       forwarded_request.options.timeout = 5
       forwarded_request.options.open_timeout = 2
@@ -48,11 +50,7 @@ class Controller < Sinatra::Base
 
   def parse_body
     body = JSON.parse(request.body.read.to_s) rescue {}
-    if body['data'].nil?
-      body['data'] = {'app_key' => ENV['APP_KEY']}
-    else
-      body['data']['app_key'] = ENV['APP_KEY']
-    end
+    body['app_key'] = ENV['APP_KEY']
     return body
   end
 end
