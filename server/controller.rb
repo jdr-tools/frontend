@@ -34,7 +34,7 @@ class Controller < Sinatra::Base
   post '/api' do
     @body = parse_body
     @url = @body.delete('url')
-    @verb = @body.delete('method') || 'get'
+    @verb = @body.delete('method').downcase || 'get'
     @forwarded = connection.send(@verb) do |forwarded_request|
       forwarded_request.url @url
       forwarded_request.body = @body
