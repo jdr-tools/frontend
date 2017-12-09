@@ -37,7 +37,7 @@ class Controller < Sinatra::Base
     @verb = @body.delete('method').downcase || 'get'
     @forwarded = connection.send(@verb) do |forwarded_request|
       forwarded_request.url @url
-      forwarded_request.body = @body
+      forwarded_request.body = @body.to_json
       forwarded_request.headers['Content-Type'] = 'application/json'
       forwarded_request.options.timeout = 5
       forwarded_request.options.open_timeout = 2
