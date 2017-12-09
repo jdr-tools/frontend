@@ -33,12 +33,12 @@ class Controller < Sinatra::Base
 
   post '/api' do
     @body = parse_body
-    @forwarded = connection.send(@body['method'].downcase) do |req|
-      forward.url @body['url'], @body['data']
-      forward.body = @body['body']
-      forward.headers['Content-Type'] = 'application/json'
-      forward.options.timeout = 5
-      forward.options.open_timeout = 2
+    @forwarded = connection.send(@body['method'].downcase) do |forwarded_request|
+      forwarded_request.url @body['url'], @body['data']
+      forwarded_request.body = @body['body']
+      forwarded_request.headers['Content-Type'] = 'application/json'
+      forwarded_request.options.timeout = 5
+      forwarded_request.options.open_timeout = 2
     end
     status @forwarded.status
     body @forwarded.body
