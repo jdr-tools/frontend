@@ -31,13 +31,14 @@ const Api = class ApiClass {
    * @param {Object} parameters - the additional parameters put in the queryString or the body, depending on the used verb.
    * @param {Object} options - an option hash used to alter the default behaviour of the method.
    */
-  makeRequest (verb, uri, parameter, options) {
+  makeRequest (verb, uri, parameters, options) {
     const configuration = {
       method: verb,
-      url: uri,
+      url: '/api',
       headers: {
         X_CSRF_TOKEN: this.jquery('input[name=_csrf]').val()
       }
+      data: angular.extend({}, parameters, {url: uri, method: verb})
     }
     const successCallback = (response) => {
       if(options.successCallback) options.successCallback(response)

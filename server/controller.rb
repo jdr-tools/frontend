@@ -32,10 +32,10 @@ class Controller < Sinatra::Base
   end
 
   post '/api' do
-    add_data_to_params
-    @forwarded = connection.send(params['method']) do |req|
-      forward.url params['url'], params['data']
-      forward.body = params['body']
+    @body = parse_body
+    @forwarded = connection.send(@body['method']) do |req|
+      forward.url @body['url'], @body['data']
+      forward.body = @body['body']
       forward.headers['Content-Type'] = 'application/json'
       forward.options.timeout = 5
       forward.options.open_timeout = 2
@@ -46,11 +46,13 @@ class Controller < Sinatra::Base
 
   private
 
-  def add_data_to_params
-    if params['data'].nil?
-      params['data'] = {'app_key' => ENV['APP_KEY']}
+  def parse_body
+    body = JSON.parse(request.body.read.to_s) rescue {}
+    if body['data'].nil?
+      body['data'] = {'app_key' => ENV['APP_KEY']}
     else
-      params['data']['app_key'] = ENV['APP_KEY']
+      body['data']['app_key'] = ENV['APP_KEY']
     end
+    return body
   end
 end
