@@ -6,6 +6,12 @@ const accountsRoute = function ($stateProvider) {
         templateUrl: 'src/modules/accounts/template.html',
         controller: 'accountsController as vm'
       }
+    },
+    resolve: {
+      authentication: (Authentication) => {
+        'ngInject'
+        Authentication.checkUserSession()
+      }
     }
   })
 }

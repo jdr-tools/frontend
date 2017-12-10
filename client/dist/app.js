@@ -146,6 +146,13 @@ var accountsRoute = function accountsRoute($stateProvider) {
         templateUrl: 'src/modules/accounts/template.html',
         controller: 'accountsController as vm'
       }
+    },
+    resolve: {
+      authentication: function authentication(Authentication) {
+        'ngInject';
+
+        Authentication.checkUserSession();
+      }
     }
   });
 };
@@ -404,21 +411,50 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Authentication = function () {
-  function AuthenticationClass($localStorage, Api) {
+  function AuthenticationClass($localStorage, Api, $state) {
     'ngInject';
 
     _classCallCheck(this, AuthenticationClass);
 
     this.storage = $localStorage;
     this.api = Api;
+    this.state = $state;
   }
 
 
 
   _createClass(AuthenticationClass, [{
     key: 'checkUserSession',
-    value: function checkUserSession(username, token) {
-      return this.storage.username && this.storage.token;
+    value: function checkUserSession() {
+      return this.checkSessionKeysPresence() && this.checkForInvalidSession();
+    }
+
+
+  }, {
+    key: 'checkSessionKeysPresence',
+    value: function checkSessionKeysPresence() {
+      if (!this.storage.username || !this.storage.token) {
+        this.destroyUserSession();
+        return false;
+      }
+      return true;
+    }
+
+
+  }, {
+    key: 'checkForInvalidSession',
+    value: function checkForInvalidSession() {
+      this.api.get('/sessions/' + this.storage.token, {
+        successCallback: this.checkForHijackedSession,
+        errorCallback: this.destroyUserSession
+      });
+    }
+
+
+  }, {
+    key: 'checkForHijackedSession',
+    value: function checkForHijackedSession(response) {
+      if (response.username != this.storage.username) this.destroyUserSession();
     }
 
 
@@ -427,15 +463,10 @@ var Authentication = function () {
     value: function createUserSession(username, password) {
       var me = this;
       var successCallback = function successCallback(response) {
-        return console.log(response);
+        me.storage.username = username;
+        me.storage.token = response.token;
       };
-      var errorCallback = function errorCallback(response) {
-        return console.log(response);
-      };
-      this.api.post('/sessions', { username: username, password: password }, {
-        successCallback: successCallback,
-        errorCallback: errorCallback
-      });
+      this.api.post('/sessions', { username: username, password: password }, { successCallback: successCallback });
     }
 
 
@@ -444,6 +475,7 @@ var Authentication = function () {
     value: function destroyUserSession() {
       delete this.storage.username;
       delete this.storage.token;
+      this.state.go('login');
     }
   }]);
 
