@@ -20,8 +20,12 @@ const Api = class ApiClass {
    * @param {Object} parameters - the parameters you want to pass as a body to the route.
    * @param {Object} options - the options to pass to the service to change its default behaviour.
    */
-  post (uri, parameters, options) {
+  post (uri, parameters = {}, options = {}) {
     this.makeRequest('POST', uri, parameters, options)
+  }
+
+  get (uri, parameters = {}, options = {}) {
+    this.makeRequest('GET', uri, parameters, options)
   }
 
   /**
@@ -41,10 +45,10 @@ const Api = class ApiClass {
       data: angular.extend({}, parameters, {url: uri, method: verb})
     }
     const successCallback = (response) => {
-      if(options.successCallback) options.successCallback(response)
+      if(options.successCallback) options.successCallback(response.data)
     }
     const errorCallback = (response) => {
-      if(options.errorCallback) options.errorCallback(response)
+      if(options.errorCallback) options.errorCallback(response.data)
     }
     return this.http(configuration).then(successCallback, errorCallback)
   }

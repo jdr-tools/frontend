@@ -1,9 +1,9 @@
-import accountsController from './accounts_controller'
+import accountsListController from './list/accounts_list_controller'
 import accountsRoute from './accounts_route'
 
 const accounts = angular.module('arkaan.frontend.accounts', [])
+  .controller('accountsListController', accountsListController)
   .config(accountsRoute)
-  .controller('accountsController', accountsController)
   .name
 
 export default accounts

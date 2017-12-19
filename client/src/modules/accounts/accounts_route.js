@@ -1,16 +1,26 @@
 const accountsRoute = function ($stateProvider) {
-  $stateProvider.state('accounts', {
-    url: '/accounts',
-    views: {
-      'main@': {
-        templateUrl: 'src/modules/accounts/template.html',
-        controller: 'accountsController as vm'
-      }
-    },
+  'ngInject'
+
+  /** Virtual state for all accounts-related states. */
+  $stateProvider.state({
+    name: 'accounts',
     resolve: {
       authentication: (Authentication) => {
         'ngInject'
-        Authentication.checkUserSession()
+        Authentication.checkAndRedirect()
+      }
+    }
+  })
+
+  /** Concrete state for displaying a list of accounts. */
+  $stateProvider.state({
+    name: 'accountsList',
+    url: '/accounts',
+    parent: 'accounts',
+    views: {
+      'main@': {
+        templateUrl: 'src/modules/accounts/list/accounts_list.html',
+        controller: 'accountsListController as vm'
       }
     }
   })

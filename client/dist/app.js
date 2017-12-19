@@ -64,15 +64,35 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var mainMenuController = function MainMenu(Authentication, $localStorage) {
-  'ngInject';
+var mainMenuController = function () {
+  function MainMenu(Authentication, $rootScope) {
+    'ngInject';
 
-  _classCallCheck(this, MainMenu);
+    _classCallCheck(this, MainMenu);
 
-  this.authenticated = Authentication.checkUserSession($localStorage.username, $localStorage.token);
-};
+    this.auth = Authentication;
+    this.authenticated = Authentication.checkSessionKeysPresence(false);
+
+    var me = this;
+    $rootScope.$on('loginSuccessful', function () {
+      me.authenticated = true;
+    });
+  }
+
+  _createClass(MainMenu, [{
+    key: 'logout',
+    value: function logout() {
+      this.auth.destroyUserSession();
+      this.authenticated = false;
+    }
+  }]);
+
+  return MainMenu;
+}();
 
 var mainMenuComponent = {
   controller: mainMenuController,
@@ -119,39 +139,29 @@ exports.default = configUrlRouterProvider;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var accountsController = function AccountsController() {
+var accountsRoute = function accountsRoute($stateProvider) {
   'ngInject';
 
-  _classCallCheck(this, AccountsController);
 
-  this.accounts = ['babausse', 'babaussine'];
-};
-
-exports.default = accountsController;
-
-},{}],8:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var accountsRoute = function accountsRoute($stateProvider) {
-  $stateProvider.state('accounts', {
-    url: '/accounts',
-    views: {
-      'main@': {
-        templateUrl: 'src/modules/accounts/template.html',
-        controller: 'accountsController as vm'
-      }
-    },
+  $stateProvider.state({
+    name: 'accounts',
     resolve: {
       authentication: function authentication(Authentication) {
         'ngInject';
 
-        Authentication.checkUserSession();
+        Authentication.checkAndRedirect();
+      }
+    }
+  });
+
+  $stateProvider.state({
+    name: 'accountsList',
+    url: '/accounts',
+    parent: 'accounts',
+    views: {
+      'main@': {
+        templateUrl: 'src/modules/accounts/list/accounts_list.html',
+        controller: 'accountsListController as vm'
       }
     }
   });
@@ -159,16 +169,16 @@ var accountsRoute = function accountsRoute($stateProvider) {
 
 exports.default = accountsRoute;
 
-},{}],9:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _accounts_controller = require('./accounts_controller');
+var _accounts_list_controller = require('./list/accounts_list_controller');
 
-var _accounts_controller2 = _interopRequireDefault(_accounts_controller);
+var _accounts_list_controller2 = _interopRequireDefault(_accounts_list_controller);
 
 var _accounts_route = require('./accounts_route');
 
@@ -176,11 +186,30 @@ var _accounts_route2 = _interopRequireDefault(_accounts_route);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var accounts = angular.module('arkaan.frontend.accounts', []).config(_accounts_route2.default).controller('accountsController', _accounts_controller2.default).name;
+var accounts = angular.module('arkaan.frontend.accounts', []).controller('accountsListController', _accounts_list_controller2.default).config(_accounts_route2.default).name;
 
 exports.default = accounts;
 
-},{"./accounts_controller":7,"./accounts_route":8}],10:[function(require,module,exports){
+},{"./accounts_route":7,"./list/accounts_list_controller":9}],9:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var accountsListController = function AccountsController() {
+  'ngInject';
+
+  _classCallCheck(this, AccountsController);
+
+  this.accounts = ['babausse', 'babaussine'];
+};
+
+exports.default = accountsListController;
+
+},{}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -193,8 +222,6 @@ var dashboardController = function DashboardController(Api) {
   'ngInject';
 
   _classCallCheck(this, DashboardController);
-
-  this.dashboardMessage = Api.post('url', {}, {});
 };
 
 exports.default = dashboardController;
@@ -206,6 +233,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var dashboardRoute = function dashboardRoute($stateProvider) {
+  'ngInject';
+
+
   $stateProvider.state('dashboard', {
     url: '/dashboard',
     views: {
@@ -267,7 +297,7 @@ var modules = angular.module('arkaan.frontend.modules', modulesList).name;
 
 exports.default = modules;
 
-},{"./accounts":9,"./dashboard":12,"./login":14}],14:[function(require,module,exports){
+},{"./accounts":8,"./dashboard":12,"./login":14}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -368,8 +398,19 @@ var Api = function () {
 
   _createClass(ApiClass, [{
     key: 'post',
-    value: function post(uri, parameters, options) {
+    value: function post(uri) {
+      var parameters = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
       this.makeRequest('POST', uri, parameters, options);
+    }
+  }, {
+    key: 'get',
+    value: function get(uri) {
+      var parameters = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+      this.makeRequest('GET', uri, parameters, options);
     }
 
 
@@ -385,10 +426,10 @@ var Api = function () {
         data: angular.extend({}, parameters, { url: uri, method: verb })
       };
       var successCallback = function successCallback(response) {
-        if (options.successCallback) options.successCallback(response);
+        if (options.successCallback) options.successCallback(response.data);
       };
       var errorCallback = function errorCallback(response) {
-        if (options.errorCallback) options.errorCallback(response);
+        if (options.errorCallback) options.errorCallback(response.data);
       };
       return this.http(configuration).then(successCallback, errorCallback);
     }
@@ -411,7 +452,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Authentication = function () {
-  function AuthenticationClass($localStorage, Api, $state) {
+  function AuthenticationClass(Api, $localStorage, $rootScope, $state) {
     'ngInject';
 
     _classCallCheck(this, AuthenticationClass);
@@ -419,13 +460,14 @@ var Authentication = function () {
     this.storage = $localStorage;
     this.api = Api;
     this.state = $state;
+    this.scope = $rootScope;
   }
 
 
 
   _createClass(AuthenticationClass, [{
-    key: 'checkUserSession',
-    value: function checkUserSession() {
+    key: 'checkAndRedirect',
+    value: function checkAndRedirect() {
       return this.checkSessionKeysPresence() && this.checkForInvalidSession();
     }
 
@@ -433,11 +475,11 @@ var Authentication = function () {
   }, {
     key: 'checkSessionKeysPresence',
     value: function checkSessionKeysPresence() {
-      if (!this.storage.username || !this.storage.token) {
-        this.destroyUserSession();
-        return false;
-      }
-      return true;
+      var redirectIfError = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
+      var hasBothKeys = !!this.storage.username && !!this.storage.token;
+      if (!hasBothKeys && redirectIfError) this.destroyUserSession();
+      return hasBothKeys;
     }
 
 
@@ -465,6 +507,8 @@ var Authentication = function () {
       var successCallback = function successCallback(response) {
         me.storage.username = username;
         me.storage.token = response.token;
+        me.scope.$broadcast('loginSuccessful');
+        me.state.go('dashboard', {}, { reload: true });
       };
       this.api.post('/sessions', { username: username, password: password }, { successCallback: successCallback });
     }
@@ -475,7 +519,7 @@ var Authentication = function () {
     value: function destroyUserSession() {
       delete this.storage.username;
       delete this.storage.token;
-      this.state.go('login');
+      this.state.go('login', {}, { reload: true });
     }
   }]);
 

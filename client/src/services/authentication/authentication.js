@@ -4,11 +4,12 @@
  */
 const Authentication = class AuthenticationClass {
 
-  constructor ($localStorage, Api, $state) {
+  constructor (Api, $localStorage, $rootScope, $state) {
     'ngInject'
     this.storage = $localStorage
     this.api = Api
     this.state = $state
+    this.scope = $rootScope
   }
 
   /**
@@ -17,25 +18,19 @@ const Authentication = class AuthenticationClass {
    * The session is considered invalid in three cases :
    * - the :username key or the :token key are not in the locale storage
    * - the session is considered invalid (see the dedicated method to know about about session validity)
-   *
-   * @param {String} username - the nickname of the user to check the session of.
-   * @param {String} token - the session token for this user on this browser.
-   * @param {Function} callback - the callback to execute if the session is NOT valid.
    */
-  checkUserSession () {
+  checkAndRedirect () {
     return this.checkSessionKeysPresence() && this.checkForInvalidSession()
   }
 
   /**
    * Checks if the session is currently empty (the needed keys are not in the locale storage).
-   * @return {Boolean} TRUE if the session keys are correctly in the locale storage, FALSE otherwise.
+   * If the session is empty, it redirects the user to the login page.
    */
-  checkSessionKeysPresence () {
-    if (!this.storage.username || !this.storage.token) {
-      this.destroyUserSession()
-      return false
-    }
-    return true
+  checkSessionKeysPresence (redirectIfError = true) {
+    const hasBothKeys = !!this.storage.username && !!this.storage.token
+    if (!hasBothKeys && redirectIfError) this.destroyUserSession()
+    return hasBothKeys
   }
 
   /**
@@ -69,6 +64,8 @@ const Authentication = class AuthenticationClass {
     const successCallback = (response) => {
       me.storage.username = username
       me.storage.token = response.token
+      me.scope.$broadcast('loginSuccessful')
+      me.state.go('dashboard', {}, {reload: true})
     }
     this.api.post('/sessions', {username: username, password: password}, {successCallback: successCallback})
   }
@@ -79,7 +76,7 @@ const Authentication = class AuthenticationClass {
   destroyUserSession () {
     delete this.storage.username
     delete this.storage.token
-    this.state.go('login')
+    this.state.go('login', {}, {reload: true})
   }
 }
 

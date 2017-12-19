@@ -3,9 +3,18 @@
  * @author Vincent Courtois <courtois.vincent@outlook.com>
  */
 const mainMenuController = class MainMenu {
-  constructor (Authentication, $localStorage) {
+  constructor (Authentication, $rootScope) {
     'ngInject'
-    this.authenticated = Authentication.checkUserSession($localStorage.username, $localStorage.token)
+    this.auth = Authentication
+    this.authenticated = Authentication.checkSessionKeysPresence(false)
+
+    const me = this
+    $rootScope.$on('loginSuccessful', () => { me.authenticated = true })
+  }
+
+  logout () {
+    this.auth.destroyUserSession()
+    this.authenticated = false
   }
 }
 

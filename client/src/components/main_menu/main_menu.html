@@ -20,7 +20,7 @@
           <a class="nav-link" ui-sref="dashboard">Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" ui-sref="accounts">Accounts</a>
+          <a class="nav-link" ui-sref="accountsList">Accounts</a>
         </li>
       </ul>
     </div>
@@ -30,6 +30,12 @@
       <ul class="navbar-nav" ng-if="!vm.authenticated">
         <li class="nav-item">
           <a class="nav-link" ui-sref="login">Log in</a>
+        </li>
+      </ul>
+      <!-- The menu displayed on the right if you're connected -->
+      <ul class="navbar-nav" ng-if="vm.authenticated">
+        <li class="nav-item">
+          <a class="nav-link" href="#" ng-click="vm.logout()">Log out</a>
         </li>
       </ul>
     </div>
