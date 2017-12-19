@@ -12,6 +12,7 @@ const mainMenuController = class MainMenu {
     $rootScope.$on('loginSuccessful', () => { me.authenticated = true })
   }
 
+  /** Logs the user out of the application and redirects him to the main page. */
   logout () {
     this.auth.destroyUserSession()
     this.authenticated = false

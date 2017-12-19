@@ -76,7 +76,7 @@ const Authentication = class AuthenticationClass {
   destroyUserSession () {
     delete this.storage.username
     delete this.storage.token
-    this.state.go('login', {}, {reload: true})
+    this.state.go('login')
   }
 }
 

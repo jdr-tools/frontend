@@ -1,1 +1,5 @@
-@import 'components/links'
+@import 'components/links';
+
+a, input[type=submit] {
+  cursor: pointer;
+}

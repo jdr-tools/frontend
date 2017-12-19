@@ -83,6 +83,8 @@ var mainMenuController = function () {
     });
   }
 
+
+
   _createClass(MainMenu, [{
     key: 'logout',
     value: function logout() {
@@ -236,7 +238,8 @@ var dashboardRoute = function dashboardRoute($stateProvider) {
   'ngInject';
 
 
-  $stateProvider.state('dashboard', {
+  $stateProvider.state({
+    name: 'dashboard',
     url: '/dashboard',
     views: {
       'main@': {
@@ -359,12 +362,20 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var loginRoute = function loginRoute($stateProvider) {
-  $stateProvider.state('login', {
+  $stateProvider.state({
+    name: 'login',
     url: '/login',
     views: {
       'main@': {
         templateUrl: 'src/modules/login/template.html',
         controller: 'loginController as vm'
+      }
+    },
+    resolve: {
+      authentication: function authentication(Authentication, $state) {
+        'ngInject';
+
+        if (Authentication.checkSessionKeysPresence(false)) $state.go('dashboard');
       }
     }
   });
@@ -404,6 +415,8 @@ var Api = function () {
 
       this.makeRequest('POST', uri, parameters, options);
     }
+
+
   }, {
     key: 'get',
     value: function get(uri) {
@@ -519,7 +532,7 @@ var Authentication = function () {
     value: function destroyUserSession() {
       delete this.storage.username;
       delete this.storage.token;
-      this.state.go('login', {}, { reload: true });
+      this.state.go('login');
     }
   }]);
 

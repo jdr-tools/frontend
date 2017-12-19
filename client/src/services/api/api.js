@@ -24,6 +24,12 @@ const Api = class ApiClass {
     this.makeRequest('POST', uri, parameters, options)
   }
 
+  /**
+   * Makes a get request on the server-side part of the application, forwarded afterward on the gateway, and the service.
+   * @param {String} uri - the URL of the route you're trying to reach in the API.
+   * @param {Object} parameters - the parameters you want to pass as a querystring to the route.
+   * @param {Object} options - the options to pass to the service to change its default behaviour.
+   */
   get (uri, parameters = {}, options = {}) {
     this.makeRequest('GET', uri, parameters, options)
   }
