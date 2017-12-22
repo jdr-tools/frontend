@@ -1,5 +1,9 @@
 client/package-lock.json
-client/node_modules/
-client/.bowerrc
-client/bower_components/
+client/node_modules/*
+!client/node_modules/@uirouter
+!client/node_modules/angular
+!client/node_modules/bootstrap
+!client/node_modules/jquery
+!client/node_modules/ngstorage
+!client/node_modules/popper.js
 .env
