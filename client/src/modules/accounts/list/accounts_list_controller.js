@@ -1,4 +1,4 @@
-const accountsListController = class AccountsController {
+const accountsListController = class AccountsListController {
   constructor() {
     'ngInject'
     this.accounts = ['babausse', 'babaussine']

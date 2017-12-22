@@ -24,6 +24,24 @@ const accountsRoute = function ($stateProvider) {
       }
     }
   })
+
+  /** Concrete state for creating an account. */
+  $stateProvider.state({
+    name: 'accountsCreate',
+    url: '/accounts/new',
+    views: {
+      'main@': {
+        templateUrl: 'src/modules/accounts/create/accounts_create.html',
+        controller: 'accountsCreateController as vm'
+      }
+    },
+    resolve: {
+      /** If the user is already authenticated, he shouldn't be able to access the account creation screen. */
+      authentication: (Authentication, $state) => {
+        if (Authentication.checkSessionKeysPresence(false)) $state.go('dashboard')
+      }
+    }
+  })
 }
 
 export default accountsRoute
