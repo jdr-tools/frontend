@@ -1,0 +1,38 @@
+{
+  "accounts": {
+    "create": {
+      "buttons": {
+        "submit": "M'inscrire"
+      },
+      "labels": {
+        "birthdate": "Date de naissance",
+        "email": "Adresse e-mail",
+        "firstname": "Prénom",
+        "lastname": "Nom de famille",
+        "password": "Mot de passe",
+        "password_confirmation": "Confirmation du mot de passe",
+        "username": "Nom d'utilisateur"
+      },
+      "legends": {
+        "about": "A propos de vous",
+        "contacts": "Informations de contact",
+        "credentials": "Informations de connexion"
+      },
+      "messages": {
+        "confirmed": "Le compte utilisateur a bien été créé"
+      },
+      "placeholders": {
+        "birthdate": "Entrez une date de naissance...",
+        "email": "Exemple : adresse-demo@arkaan.fr...",
+        "firstname": "Entrez votre prénom...",
+        "lastname": "Entrez votre nom de famille...",
+        "password": "Entrez un mot de passe...",
+        "password_confirmation": "Confirmez le mot de passe...",
+        "username": "Entrez un nom d'utilisateur..."
+      },
+      "titles": {
+        "main": "Inscription"
+      }
+    }
+  }
+}

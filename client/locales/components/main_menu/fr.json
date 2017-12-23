@@ -1,0 +1,19 @@
+{
+  "components": {
+    "main_menu": {
+      "aria": {
+        "labels": {
+          "toggle": "Dérouler le menu"
+        }
+      },
+      "brand": "Arkaan",
+      "items": {
+        "accounts": "Comptes utilisateur",
+        "dashboard": "Tableau de bord",
+        "login": "Se connecter",
+        "logout": "Se déconnecter",
+        "register": "Créer un compte"
+      }
+    }
+  }
+}

@@ -6,4 +6,6 @@ client/node_modules/*
 !client/node_modules/jquery
 !client/node_modules/ngstorage
 !client/node_modules/popper.js
+!client/node_modules/angular-translate
+!client/node_modules/angular-translate-loader-partial
 .env

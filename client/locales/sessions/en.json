@@ -1,0 +1,17 @@
+{
+  "sessions": {
+    "create": {
+      "buttons": {
+        "submit": "Log in"
+      },
+      "labels": {
+        "password": "Password",
+        "username": "Username"
+      },
+      "placeholders": {
+        "password": "Enter your password...",
+        "username": "Enter your username..."
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-sm-6">
+      <form ng-submit="vm.authenticate()">
+        <div class="form-group">
+          <label for="username" translate>sessions.create.labels.username</label>
+          <input type="text" class="form-control" name="username" ng-model="vm.username" required translate translate-attr-placeholder="sessions.create.placeholders.username" />
+        </div>
+        <div class="form-group">
+          <label for="password" translate>sessions.create.labels.password</label>
+          <input type="password" class="form-control" name="password" ng-model="vm.password" required translate translate-attr-placeholder="sessions.create.placeholders.password" />
+        </div>
+        <input class="btn" type="submit" translate translate-attr-value="sessions.create.buttons.submit" />
+      </form>
+    </div>
+  </div>
+</div>

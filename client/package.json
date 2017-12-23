@@ -6,6 +6,10 @@
   "dependencies": {
     "@uirouter/angularjs": "^1.0.11",
     "angular": "^1.6.7",
+    "angular-translate": "^2.17.0",
+    "angular-translate-loader-partial": "^2.17.0",
+    "angular-translate-loader-static-files": "^2.17.0",
+    "angular-translate-storage-local": "^2.17.0",
     "bootstrap": "4.0.0-beta.2",
     "jquery": "^3.2.1",
     "ngstorage": "^0.3.11",

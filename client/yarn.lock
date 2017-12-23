@@ -79,6 +79,46 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
+"angular-cookies@>=1.2.26 <1.7":
+  version "1.6.8"
+  resolved "https://registry.yarnpkg.com/angular-cookies/-/angular-cookies-1.6.8.tgz#97b559ed797dd6545e4aafd14ba7a42dd3c6b40f"
+
+angular-translate-loader-partial@^2.17.0:
+  version "2.17.0"
+  resolved "https://registry.yarnpkg.com/angular-translate-loader-partial/-/angular-translate-loader-partial-2.17.0.tgz#3e5b18bb9fb8f2b28ac6404b20780aa74a0bee63"
+  dependencies:
+    angular-translate "~2.17.0"
+
+angular-translate-loader-static-files@^2.17.0:
+  version "2.17.0"
+  resolved "https://registry.yarnpkg.com/angular-translate-loader-static-files/-/angular-translate-loader-static-files-2.17.0.tgz#467ca4254e01a7d224a17668fa1357e08b99abb6"
+  dependencies:
+    angular-translate "~2.17.0"
+
+angular-translate-storage-cookie@~2.17.0:
+  version "2.17.0"
+  resolved "https://registry.yarnpkg.com/angular-translate-storage-cookie/-/angular-translate-storage-cookie-2.17.0.tgz#9ca42716868a5e12c297dd4bf21bbcda4ca73303"
+  dependencies:
+    angular-cookies ">=1.2.26 <1.7"
+    angular-translate "~2.17.0"
+
+angular-translate-storage-local@^2.17.0:
+  version "2.17.0"
+  resolved "https://registry.yarnpkg.com/angular-translate-storage-local/-/angular-translate-storage-local-2.17.0.tgz#14c118d5c63bd4f0a677c60f6b351f9bf290fa20"
+  dependencies:
+    angular-translate "~2.17.0"
+    angular-translate-storage-cookie "~2.17.0"
+
+angular-translate@^2.17.0, angular-translate@~2.17.0:
+  version "2.17.0"
+  resolved "https://registry.yarnpkg.com/angular-translate/-/angular-translate-2.17.0.tgz#0871e50bec65eb30f6fbe6d83e4bee6bc5fcb474"
+  dependencies:
+    angular ">=1.2.26 <=1.6"
+
+"angular@>=1.2.26 <=1.6":
+  version "1.6.8"
+  resolved "https://registry.yarnpkg.com/angular/-/angular-1.6.8.tgz#5be378a58be91a5489e78b59c4518cd9fd273ffb"
+
 angular@^1.6.7:
   version "1.6.7"
   resolved "https://registry.yarnpkg.com/angular/-/angular-1.6.7.tgz#0f89837dae1776b01ccb1fa2096db0d9373d9897"

@@ -1,5 +1,5 @@
 const accountsCreateController = class AccountsCreateController {
-  constructor(Api) {
+  constructor(Api, $translate) {
     'ngInject'
     this.account = {
       username: '',
@@ -8,7 +8,7 @@ const accountsCreateController = class AccountsCreateController {
       email: '',
       lastname: '',
       firstname: '',
-      birthdate: new Date(1970, 0, 0, 0, 0, 0)
+      birthdate: new Date(1970, 0, 0)
     }
     this.api = Api
     this.confirmation = false

@@ -1,0 +1,23 @@
+{
+  "errors": {
+    "accounts": {
+      "email": {
+        "blank": "Veuillez indiquer une adresse e-mail.",
+        "format": "Cette adresse e-mail semble avoir un format éronné, veuillez indiquer une adresse e-mail valide.",
+        "uniq": "Cette adresse e-mail est déjà utilisée, veuillez indiquer une autre adresse e-mail."
+      },
+      "password": {
+        "blank": "Veuillez fournir un mot de passe.",
+        "confirmation": "La confirmation du mot de passe doit être identique à ce dernier."
+      },
+      "password_confirmation": {
+        "blank": "Veuillez confirmer le mot de passe."
+      },
+      "username": {
+        "blank": "Veuillez fournir un nom d'utilisateur.",
+        "short": "Ce nom d'utilisateur est trop court, un nom d'utilisateur doit faire au moins six caractères.",
+        "uniq": "Ce nom d'utilisateur existe déjà, veuillez choisir un nom d'utilisateur disponible."
+      }
+    }
+  }
+}

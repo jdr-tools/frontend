@@ -1,0 +1,10 @@
+{
+  "components": {
+    "custom_footer": {
+      "langs": {
+        "en": "English",
+        "fr": "French"
+      }
+    }
+  }
+}

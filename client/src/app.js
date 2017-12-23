@@ -3,4 +3,4 @@ import configuration from './configuration'
 import modules from './modules'
 import services from './services'
 
-angular.module('arkaan.frontend', ['ui.router', 'ngStorage', components, configuration, modules, services])
+angular.module('arkaan.frontend', ['ngStorage', 'pascalprecht.translate', 'ui.router', components, configuration, modules, services])

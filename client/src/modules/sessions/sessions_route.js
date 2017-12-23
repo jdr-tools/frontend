@@ -1,11 +1,11 @@
 const loginRoute = function ($stateProvider) {
   $stateProvider.state({
-    name: 'login',
-    url: '/login',
+    name: 'sessionsCreate',
+    url: '/sessions/new',
     views: {
       'main@': {
-        templateUrl: 'src/modules/login/template.html',
-        controller: 'loginController as vm'
+        templateUrl: 'src/modules/sessions/create/sessions_create.html',
+        controller: 'sessionsCreateController as vm'
       }
     },
     resolve: {

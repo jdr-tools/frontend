@@ -1,0 +1,17 @@
+{
+  "sessions": {
+    "create": {
+      "buttons": {
+        "submit": "Me connecter"
+      },
+      "labels": {
+        "password": "Mot de passe",
+        "username": "Nom d'utilisateur"
+      },
+      "placeholders": {
+        "password": "Entrez votre mot de passe...",
+        "username": "Entrez votre nom d'utilisateur..."
+      }
+    }
+  }
+}

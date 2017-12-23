@@ -2,7 +2,7 @@
  * Controller for the login screen.
  * @author Vincent Courtois <courtois.vincent@outlook.com>
  */
-const loginController = class LoginController {
+const sessionsCreateController = class SessionsCreateController {
   constructor(Authentication) {
     'ngInject'
     this.username = ''
@@ -16,4 +16,4 @@ const loginController = class LoginController {
   
 }
 
-export default loginController
+export default sessionsCreateController

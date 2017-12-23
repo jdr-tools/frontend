@@ -1,14 +1,22 @@
 const accountsRoute = function ($stateProvider) {
   'ngInject'
 
+  const addTranslation = ($translatePartialLoader) => {
+    'ngInject'
+    $translatePartialLoader.addPart('accounts')
+  }
+
   /** Virtual state for all accounts-related states. */
   $stateProvider.state({
     name: 'accounts',
     resolve: {
+      /** Redirects the user to the login page if he's not yet connected. */
       authentication: (Authentication) => {
         'ngInject'
         Authentication.checkAndRedirect()
-      }
+      },
+      /** Add the translation partial needed for his set of features. */
+      translate: addTranslation
     }
   })
 
@@ -38,8 +46,11 @@ const accountsRoute = function ($stateProvider) {
     resolve: {
       /** If the user is already authenticated, he shouldn't be able to access the account creation screen. */
       authentication: (Authentication, $state) => {
+        'ngInject'
         if (Authentication.checkSessionKeysPresence(false)) $state.go('dashboard')
-      }
+      },
+      /** This must be added here in addition to the virutal state because this one does not inherit from it. */
+      translate: addTranslation
     }
   })
 }

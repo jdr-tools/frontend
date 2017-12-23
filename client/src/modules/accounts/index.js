@@ -7,6 +7,7 @@ const accounts = angular.module('arkaan.frontend.accounts', [])
   .controller('accountsListController', accountsListController)
   .controller('accountsCreateController', accountsCreateController)
   .config(accountsRoute)
+  .run(($translatePartialLoader) => $translatePartialLoader.addPart('accounts'))
   .name
 
 export default accounts

@@ -1,0 +1,23 @@
+{
+  "errors": {
+    "accounts": {
+      "email": {
+        "blank": "Please provide an email address.",
+        "format": "This email address is in the wrong format, please provide a rightly formed email address.",
+        "uniq": "This email address is already used, please provide an available email address."
+      },
+      "password": {
+        "blank": "Please provide a password.",
+        "confirmation": "The password confirmation must match the password."
+      },
+      "password_confirmation": {
+        "blank": "Please confirm the password."
+      },
+      "username": {
+        "blank": "Please provide a username.",
+        "short": "This username is too short, you must provide a username at least six characters long.",
+        "uniq": "This emailusername address is already used, please provide an available username."
+      }
+    }
+  }
+}
