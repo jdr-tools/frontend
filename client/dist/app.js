@@ -39,6 +39,8 @@ var customMenuController = function () {
     this.translate = $translate;
   }
 
+
+
   _createClass(customFooter, [{
     key: 'selectLanguage',
     value: function selectLanguage(language) {
@@ -145,8 +147,8 @@ var mainMenuController = function () {
   _createClass(MainMenu, [{
     key: 'logout',
     value: function logout() {
-      this.auth.destroyUserSession();
       this.authenticated = false;
+      this.auth.destroyUserSession();
     }
   }]);
 
@@ -227,11 +229,6 @@ Object.defineProperty(exports, "__esModule", {
 var accountsRoute = function accountsRoute($stateProvider) {
   'ngInject';
 
-  var addTranslation = function addTranslation($translatePartialLoader) {
-    'ngInject';
-
-    $translatePartialLoader.addPart('accounts');
-  };
 
   $stateProvider.state({
     name: 'accounts',
@@ -240,8 +237,7 @@ var accountsRoute = function accountsRoute($stateProvider) {
         'ngInject';
 
         Authentication.checkAndRedirect();
-      },
-      translate: addTranslation
+      }
     }
   });
 
@@ -271,8 +267,7 @@ var accountsRoute = function accountsRoute($stateProvider) {
         'ngInject';
 
         if (Authentication.checkSessionKeysPresence(false)) $state.go('dashboard');
-      },
-      translate: addTranslation
+      }
     }
   });
 };
@@ -310,6 +305,8 @@ var accountsCreateController = function () {
     this.errors = false;
   }
 
+
+
   _createClass(AccountsCreateController, [{
     key: 'createAccount',
     value: function createAccount() {
@@ -323,12 +320,16 @@ var accountsCreateController = function () {
         }
       });
     }
+
+
   }, {
     key: 'confirm',
     value: function confirm() {
       this.confirmation = true;
       this.errors = false;
     }
+
+
   }, {
     key: 'displayErrors',
     value: function displayErrors(response) {
@@ -498,6 +499,8 @@ var sessionsCreateController = function () {
     this.password = '';
     this.auth = Authentication;
   }
+
+
 
   _createClass(SessionsCreateController, [{
     key: 'authenticate',
@@ -669,7 +672,7 @@ var Authentication = function () {
     value: function checkSessionKeysPresence() {
       var redirectIfError = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
 
-      var hasBothKeys = !!this.storage.username && !!this.storage.token;
+      var hasBothKeys = !!this.storage.account && !!this.storage.token;
       if (!hasBothKeys && redirectIfError) this.destroyUserSession();
       return hasBothKeys;
     }
@@ -688,7 +691,7 @@ var Authentication = function () {
   }, {
     key: 'checkForHijackedSession',
     value: function checkForHijackedSession(response) {
-      if (response.username != this.storage.username) this.destroyUserSession();
+      if (response.username != this.storage.account.username) this.destroyUserSession();
     }
 
 
@@ -697,7 +700,7 @@ var Authentication = function () {
     value: function createUserSession(username, password) {
       var me = this;
       var successCallback = function successCallback(response) {
-        me.storage.username = username;
+        me.storage.account = response.account;
         me.storage.token = response.token;
         me.scope.$broadcast('loginSuccessful');
         me.state.go('dashboard', {}, { reload: true });
@@ -709,9 +712,9 @@ var Authentication = function () {
   }, {
     key: 'destroyUserSession',
     value: function destroyUserSession() {
-      delete this.storage.username;
+      delete this.storage.account;
       delete this.storage.token;
-      this.state.go('login');
+      this.state.go('sessionsCreate');
     }
   }]);
 

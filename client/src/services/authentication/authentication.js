@@ -28,7 +28,7 @@ const Authentication = class AuthenticationClass {
    * If the session is empty, it redirects the user to the login page.
    */
   checkSessionKeysPresence (redirectIfError = true) {
-    const hasBothKeys = !!this.storage.username && !!this.storage.token
+    const hasBothKeys = !!this.storage.account && !!this.storage.token
     if (!hasBothKeys && redirectIfError) this.destroyUserSession()
     return hasBothKeys
   }
@@ -51,7 +51,7 @@ const Authentication = class AuthenticationClass {
    * @param {Object} response - the response from the sessions API.
    */
   checkForHijackedSession (response) {
-    if (response.username != this.storage.username) this.destroyUserSession()
+    if (response.username != this.storage.account.username) this.destroyUserSession()
   }
 
   /**
@@ -62,7 +62,7 @@ const Authentication = class AuthenticationClass {
   createUserSession (username, password) {
     const me = this
     const successCallback = (response) => {
-      me.storage.username = username
+      me.storage.account = response.account
       me.storage.token = response.token
       me.scope.$broadcast('loginSuccessful')
       me.state.go('dashboard', {}, {reload: true})
@@ -74,9 +74,9 @@ const Authentication = class AuthenticationClass {
    * Destroys the current session and therefore disconnects the user.
    */
   destroyUserSession () {
-    delete this.storage.username
+    delete this.storage.account
     delete this.storage.token
-    this.state.go('login')
+    this.state.go('sessionsCreate')
   }
 }
 
