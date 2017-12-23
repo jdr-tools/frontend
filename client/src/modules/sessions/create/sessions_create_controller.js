@@ -10,6 +10,7 @@ const sessionsCreateController = class SessionsCreateController {
     this.auth = Authentication
   }
 
+  /** Called when the form is submitted, and creates the session for this user. */
   authenticate () {
     this.auth.createUserSession(this.username, this.password)
   }

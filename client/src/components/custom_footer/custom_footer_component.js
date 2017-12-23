@@ -7,6 +7,10 @@ const customMenuController = class customFooter {
     this.translate = $translate
   }
 
+  /**
+   * Change the language used throughout the application.
+   * @param {String} language the language you want to use, for example 'fr' or 'en'
+   */
   selectLanguage (language) {
     this.translate.use(language)
   }
