@@ -19,9 +19,9 @@ var _services2 = _interopRequireDefault(_services);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-angular.module('arkaan.frontend', ['ngStorage', 'pascalprecht.translate', 'ui.router', _components2.default, _configuration2.default, _modules2.default, _services2.default]);
+angular.module('arkaan.frontend', ['ngStorage', 'ngMaterial', 'pascalprecht.translate', 'ui.router', _components2.default, _configuration2.default, _modules2.default, _services2.default]);
 
-},{"./components":4,"./configuration":7,"./modules":17,"./services":23}],2:[function(require,module,exports){
+},{"./components":4,"./configuration":7,"./modules":17,"./services":26}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -470,15 +470,100 @@ var _sessions = require('./sessions');
 
 var _sessions2 = _interopRequireDefault(_sessions);
 
+var _rights = require('./rights');
+
+var _rights2 = _interopRequireDefault(_rights);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var modulesList = [_dashboard2.default, _accounts2.default, _sessions2.default];
+var modulesList = [_dashboard2.default, _accounts2.default, _sessions2.default, _rights2.default];
 
 var modules = angular.module('arkaan.frontend.modules', modulesList).name;
 
 exports.default = modules;
 
-},{"./accounts":12,"./dashboard":16,"./sessions":19}],18:[function(require,module,exports){
+},{"./accounts":12,"./dashboard":16,"./rights":18,"./sessions":22}],18:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _rights_list_controller = require('./list/rights_list_controller');
+
+var _rights_list_controller2 = _interopRequireDefault(_rights_list_controller);
+
+var _rights_route = require('./rights_route');
+
+var _rights_route2 = _interopRequireDefault(_rights_route);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var rights = angular.module('arkaan.frontend.rights', []).controller('rightsListController', _rights_list_controller2.default).config(_rights_route2.default).run(function ($translatePartialLoader) {
+  return $translatePartialLoader.addPart('rights');
+}).name;
+
+exports.default = rights;
+
+},{"./list/rights_list_controller":19,"./rights_route":20}],19:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var rightsListController = function RightsListController(Api) {
+  'ngInject';
+
+  _classCallCheck(this, RightsListController);
+
+  var myself = this;
+  Api.get('/rights', {}, { successCallback: function successCallback(response) {
+      return myself.rights = response;
+    } });
+};
+
+exports.default = rightsListController;
+
+},{}],20:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var rightsRoute = function rightsRoute($stateProvider) {
+  'ngInject';
+
+
+  $stateProvider.state({
+    name: 'rights',
+    resolve: {
+      authentication: function authentication(Authentication) {
+        'ngInject';
+
+        Authentication.checkAndRedirect();
+      }
+    }
+  });
+
+  $stateProvider.state({
+    name: 'rightsList',
+    url: '/rights',
+    parent: 'rights',
+    views: {
+      'main@': {
+        templateUrl: 'src/modules/rights/list/rights_list.html',
+        controller: 'rightsListController as vm'
+      }
+    }
+  });
+};
+
+exports.default = rightsRoute;
+
+},{}],21:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -514,7 +599,7 @@ var sessionsCreateController = function () {
 
 exports.default = sessionsCreateController;
 
-},{}],19:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -537,7 +622,7 @@ var login = angular.module('arkaan.frontend.sessions', []).controller('sessionsC
 
 exports.default = login;
 
-},{"././sessions_route":20,"./create/sessions_create_controller":18}],20:[function(require,module,exports){
+},{"././sessions_route":23,"./create/sessions_create_controller":21}],23:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -565,7 +650,7 @@ var loginRoute = function loginRoute($stateProvider) {
 
 exports.default = loginRoute;
 
-},{}],21:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -613,7 +698,7 @@ var Api = function () {
     key: 'makeRequest',
     value: function makeRequest(verb, uri, parameters, options) {
       var configuration = {
-        method: verb,
+        method: 'POST',
         url: '/api',
         headers: {
           X_CSRF_TOKEN: this.jquery('input[name=_csrf]').val()
@@ -635,7 +720,7 @@ var Api = function () {
 
 exports.default = Api;
 
-},{}],22:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -723,7 +808,7 @@ var Authentication = function () {
 
 exports.default = Authentication;
 
-},{}],23:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -744,4 +829,4 @@ var services = angular.module('arkaan.frontend.services', []).service('Authentic
 
 exports.default = services;
 
-},{"./api/api":21,"./authentication/authentication":22}]},{},[1])
+},{"./api/api":24,"./authentication/authentication":25}]},{},[1])

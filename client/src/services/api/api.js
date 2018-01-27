@@ -43,7 +43,7 @@ const Api = class ApiClass {
    */
   makeRequest (verb, uri, parameters, options) {
     const configuration = {
-      method: verb,
+      method: 'POST',
       url: '/api',
       headers: {
         X_CSRF_TOKEN: this.jquery('input[name=_csrf]').val()

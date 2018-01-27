@@ -1,47 +1,16 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container">
-    <a class="navbar-brand" href="/" translate>components.main_menu.brand</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      translate
-      translate-attr-aria-label="components.main_menu.aria.labels.toggle"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- This menu  is displayed on the left, only when you're authenticated. -->
-    <div class="collapse navbar-collapse" ng-if="vm.authenticated">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" ui-sref="dashboard" translate>components.main_menu.items.dashboard</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" ui-sref="accountsList" translate>components.main_menu.items.accounts</a>
-        </li>
-      </ul>
-    </div>
-
-    <div class="collapse navbar-collapse flex-row-reverse">
-      <!-- The menu displayed on the right if you're not connected -->
-      <ul class="navbar-nav" ng-if="!vm.authenticated">
-        <li class="nav-item">
-          <a class="nav-link" ui-sref="sessionsCreate" translate>components.main_menu.items.login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" ui-sref="accountsCreate" translate>components.main_menu.items.register</a>
-        </li>
-      </ul>
-      <!-- The menu displayed on the right if you're connected -->
-      <ul class="navbar-nav" ng-if="vm.authenticated">
-        <li class="nav-item">
-          <a class="nav-link" ng-click="vm.logout()" translate>components.main_menu.items.logout</a>
-        </li>
-      </ul>
-    </div>
+<md-toolbar>
+  <div class="md-toolbar-tools" ng-if="vm.authenticated">
+    <md-button ui-sref="rightsList">{{'components.main_menu.items.rights' | translate}}</md-button>
+    <span flex></span>
+    <span>
+      <md-button ng-click="vm.logout()">{{'components.main_menu.items.logout' | translate}}</md-button>
+    </span>
   </div>
-</nav>
+  <div class="md-toolbar-tools" ng-if="!vm.authenticated">
+    <span flex></span>
+    <span>
+      <md-button ui-sref="sessionsCreate">{{'components.main_menu.items.login' | translate}}</md-button>
+      <md-button ui-sref="accountsCreate">{{'components.main_menu.items.register' | translate}}</md-button>
+    </span>
+  </div>
+</md-toolbar>
