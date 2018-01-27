@@ -20,7 +20,7 @@ class Controller < Sinatra::Base
 
   def initialize
     super
-    @connection = Faraday.new(url: 'https://arkaan-gateway.herokuapp.com/') do |faraday|
+    @connection = Faraday.new(url: 'http://localhost:3000/') do |faraday|
       faraday.request  :url_encoded
       faraday.response :logger
       faraday.adapter  Faraday.default_adapter
@@ -35,12 +35,21 @@ class Controller < Sinatra::Base
     @body = parse_body
     @url = @body.delete('url')
     @verb = @body.delete('method').downcase || 'get'
-    @forwarded = connection.send(@verb) do |forwarded_request|
-      forwarded_request.url @url
-      forwarded_request.body = @body.to_json
-      forwarded_request.headers['Content-Type'] = 'application/json'
-      forwarded_request.options.timeout = 5
-      forwarded_request.options.open_timeout = 2
+    if ['get', 'delete'].include? @verb
+      @forwarded = connection.send(@verb) do |forwarded_request|
+        forwarded_request.url @url, @body
+        forwarded_request.headers['Content-Type'] = 'application/json'
+        forwarded_request.options.timeout = 5
+        forwarded_request.options.open_timeout = 2
+      end
+    else
+      @forwarded = connection.send(@verb) do |forwarded_request|
+        forwarded_request.url @url
+        forwarded_request.body = @body.to_json
+        forwarded_request.headers['Content-Type'] = 'application/json'
+        forwarded_request.options.timeout = 5
+        forwarded_request.options.open_timeout = 2
+      end
     end
     status @forwarded.status
     body @forwarded.body
