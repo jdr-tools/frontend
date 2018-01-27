@@ -20,7 +20,7 @@ class Controller < Sinatra::Base
 
   def initialize
     super
-    @connection = Faraday.new(url: 'http://localhost:3000/') do |faraday|
+    @connection = Faraday.new(Arkaan::Monitoring::Gateway.all.sample.url) do |faraday|
       faraday.request  :url_encoded
       faraday.response :logger
       faraday.adapter  Faraday.default_adapter
