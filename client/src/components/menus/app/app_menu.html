@@ -1,0 +1,25 @@
+<md-toolbar>
+  <div class="md-toolbar-tools" ng-if="vm.authenticated">
+    <span flex></span>
+    <span>
+      <md-menu>
+        <md-button ng-click="$mdMenu.open($event)">{{vm.username}}</md-button>
+        <md-menu-content>
+          <md-menu-item>
+            <md-button ui-sref="adminDashboard">admin panel</md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button ng-click="vm.logout()">{{'components.main_menu.items.logout' | translate}}</md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+    </span>
+  </div>
+  <div class="md-toolbar-tools" ng-if="!vm.authenticated">
+    <span flex></span>
+    <span>
+      <md-button ui-sref="sessionsCreate">{{'components.main_menu.items.login' | translate}}</md-button>
+      <md-button ui-sref="accountsCreate">{{'components.main_menu.items.register' | translate}}</md-button>
+    </span>
+  </div>
+</md-toolbar>
