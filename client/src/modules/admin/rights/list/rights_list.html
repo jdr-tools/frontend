@@ -1,13 +1,21 @@
 <h1>
   Droits&nbsp;
-  <a class="btn btn-info" role="button" ui-sref="createRight">
-    <i class="fa fa-plus"></i>&nbsp;&nbsp;Ajouter
+  <a class="btn btn-light text-dark" role="button" data-toggle="collapse" data-target="#collapseCreateCategory" aria-expanded="false" aria-controls="collapseCreateCategory">
+    <i class="fa fa-plus text-dark"></i>&nbsp;&nbsp;
+    <span translate>rights.categories.buttons.create</span>
   </a>
 </h1>
+
+<div class="collapse mt-2 mb-2" id="collapseCreateCategory">
+  <form class="form-inline" ng-submit="vm.createCategory()">
+    <div class="input-group">
+      <input type="text" class="form-control" translate translate-attr-placeholder="rights.categories.create.placeholders.slug" />
+    </div>
+    <button type="submit" translate>rights.categories.buttons.validate</button>
+  </form>
+</div>
 
 <div ng-if="rights.length">
 
 </div>
-<div ng-if="!rights.length">
-Aucun catégorie à afficher
-</div>
+<div ng-if="!rights.length">Aucun catégorie à afficher</div>

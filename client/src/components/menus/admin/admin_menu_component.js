@@ -3,7 +3,7 @@
  * @author Vincent Courtois <courtois.vincent@outlook.com>
  */
 const adminMenuController = class MainMenu {
-  constructor (Authentication, $rootScope, $translatePartialLoader) {
+  constructor (Authentication, $rootScope) {
     'ngInject'
     this.auth = Authentication
     this.authenticated = Authentication.checkSessionKeysPresence(false)

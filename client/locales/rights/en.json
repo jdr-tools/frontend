@@ -1,5 +1,15 @@
 {
   "rights": {
-    
+    "categories": {
+      "buttons": {
+        "create": "Add a category",
+        "validate": "Validate"
+      },
+      "create": {
+        "placeholders": {
+          "slug": "Enter a slug"
+        }
+      }
+    }
   }
 }

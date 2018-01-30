@@ -108,7 +108,7 @@ Object.defineProperty(exports, "__esModule", {
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var adminMenuController = function MainMenu(Authentication, $rootScope, $translatePartialLoader) {
+var adminMenuController = function MainMenu(Authentication, $rootScope) {
   'ngInject';
 
   _classCallCheck(this, MainMenu);
@@ -182,7 +182,6 @@ var appMenuController = function () {
   }, {
     key: 'setUsername',
     value: function setUsername() {
-      console.log(this.authenticated);
       if (this.authenticated) {
         this.username = this.storage.account.username;
       }
@@ -489,6 +488,9 @@ var rightsRoute = function rightsRoute($stateProvider) {
         'ngInject';
 
         Authentication.checkAndRedirect();
+      },
+      translation: function translation($translatePartialLoader) {
+        $translatePartialLoader.addPart('rights');
       }
     }
   });
