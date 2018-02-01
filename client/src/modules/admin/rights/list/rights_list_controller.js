@@ -3,17 +3,36 @@
  * @author Vincent Courtois <courtois.vincent@outlook.com>
  */
 const rightsListController = class RightsListController {
-  constructor($state, Api) {
+  constructor($state, RightsFactory) {
     'ngInject'
-    this.rights = []
+    this.categories = []
     this.state = $state
-    this.api = Api
-    const myself = this
-    this.api.get('/rights', {}, {successCallback: (response) => { myself.rights = response.items }})
+    this.factories = {rights: RightsFactory}
+    this.category = {slug: ''}
+    this.searchRights()
   }
 
-  createRight () {
-    this.state.go('createRight')
+  createRight (category) {
+    console.log(category)
+    console.log(this.rights[category])
+  }
+
+  createCategory () {
+    this.factories.rights.createCategory(this.category, this.searchRights)
+  }
+
+  searchRights () {
+    const myself = this
+    this.factories.rights.list(data => { myself.setCategories(data.items) })
+  }
+
+  setCategories (items) {
+    const myself = this
+    this.categories = items
+    this.rights = {}
+    this.categories.forEach((item) => {
+      myself.rights[item] = ''
+    })
   }
 }
 
