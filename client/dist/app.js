@@ -21,7 +21,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 angular.module('arkaan.frontend', ['ngStorage', 'ngMaterial', 'pascalprecht.translate', 'ui.router', _components2.default, _configuration2.default, _modules2.default, _services2.default]);
 
-},{"./components":4,"./configuration":10,"./modules":33,"./services":36}],2:[function(require,module,exports){
+},{"./components":4,"./configuration":10,"./modules":34,"./services":37}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -410,7 +410,29 @@ var adminModules = angular.module('arkaan.frontend.admin', adminModulesList).nam
 
 exports.default = adminModules;
 
-},{"./dashboard":16,"./rights":19}],18:[function(require,module,exports){
+},{"./dashboard":16,"./rights":20}],18:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var categoriesFactory = function CategoriesFactory(Api) {
+  var vm = this;
+
+  vm.create = function (category, callback) {
+    Api.post('/rights/categories', category, { successCallback: callback });
+  };
+
+  vm.delete = function (category_id, callback) {
+    Api.delete('/rights/categories/' + category_id, { successCallback: callback });
+  };
+
+  return vm;
+};
+
+exports.default = categoriesFactory;
+
+},{}],19:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -419,12 +441,16 @@ Object.defineProperty(exports, "__esModule", {
 var rightsFactory = function RightsFactory(Api) {
   var vm = this;
 
-  vm.list = function (callback) {
-    Api.get('/rights', {}, { successCallback: callback });
+  vm.create = function (category_id, right_slug, callback) {
+    Api.post('/rights', { category_id: category_id, slug: right_slug }, { successCallback: callback });
   };
 
-  vm.createCategory = function (category, callback) {
-    Api.post('/rights/categories', category, { successCallback: callback });
+  vm.delete = function (right_id, callback) {
+    Api.delete('/rights/' + right_id, { successCallback: callback });
+  };
+
+  vm.list = function (callback) {
+    Api.get('/rights', {}, { successCallback: callback });
   };
 
   return vm;
@@ -432,7 +458,7 @@ var rightsFactory = function RightsFactory(Api) {
 
 exports.default = rightsFactory;
 
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -447,79 +473,72 @@ var _rights_factory = require('./factories/rights_factory');
 
 var _rights_factory2 = _interopRequireDefault(_rights_factory);
 
+var _categories_factory = require('./factories/categories_factory');
+
+var _categories_factory2 = _interopRequireDefault(_categories_factory);
+
 var _rights_route = require('./rights_route');
 
 var _rights_route2 = _interopRequireDefault(_rights_route);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var rights = angular.module('arkaan.frontend.rights', []).controller('rightsListController', _rights_list_controller2.default).factory('RightsFactory', _rights_factory2.default).config(_rights_route2.default).run(function ($translatePartialLoader) {
+var rights = angular.module('arkaan.frontend.rights', []).controller('rightsListController', _rights_list_controller2.default).factory('RightsFactory', _rights_factory2.default).factory('CategoriesFactory', _categories_factory2.default).config(_rights_route2.default).run(function ($translatePartialLoader) {
   return $translatePartialLoader.addPart('rights');
 }).name;
 
 exports.default = rights;
 
-},{"./factories/rights_factory":18,"./list/rights_list_controller":20,"./rights_route":21}],20:[function(require,module,exports){
+},{"./factories/categories_factory":18,"./factories/rights_factory":19,"./list/rights_list_controller":21,"./rights_route":22}],21:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var rightsListController = function rightsListControllerFunction($state, CategoriesFactory, RightsFactory) {
+  'ngInject';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+  var vm = this;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+  vm.categories = [];
+  vm.category = { slug: ''
+  };vm.rights = {};
 
-var rightsListController = function () {
-  function RightsListController($state, RightsFactory) {
-    'ngInject';
+  vm.createCategory = function () {
+    CategoriesFactory.create(vm.category, vm.getRights);
+  };
 
-    _classCallCheck(this, RightsListController);
+  vm.createRight = function (category_id) {
+    RightsFactory.create(category_id, vm.rights[category_id], vm.getRights);
+  };
 
-    this.categories = [];
-    this.state = $state;
-    this.factories = { rights: RightsFactory };
-    this.category = { slug: '' };
-    this.searchRights();
-  }
+  vm.deleteCategory = function (category_id) {
+    CategoriesFactory.delete(category_id, vm.getRights);
+  };
 
-  _createClass(RightsListController, [{
-    key: 'createRight',
-    value: function createRight(category) {
-      console.log(category);
-      console.log(this.rights[category]);
-    }
-  }, {
-    key: 'createCategory',
-    value: function createCategory() {
-      this.factories.rights.createCategory(this.category, this.searchRights);
-    }
-  }, {
-    key: 'searchRights',
-    value: function searchRights() {
-      var myself = this;
-      this.factories.rights.list(function (data) {
-        myself.setCategories(data.items);
-      });
-    }
-  }, {
-    key: 'setCategories',
-    value: function setCategories(items) {
-      var myself = this;
-      this.categories = items;
-      this.rights = {};
-      this.categories.forEach(function (item) {
-        myself.rights[item] = '';
-      });
-    }
-  }]);
+  vm.deleteRight = function (right_id) {
+    RightsFactory.delete(right_id, vm.getRights);
+  };
 
-  return RightsListController;
-}();
+  vm.getRights = function () {
+    RightsFactory.list(vm.setCategories);
+  };
+
+  vm.setCategories = function (categories) {
+    vm.category.slug = '';
+    vm.categories = categories.items;
+    vm.rights = {};
+    vm.categories.forEach(function (item) {
+      vm.rights[item.id] = '';
+    });
+  };
+
+  vm.getRights();
+};
 
 exports.default = rightsListController;
 
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -549,18 +568,11 @@ var rightsRoute = function rightsRoute($stateProvider) {
     templateUrl: 'src/modules/admin/rights/list/rights_list.html',
     controller: 'rightsListController as vm'
   });
-
-  $stateProvider.state('createRight', {
-    url: '/rights/new',
-    parent: 'rights',
-    templateUrl: 'src/modules/admin/rights/create/create_right.html',
-    controller: 'createRightController as vm'
-  });
 };
 
 exports.default = rightsRoute;
 
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -604,7 +616,7 @@ var accountsRoute = function accountsRoute($stateProvider) {
 
 exports.default = accountsRoute;
 
-},{}],23:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -673,7 +685,7 @@ var accountsCreateController = function () {
 
 exports.default = accountsCreateController;
 
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -700,7 +712,7 @@ var accounts = angular.module('arkaan.frontend.accounts', []).controller('accoun
 
 exports.default = accounts;
 
-},{"./accounts_route":22,"./create/accounts_create_controller":23,"./list/accounts_list_controller":25}],25:[function(require,module,exports){
+},{"./accounts_route":23,"./create/accounts_create_controller":24,"./list/accounts_list_controller":26}],26:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -719,7 +731,7 @@ var accountsListController = function AccountsListController() {
 
 exports.default = accountsListController;
 
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -738,7 +750,7 @@ var dashboardController = function DashboardController(Api, $scope) {
 
 exports.default = dashboardController;
 
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -758,7 +770,7 @@ var dashboardRoute = function dashboardRoute($stateProvider) {
 
 exports.default = dashboardRoute;
 
-},{}],28:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -779,7 +791,7 @@ var dashboard = angular.module('arkaan.frontend.dashboard', []).config(_dashboar
 
 exports.default = dashboard;
 
-},{"./dashboard_controller":26,"./dashboard_route":27}],29:[function(require,module,exports){
+},{"./dashboard_controller":27,"./dashboard_route":28}],30:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -806,7 +818,7 @@ var appModules = angular.module('arkaan.frontend.app', appModulesList).name;
 
 exports.default = appModules;
 
-},{"./accounts":24,"./dashboard":28,"./sessions":31}],30:[function(require,module,exports){
+},{"./accounts":25,"./dashboard":29,"./sessions":32}],31:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -842,7 +854,7 @@ var sessionsCreateController = function () {
 
 exports.default = sessionsCreateController;
 
-},{}],31:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -865,7 +877,7 @@ var login = angular.module('arkaan.frontend.sessions', []).controller('sessionsC
 
 exports.default = login;
 
-},{"././sessions_route":32,"./create/sessions_create_controller":30}],32:[function(require,module,exports){
+},{"././sessions_route":33,"./create/sessions_create_controller":31}],33:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -889,7 +901,7 @@ var loginRoute = function loginRoute($stateProvider) {
 
 exports.default = loginRoute;
 
-},{}],33:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -912,7 +924,7 @@ var modules = angular.module('arkaan.frontend.modules', modulesList).name;
 
 exports.default = modules;
 
-},{"./admin":17,"./app":29}],34:[function(require,module,exports){
+},{"./admin":17,"./app":30}],35:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -957,6 +969,15 @@ var Api = function () {
 
 
   }, {
+    key: 'delete',
+    value: function _delete(uri) {
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+      this.makeRequest('DELETE', uri, {}, options);
+    }
+
+
+  }, {
     key: 'makeRequest',
     value: function makeRequest(verb, uri, parameters, options) {
       var configuration = {
@@ -982,7 +1003,7 @@ var Api = function () {
 
 exports.default = Api;
 
-},{}],35:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1070,7 +1091,7 @@ var Authentication = function () {
 
 exports.default = Authentication;
 
-},{}],36:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1091,4 +1112,4 @@ var services = angular.module('arkaan.frontend.services', []).service('Authentic
 
 exports.default = services;
 
-},{"./api/api":34,"./authentication/authentication":35}]},{},[1])
+},{"./api/api":35,"./authentication/authentication":36}]},{},[1])

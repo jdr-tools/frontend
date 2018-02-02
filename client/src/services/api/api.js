@@ -35,6 +35,15 @@ const Api = class ApiClass {
   }
 
   /**
+   * Makes a delete request on the server-side part of the application, forwarded afterward on the gateway, and the service.
+   * @param {String} uri - the URL of the route you're trying to reach in the API.
+   * @param {Object} options - the options to pass to the service to change its default behaviour.
+   */
+  delete (uri, options = {}) {
+    this.makeRequest('DELETE', uri, {}, options)
+  }
+
+  /**
    * Generic method to issue a request on the API.
    * @param {String} verb - the HTTP method employed for this request.
    * @param {String} uri - the resource location you're trying to reach on the API.

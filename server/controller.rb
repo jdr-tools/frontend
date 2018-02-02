@@ -35,21 +35,16 @@ class Controller < Sinatra::Base
     @body = parse_body
     @url = @body.delete('url')
     @verb = @body.delete('method').downcase || 'get'
-    if ['get', 'delete'].include? @verb
-      @forwarded = connection.send(@verb) do |forwarded_request|
+    @forwarded = connection.send(@verb) do |forwarded_request|
+      if ['get', 'delete'].include? @verb
         forwarded_request.url @url, @body
-        forwarded_request.headers['Content-Type'] = 'application/json'
-        forwarded_request.options.timeout = 5
-        forwarded_request.options.open_timeout = 2
-      end
-    else
-      @forwarded = connection.send(@verb) do |forwarded_request|
+      else
         forwarded_request.url @url
         forwarded_request.body = @body.to_json
-        forwarded_request.headers['Content-Type'] = 'application/json'
-        forwarded_request.options.timeout = 5
-        forwarded_request.options.open_timeout = 2
       end
+      forwarded_request.headers['Content-Type'] = 'application/json'
+      forwarded_request.options.timeout = 5
+      forwarded_request.options.open_timeout = 2
     end
     status @forwarded.status
     body @forwarded.body

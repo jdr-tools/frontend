@@ -23,14 +23,6 @@ const rightsRoute = function ($stateProvider) {
     templateUrl: 'src/modules/admin/rights/list/rights_list.html',
     controller: 'rightsListController as vm'
   })
-
-  /** Concrete state for displaying a list of accounts. */
-  $stateProvider.state('createRight', {
-    url: '/rights/new',
-    parent: 'rights',
-    templateUrl: 'src/modules/admin/rights/create/create_right.html',
-    controller: 'createRightController as vm'
-  })
 }
 
 export default rightsRoute
