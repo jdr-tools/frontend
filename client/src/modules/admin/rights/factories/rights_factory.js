@@ -9,10 +9,6 @@ const rightsFactory = function RightsFactory(Api) {
     Api.delete(`/rights/${right_id}`, {successCallback: callback})
   }
 
-  vm.list = (callback) => {
-    Api.get('/rights', {}, {successCallback: callback})
-  }
-
   return vm
 }
 

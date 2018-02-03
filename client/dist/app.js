@@ -420,11 +420,15 @@ var categoriesFactory = function CategoriesFactory(Api) {
   var vm = this;
 
   vm.create = function (category, callback) {
-    Api.post('/rights/categories', category, { successCallback: callback });
+    Api.post('/categories', category, { successCallback: callback });
   };
 
   vm.delete = function (category_id, callback) {
-    Api.delete('/rights/categories/' + category_id, { successCallback: callback });
+    Api.delete('/categories/' + category_id, { successCallback: callback });
+  };
+
+  vm.list = function (callback) {
+    Api.get('/categories', {}, { successCallback: callback });
   };
 
   return vm;
@@ -447,10 +451,6 @@ var rightsFactory = function RightsFactory(Api) {
 
   vm.delete = function (right_id, callback) {
     Api.delete('/rights/' + right_id, { successCallback: callback });
-  };
-
-  vm.list = function (callback) {
-    Api.get('/rights', {}, { successCallback: callback });
   };
 
   return vm;
@@ -521,7 +521,7 @@ var rightsListController = function rightsListControllerFunction($state, Categor
   };
 
   vm.getRights = function () {
-    RightsFactory.list(vm.setCategories);
+    CategoriesFactory.list(vm.setCategories);
   };
 
   vm.setCategories = function (categories) {

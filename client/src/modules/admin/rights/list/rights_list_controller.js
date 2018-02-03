@@ -45,7 +45,7 @@ const rightsListController = function rightsListControllerFunction ($state, Cate
 
   /** Refreshes the list of rights. */
   vm.getRights = () => {
-    RightsFactory.list(vm.setCategories)
+    CategoriesFactory.list(vm.setCategories)
   }
 
   /**
