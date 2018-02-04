@@ -1,0 +1,80 @@
+<div ng-if="!vm.group">Pas de données</div>
+<div ng-if="vm.group">
+  <h1>
+    Edition du groupe {{vm.group.slug}}
+  </h1>
+  <div class="row">
+    <div class="col-6">
+      <h3>Droits</h3>
+      <div id="categoriesAccordion">
+        <div ng-repeat="category in vm.categories" class="card">
+          <div class="card-header" id="header-{{category.id}}">
+            <h5 class="mb-0">
+              <a role="button" data-toggle="collapse" data-target="#collapsable-{{category.id}}" aria-expanded="false" aria-controls="collapsable-{{category.id}}">
+                <i class="fa fa-caret-down text-muted"></i>&nbsp;&nbsp;{{category.slug}}
+              </a>
+            </h5>
+          </div>
+          <div class="collapse" id="collapsable-{{category.id}}" data-parent="#categoriesAccordion" aria-labelledby="header-{{category.id}}">
+            <div class="card-body">
+              <table class="table table-condensed">
+                <thead>
+                  <tr>
+                    <th>Nom du droit</th>
+                    <th>Etat</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="right in category.items | orderBy : 'slug'">
+                    <td>{{right.slug}}</td>
+                    <td>
+                      <input type="checkbox" ng-model="right.selected" />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="btn btn-primary mt-2 text-white" ng-click="vm.updateRights()">Mettre les droits à jour</a>
+    </div>
+    <div class="col-6">
+      <h3>Routes</h3>
+      <div id="servicesAccordion">
+        <div ng-repeat="service in vm.services" class="card">
+          <div class="card-header" id="header-{{category.id}}">
+            <h5 class="mb-0">
+              <a role="button" data-toggle="collapse" data-target="#collapsable-{{service.id}}" aria-expanded="false" aria-controls="collapsable-{{service.id}}">
+                <i class="fa fa-caret-down text-muted"></i>&nbsp;&nbsp;{{service.key}}
+              </a>
+            </h5>
+          </div>
+          <div class="collapse" id="collapsable-{{service.id}}" data-parent="#servicesAccordion" aria-labelledby="header-{{service.id}}">
+            <div class="card-body">
+              <table class="table table-condensed">
+                <thead>
+                  <tr>
+                    <th>méthode</th>
+                    <th>chemin</th>
+                    <th>état</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="route in service.routes | orderBy : 'path'">
+                    <td>{{route.verb}}</td>
+                    <td>{{route.path}}</td>
+                    <td>
+                      <input type="checkbox" ng-model="route.selected" />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="btn btn-primary mt-2 text-white" ng-click="vm.updateRoutes()">Mettre les routes à jour</a>
+    </div>
+  </div>
+</div>

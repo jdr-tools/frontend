@@ -1,0 +1,42 @@
+<h1>
+  Groupes&nbsp;
+  <a class="btn btn-light text-dark" role="button" data-toggle="collapse" data-target="#collapseCreateGroup" aria-expanded="false" aria-controls="collapseCreateGroup">
+    <i class="fa fa-plus"></i>&nbsp;
+    <span translate>groups.buttons.create</span>
+  </a>
+</h1>
+
+<div class="collapse mt-2 mb-2" id="collapseCreateGroup">
+  <form class="form-inline" ng-submit="vm.createGroup()">
+    <div class="input-group">
+      <input type="text" class="form-control" ng-model="vm.group.slug" required translate translate-attr-placeholder="groups.create.placeholders.slug" />
+    </div>
+    <input type="submit" class="btn btn-primary ml-2" translate translate-attr-value="groups.buttons.validate" />
+  </form>
+</div>
+
+<div ng-if="vm.groups.length">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>ID - Nom du groupe</th>
+        <th>Droits associés</th>
+        <th>Routes associés</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="group in vm.groups" ui-sref="updateGroup({group_id: group.id})">
+        <td><span class="text-muted">{{group.id}}</span>&nbsp;-&nbsp;{{group.slug}}</td>
+        <td>{{group.rights}}</td>
+        <td>{{group.routes}}</td>
+        <td>
+          <a ng-click="deleteGroup(group.id)"><i class="fa fa-trash"></i></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div ng-if="!vm.groups.length">
+  Pas de groups disponibles
+</div>

@@ -43,8 +43,8 @@ class Controller < Sinatra::Base
         forwarded_request.body = @body.to_json
       end
       forwarded_request.headers['Content-Type'] = 'application/json'
-      forwarded_request.options.timeout = 5
-      forwarded_request.options.open_timeout = 2
+      forwarded_request.options.timeout = 20
+      forwarded_request.options.open_timeout = 20
     end
     status @forwarded.status
     body @forwarded.body
