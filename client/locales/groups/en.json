@@ -1,5 +1,45 @@
 {
   "groups": {
-    
+    "buttons": {
+      "create": "Add a group",
+      "validate": "Add"
+    },
+    "create": {
+      "placeholders": {
+        "slug": "Enter a slug..."
+      }
+    },
+    "list": {
+      "headers": {
+        "id": "ID - Name",
+        "rights": "Linked rights",
+        "routes": "Linked routes"
+      },
+      "title": "Groups management",
+      "unavailable": "No groups available"
+    },
+    "update": {
+      "buttons": {
+        "rights": "Update rights",
+        "routes": "Update routes"
+      },
+      "headers": {
+        "rights": {
+          "slug": "Slug",
+          "state": "State"
+        },
+        "routes": {
+          "path": "Path",
+          "state": "State",
+          "verb": "Verb"
+        }
+      },
+      "title": "Edition of group {{slug}}",
+      "titles": {
+        "rights": "Rights",
+        "routes": "Routes"
+      },
+      "unavailable": "This group is unavailable"
+    }
   }
 }

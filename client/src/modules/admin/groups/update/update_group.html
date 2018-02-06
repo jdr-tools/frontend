@@ -1,11 +1,8 @@
-<div ng-if="!vm.group">Pas de données</div>
 <div ng-if="vm.group">
-  <h1>
-    Edition du groupe {{vm.group.slug}}
-  </h1>
+  <h1 translate translate-values="{slug: vm.group.slug}">groups.update.title</h1>
   <div class="row">
     <div class="col-6">
-      <h3>Droits</h3>
+      <h3 translate>groups.titles.rights</h3>
       <div id="categoriesAccordion">
         <div ng-repeat="category in vm.categories" class="card">
           <div class="card-header" id="header-{{category.id}}">
@@ -20,8 +17,8 @@
               <table class="table table-condensed">
                 <thead>
                   <tr>
-                    <th>Nom du droit</th>
-                    <th>Etat</th>
+                    <th translate>groups.update.headers.rights.slug</th>
+                    <th translate>groups.update.headers.rights.state</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -37,10 +34,10 @@
           </div>
         </div>
       </div>
-      <a class="btn btn-primary mt-2 text-white" ng-click="vm.updateRights()">Mettre les droits à jour</a>
+      <a class="btn btn-primary mt-2 text-white" ng-click="vm.updateRights()" translate>groups.update.buttons.rights</a>
     </div>
     <div class="col-6">
-      <h3>Routes</h3>
+      <h3 translate>groups.titles.routes</h3>
       <div id="servicesAccordion">
         <div ng-repeat="service in vm.services" class="card">
           <div class="card-header" id="header-{{category.id}}">
@@ -55,9 +52,9 @@
               <table class="table table-condensed">
                 <thead>
                   <tr>
-                    <th>méthode</th>
-                    <th>chemin</th>
-                    <th>état</th>
+                    <th translate>groups.update.headers.routes.verb</th>
+                    <th translate>groups.update.headers.routes.path</th>
+                    <th translate>groups.update.headers.routes.state</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -74,7 +71,8 @@
           </div>
         </div>
       </div>
-      <a class="btn btn-primary mt-2 text-white" ng-click="vm.updateRoutes()">Mettre les routes à jour</a>
+      <a class="btn btn-primary mt-2 text-white" ng-click="vm.updateRoutes()" translate>groups.update.buttons.routes</a>
     </div>
   </div>
 </div>
+<div ng-if="!vm.group" translate>groups.update.unavailable</div>

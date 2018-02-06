@@ -1,5 +1,45 @@
 {
   "groups": {
-    
+    "buttons": {
+      "create": "Ajouter un groupe",
+      "validate": "Ajouter"
+    },
+    "create": {
+      "placeholders": {
+        "slug": "Entrez un slug..."
+      }
+    },
+    "list": {
+      "headers": {
+        "id": "ID - Nom du groupe",
+        "rights": "Droits associés",
+        "routes": "Routes associées"
+      },
+      "title": "Gestion des groupes",
+      "unavailable": "Pas de groupes disponibles"
+    },
+    "update": {
+      "buttons": {
+        "rights": "Mettre les droits à jour",
+        "routes": "Mettre les routes à jour"
+      },
+      "headers": {
+        "rights": {
+          "slug": "Slug",
+          "state": "Etat"
+        },
+        "routes": {
+          "path": "Chemin",
+          "state": "Etat",
+          "verb": "Méthode"
+        }
+      },
+      "title": "Edition du groupe {{slug}}",
+      "titles": {
+        "rights": "Droits",
+        "routes": "Routes"
+      },
+      "unavailable": "Ce groupe n'est pas disponible"
+    }
   }
 }

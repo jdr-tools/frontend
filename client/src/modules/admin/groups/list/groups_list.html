@@ -1,5 +1,5 @@
 <h1>
-  Groupes&nbsp;
+  <span translate>groups.list.title</span>&nbsp;
   <a class="btn btn-light text-dark" role="button" data-toggle="collapse" data-target="#collapseCreateGroup" aria-expanded="false" aria-controls="collapseCreateGroup">
     <i class="fa fa-plus"></i>&nbsp;
     <span translate>groups.buttons.create</span>
@@ -19,10 +19,10 @@
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>ID - Nom du groupe</th>
-        <th>Droits associés</th>
-        <th>Routes associés</th>
-        <th>Actions</th>
+        <th translate>groups.list.headers.id</th>
+        <th translate>groups.list.headers.rights</th>
+        <th translate>groups.list.headers.routes</th>
+        <th translate>common.actions</th>
       </tr>
     </thead>
     <tbody>
@@ -37,6 +37,4 @@
     </tbody>
   </table>
 </div>
-<div ng-if="!vm.groups.length">
-  Pas de groups disponibles
-</div>
+<div ng-if="!vm.groups.length" translate>groups.list.unavailable</div>

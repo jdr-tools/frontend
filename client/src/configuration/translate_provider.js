@@ -6,6 +6,8 @@ const configTranslateProvider = function configTranslateProviderFunction ($trans
   'ngInject'
   /** This adds the translations for all the possible errors from the api. */
   $translatePartialLoaderProvider.addPart('errors');
+  /** This adds the translations for the common elements used throughout the whole application. */
+  $translatePartialLoaderProvider.addPart('errors');
 
   $translatePartialLoaderProvider.addPart('components/main_menu');
   $translatePartialLoaderProvider.addPart('components/custom_footer');
