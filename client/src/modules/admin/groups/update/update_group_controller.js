@@ -11,50 +11,44 @@ const updateGroupController = function updateGroupControllerFunction ($statePara
 
   vm.getCategories = () => {
     CategoriesFactory.list((categories) => {
-      vm.categories = categories.items.map(vm.transformCategory)
+      vm.categories = vm.transformCollection(categories, 'rights')
     })
   }
 
   vm.getServices = () => {
     ServicesFactory.list((services) => {
-      vm.services = services.items.map(vm.transformService)
+      vm.services = vm.transformCollection(services, 'routes')
     })
   }
 
-  vm.transformCategory = (category) => {
-    category.items = category.items.map((item) => {
-      item.selected = (vm.group.rights.indexOf(item.id) >= 0)
+  vm.transformCollection = (collection, key) => {
+    collection.items.map((item) => {
+      item[key] = item[key].map((subitem) => {
+        subitem.selected = (vm.group[key].indexOf(subitem.id) >= 0)
+        return subitem
+      })
       return item
     })
-    return category
-  }
-
-  vm.transformService = (service) => {
-    service.routes = service.routes.map((item) => {
-      item.selected = (vm.group.routes.indexOf(item.id) >= 0)
-      return item
-    })
-    return service
+    return collection.items
   }
 
   vm.updateRights = () => {
-    const rights = []
-    vm.categories.forEach((category) => {
-      category.items.forEach((right) => {
-        if (right.selected) rights.push(right.id)
-      })
-    })
-    GroupsFactory.updateRights(vm.group.id, rights, vm.getGroup)
+    return vm.updateWithSelected(vm.categories, 'rights')
   }
 
   vm.updateRoutes = () => {
-    const routes = []
-    vm.services.forEach((service) => {
-      service.routes.forEach((right) => {
-        if (right.selected) routes.push(right.id)
+    return vm.updateWithSelected(vm.services, 'routes')
+  }
+
+  vm.updateWithSelected = (collection, key) => {
+    const elements = []
+    collection.forEach((service) => {
+      service[key].forEach((element) => {
+        if (element.selected) elements.push(element.id)
       })
     })
-    GroupsFactory.updateRoutes(vm.group.id, routes, vm.getGroup)
+    const methodName = key.charAt(0).toUpperCase() + key.slice(1)
+    GroupsFactory[`update${methodName}`](vm.group.id, elements, vm.getGroup)
   }
 
   vm.setGroup = (group) => {

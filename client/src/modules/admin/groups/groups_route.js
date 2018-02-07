@@ -9,9 +9,6 @@ const groupsRoute = function ($stateProvider) {
       authentication: (Authentication) => {
         'ngInject'
         Authentication.checkAndRedirect()
-      },
-      translation: ($translatePartialLoader) => {
-        $translatePartialLoader.addPart('groups');
       }
     }
   })

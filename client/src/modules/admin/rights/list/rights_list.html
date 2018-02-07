@@ -1,5 +1,5 @@
 <h1>
-  Droits&nbsp;
+  <span translate></span>&nbsp;
   <a class="btn btn-light text-dark" role="button" data-toggle="collapse" data-target="#collapseCreateCategory" aria-expanded="false" aria-controls="collapseCreateCategory">
     <i class="fa fa-plus text-dark"></i>&nbsp;&nbsp;
     <span translate>rights.categories.buttons.create</span>
@@ -27,13 +27,14 @@
     <table class="table">
       <thead>
         <tr>
-          <th>ID - Nom du droit</th>
-          <th>Groupes associés</th>
-          <th>Actions</th>
+          <th translate>rights.list.headers.id</th>
+          <th translate>rights.list.headers.slug</th>
+          <th translate>rights.list.headers.groups</th>
+          <th translate>common.actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="right in category.items">
+        <tr ng-repeat="right in category.rights">
           <td><span class="text-muted">{{right.id}}</span>&nbsp;-&nbsp;{{right.slug}}</td>
           <td>{{right.groups}}</td>
           <td>

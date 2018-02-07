@@ -303,6 +303,7 @@ var configTranslateProvider = function configTranslateProviderFunction($translat
   'ngInject';
 
   $translatePartialLoaderProvider.addPart('errors');
+  $translatePartialLoaderProvider.addPart('errors');
 
   $translatePartialLoaderProvider.addPart('components/main_menu');
   $translatePartialLoaderProvider.addPart('components/custom_footer');
@@ -460,9 +461,6 @@ var groupsRoute = function groupsRoute($stateProvider) {
         'ngInject';
 
         Authentication.checkAndRedirect();
-      },
-      translation: function translation($translatePartialLoader) {
-        $translatePartialLoader.addPart('groups');
       }
     }
   });
@@ -513,7 +511,9 @@ var _groups_route2 = _interopRequireDefault(_groups_route);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var groups = angular.module('arkaan.frontend.groups', []).controller('groupsListController', _groups_list_controller2.default).controller('updateGroupController', _update_group_controller2.default).factory('GroupsFactory', _groups_factory2.default).factory('ServicesFactory', _services_factory2.default).config(_groups_route2.default).name;
+var groups = angular.module('arkaan.frontend.groups', []).controller('groupsListController', _groups_list_controller2.default).controller('updateGroupController', _update_group_controller2.default).factory('GroupsFactory', _groups_factory2.default).factory('ServicesFactory', _services_factory2.default).config(_groups_route2.default).run(function ($translatePartialLoader) {
+  return $translatePartialLoader.addPart('groups');
+}).name;
 
 exports.default = groups;
 
@@ -550,7 +550,7 @@ var updateGroupController = function updateGroupControllerFunction(GroupsFactory
 exports.default = updateGroupController;
 
 },{}],22:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -568,51 +568,44 @@ var updateGroupController = function updateGroupControllerFunction($stateParams,
 
   vm.getCategories = function () {
     CategoriesFactory.list(function (categories) {
-      vm.categories = categories.items.map(vm.transformCategory);
+      vm.categories = vm.transformCollection(categories, 'rights');
     });
   };
 
   vm.getServices = function () {
     ServicesFactory.list(function (services) {
-      console.log(services);
-      vm.services = services.items.map(vm.transformService);
+      vm.services = vm.transformCollection(services, 'routes');
     });
   };
 
-  vm.transformCategory = function (category) {
-    category.items = category.items.map(function (item) {
-      item.selected = vm.group.rights.indexOf(item.id) >= 0;
+  vm.transformCollection = function (collection, key) {
+    collection.items.map(function (item) {
+      item[key] = item[key].map(function (subitem) {
+        subitem.selected = vm.group[key].indexOf(subitem.id) >= 0;
+        return subitem;
+      });
       return item;
     });
-    return category;
-  };
-
-  vm.transformService = function (service) {
-    service.routes = service.routes.map(function (item) {
-      item.selected = vm.group.routes.indexOf(item.id) >= 0;
-      return item;
-    });
-    return service;
+    return collection.items;
   };
 
   vm.updateRights = function () {
-    var rights = [];
-    vm.categories.forEach(function (category) {
-      category.items.forEach(function (right) {
-        if (right.selected) rights.push(right.id);
-      });
-    });
-    GroupsFactory.updateRights(vm.group.id, rights, vm.getGroup);
+    return vm.updateWithSelected(vm.categories, 'rights');
   };
 
   vm.updateRoutes = function () {
-    var routes = [];
-    vm.services.forEach(function (service) {
-      service.routes.forEach(function (right) {
-        if (right.selected) routes.push(right.id);
+    return vm.updateWithSelected(vm.services, 'routes');
+  };
+
+  vm.updateWithSelected = function (collection, key) {
+    var elements = [];
+    collection.forEach(function (service) {
+      service[key].forEach(function (element) {
+        if (element.selected) elements.push(element.id);
       });
     });
-    GroupsFactory.updateRoutes(vm.group.id, routes, vm.getGroup);
+    var methodName = key.charAt(0).toUpperCase() + key.slice(1);
+    GroupsFactory['update' + methodName](vm.group.id, elements, vm.getGroup);
   };
 
   vm.setGroup = function (group) {
@@ -726,7 +719,9 @@ var _rights_route2 = _interopRequireDefault(_rights_route);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var rights = angular.module('arkaan.frontend.rights', []).controller('rightsListController', _rights_list_controller2.default).factory('RightsFactory', _rights_factory2.default).factory('CategoriesFactory', _categories_factory2.default).config(_rights_route2.default).name;
+var rights = angular.module('arkaan.frontend.rights', []).controller('rightsListController', _rights_list_controller2.default).factory('RightsFactory', _rights_factory2.default).factory('CategoriesFactory', _categories_factory2.default).config(_rights_route2.default).run(function ($translatePartialLoader) {
+  return $translatePartialLoader.addPart('rights');
+}).name;
 
 exports.default = rights;
 
@@ -796,9 +791,6 @@ var rightsRoute = function rightsRoute($stateProvider) {
         'ngInject';
 
         Authentication.checkAndRedirect();
-      },
-      translation: function translation($translatePartialLoader) {
-        $translatePartialLoader.addPart('rights');
       }
     }
   });

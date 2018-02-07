@@ -10,6 +10,7 @@ const groups = angular.module('arkaan.frontend.groups', [])
   .factory('GroupsFactory', groupsFactory)
   .factory('ServicesFactory', servicesFactory)
   .config(groupsRoute)
+  .run(($translatePartialLoader) => $translatePartialLoader.addPart('groups'))
   .name
 
 export default groups

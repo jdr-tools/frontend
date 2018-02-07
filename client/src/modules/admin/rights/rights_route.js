@@ -9,9 +9,6 @@ const rightsRoute = function ($stateProvider) {
       authentication: (Authentication) => {
         'ngInject'
         Authentication.checkAndRedirect()
-      },
-      translation: ($translatePartialLoader) => {
-        $translatePartialLoader.addPart('rights');
       }
     }
   })

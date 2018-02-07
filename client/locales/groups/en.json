@@ -34,7 +34,7 @@
           "verb": "Verb"
         }
       },
-      "title": "Edition of group {{slug}}",
+      "title": "Edition of a group",
       "titles": {
         "rights": "Rights",
         "routes": "Routes"

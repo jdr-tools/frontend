@@ -9,6 +9,7 @@ const rights = angular.module('arkaan.frontend.rights', [])
   .factory('RightsFactory', rightsFactory)
   .factory('CategoriesFactory', categoriesFactory)
   .config(rightsRoute)
+  .run(($translatePartialLoader) => $translatePartialLoader.addPart('rights'))
   .name
 
 export default rights

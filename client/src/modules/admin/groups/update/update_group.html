@@ -1,8 +1,8 @@
 <div ng-if="vm.group">
-  <h1 translate translate-values="{slug: vm.group.slug}">groups.update.title</h1>
+  <h1 translate>groups.update.title</h1>
   <div class="row">
     <div class="col-6">
-      <h3 translate>groups.titles.rights</h3>
+      <h3 translate>groups.update.titles.rights</h3>
       <div id="categoriesAccordion">
         <div ng-repeat="category in vm.categories" class="card">
           <div class="card-header" id="header-{{category.id}}">
@@ -22,7 +22,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="right in category.items | orderBy : 'slug'">
+                  <tr ng-repeat="right in category.rights | orderBy : 'slug'">
                     <td>{{right.slug}}</td>
                     <td>
                       <input type="checkbox" ng-model="right.selected" />
@@ -37,7 +37,7 @@
       <a class="btn btn-primary mt-2 text-white" ng-click="vm.updateRights()" translate>groups.update.buttons.rights</a>
     </div>
     <div class="col-6">
-      <h3 translate>groups.titles.routes</h3>
+      <h3 translate>groups.update.titles.routes</h3>
       <div id="servicesAccordion">
         <div ng-repeat="service in vm.services" class="card">
           <div class="card-header" id="header-{{category.id}}">

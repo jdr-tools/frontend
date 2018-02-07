@@ -10,6 +10,13 @@
           "slug": "Enter a slug"
         }
       }
+    },
+    "list": {
+      "headers": {
+        "groups": "Linked groups",
+        "id": "ID",
+        "slug": "Slug"
+      }
     }
   }
 }

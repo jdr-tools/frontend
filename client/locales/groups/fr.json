@@ -34,7 +34,7 @@
           "verb": "Méthode"
         }
       },
-      "title": "Edition du groupe {{slug}}",
+      "title": "Edition d'un groupe",
       "titles": {
         "rights": "Droits",
         "routes": "Routes"
