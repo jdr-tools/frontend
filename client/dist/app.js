@@ -394,167 +394,6 @@ exports.default = adminDashboard;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var groupsFactory = function groupsFactoryFunction(Api) {
-  'ngInject';
-
-  var vm = this;
-
-  vm.create = function (group, callback) {
-    Api.post('/groups', group, { successCallback: callback });
-  };
-
-  vm.get = function (group_id, callback) {
-    Api.get('/groups/' + group_id, {}, { successCallback: callback });
-  };
-
-  vm.list = function (callback) {
-    Api.get('/groups', {}, { successCallback: callback });
-  };
-
-  vm.updateRights = function (group_id, rights, callback) {
-    Api.patch('/groups/' + group_id + '/rights', { rights: rights }, { successCallback: callback });
-  };
-
-  vm.updateRoutes = function (group_id, routes, callback) {
-    Api.patch('/groups/' + group_id + '/routes', { routes: routes }, { successCallback: callback });
-  };
-
-  return vm;
-};
-
-exports.default = groupsFactory;
-
-},{}],18:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var servicesFactory = function servicesFactoryFunction(Api) {
-  'ngInject';
-
-  var vm = this;
-
-  vm.list = function (callback) {
-    Api.get('/services', {}, { successCallback: callback });
-  };
-
-  return vm;
-};
-
-exports.default = servicesFactory;
-
-},{}],19:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var groupsRoute = function groupsRoute($stateProvider) {
-  'ngInject';
-
-
-  $stateProvider.state('groups', {
-    parent: 'admin',
-    resolve: {
-      authentication: function authentication(Authentication) {
-        'ngInject';
-
-        Authentication.checkAndRedirect();
-      }
-    }
-  });
-
-  $stateProvider.state('groupsList', {
-    url: '/groups',
-    parent: 'groups',
-    templateUrl: 'src/modules/admin/groups/list/groups_list.html',
-    controller: 'groupsListController as vm'
-  });
-
-  $stateProvider.state('updateGroup', {
-    url: '/groups/{group_id}',
-    parent: 'groups',
-    templateUrl: 'src/modules/admin/groups/update/update_group.html',
-    controller: 'updateGroupController as vm'
-  });
-};
-
-exports.default = groupsRoute;
-
-},{}],20:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _groups_list_controller = require('./list/groups_list_controller');
-
-var _groups_list_controller2 = _interopRequireDefault(_groups_list_controller);
-
-var _update_group_controller = require('./update/update_group_controller');
-
-var _update_group_controller2 = _interopRequireDefault(_update_group_controller);
-
-var _groups_factory = require('./factories/groups_factory.js');
-
-var _groups_factory2 = _interopRequireDefault(_groups_factory);
-
-var _services_factory = require('./factories/services_factory.js');
-
-var _services_factory2 = _interopRequireDefault(_services_factory);
-
-var _groups_route = require('./groups_route');
-
-var _groups_route2 = _interopRequireDefault(_groups_route);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var groups = angular.module('arkaan.frontend.groups', []).controller('groupsListController', _groups_list_controller2.default).controller('updateGroupController', _update_group_controller2.default).factory('GroupsFactory', _groups_factory2.default).factory('ServicesFactory', _services_factory2.default).config(_groups_route2.default).run(function ($translatePartialLoader) {
-  return $translatePartialLoader.addPart('groups');
-}).name;
-
-exports.default = groups;
-
-},{"./factories/groups_factory.js":17,"./factories/services_factory.js":18,"./groups_route":19,"./list/groups_list_controller":21,"./update/update_group_controller":22}],21:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var updateGroupController = function updateGroupControllerFunction(GroupsFactory) {
-  'ngInject';
-
-  var vm = this;
-
-  vm.groups = [];
-
-  vm.group = { slug: '' };
-
-  vm.setGroups = function (groups) {
-    vm.groups = groups.items;
-  };
-
-  vm.getGroups = function () {
-    GroupsFactory.list(vm.setGroups);
-  };
-
-  vm.createGroup = function () {
-    GroupsFactory.create(vm.group, vm.getGroups);
-  };
-
-  vm.getGroups();
-};
-
-exports.default = updateGroupController;
-
-},{}],22:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 var updateGroupController = function updateGroupControllerFunction($stateParams, CategoriesFactory, GroupsFactory, ServicesFactory) {
   var vm = this;
 
@@ -563,7 +402,7 @@ var updateGroupController = function updateGroupControllerFunction($stateParams,
   vm.categories = [];
 
   vm.getGroup = function () {
-    GroupsFactory.get($stateParams.group_id, vm.setGroup);
+    GroupsFactory.get($stateParams.id, vm.setGroup);
   };
 
   vm.getCategories = function () {
@@ -619,6 +458,165 @@ var updateGroupController = function updateGroupControllerFunction($stateParams,
 
 exports.default = updateGroupController;
 
+},{}],18:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var groupsFactory = function groupsFactoryFunction(Api) {
+  'ngInject';
+
+  var vm = this;
+
+  vm.create = function (group, callback) {
+    Api.post('/groups', group, { successCallback: callback });
+  };
+
+  vm.get = function (group_id, callback) {
+    Api.get('/groups/' + group_id, {}, { successCallback: callback });
+  };
+
+  vm.list = function (callback) {
+    Api.get('/groups', {}, { successCallback: callback });
+  };
+
+  vm.updateRights = function (group_id, rights, callback) {
+    Api.patch('/groups/' + group_id + '/rights', { rights: rights }, { successCallback: callback });
+  };
+
+  vm.updateRoutes = function (group_id, routes, callback) {
+    Api.patch('/groups/' + group_id + '/routes', { routes: routes }, { successCallback: callback });
+  };
+
+  return vm;
+};
+
+exports.default = groupsFactory;
+
+},{}],19:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var servicesFactory = function servicesFactoryFunction(Api) {
+  'ngInject';
+
+  var vm = this;
+
+  vm.list = function (callback) {
+    Api.get('/services', {}, { successCallback: callback });
+  };
+
+  return vm;
+};
+
+exports.default = servicesFactory;
+
+},{}],20:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var groupsRoute = function groupsRoute($stateProvider) {
+  'ngInject';
+
+
+  $stateProvider.state('groups', {
+    parent: 'admin',
+    resolve: {
+      authentication: function authentication(Authentication) {
+        'ngInject';
+
+        Authentication.checkAndRedirect();
+      }
+    }
+  });
+
+  $stateProvider.state('groups.index', {
+    url: '/groups',
+    templateUrl: 'src/modules/admin/groups/index/groups_list.html',
+    controller: 'groupsListController as vm'
+  });
+
+  $stateProvider.state('groups.edit', {
+    url: '/groups/{id}',
+    templateUrl: 'src/modules/admin/groups/edit/update_group.html',
+    controller: 'updateGroupController as vm'
+  });
+};
+
+exports.default = groupsRoute;
+
+},{}],21:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _groups_list_controller = require('./index/groups_list_controller');
+
+var _groups_list_controller2 = _interopRequireDefault(_groups_list_controller);
+
+var _update_group_controller = require('./edit/update_group_controller');
+
+var _update_group_controller2 = _interopRequireDefault(_update_group_controller);
+
+var _groups_factory = require('./factories/groups_factory.js');
+
+var _groups_factory2 = _interopRequireDefault(_groups_factory);
+
+var _services_factory = require('./factories/services_factory.js');
+
+var _services_factory2 = _interopRequireDefault(_services_factory);
+
+var _groups_route = require('./groups_route');
+
+var _groups_route2 = _interopRequireDefault(_groups_route);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var groups = angular.module('arkaan.frontend.groups', []).controller('groupsListController', _groups_list_controller2.default).controller('updateGroupController', _update_group_controller2.default).factory('GroupsFactory', _groups_factory2.default).factory('ServicesFactory', _services_factory2.default).config(_groups_route2.default).run(function ($translatePartialLoader) {
+  return $translatePartialLoader.addPart('groups');
+}).name;
+
+exports.default = groups;
+
+},{"./edit/update_group_controller":17,"./factories/groups_factory.js":18,"./factories/services_factory.js":19,"./groups_route":20,"./index/groups_list_controller":22}],22:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var updateGroupController = function updateGroupControllerFunction(GroupsFactory) {
+  'ngInject';
+
+  var vm = this;
+
+  vm.groups = [];
+
+  vm.group = { slug: '' };
+
+  vm.setGroups = function (groups) {
+    vm.groups = groups.items;
+  };
+
+  vm.getGroups = function () {
+    GroupsFactory.list(vm.setGroups);
+  };
+
+  vm.createGroup = function () {
+    GroupsFactory.create(vm.group, vm.getGroups);
+  };
+
+  vm.getGroups();
+};
+
+exports.default = updateGroupController;
+
 },{}],23:[function(require,module,exports){
 'use strict';
 
@@ -646,7 +644,7 @@ var adminModules = angular.module('arkaan.frontend.admin', adminModulesList).nam
 
 exports.default = adminModules;
 
-},{"./dashboard":16,"./groups":20,"./rights":26}],24:[function(require,module,exports){
+},{"./dashboard":16,"./groups":21,"./rights":26}],24:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

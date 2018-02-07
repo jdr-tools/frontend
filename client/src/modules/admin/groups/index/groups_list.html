@@ -26,7 +26,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="group in vm.groups" ui-sref="updateGroup({group_id: group.id})">
+      <tr ng-repeat="group in vm.groups" ui-sref="groups.edit({id: group.id})">
         <td><span class="text-muted">{{group.id}}</span>&nbsp;-&nbsp;{{group.slug}}</td>
         <td>{{group.rights}}</td>
         <td>{{group.routes}}</td>

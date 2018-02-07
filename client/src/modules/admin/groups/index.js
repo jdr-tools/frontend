@@ -1,5 +1,5 @@
-import groupsListController from './list/groups_list_controller'
-import updateGroupController from './update/update_group_controller'
+import groupsListController from './index/groups_list_controller'
+import updateGroupController from './edit/update_group_controller'
 import groupsFactory from './factories/groups_factory.js'
 import servicesFactory from './factories/services_factory.js'
 import groupsRoute from './groups_route'

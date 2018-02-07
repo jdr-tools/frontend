@@ -6,7 +6,7 @@ const updateGroupController = function updateGroupControllerFunction ($statePara
   vm.categories = []
 
   vm.getGroup = () => {
-    GroupsFactory.get($stateParams.group_id, vm.setGroup)
+    GroupsFactory.get($stateParams.id, vm.setGroup)
   }
 
   vm.getCategories = () => {
