@@ -18,13 +18,6 @@ const groupsRoute = function ($stateProvider) {
     templateUrl: 'src/modules/admin/groups/index/groups_list.html',
     controller: 'groupsListController as vm'
   })
-
-  /** Concrete state for displaying the form to edit a group. */
-  $stateProvider.state('groups.edit', {
-    url: '/groups/{id}',
-    templateUrl: 'src/modules/admin/groups/edit/update_group.html',
-    controller: 'updateGroupController as vm'
-  })
 }
 
 export default groupsRoute

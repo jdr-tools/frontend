@@ -6,6 +6,9 @@
   </a>
 </h1>
 
+<update-left-panel collection="vm.categories" loop-key="rights"></update-left-panel>
+<update-left-panel collection="vm.services" loop-key="routes"></update-left-panel>
+
 <div class="collapse mt-2 mb-2" id="collapseCreateGroup">
   <form class="form-inline" ng-submit="vm.createGroup()">
     <div class="input-group">
@@ -26,12 +29,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="group in vm.groups" ui-sref="groups.edit({id: group.id})">
+      <tr ng-repeat="group in vm.groups">
         <td><span class="text-muted">{{group.id}}</span>&nbsp;-&nbsp;{{group.slug}}</td>
         <td>{{group.rights}}</td>
         <td>{{group.routes}}</td>
         <td>
-          <a ng-click="deleteGroup(group.id)"><i class="fa fa-trash"></i></a>
+          <a ng-click="vm.editElements('routes', group)"><i class="fa fa-road"></i></a>&nbsp;
+          <a ng-click="vm.editElements('rights', group)"><i class="fa fa-lock"></i></a>&nbsp;
+          <a ng-click="vm.deleteGroup(group.id)"><i class="fa fa-trash"></i></a>
         </td>
       </tr>
     </tbody>

@@ -394,69 +394,63 @@ exports.default = adminDashboard;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var updateGroupController = function updateGroupControllerFunction($stateParams, CategoriesFactory, GroupsFactory, ServicesFactory) {
+var updateLeftPanel = function updateLeftPanelFunction($mdSidenav, $rootScope, $scope, GroupsFactory) {
+  'ngInject';
+
   var vm = this;
 
-  vm.group = false;
+  vm.groupId = false;
+  vm.correspondance = { 'rights': 'key', 'routes': 'slug'
 
-  vm.categories = [];
-
-  vm.getGroup = function () {
-    GroupsFactory.get($stateParams.id, vm.setGroup);
-  };
-
-  vm.getCategories = function () {
-    CategoriesFactory.list(function (categories) {
-      vm.categories = vm.transformCollection(categories, 'rights');
+  };$scope.$watch('vm.loopKey', function () {
+    $rootScope.$on('update_' + vm.loopKey, function (event, groupId) {
+      vm.groupId = groupId;
+      GroupsFactory.get(groupId, vm.selectElements);
     });
-  };
+  });
 
-  vm.getServices = function () {
-    ServicesFactory.list(function (services) {
-      vm.services = vm.transformCollection(services, 'routes');
-    });
-  };
-
-  vm.transformCollection = function (collection, key) {
-    collection.items.map(function (item) {
-      item[key] = item[key].map(function (subitem) {
-        subitem.selected = vm.group[key].indexOf(subitem.id) >= 0;
+  vm.selectElements = function (group) {
+    vm.collection = vm.collection.map(function (item) {
+      item[vm.loopKey] = item[vm.loopKey].map(function (subitem) {
+        subitem.selected = group[vm.loopKey].indexOf(subitem.id) >= 0;
         return subitem;
       });
       return item;
     });
-    return collection.items;
+    vm.toggle();
   };
 
-  vm.updateRights = function () {
-    return vm.updateWithSelected(vm.categories, 'rights');
-  };
-
-  vm.updateRoutes = function () {
-    return vm.updateWithSelected(vm.services, 'routes');
-  };
-
-  vm.updateWithSelected = function (collection, key) {
+  vm.update = function () {
     var elements = [];
-    collection.forEach(function (service) {
-      service[key].forEach(function (element) {
-        if (element.selected) elements.push(element.id);
+    vm.collection.forEach(function (element) {
+      element[vm.loopKey].forEach(function (item) {
+        if (item.selected) elements.push(item.id);
       });
     });
-    var methodName = key.charAt(0).toUpperCase() + key.slice(1);
-    GroupsFactory['update' + methodName](vm.group.id, elements, vm.getGroup);
+    var methodName = vm.loopKey.charAt(0).toUpperCase() + vm.loopKey.slice(1);
+    GroupsFactory['update' + methodName](vm.groupId, elements, vm.close);
   };
 
-  vm.setGroup = function (group) {
-    vm.group = group;
-    vm.getCategories();
-    vm.getServices();
+  vm.toggle = function () {
+    $mdSidenav(vm.loopKey + '-panel').toggle();
   };
 
-  vm.getGroup();
+  vm.close = function () {
+    $rootScope.$broadcast('refreshGroupsList');
+    vm.toggle();
+  };
 };
 
-exports.default = updateGroupController;
+exports.default = {
+  templateUrl: 'src/modules/admin/groups/components/update_left_panel/update_left_panel.html',
+  controller: updateLeftPanel,
+  controllerAs: 'vm',
+  bindings: {
+    collection: '=',
+    loopKey: '@',
+    titleKey: '@'
+  }
+};
 
 },{}],18:[function(require,module,exports){
 'use strict';
@@ -471,6 +465,10 @@ var groupsFactory = function groupsFactoryFunction(Api) {
 
   vm.create = function (group, callback) {
     Api.post('/groups', group, { successCallback: callback });
+  };
+
+  vm.delete = function (group_id, callback) {
+    Api.delete('/groups/' + group_id, { successCallback: callback });
   };
 
   vm.get = function (group_id, callback) {
@@ -540,12 +538,6 @@ var groupsRoute = function groupsRoute($stateProvider) {
     templateUrl: 'src/modules/admin/groups/index/groups_list.html',
     controller: 'groupsListController as vm'
   });
-
-  $stateProvider.state('groups.edit', {
-    url: '/groups/{id}',
-    templateUrl: 'src/modules/admin/groups/edit/update_group.html',
-    controller: 'updateGroupController as vm'
-  });
 };
 
 exports.default = groupsRoute;
@@ -561,10 +553,6 @@ var _groups_list_controller = require('./index/groups_list_controller');
 
 var _groups_list_controller2 = _interopRequireDefault(_groups_list_controller);
 
-var _update_group_controller = require('./edit/update_group_controller');
-
-var _update_group_controller2 = _interopRequireDefault(_update_group_controller);
-
 var _groups_factory = require('./factories/groups_factory.js');
 
 var _groups_factory2 = _interopRequireDefault(_groups_factory);
@@ -577,40 +565,65 @@ var _groups_route = require('./groups_route');
 
 var _groups_route2 = _interopRequireDefault(_groups_route);
 
+var _update_left_panel_component = require('./components/update_left_panel/update_left_panel_component');
+
+var _update_left_panel_component2 = _interopRequireDefault(_update_left_panel_component);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var groups = angular.module('arkaan.frontend.groups', []).controller('groupsListController', _groups_list_controller2.default).controller('updateGroupController', _update_group_controller2.default).factory('GroupsFactory', _groups_factory2.default).factory('ServicesFactory', _services_factory2.default).config(_groups_route2.default).run(function ($translatePartialLoader) {
+var groups = angular.module('arkaan.frontend.groups', []).controller('groupsListController', _groups_list_controller2.default).component('updateLeftPanel', _update_left_panel_component2.default).factory('GroupsFactory', _groups_factory2.default).factory('ServicesFactory', _services_factory2.default).config(_groups_route2.default).run(function ($translatePartialLoader) {
   return $translatePartialLoader.addPart('groups');
 }).name;
 
 exports.default = groups;
 
-},{"./edit/update_group_controller":17,"./factories/groups_factory.js":18,"./factories/services_factory.js":19,"./groups_route":20,"./index/groups_list_controller":22}],22:[function(require,module,exports){
+},{"./components/update_left_panel/update_left_panel_component":17,"./factories/groups_factory.js":18,"./factories/services_factory.js":19,"./groups_route":20,"./index/groups_list_controller":22}],22:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var updateGroupController = function updateGroupControllerFunction(GroupsFactory) {
+var updateGroupController = function updateGroupControllerFunction($mdSidenav, $rootScope, CategoriesFactory, GroupsFactory, ServicesFactory) {
   'ngInject';
 
   var vm = this;
 
   vm.groups = [];
+  vm.group = { slug: ''
+  };vm.services = [];
+  vm.categories = [];
+  vm.typeCorrespondance = { 'routes': 'services', 'rights': 'categories' };
 
-  vm.group = { slug: '' };
+  vm.createGroup = function () {
+    GroupsFactory.create(vm.group, vm.getGroups);
+  };
 
-  vm.setGroups = function (groups) {
-    vm.groups = groups.items;
+  vm.deleteGroup = function (group_id) {
+    GroupsFactory.delete(group_id, vm.getGroups);
+  };
+
+  vm.editElements = function (type, group) {
+    var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+    $rootScope.$broadcast('update_' + type, group.id);
   };
 
   vm.getGroups = function () {
     GroupsFactory.list(vm.setGroups);
   };
 
-  vm.createGroup = function () {
-    GroupsFactory.create(vm.group, vm.getGroups);
+  vm.setGroups = function (groups) {
+    vm.groups = groups.items;
   };
+
+  $rootScope.$on('refreshGroupsList', vm.getGroups);
+
+  ServicesFactory.list(function (services) {
+    vm.services = services.items;
+  });
+  CategoriesFactory.list(function (categories) {
+    vm.categories = categories.items;
+  });
 
   vm.getGroups();
 };

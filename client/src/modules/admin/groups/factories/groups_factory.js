@@ -7,6 +7,10 @@ const groupsFactory = function groupsFactoryFunction (Api) {
     Api.post('/groups', group, {successCallback: callback})
   }
 
+  vm.delete = (group_id, callback) => {
+    Api.delete(`/groups/${group_id}`, {successCallback: callback})
+  }
+
   vm.get = (group_id, callback) => {
     Api.get(`/groups/${group_id}`, {}, {successCallback: callback})
   }
