@@ -21,7 +21,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 angular.module('arkaan.frontend', ['ngStorage', 'ngMaterial', 'pascalprecht.translate', 'ui.router', _components2.default, _configuration2.default, _modules2.default, _services2.default]);
 
-},{"./components":4,"./configuration":10,"./modules":40,"./services":43}],2:[function(require,module,exports){
+},{"./components":4,"./configuration":10,"./modules":41,"./services":43}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -935,6 +935,26 @@ exports.default = accountsCreateController;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var accountsFactory = function accountsFactoryFunction(Api) {
+  'ngInject';
+
+  var vm = this;
+
+  vm.get = function (account_id, callback) {
+    Api.get('/accounts/' + account_id, {}, { successCallback: callback });
+  };
+
+  return vm;
+};
+
+exports.default = accountsFactory;
+
+},{}],32:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
 var _accounts_list_controller = require('./list/accounts_list_controller');
 
@@ -944,19 +964,23 @@ var _accounts_create_controller = require('./create/accounts_create_controller')
 
 var _accounts_create_controller2 = _interopRequireDefault(_accounts_create_controller);
 
+var _accounts_factory = require('./factories/accounts_factory');
+
+var _accounts_factory2 = _interopRequireDefault(_accounts_factory);
+
 var _accounts_route = require('./accounts_route');
 
 var _accounts_route2 = _interopRequireDefault(_accounts_route);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var accounts = angular.module('arkaan.frontend.accounts', []).controller('accountsListController', _accounts_list_controller2.default).controller('accountsCreateController', _accounts_create_controller2.default).config(_accounts_route2.default).run(function ($translatePartialLoader) {
+var accounts = angular.module('arkaan.frontend.accounts', []).controller('accountsListController', _accounts_list_controller2.default).controller('accountsCreateController', _accounts_create_controller2.default).factory('AccountsFactory', _accounts_factory2.default).config(_accounts_route2.default).run(function ($translatePartialLoader) {
   return $translatePartialLoader.addPart('accounts');
 }).name;
 
 exports.default = accounts;
 
-},{"./accounts_route":29,"./create/accounts_create_controller":30,"./list/accounts_list_controller":32}],32:[function(require,module,exports){
+},{"./accounts_route":29,"./create/accounts_create_controller":30,"./factories/accounts_factory":31,"./list/accounts_list_controller":33}],33:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -975,7 +999,7 @@ var accountsListController = function AccountsListController() {
 
 exports.default = accountsListController;
 
-},{}],33:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -994,7 +1018,7 @@ var dashboardController = function DashboardController(Api, $scope) {
 
 exports.default = dashboardController;
 
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1014,7 +1038,7 @@ var dashboardRoute = function dashboardRoute($stateProvider) {
 
 exports.default = dashboardRoute;
 
-},{}],35:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1035,7 +1059,7 @@ var dashboard = angular.module('arkaan.frontend.dashboard', []).config(_dashboar
 
 exports.default = dashboard;
 
-},{"./dashboard_controller":33,"./dashboard_route":34}],36:[function(require,module,exports){
+},{"./dashboard_controller":34,"./dashboard_route":35}],37:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1062,7 +1086,7 @@ var appModules = angular.module('arkaan.frontend.app', appModulesList).name;
 
 exports.default = appModules;
 
-},{"./accounts":31,"./dashboard":35,"./sessions":38}],37:[function(require,module,exports){
+},{"./accounts":32,"./dashboard":36,"./sessions":39}],38:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1098,7 +1122,7 @@ var sessionsCreateController = function () {
 
 exports.default = sessionsCreateController;
 
-},{}],38:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1121,7 +1145,7 @@ var login = angular.module('arkaan.frontend.sessions', []).controller('sessionsC
 
 exports.default = login;
 
-},{"././sessions_route":39,"./create/sessions_create_controller":37}],39:[function(require,module,exports){
+},{"././sessions_route":40,"./create/sessions_create_controller":38}],40:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1145,7 +1169,7 @@ var loginRoute = function loginRoute($stateProvider) {
 
 exports.default = loginRoute;
 
-},{}],40:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1168,7 +1192,7 @@ var modules = angular.module('arkaan.frontend.modules', modulesList).name;
 
 exports.default = modules;
 
-},{"./admin":23,"./app":36}],41:[function(require,module,exports){
+},{"./admin":23,"./app":37}],42:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1255,7 +1279,32 @@ var Api = function () {
 
 exports.default = Api;
 
-},{}],42:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _authentication = require('./permissions/authentication');
+
+var _authentication2 = _interopRequireDefault(_authentication);
+
+var _permissions = require('./permissions/permissions');
+
+var _permissions2 = _interopRequireDefault(_permissions);
+
+var _api = require('./api/api');
+
+var _api2 = _interopRequireDefault(_api);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var services = angular.module('arkaan.frontend.services', []).service('Authentication', _authentication2.default).service('Permissions', _permissions2.default).service('Api', _api2.default).name;
+
+exports.default = services;
+
+},{"./api/api":42,"./permissions/authentication":44,"./permissions/permissions":45}],44:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1267,13 +1316,14 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Authentication = function () {
-  function AuthenticationClass(Api, $localStorage, $rootScope, $state) {
+  function AuthenticationClass(Api, AccountsFactory, $localStorage, $rootScope, $state) {
     'ngInject';
 
     _classCallCheck(this, AuthenticationClass);
 
     this.storage = $localStorage;
     this.api = Api;
+    this.accounts = AccountsFactory;
     this.state = $state;
     this.scope = $rootScope;
   }
@@ -1319,11 +1369,13 @@ var Authentication = function () {
     key: 'createUserSession',
     value: function createUserSession(username, password) {
       var me = this;
-      var successCallback = function successCallback(response) {
-        me.storage.account = response.account;
-        me.storage.token = response.token;
-        me.scope.$broadcast('loginSuccessful');
-        me.state.go('dashboard', {}, { reload: true });
+      var successCallback = function successCallback(session_response) {
+        me.storage.token = session_response.token;
+        me.accounts.get(session_response.account_id, function (account_response) {
+          me.storage.account = account_response.account;
+          me.scope.$broadcast('loginSuccessful');
+          me.state.go('dashboard', {}, { reload: true });
+        });
       };
       this.api.post('/sessions', { username: username, password: password }, { successCallback: successCallback });
     }
@@ -1343,25 +1395,26 @@ var Authentication = function () {
 
 exports.default = Authentication;
 
-},{}],43:[function(require,module,exports){
-'use strict';
+},{}],45:[function(require,module,exports){
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _authentication = require('./authentication/authentication');
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var _authentication2 = _interopRequireDefault(_authentication);
+var Permissions = function () {
+  function PermissionsClass($localStorage) {
+    _classCallCheck(this, PermissionsClass);
 
-var _api = require('./api/api');
+    this.account = $localStorage.account;
+  }
 
-var _api2 = _interopRequireDefault(_api);
+  _createClass(PermissionsClass, [{
+    key: "hasRight",
+    value: function hasRight() {}
+  }]);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+  return PermissionsClass;
+}();
 
-var services = angular.module('arkaan.frontend.services', []).service('Authentication', _authentication2.default).service('Api', _api2.default).name;
-
-exports.default = services;
-
-},{"./api/api":41,"./authentication/authentication":42}]},{},[1])
+},{}]},{},[1])
