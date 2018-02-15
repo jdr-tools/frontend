@@ -62,12 +62,14 @@ const Authentication = class AuthenticationClass {
   createUserSession (username, password) {
     const me = this
     const successCallback = (response) => {
-      me.storage.account = response.account
       me.storage.token = response.token
-      me.scope.$broadcast('loginSuccessful')
-      me.state.go('dashboard', {}, {reload: true})
+      me.api.get(`/accounts/${response.account_id}`, {}, {successCallback: (account_response) => {
+        me.storage.account = account_response.account
+        me.scope.$broadcast('loginSuccessful')
+        me.state.go('dashboard', {}, {reload: true})
+      }})
     }
-    this.api.post('/sessions', {username: username, password: password}, {successCallback: successCallback})
+    this.api.post('/sessions', {username: username, password: password}, {successCallback: successCallback, skipSessionId: true})
   }
 
   /**

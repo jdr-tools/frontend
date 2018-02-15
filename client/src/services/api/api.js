@@ -8,10 +8,11 @@ const Api = class ApiClass {
    * Constructor of the class, initializing needed variables
    * @param {Object} $http - the HTTP requests maker service used to query the API server-side.
    */
-  constructor ($http, $window) {
+  constructor ($http, $localStorage, $window) {
     'ngInject'
     this.http = $http
     this.jquery = $window.jQuery
+    this.storage = $localStorage
   }
 
   /**
@@ -34,6 +35,12 @@ const Api = class ApiClass {
     this.makeRequest('GET', uri, parameters, options)
   }
 
+  /**
+   * Makes a patch request on the server-side part of the application, forwarded afterward on the gateway, and the service.
+   * @param {String} uri - the URL of the route you're trying to reach in the API.
+   * @param {Object} parameters - the parameters you want to pass as a querystring to the route.
+   * @param {Object} options - the options to pass to the service to change its default behaviour.
+   */
   patch (uri, parameters = {}, options = {}) {
     this.makeRequest('PATCH', uri, parameters, options)
   }
@@ -62,6 +69,9 @@ const Api = class ApiClass {
         X_CSRF_TOKEN: this.jquery('input[name=_csrf]').val()
       },
       data: angular.extend({}, parameters, {url: uri, method: verb})
+    }
+    if (options.skipSessionId != true) {
+      configuration.data.session_id = this.storage.token
     }
     const successCallback = (response) => {
       if(options.successCallback) options.successCallback(response.data)

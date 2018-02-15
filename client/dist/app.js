@@ -1170,13 +1170,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var Api = function () {
 
-  function ApiClass($http, $window) {
+  function ApiClass($http, $localStorage, $window) {
     'ngInject';
 
     _classCallCheck(this, ApiClass);
 
     this.http = $http;
     this.jquery = $window.jQuery;
+    this.storage = $localStorage;
   }
 
 
@@ -1199,6 +1200,8 @@ var Api = function () {
 
       this.makeRequest('GET', uri, parameters, options);
     }
+
+
   }, {
     key: 'patch',
     value: function patch(uri) {
@@ -1229,6 +1232,9 @@ var Api = function () {
         },
         data: angular.extend({}, parameters, { url: uri, method: verb })
       };
+      if (options.skipSessionId != true) {
+        configuration.data.session_id = this.storage.token;
+      }
       var successCallback = function successCallback(response) {
         if (options.successCallback) options.successCallback(response.data);
       };
@@ -1309,12 +1315,14 @@ var Authentication = function () {
     value: function createUserSession(username, password) {
       var me = this;
       var successCallback = function successCallback(response) {
-        me.storage.account = response.account;
         me.storage.token = response.token;
-        me.scope.$broadcast('loginSuccessful');
-        me.state.go('dashboard', {}, { reload: true });
+        me.api.get('/accounts/' + response.account_id, {}, { successCallback: function successCallback(account_response) {
+            me.storage.account = account_response.account;
+            me.scope.$broadcast('loginSuccessful');
+            me.state.go('dashboard', {}, { reload: true });
+          } });
       };
-      this.api.post('/sessions', { username: username, password: password }, { successCallback: successCallback });
+      this.api.post('/sessions', { username: username, password: password }, { successCallback: successCallback, skipSessionId: true });
     }
 
 
