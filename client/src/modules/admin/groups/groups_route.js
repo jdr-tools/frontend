@@ -1,11 +1,10 @@
 const groupsRoute = function ($stateProvider) {
   'ngInject'
 
-  /** Virtual state for all accounts-related states. */
+  /** Virtual state for all groups-related states. */
   $stateProvider.state('groups', {
     parent: 'admin',
     resolve: {
-      /** Redirects the user to the login page if he's not yet connected. */
       authentication: (Authentication) => {
         'ngInject'
         Authentication.checkAndRedirect()
@@ -13,20 +12,11 @@ const groupsRoute = function ($stateProvider) {
     }
   })
 
-  /** Concrete state for displaying a list of accounts. */
-  $stateProvider.state('groupsList', {
+  /** Concrete state for displaying a list of groups. */
+  $stateProvider.state('groups.index', {
     url: '/groups',
-    parent: 'groups',
-    templateUrl: 'src/modules/admin/groups/list/groups_list.html',
+    templateUrl: 'src/modules/admin/groups/index/groups_list.html',
     controller: 'groupsListController as vm'
-  })
-
-  /** Concrete state for displaying a list of accounts. */
-  $stateProvider.state('updateGroup', {
-    url: '/groups/{group_id}',
-    parent: 'groups',
-    templateUrl: 'src/modules/admin/groups/update/update_group.html',
-    controller: 'updateGroupController as vm'
   })
 }
 

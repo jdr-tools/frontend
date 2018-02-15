@@ -4,10 +4,11 @@
  */
 const Authentication = class AuthenticationClass {
 
-  constructor (Api, $localStorage, $rootScope, $state) {
+  constructor (Api, AccountsFactory, $localStorage, $rootScope, $state) {
     'ngInject'
     this.storage = $localStorage
     this.api = Api
+    this.accounts = AccountsFactory
     this.state = $state
     this.scope = $rootScope
   }
@@ -61,13 +62,13 @@ const Authentication = class AuthenticationClass {
    */
   createUserSession (username, password) {
     const me = this
-    const successCallback = (response) => {
-      me.storage.token = response.token
-      me.api.get(`/accounts/${response.account_id}`, {}, {successCallback: (account_response) => {
+    const successCallback = (session_response) => {
+      me.storage.token = session_response.token
+      me.accounts.get(session_response.account_id, (account_response) => {
         me.storage.account = account_response.account
         me.scope.$broadcast('loginSuccessful')
         me.state.go('dashboard', {}, {reload: true})
-      }})
+      })
     }
     this.api.post('/sessions', {username: username, password: password}, {successCallback: successCallback, skipSessionId: true})
   }

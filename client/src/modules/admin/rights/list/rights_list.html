@@ -17,7 +17,7 @@
 
 <div ng-if="vm.categories.length">
   <div ng-repeat="category in vm.categories">
-    <div class="row align-items-center">
+    <div class="row align-items-center pl-3 pr-3">
       <h3 class="col-xs-auto">{{category.slug}}</h3>
       <div class="col text-muted">{{category.id}}</div>
       <div class="col-xs-auto text-right">
@@ -35,7 +35,8 @@
       </thead>
       <tbody>
         <tr ng-repeat="right in category.rights">
-          <td><span class="text-muted">{{right.id}}</span>&nbsp;-&nbsp;{{right.slug}}</td>
+          <td><span class="text-muted">{{right.id}}</span></td>
+          <td>{{right.slug}}</td>
           <td>{{right.groups}}</td>
           <td>
             <a ng-click="vm.deleteRight(right.id)"><i class="fa fa-trash"></i></a>
@@ -44,7 +45,7 @@
       </tbody>
       <tfoot>
         <tr>
-          <td colspan="2">
+          <td colspan="4">
             <form class="form-inline" ng-submit="vm.createRight(category.id)">
               <div class="input-group">
                 <input type="text" class="form-control" ng-model="vm.rights[category.id]" />

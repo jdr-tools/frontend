@@ -1,0 +1,19 @@
+<md-sidenav md-component-id="{{vm.loopKey}}-panel" class="md-sidenav-left">
+  <div class="pl-3 pr-3 pb-2 pt-2">
+    <h4 class="mt-1">Droits</h4>
+    <div ng-repeat="item in vm.collection">
+      <h5 class="bg-dark text-light mt-3 pl-2 pb-1 pt-1">
+        <span ng-if="vm.loopKey == 'rights'">{{item.slug}}</span>
+        <span ng-if="vm.loopKey == 'routes'">{{item.key}}</span>
+      </h5>
+      <div ng-repeat="item in item[vm.loopKey]" class="row">
+        <div class="col">
+          <samp ng-if="vm.loopKey == 'rights'">{{item.slug}}</samp>
+          <samp ng-if="vm.loopKey == 'routes'">{{item.verb | uppercase}}&nbsp;{{item.path}}</samp>
+        </div>
+        <div class="col-md-auto"><input type="checkbox" ng-model="item.selected" /></div>
+      </div>
+    </div>
+    <a ng-click="vm.update(vm.loopKey)" class="btn btn-primary text-white mt-2">Valider</a>
+  </div>
+</md-sidenav>
