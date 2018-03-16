@@ -9,6 +9,7 @@
       "brand": "Arkaan",
       "items": {
         "accounts": "Accounts",
+        "campaigns": "Campaigns",
         "dashboard": "Dashboard",
         "login": "Log in",
         "logout": "Log out",

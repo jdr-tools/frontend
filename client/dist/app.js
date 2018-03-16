@@ -25,7 +25,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 angular.module('arkaan.frontend', ['ngStorage', 'ngMaterial', 'pascalprecht.translate', 'ui.router', _components2.default, _configuration2.default, _directives2.default, _modules2.default, _services2.default]);
 
-},{"./components":4,"./configuration":10,"./directives":15,"./modules":43,"./services":45}],2:[function(require,module,exports){
+},{"./components":4,"./configuration":10,"./directives":15,"./modules":47,"./services":49}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1060,6 +1060,101 @@ exports.default = accountsListController;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var campaignsRoute = function campaignsRoute($stateProvider) {
+  'ngInject';
+
+
+  $stateProvider.state('campaigns', {
+    parent: 'app',
+    resolve: {
+      authentication: function authentication(Authentication) {
+        'ngInject';
+
+        Authentication.checkAndRedirect();
+      }
+    }
+  });
+
+  $stateProvider.state('campaigns.index', {
+    url: '/campaigns',
+    templateUrl: 'src/modules/app/campaigns/index/campaigns_list.html',
+    controller: 'campaignsListController as vm'
+  });
+};
+
+exports.default = campaignsRoute;
+
+},{}],37:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var campaignsFactory = function campaignsFactoryFunction(Api) {
+  'ngInject';
+
+  var service = this;
+
+  service.list = function (callback) {
+    Api.get('/campaigns', {}, { successCallback: callback });
+  };
+
+  return service;
+};
+
+exports.default = campaignsFactory;
+
+},{}],38:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _campaigns_list_controller = require('./index/campaigns_list_controller');
+
+var _campaigns_list_controller2 = _interopRequireDefault(_campaigns_list_controller);
+
+var _campaigns_factory = require('./factories/campaigns_factory.js');
+
+var _campaigns_factory2 = _interopRequireDefault(_campaigns_factory);
+
+var _campaigns_route = require('./campaigns_route');
+
+var _campaigns_route2 = _interopRequireDefault(_campaigns_route);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var campaigns = angular.module('arkaan.frontend.campaigns', []).controller('campaignsListController', _campaigns_list_controller2.default).factory('campaignsFactory', _campaigns_factory2.default).config(_campaigns_route2.default).run(function ($translatePartialLoader) {
+  return $translatePartialLoader.addPart('campaigns');
+}).name;
+
+exports.default = campaigns;
+
+},{"./campaigns_route":36,"./factories/campaigns_factory.js":37,"./index/campaigns_list_controller":39}],39:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var campaignsListController = function campaignsListControllerFunction(campaignsFactory) {
+  'ngInject';
+
+  var vm = this;
+
+  campaignsFactory.list(function (data) {
+    return console.log(data);
+  });
+};
+
+exports.default = campaignsListController;
+
+},{}],40:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1073,7 +1168,7 @@ var dashboardController = function DashboardController(Api, $scope) {
 
 exports.default = dashboardController;
 
-},{}],37:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1093,7 +1188,7 @@ var dashboardRoute = function dashboardRoute($stateProvider) {
 
 exports.default = dashboardRoute;
 
-},{}],38:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1114,20 +1209,24 @@ var dashboard = angular.module('arkaan.frontend.dashboard', []).config(_dashboar
 
 exports.default = dashboard;
 
-},{"./dashboard_controller":36,"./dashboard_route":37}],39:[function(require,module,exports){
+},{"./dashboard_controller":40,"./dashboard_route":41}],43:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _dashboard = require('./dashboard');
-
-var _dashboard2 = _interopRequireDefault(_dashboard);
-
 var _accounts = require('./accounts');
 
 var _accounts2 = _interopRequireDefault(_accounts);
+
+var _campaigns = require('./campaigns');
+
+var _campaigns2 = _interopRequireDefault(_campaigns);
+
+var _dashboard = require('./dashboard');
+
+var _dashboard2 = _interopRequireDefault(_dashboard);
 
 var _sessions = require('./sessions');
 
@@ -1135,13 +1234,13 @@ var _sessions2 = _interopRequireDefault(_sessions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var appModulesList = [_dashboard2.default, _accounts2.default, _sessions2.default];
+var appModulesList = [_accounts2.default, _campaigns2.default, _dashboard2.default, _sessions2.default];
 
 var appModules = angular.module('arkaan.frontend.app', appModulesList).name;
 
 exports.default = appModules;
 
-},{"./accounts":34,"./dashboard":38,"./sessions":41}],40:[function(require,module,exports){
+},{"./accounts":34,"./campaigns":38,"./dashboard":42,"./sessions":45}],44:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1177,7 +1276,7 @@ var sessionsCreateController = function () {
 
 exports.default = sessionsCreateController;
 
-},{}],41:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1200,7 +1299,7 @@ var login = angular.module('arkaan.frontend.sessions', []).controller('sessionsC
 
 exports.default = login;
 
-},{"././sessions_route":42,"./create/sessions_create_controller":40}],42:[function(require,module,exports){
+},{"././sessions_route":46,"./create/sessions_create_controller":44}],46:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1224,7 +1323,7 @@ var loginRoute = function loginRoute($stateProvider) {
 
 exports.default = loginRoute;
 
-},{}],43:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1247,7 +1346,7 @@ var modules = angular.module('arkaan.frontend.modules', modulesList).name;
 
 exports.default = modules;
 
-},{"./admin":25,"./app":39}],44:[function(require,module,exports){
+},{"./admin":25,"./app":43}],48:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1340,7 +1439,7 @@ var Api = function () {
 
 exports.default = Api;
 
-},{}],45:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1365,7 +1464,7 @@ var services = angular.module('arkaan.frontend.services', []).service('Authentic
 
 exports.default = services;
 
-},{"./api/api":44,"./permissions/authentication":46,"./permissions/permissions":47}],46:[function(require,module,exports){
+},{"./api/api":48,"./permissions/authentication":50,"./permissions/permissions":51}],50:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1456,7 +1555,7 @@ var Authentication = function () {
 
 exports.default = Authentication;
 
-},{}],47:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
