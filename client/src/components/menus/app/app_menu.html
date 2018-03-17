@@ -1,7 +1,7 @@
 <md-toolbar>
-  <div class="md-toolbar-tools" ng-if="vm.authenticated">
+  <div class="md-toolbar-tools container centered" ng-if="vm.authenticated">
     <span>
-      <md-button ui-sref="campaigns.index" translate>components.main_menu.items.campaigns</md-button>
+      <md-button ui-sref="campaigns.index">{{'components.main_menu.items.campaigns' | translate}}</md-button>
     </span>
     <span flex></span>
     <span>
@@ -18,7 +18,7 @@
       </md-menu>
     </span>
   </div>
-  <div class="md-toolbar-tools" ng-if="!vm.authenticated">
+  <div class="md-toolbar-tools container centered" ng-if="!vm.authenticated">
     <span flex></span>
     <span>
       <md-button ui-sref="sessionsCreate">{{'components.main_menu.items.login' | translate}}</md-button>

@@ -1,1 +1,23 @@
 <h1 translate>campaigns.index.title</h1>
+<div>
+  <campaigns-edit></campaigns-edit>
+</div>
+<div layout="row" layout-xs="column">
+  <md-card ng-repeat="campaign in vm.campaigns.items" flex="33" flex-xs="100">
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">{{campaign.title}}</span>
+        <span class="md-subhead" ng-if="campaign.is_private">Privée</span>
+        <span class="md-subhead" ng-if="!campaign.is_private">Publique</span>
+      </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+      <p>{{campaign.description}}</p>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button class="md-icon-button" ng-click="vm.deleteCampaign(campaign.id)">
+        <md-icon>delete</md-icon>
+      </md-button>
+    </md-card-actions>
+  </md-card>
+</div>

@@ -1,2 +1,13 @@
 a, input[type=submit] {
   cursor: pointer; }
+
+.container.centered {
+  margin: 0 auto; }
+
+.campaigns-edit-modal {
+  width: 800px; }
+  .campaigns-edit-modal .campaign-description {
+    height: 100px !important; }
+
+.no-margin-bottom {
+  margin-bottom: 0px !important; }

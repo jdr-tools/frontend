@@ -1,1 +1,16 @@
 @import 'components/links';
+
+.container.centered {
+  margin: 0 auto;
+}
+
+.campaigns-edit-modal {
+  width: 800px;
+  .campaign-description {
+    height: 100px !important;
+  }
+}
+
+.no-margin-bottom {
+  margin-bottom: 0px !important;
+}
