@@ -1,7 +1,14 @@
 {
   "campaigns": {
+    "create": {
+      "labels": {
+        "description": "Description",
+        "title": "Titre"
+      },
+      "title": "Créer une nouvelle campagne"
+    },
     "index": {
-      "title": "List of campaigns"
+      "title": "Vos campagnes"
     }
   }
 }

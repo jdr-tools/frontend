@@ -1,5 +1,17 @@
 {
   "common": {
-    "actions": "Actions"
+    "actions": "Actions",
+    "cancel": "Annuler",
+    "private": {
+      "f": "Privée",
+      "m": "Privé",
+      "n": "Privé·e"
+    },
+    "public": {
+      "f": "Publique",
+      "m": "Public",
+      "n": "Public·que"
+    },
+    "validate": "Valider"
   }
 }

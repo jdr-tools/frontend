@@ -1,31 +1,31 @@
 <md-dialog class="campaigns-edit-modal">
   <md-toolbar>
     <div class="md-toolbar-tools">
-      <h2>Création d'une campagne</h2>
+      <h2 translate>campaigns.create.title</h2>
     </div>
   </md-toolbar>
-  <md-dialog-content>
-    <md-content class="md-padding">
-      <form ng-submit="vm.createCampaign()" class="no-margin-bottom">
+  <form ng-submit="validate()" class="no-margin-bottom">
+    <md-dialog-content>
+      <md-content class="md-padding">
         <!-- Input for the title of the campaign. -->
         <md-input-container class="md-block">
-          <label>Titre</label>
-          <input type="text" ng-model="campaign.title" />
+          <label for="campaignName" translate>campaigns.create.labels.title</label>
+          <input type="text" class="md-input" ng-model="campaign.title" id="campaignName" required />
         </md-input-container>
         <!-- Switch to make the campaign private (TRUE) or public (FALSE) -->
         <md-switch ng-model="campaign.isPrivate">
-          <span ng-if="campaign.isPrivate">Privée</span>
-          <span ng-if="!campaign.isPrivate">Publique</span>
+          <span ng-if="campaign.isPrivate">{{'common.private.f' | translate}}</span>
+          <span ng-if="!campaign.isPrivate">{{'common.public.f' | translate}}</span>
         </md-switch>
         <md-input-container class="md-block no-margin-bottom">
-          <label>Description</label>
+          <label translate>campaigns.create.labels.description</label>
           <textarea class="campaign-description" ng-model="campaign.description"></textarea>
         </md-input-container>
-      </form>
-    </md-content>
-  </md-dialog-content>
-  <md-dialog-actions layout="row">
-    <md-button ng-click="validate()">Valider</md-button>
-    <md-button ng-click="close()">Annuler</md-button>
-  </md-dialog-actions>
+      </md-content>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <input type="submit" value="{{'common.validate' | translate}}" class="md-button" />
+      <md-button ng-click="close()">{{'common.cancel' | translate}}</md-button>
+    </md-dialog-actions>
+  </form>
 </md-dialog>

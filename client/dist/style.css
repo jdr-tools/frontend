@@ -11,3 +11,8 @@ a, input[type=submit] {
 
 .no-margin-bottom {
   margin-bottom: 0px !important; }
+
+.main-title {
+  padding-left: 20px;
+  margin-top: 15px;
+  margin-bottom: 0px; }

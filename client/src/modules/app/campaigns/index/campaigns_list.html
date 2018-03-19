@@ -1,14 +1,14 @@
-<h1 translate>campaigns.index.title</h1>
+<h1 translate class="main-title md-display-2">campaigns.index.title</h1>
 <div>
   <campaigns-edit></campaigns-edit>
 </div>
-<div layout="row" layout-xs="column">
-  <md-card ng-repeat="campaign in vm.campaigns.items" flex="33" flex-xs="100">
+<div class="md-padding" layout="row" layout-xs="column">
+  <md-card ng-repeat="campaign in vm.campaigns.items" flex-gt-sm="25" flex-xs="auto">
     <md-card-title>
       <md-card-title-text>
         <span class="md-headline">{{campaign.title}}</span>
-        <span class="md-subhead" ng-if="campaign.is_private">Privée</span>
-        <span class="md-subhead" ng-if="!campaign.is_private">Publique</span>
+        <span class="md-subhead" ng-if="campaign.is_private" translate>common.private.f</span>
+        <span class="md-subhead" ng-if="!campaign.is_private" translate>common.public.f</span>
       </md-card-title-text>
     </md-card-title>
     <md-card-content>

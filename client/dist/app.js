@@ -307,7 +307,7 @@ var configTranslateProvider = function configTranslateProviderFunction($translat
   'ngInject';
 
   $translatePartialLoaderProvider.addPart('errors');
-  $translatePartialLoaderProvider.addPart('errors');
+  $translatePartialLoaderProvider.addPart('common');
 
   $translatePartialLoaderProvider.addPart('components/main_menu');
   $translatePartialLoaderProvider.addPart('components/custom_footer');
