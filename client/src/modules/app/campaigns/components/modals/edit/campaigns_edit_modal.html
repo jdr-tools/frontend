@@ -8,10 +8,18 @@
     <md-dialog-content>
       <md-content class="md-padding">
         <!-- Input for the title of the campaign. -->
-        <md-input-container class="md-block">
+        <md-input-container class="md-block md-title-container">
           <label for="campaignName" translate>campaigns.create.labels.title</label>
           <input type="text" class="md-input" ng-model="campaign.title" id="campaignName" required />
         </md-input-container>
+        <!-- Tags to assign to the campaign to describe its content -->
+        <md-chips
+          ng-model="campaign.tags"
+          name="campaignTags"
+          placeholder="Enter tags and press enter"
+          secondary-placeholder="+ Tag"
+        >
+        </md-chips>
         <!-- Switch to make the campaign private (TRUE) or public (FALSE) -->
         <md-switch ng-model="campaign.isPrivate">
           <span ng-if="campaign.isPrivate">{{'common.private.f' | translate}}</span>

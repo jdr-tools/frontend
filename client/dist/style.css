@@ -6,8 +6,9 @@ a, input[type=submit] {
 
 .campaigns-edit-modal {
   width: 800px; }
-  .campaigns-edit-modal .campaign-description {
-    height: 100px !important; }
+
+.campaign-description {
+  height: 100px !important; }
 
 .no-margin-bottom {
   margin-bottom: 0px !important; }
@@ -16,3 +17,9 @@ a, input[type=submit] {
   padding-left: 20px;
   margin-top: 15px;
   margin-bottom: 0px; }
+
+.md-title-container {
+  margin-bottom: 0px !important; }
+
+.campaign-tags .md-chips {
+  box-shadow: none !important; }

@@ -9,6 +9,24 @@
     },
     "index": {
       "title": "Your campaigns"
+    },
+    "update": {
+      "tabs": {
+        "informations": {
+          "labels": {
+            "description": "Description",
+            "title": "Title"
+          },
+          "subtitles" : {
+            "infos": "Informations",
+            "tags": "Tags"
+          },
+          "title": "Informations"
+        },
+        "players": {
+          "title": "Players"
+        }
+      }
     }
   }
 }

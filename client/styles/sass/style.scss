@@ -6,9 +6,10 @@
 
 .campaigns-edit-modal {
   width: 800px;
-  .campaign-description {
-    height: 100px !important;
-  }
+}
+
+.campaign-description {
+  height: 100px !important;
 }
 
 .no-margin-bottom {
@@ -19,4 +20,14 @@
   padding-left: 20px;
   margin-top: 15px;
   margin-bottom: 0px;
+}
+
+.md-title-container {
+  margin-bottom: 0px !important;
+}
+
+.campaign-tags {
+  .md-chips {
+    box-shadow: none !important;
+  }
 }

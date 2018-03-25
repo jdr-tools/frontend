@@ -18,6 +18,12 @@ const campaignsRoute = function ($stateProvider) {
     templateUrl: 'src/modules/app/campaigns/index/campaigns_list.html',
     controller: 'campaignsListController as vm'
   })
+
+  $stateProvider.state('campaigns.edit', {
+    url: '/campaigns/{id}',
+    templateUrl: 'src/modules/app/campaigns/edit/campaigns_edit.html',
+    controller: 'campaignsEditController as vm'
+  })
 }
 
 export default campaignsRoute

@@ -16,6 +16,7 @@
     "angular-translate-storage-local": "^2.17.0",
     "bootstrap": "4.0.0-beta.2",
     "jquery": "^3.2.1",
+    "lodash": "^4.17.5",
     "ngstorage": "^0.3.11",
     "popper.js": "^1.12.9"
   },

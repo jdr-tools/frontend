@@ -1,0 +1,51 @@
+<md-content layout="row">
+  <div flex-gt-xs="25" hide-xs></div>
+  <div flex-gt-xs="50" flex-xs="100">
+    <md-tabs md-dynamic-height>
+      <md-tab>
+        <md-tab-label>{{'campaigns.update.tabs.informations.title' | translate}}</md-tab-label>
+        <md-tab-body>
+          <form ng-submit="vm.update()">
+            <h1 translate class="main-title md-display-1">{{'campaigns.update.tabs.informations.subtitles.infos' | translate}}</h1>
+            <md-content class="md-padding">
+              <md-input-container class="md-block">
+                <label for="campaignTitle">{{'campaigns.update.tabs.informations.labels.title' | translate}}</label>
+                <input type="text" class="md-input" ng-model="vm.campaign.title" id="campaignName" required />
+              </md-input-container>
+              <md-input-container class="md-block">
+                <label for="campaignDescription">{{'campaigns.update.tabs.informations.labels.description' | translate}}</label>
+                <textarea class="campaign-description" ng-model="vm.campaign.description"></textarea>
+              </md-input-container>
+              <md-switch ng-model="vm.campaign.is_private">
+                <span ng-if="vm.campaign.is_private">{{'common.private.f' | translate}}</span>
+                <span ng-if="!vm.campaign.is_private">{{'common.public.f' | translate}}</span>
+              </md-switch>
+            </md-content>
+            <h1 translate class="main-title md-display-1">{{'campaigns.update.tabs.informations.subtitles.tags' | translate}}</h1>
+            <md-content class="md-padding">
+              <md-chips
+                ng-model="vm.campaign.tags"
+                name="campaignTags"
+                placeholder="Enter tags and press enter"
+                secondary-placeholder="+ Tag"
+              >
+              </md-chips>
+            </md-content>
+            <md-content class="md-padding">
+              <input type="submit" class="md-button md-raised" value="{{'common.update' | translate}}" />
+            </md-content>
+          </form>
+        </md-tab-body>
+      </md-tab>
+      <md-tab>
+        <md-tab-label>{{'campaigns.update.tabs.players.title' | translate}}</md-tab-label>
+        <md-tab-body>
+          <md-content class="md-padding">
+            COMING SOON
+          </md-content>
+        </md-tab-body>
+      </md-tab>
+    </md-tabs>
+  </div>
+  <div flex-gt-xs="25" hide-xs></div>
+</md-content>

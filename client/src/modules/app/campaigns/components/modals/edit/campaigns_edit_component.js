@@ -9,6 +9,7 @@ const campaignsEditComponent = function ($localStorage, $mdDialog, $rootScope, c
       title: '',
       isPrivate: true,
       description: '',
+      tags: [],
       creator_id: $localStorage.account.id
     }
     /** Closes the modal without calling the function to create a campaign. */

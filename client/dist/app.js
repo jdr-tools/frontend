@@ -25,7 +25,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 angular.module('arkaan.frontend', ['ngStorage', 'ngMaterial', 'pascalprecht.translate', 'ui.router', _components2.default, _configuration2.default, _directives2.default, _modules2.default, _services2.default]);
 
-},{"./components":4,"./configuration":10,"./directives":15,"./modules":50,"./services":52}],2:[function(require,module,exports){
+},{"./components":4,"./configuration":10,"./directives":15,"./modules":51,"./services":53}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1080,6 +1080,12 @@ var campaignsRoute = function campaignsRoute($stateProvider) {
     templateUrl: 'src/modules/app/campaigns/index/campaigns_list.html',
     controller: 'campaignsListController as vm'
   });
+
+  $stateProvider.state('campaigns.edit', {
+    url: '/campaigns/{id}',
+    templateUrl: 'src/modules/app/campaigns/edit/campaigns_edit.html',
+    controller: 'campaignsEditController as vm'
+  });
 };
 
 exports.default = campaignsRoute;
@@ -1117,6 +1123,7 @@ var campaignsEditComponent = function campaignsEditComponent($localStorage, $mdD
       title: '',
       isPrivate: true,
       description: '',
+      tags: [],
       creator_id: $localStorage.account.id
     };$scope.close = function () {
       return $mdDialog.cancel();
@@ -1173,6 +1180,38 @@ exports.default = campaignsEditModal;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var campaignsEditController = function campaignsEditControllerFunction($mdToast, $state, campaignsFactory) {
+  'ngInject';
+
+  var vm = this;
+
+  vm.initialize = function () {
+    campaignsFactory.get($state.params.id, function (campaign) {
+      vm.campaign = campaign;
+    });
+  };
+
+  vm.update = function () {
+    var parameters = _.pick(vm.campaign, ['title', 'description', 'tags', 'is_private']);
+    campaignsFactory.update($state.params.id, parameters, function () {
+      var toast = $mdToast.simple().position('bottom right').textContent('Campagne mise à jour avec succès').hideDelay(2000);
+      console.log(toast);
+      $mdToast.show(toast);
+      vm.initialize();
+    });
+  };
+
+  vm.initialize();
+};
+
+exports.default = campaignsEditController;
+
+},{}],41:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 var campaignsFactory = function campaignsFactoryFunction(Api) {
   'ngInject';
 
@@ -1186,8 +1225,16 @@ var campaignsFactory = function campaignsFactoryFunction(Api) {
     Api.delete('/campaigns/' + campaign_id, { successCallback: callback });
   };
 
+  service.get = function (campaign_id, callback) {
+    Api.get('/campaigns/' + campaign_id, {}, { successCallback: callback });
+  };
+
   service.list = function (callback) {
     Api.get('/campaigns', {}, { successCallback: callback });
+  };
+
+  service.update = function (campaign_id, parameters, callback) {
+    Api.put('/campaigns/' + campaign_id, parameters, { successCallback: callback });
   };
 
   return service;
@@ -1195,7 +1242,7 @@ var campaignsFactory = function campaignsFactoryFunction(Api) {
 
 exports.default = campaignsFactory;
 
-},{}],41:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1205,6 +1252,10 @@ Object.defineProperty(exports, "__esModule", {
 var _campaigns_list_controller = require('./index/campaigns_list_controller');
 
 var _campaigns_list_controller2 = _interopRequireDefault(_campaigns_list_controller);
+
+var _campaigns_edit_controller = require('./edit/campaigns_edit_controller');
+
+var _campaigns_edit_controller2 = _interopRequireDefault(_campaigns_edit_controller);
 
 var _campaigns_factory = require('./factories/campaigns_factory.js');
 
@@ -1220,13 +1271,13 @@ var _components2 = _interopRequireDefault(_components);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var campaigns = angular.module('arkaan.frontend.campaigns', [_components2.default]).controller('campaignsListController', _campaigns_list_controller2.default).factory('campaignsFactory', _campaigns_factory2.default).config(_campaigns_route2.default).run(function ($translatePartialLoader) {
+var campaigns = angular.module('arkaan.frontend.campaigns', [_components2.default]).controller('campaignsListController', _campaigns_list_controller2.default).controller('campaignsEditController', _campaigns_edit_controller2.default).factory('campaignsFactory', _campaigns_factory2.default).config(_campaigns_route2.default).run(function ($translatePartialLoader) {
   return $translatePartialLoader.addPart('campaigns');
 }).name;
 
 exports.default = campaigns;
 
-},{"./campaigns_route":36,"./components":37,"./factories/campaigns_factory.js":40,"./index/campaigns_list_controller":42}],42:[function(require,module,exports){
+},{"./campaigns_route":36,"./components":37,"./edit/campaigns_edit_controller":40,"./factories/campaigns_factory.js":41,"./index/campaigns_list_controller":43}],43:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1254,7 +1305,7 @@ var campaignsListController = function campaignsListControllerFunction($mdDialog
 
 exports.default = campaignsListController;
 
-},{}],43:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1273,7 +1324,7 @@ var dashboardController = function DashboardController(Api, $scope) {
 
 exports.default = dashboardController;
 
-},{}],44:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1293,7 +1344,7 @@ var dashboardRoute = function dashboardRoute($stateProvider) {
 
 exports.default = dashboardRoute;
 
-},{}],45:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1314,7 +1365,7 @@ var dashboard = angular.module('arkaan.frontend.dashboard', []).config(_dashboar
 
 exports.default = dashboard;
 
-},{"./dashboard_controller":43,"./dashboard_route":44}],46:[function(require,module,exports){
+},{"./dashboard_controller":44,"./dashboard_route":45}],47:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1345,7 +1396,7 @@ var appModules = angular.module('arkaan.frontend.app', appModulesList).name;
 
 exports.default = appModules;
 
-},{"./accounts":34,"./campaigns":41,"./dashboard":45,"./sessions":48}],47:[function(require,module,exports){
+},{"./accounts":34,"./campaigns":42,"./dashboard":46,"./sessions":49}],48:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1381,7 +1432,7 @@ var sessionsCreateController = function () {
 
 exports.default = sessionsCreateController;
 
-},{}],48:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1404,7 +1455,7 @@ var login = angular.module('arkaan.frontend.sessions', []).controller('sessionsC
 
 exports.default = login;
 
-},{"././sessions_route":49,"./create/sessions_create_controller":47}],49:[function(require,module,exports){
+},{"././sessions_route":50,"./create/sessions_create_controller":48}],50:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1428,7 +1479,7 @@ var loginRoute = function loginRoute($stateProvider) {
 
 exports.default = loginRoute;
 
-},{}],50:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1451,7 +1502,7 @@ var modules = angular.module('arkaan.frontend.modules', modulesList).name;
 
 exports.default = modules;
 
-},{"./admin":25,"./app":46}],51:[function(require,module,exports){
+},{"./admin":25,"./app":47}],52:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1507,6 +1558,16 @@ var Api = function () {
 
 
   }, {
+    key: 'put',
+    value: function put(uri) {
+      var parameters = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+      this.makeRequest('PUT', uri, parameters, options);
+    }
+
+
+  }, {
     key: 'delete',
     value: function _delete(uri) {
       var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -1544,7 +1605,7 @@ var Api = function () {
 
 exports.default = Api;
 
-},{}],52:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1569,7 +1630,7 @@ var services = angular.module('arkaan.frontend.services', []).service('Authentic
 
 exports.default = services;
 
-},{"./api/api":51,"./permissions/authentication":53,"./permissions/permissions":54}],53:[function(require,module,exports){
+},{"./api/api":52,"./permissions/authentication":54,"./permissions/permissions":55}],54:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1660,7 +1721,7 @@ var Authentication = function () {
 
 exports.default = Authentication;
 
-},{}],54:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
