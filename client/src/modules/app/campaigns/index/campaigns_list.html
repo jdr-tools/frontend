@@ -13,9 +13,6 @@
     </md-card-title>
     <md-card-content flex="noshrink">
       <div>{{campaign.description}}</div>
-      <!--div ng-if="campaign.tags.length > 0">
-        <b>Tags :</b>&nbsp;<em ng-repeat="tag in campaign.tags">{{tag}}</em>
-      </div-->
       <md-chips class="campaign-tags" ng-if="campaign.tags.length > 0" ng-model="campaign.tags" readonly="true"></md-chips>
     </md-card-content>
     <md-card-actions layout="row" layout-align="end center">
