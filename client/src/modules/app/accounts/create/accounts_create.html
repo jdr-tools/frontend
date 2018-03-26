@@ -1,76 +1,31 @@
-<div class="container mt-2">
-  <div class="row">
-    <div class="col">
-      <h1 translate>accounts.create.titles.main</h1>
-    </div>
-  </div>
-  <div class="alert alert-info alert-dismissible fade show" role="alert" ng-if="vm.confirmation">
-    <span translate>accounts.create.messages.confirmed</span>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="alert alert-danger alert-dismissible fade show" role="alert" ng-if="vm.errors">
-    <ul>
-      <li ng-repeat="error in vm.errors" translate>errors.{{error}}</li>
-    </ul>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <hr />
-  <div class="row">
-    <form ng-submit="vm.createAccount()" class="container-fluid">
-      <fieldset>
-        <legend translate>accounts.create.legends.credentials</legend>
-        <div class="row">
-          <div class="col form-group">
-            <label translate>accounts.create.labels.username</label>
-            <input type="text" name="username" class="form-control" translate translate-attr-placeholder="accounts.create.placeholders.username" ng-model="vm.account.username" required />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col form-group">
-            <label translate>accounts.create.labels.password</label>
-            <input type="password" name="password" class="form-control" translate translate-attr-placeholder="accounts.create.placeholders.password" ng-model="vm.account.password" required />
-          </div>
-          <div class="col form-group">
-            <label translate>accounts.create.labels.password_confirmation</label>
-            <input type="password" name="password_confirmation" class="form-control" translate translate-attr-placeholder="accounts.create.placeholders.password_confirmation" ng-model="vm.account.password_confirmation" required />
-          </div>
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend translate>accounts.create.legends.contacts</legend>
-        <div class="row">
-          <div class="col form-group">
-            <label translate>accounts.create.labels.email</label>
-            <input type="email" name="email" class="form-control" translate translate-attr-placeholder="accounts.create.placeholders.email" ng-model="vm.account.email" required />
-          </div>
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend translate>accounts.create.legends.about</legend>
-        <div class="row">
-          <div class="col form-group">
-            <label translate>accounts.create.labels.lastname</label>
-            <input type="text" name="lastname" class="form-control" translate translate-attr-placeholder="accounts.create.placeholders.lastname" ng-model="vm.account.lastname" />
-          </div>
-          <div class="col form-group">
-            <label translate>accounts.create.labels.firstname</label>
-            <input type="text" name="firstname" class="form-control" translate translate-attr-placeholder="accounts.create.placeholders.firstname" ng-model="vm.account.firstname" />
-          </div>
-          <div class="col form-group">
-            <label translate>accounts.create.labels.birthdate</label>
-            <input type="date" name="birthdate" class="form-control" ng-model="vm.account.birthdate" />
-          </div>
-        </div>
-        <div class="row center">
-          <div class="col">
-            <input type="submit" translate translate-attr-value="accounts.create.buttons.submit" class="btn btn-primary" />
-          </div>
-        </div>
-      </fieldset>
+<app-menu></app-menu>
+<md-content layout="row">
+  <div flex-gt-xs="25" hide-xs></div>
+  <div flex-gt-xs="50" flex-xs="100">
+    <h1 class="main-title md-display-1" translate>accounts.create.titles.main</h1>
+    <form ng-submit="vm.createAccount()">
+      <md-content class="md-padding">
+        <md-input-container class="md-block">
+          <label for="usernameInput" translate>accounts.create.labels.username</label>
+          <input type="text" id="usernameInput" name="username" class="md-input" ng-model="vm.account.username" required autocomplete="off" />
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label for="passwordInput" translate>accounts.create.labels.password</label>
+          <input type="password" id="passwordInput" name="password" class="md-input" ng-model="vm.account.password" required autocomplete="off" />
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label for="passwordConfirmInput" translate>accounts.create.labels.password_confirmation</label>
+          <input type="password" id="passwordConfirmInput" name="password_confirmation" class="md-input" ng-model="vm.account.password_confirmation" required autocomplete="off" />
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label for="emailInput" translate>accounts.create.labels.email</label>
+          <input type="email" id="emailInput" name="email" class="form-control" ng-model="vm.account.email" required autocomplete="off" />
+        </md-input-container>
+      </md-content>
+      <md-content class="md-padding">
+        <input type="submit" translate translate-attr-value="accounts.create.buttons.submit" class="md-button md-raised" />
+      </md-content>
     </form>
   </div>
-</div>
+  <div flex-gt-xs="25" hide-xs></div>
+</md-content>
