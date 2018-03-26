@@ -59,10 +59,13 @@ const Authentication = class AuthenticationClass {
    * Creates a user session with the given parameters
    * @param {String} username - the username to create the session with.
    * @param {String} token - the password of the user, used to identify him server-side.
+   * @param {Boolean} remember - a flag indicating whether the user wants to be remembered or not.
    */
-  createUserSession (username, password) {
+  createUserSession (username, password, remember) {
     const me = this
     const successCallback = (session_response) => {
+      /** The username is remembered only if the user wants to remember it. */
+      if (remember) this.storage.remember = username
       me.storage.token = session_response.token
       me.accounts.get(session_response.account_id, (account_response) => {
         me.storage.account = account_response.account
@@ -77,9 +80,12 @@ const Authentication = class AuthenticationClass {
    * Destroys the current session and therefore disconnects the user.
    */
   destroyUserSession () {
-    delete this.storage.account
-    delete this.storage.token
-    this.state.go('sessionsCreate')
+    const me = this
+    this.api.delete(`/sessions/${me.storage.token}`, {successCallback: () => {
+      delete me.storage.account
+      delete me.storage.token
+      me.state.go('sessionsCreate')
+    }})
   }
 }
 

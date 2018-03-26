@@ -1402,33 +1402,20 @@ exports.default = appModules;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var sessionsCreateController = function sessionCreateControllerFunction($localStorage, Authentication) {
+  'ngInject';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+  var vm = this;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+  vm.username = $localStorage.remember || '';
+  vm.password = '';
+  vm.remember = !!$localStorage.remember;
+  vm.auth = Authentication;
 
-var sessionsCreateController = function () {
-  function SessionsCreateController(Authentication) {
-    'ngInject';
-
-    _classCallCheck(this, SessionsCreateController);
-
-    this.username = '';
-    this.password = '';
-    this.auth = Authentication;
-  }
-
-
-
-  _createClass(SessionsCreateController, [{
-    key: 'authenticate',
-    value: function authenticate() {
-      this.auth.createUserSession(this.username, this.password);
-    }
-  }]);
-
-  return SessionsCreateController;
-}();
+  vm.authenticate = function () {
+    Authentication.createUserSession(vm.username, vm.password, vm.remember);
+  };
+};
 
 exports.default = sessionsCreateController;
 
@@ -1693,9 +1680,12 @@ var Authentication = function () {
 
   }, {
     key: 'createUserSession',
-    value: function createUserSession(username, password) {
+    value: function createUserSession(username, password, remember) {
+      var _this = this;
+
       var me = this;
       var successCallback = function successCallback(session_response) {
+        if (remember) _this.storage.remember = username;
         me.storage.token = session_response.token;
         me.accounts.get(session_response.account_id, function (account_response) {
           me.storage.account = account_response.account;
@@ -1710,9 +1700,12 @@ var Authentication = function () {
   }, {
     key: 'destroyUserSession',
     value: function destroyUserSession() {
-      delete this.storage.account;
-      delete this.storage.token;
-      this.state.go('sessionsCreate');
+      var me = this;
+      this.api.delete('/sessions/' + me.storage.token, { successCallback: function successCallback() {
+          delete me.storage.account;
+          delete me.storage.token;
+          me.state.go('sessionsCreate');
+        } });
     }
   }]);
 

@@ -5,13 +5,18 @@
       <md-content class="md-padding">
         <md-input-container class="md-block">
           <label for="username" translate>sessions.create.labels.username</label>
-          <input type="text" class="md-input" name="username" ng-model="vm.username" required />
+          <input type="text" class="md-input" name="username" ng-model="vm.username" required autocomplete="off" />
         </md-input-container>
         <md-input-container class="md-block">
           <label for="password" translate>sessions.create.labels.password</label>
           <input type="password" class="md-input" name="password" ng-model="vm.password" />
         </md-input-container>
-        <input class="md-button md-raised" type="submit" value="{{'sessions.create.buttons.submit' | translate}}" />
+        <md-switch ng-model="vm.remember">
+          <span>Se souvenir de moi</span>
+        </md-switch>
+      </md-content>
+      <md-content class="md-padding">
+        <input class="md-button md-raised" type="submit" value="{{'sessions.create.buttons.submit' | translate}}" autocomplete="off" />
       </md-content>
     </form>
   </div>
