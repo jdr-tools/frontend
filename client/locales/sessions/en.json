@@ -4,6 +4,15 @@
       "buttons": {
         "submit": "Log in"
       },
+      "errors": {
+        "password": {
+          "blank": "Please fill the username field to log in",
+          "credentials": "You seem to have entered wrong credentials"
+        },
+        "username": {
+          "blank": "Please fill the password field to log in"
+        }
+      },
       "labels": {
         "password": "Password",
         "username": "Username"

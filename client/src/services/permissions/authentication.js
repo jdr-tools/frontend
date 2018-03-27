@@ -61,7 +61,7 @@ const Authentication = class AuthenticationClass {
    * @param {String} token - the password of the user, used to identify him server-side.
    * @param {Boolean} remember - a flag indicating whether the user wants to be remembered or not.
    */
-  createUserSession (username, password, remember) {
+  createUserSession (username, password, remember, errorCallback) {
     const me = this
     const successCallback = (session_response) => {
       /** The username is remembered only if the user wants to remember it. */
@@ -73,7 +73,11 @@ const Authentication = class AuthenticationClass {
         me.state.go('dashboard', {}, {reload: true})
       })
     }
-    this.api.post('/sessions', {username: username, password: password}, {successCallback: successCallback, skipSessionId: true})
+    this.api.post('/sessions', {username: username, password: password}, {
+      successCallback: successCallback,
+      errorCallback: errorCallback,
+      skipSessionId: true
+    })
   }
 
   /**

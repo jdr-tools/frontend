@@ -4,6 +4,15 @@
       "buttons": {
         "submit": "Me connecter"
       },
+      "errors": {
+        "password": {
+          "blank": "Veuillez fournir votre mot de passe pour vous connecter",
+          "credentials": "Les identifiants entrés semblent incorrects"
+        },
+        "username": {
+          "blank": "Veuillez entrer votre nom d'utilisateur pour vous connecter"
+        }
+      },
       "labels": {
         "password": "Mot de passe",
         "username": "Nom d'utilisateur"

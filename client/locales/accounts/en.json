@@ -4,6 +4,25 @@
       "buttons": {
         "submit": "Register"
       },
+      "errors": {
+        "email": {
+          "blank": "Please fill the email address field",
+          "pattern": "You must provide a valid email address (eg: example@test.com)",
+          "uniq": "This email address is already used"
+        },
+        "password": {
+          "blank": "Please fill the password field",
+          "confirmation": "Password and confirmation must be identical"
+        },
+        "password_confirmation": {
+          "blank": "Please fill the password confirmation field"
+        },
+        "username": {
+          "blank": "Please fill the username field",
+          "minlength": "A username must be at least 6 characters long",
+          "uniq": "This username is already taken"
+        }
+      },
       "labels": {
         "birthdate": "Birth date",
         "email": "Email address",

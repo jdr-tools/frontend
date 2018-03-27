@@ -15,7 +15,15 @@ const sessionsCreateController = function sessionCreateControllerFunction ($loca
 
   /** Called when the form is submitted, and creates the session for this user. */
   vm.authenticate = () => {
-    Authentication.createUserSession(vm.username, vm.password, vm.remember)
+    Authentication.createUserSession(vm.username, vm.password, vm.remember, vm.handleErrors)
+  }
+
+  vm.handleErrors = (response) => {
+    vm.sessionCreationForm.username.$setValidity('credentials', false)
+  }
+
+  vm.resetCredentialsError = () => {
+    vm.sessionCreationForm.username.$setValidity('credentials', true)
   }
   
 }

@@ -23,7 +23,7 @@ var _services2 = _interopRequireDefault(_services);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-angular.module('arkaan.frontend', ['ngStorage', 'ngMaterial', 'pascalprecht.translate', 'ui.router', _components2.default, _configuration2.default, _directives2.default, _modules2.default, _services2.default]);
+angular.module('arkaan.frontend', ['ngStorage', 'ngMaterial', 'ngMessages', 'pascalprecht.translate', 'ui.router', _components2.default, _configuration2.default, _directives2.default, _modules2.default, _services2.default]);
 
 },{"./components":4,"./configuration":10,"./directives":15,"./modules":51,"./services":53}],2:[function(require,module,exports){
 'use strict';
@@ -921,66 +921,44 @@ exports.default = accountsRoute;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var accountsCreateController = function accountsCreateControllerFunction(Api, $translate) {
+  'ngInject';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+  var vm = this;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+  vm.account = {
+    username: '',
+    password: '',
+    password_confirmation: '',
+    email: '',
+    lastname: '',
+    firstname: '',
+    birthdate: new Date(1970, 0, 0)
+  };
+  vm.confirmation = false;
+  vm.errors = false;
 
-var accountsCreateController = function () {
-  function AccountsCreateController(Api, $translate) {
-    'ngInject';
+  vm.createAccount = function () {
+    Api.post('/accounts', vm.account, {
+      successCallback: vm.confirm,
+      errorCallback: vm.displayErrors
+    });
+  };
 
-    _classCallCheck(this, AccountsCreateController);
+  vm.confirm = function () {
+    vm.confirmation = true;
+    vm.errors = false;
+  };
 
-    this.account = {
-      username: '',
-      password: '',
-      password_confirmation: '',
-      email: '',
-      lastname: '',
-      firstname: '',
-      birthdate: new Date(1970, 0, 0)
-    };
-    this.api = Api;
-    this.confirmation = false;
-    this.errors = false;
-  }
-
-
-
-  _createClass(AccountsCreateController, [{
-    key: 'createAccount',
-    value: function createAccount() {
-      var me = this;
-      this.api.post('/accounts', this.account, {
-        successCallback: function successCallback() {
-          return me.confirm();
-        },
-        errorCallback: function errorCallback(response) {
-          return me.displayErrors(response);
-        }
+  vm.displayErrors = function (response) {
+    if (_.has(response, 'errors')) {
+      _.each(response.errors, function (error) {
+        var split = _.split(error, '.');
+        vm.accountCreationForm[split[1]].$setValidity(split[2], false);
       });
     }
-
-
-  }, {
-    key: 'confirm',
-    value: function confirm() {
-      this.confirmation = true;
-      this.errors = false;
-    }
-
-
-  }, {
-    key: 'displayErrors',
-    value: function displayErrors(response) {
-      this.errors = response.errors;
-      this.confirmation = false;
-    }
-  }]);
-
-  return AccountsCreateController;
-}();
+  };
+};
 
 exports.default = accountsCreateController;
 
@@ -1413,7 +1391,15 @@ var sessionsCreateController = function sessionCreateControllerFunction($localSt
   vm.auth = Authentication;
 
   vm.authenticate = function () {
-    Authentication.createUserSession(vm.username, vm.password, vm.remember);
+    Authentication.createUserSession(vm.username, vm.password, vm.remember, vm.handleErrors);
+  };
+
+  vm.handleErrors = function (response) {
+    vm.sessionCreationForm.username.$setValidity('credentials', false);
+  };
+
+  vm.resetCredentialsError = function () {
+    vm.sessionCreationForm.username.$setValidity('credentials', true);
   };
 };
 
@@ -1680,7 +1666,7 @@ var Authentication = function () {
 
   }, {
     key: 'createUserSession',
-    value: function createUserSession(username, password, remember) {
+    value: function createUserSession(username, password, remember, errorCallback) {
       var _this = this;
 
       var me = this;
@@ -1693,7 +1679,11 @@ var Authentication = function () {
           me.state.go('dashboard', {}, { reload: true });
         });
       };
-      this.api.post('/sessions', { username: username, password: password }, { successCallback: successCallback, skipSessionId: true });
+      this.api.post('/sessions', { username: username, password: password }, {
+        successCallback: successCallback,
+        errorCallback: errorCallback,
+        skipSessionId: true
+      });
     }
 
 
