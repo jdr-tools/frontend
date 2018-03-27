@@ -1075,23 +1075,23 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _edit = require('./modals/edit');
+var _create = require('./modals/create');
 
-var _edit2 = _interopRequireDefault(_edit);
+var _create2 = _interopRequireDefault(_create);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var campaignsComponents = angular.module('arkaan.frontend.campaigns.components', [_edit2.default]).name;
+var campaignsComponents = angular.module('arkaan.frontend.campaigns.components', [_create2.default]).name;
 
 exports.default = campaignsComponents;
 
-},{"./modals/edit":39}],38:[function(require,module,exports){
+},{"./modals/create":39}],38:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var campaignsEditComponent = function campaignsEditComponent($localStorage, $mdDialog, $rootScope, campaignsFactory) {
+var campaignsCreateComponent = function campaignsCreateComponentFunction($localStorage, $mdDialog, $rootScope, campaignsFactory) {
   'ngInject';
 
   var vm = this;
@@ -1121,7 +1121,7 @@ var campaignsEditComponent = function campaignsEditComponent($localStorage, $mdD
   vm.createCampaign = function (event) {
     $mdDialog.show({
       controller: dialogController,
-      templateUrl: '/src/modules/app/campaigns/components/modals/edit/campaigns_edit_modal.html',
+      templateUrl: '/src/modules/app/campaigns/components/modals/create/campaigns_create_modal.html',
       parent: angular.element(document.body),
       targetEvent: event,
       clickOutsideToClose: true
@@ -1130,9 +1130,9 @@ var campaignsEditComponent = function campaignsEditComponent($localStorage, $mdD
 };
 
 exports.default = {
-  controller: campaignsEditComponent,
+  controller: campaignsCreateComponent,
   controllerAs: 'vm',
-  templateUrl: '/src/modules/app/campaigns/components/modals/edit/campaigns_edit.html'
+  templateUrl: '/src/modules/app/campaigns/components/modals/create/campaigns_create.html'
 };
 
 },{}],39:[function(require,module,exports){
@@ -1142,17 +1142,17 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _campaigns_edit_component = require('./campaigns_edit_component.js');
+var _campaigns_create_component = require('./campaigns_create_component.js');
 
-var _campaigns_edit_component2 = _interopRequireDefault(_campaigns_edit_component);
+var _campaigns_create_component2 = _interopRequireDefault(_campaigns_create_component);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var campaignsEditModal = angular.module('arkaan.frontend.campaigns.components.modals.edit', []).component('campaignsEdit', _campaigns_edit_component2.default).name;
+var campaignsCreateModal = angular.module('arkaan.frontend.campaigns.components.modals.create', []).component('campaignsCreate', _campaigns_create_component2.default).name;
 
-exports.default = campaignsEditModal;
+exports.default = campaignsCreateModal;
 
-},{"./campaigns_edit_component.js":38}],40:[function(require,module,exports){
+},{"./campaigns_create_component.js":38}],40:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

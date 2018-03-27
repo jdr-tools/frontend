@@ -1,4 +1,4 @@
-const campaignsEditComponent = function ($localStorage, $mdDialog, $rootScope, campaignsFactory) {
+const campaignsCreateComponent = function campaignsCreateComponentFunction ($localStorage, $mdDialog, $rootScope, campaignsFactory) {
   'ngInject'
 
   const vm = this
@@ -35,7 +35,7 @@ const campaignsEditComponent = function ($localStorage, $mdDialog, $rootScope, c
   vm.createCampaign = (event) => {
     $mdDialog.show({
       controller: dialogController,
-      templateUrl: '/src/modules/app/campaigns/components/modals/edit/campaigns_edit_modal.html',
+      templateUrl: '/src/modules/app/campaigns/components/modals/create/campaigns_create_modal.html',
       parent: angular.element(document.body),
       targetEvent: event,
       clickOutsideToClose:true
@@ -45,7 +45,7 @@ const campaignsEditComponent = function ($localStorage, $mdDialog, $rootScope, c
 }
 
 export default {
-  controller: campaignsEditComponent,
+  controller: campaignsCreateComponent,
   controllerAs: 'vm',
-  templateUrl: '/src/modules/app/campaigns/components/modals/edit/campaigns_edit.html'
+  templateUrl: '/src/modules/app/campaigns/components/modals/create/campaigns_create.html'
 }
