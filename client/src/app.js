@@ -1,7 +1,21 @@
+import popper from 'popper.js'
+import lodash from 'lodash'
+import angular from 'angular'
+import translate from 'angular-translate'
+import translateLoader from 'angular-translate-loader-partial'
+import storage from 'ngstorage'
+import uiRouter from '@uirouter/angularjs'
+import jQuery from 'jquery'
+import bootstrap from 'bootstrap'
+import angularAria from 'angular-aria'
+import angularAnimate from 'angular-animate'
+import messages from 'angular-messages'
+import material from 'angular-material'
+
 import components from './components'
 import configuration from './configuration'
 import directives from './directives'
 import modules from './modules'
 import services from './services'
 
-angular.module('arkaan.frontend', ['ngStorage', 'ngMaterial', 'ngMessages', 'pascalprecht.translate', 'ui.router', components, configuration, directives, modules, services])
+angular.module('arkaan.frontend', [storage, material, messages, translate, router, components, configuration, directives, modules, services])
