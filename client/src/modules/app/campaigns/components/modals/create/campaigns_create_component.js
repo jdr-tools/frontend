@@ -20,7 +20,7 @@ const campaignsCreateComponent = function campaignsCreateComponentFunction ($loc
      * Handles the errors by appending it to the form.
      * @param {Object} response - the response of the API.
      */
-    $scope.handleErrors = (response) => ErrorsService.append(vm.campaignCreationForm, response)
+    $scope.handleErrors = (response) => ErrorsService.append($scope.campaignCreationForm, response)
     /** Closes the modal and creates the campaign. */
     $scope.validate = () => campaignsFactory.create($scope.campaign, $scope.closeAndRefresh, $scope.handleErrors)
   }
