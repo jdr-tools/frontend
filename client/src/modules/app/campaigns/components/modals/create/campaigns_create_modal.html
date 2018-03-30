@@ -12,9 +12,9 @@
           <label for="campaignName" translate>campaigns.create.labels.title</label>
           <input type="text" class="md-input" name="title" ng-model="campaign.title" id="campaignName" required minlength="4" />
           <div ng-messages="campaignCreationForm.title.$error" multiple>
-            <div ng-message="required" translate>campaigns.create.errors.title.blank</div>
-            <div ng-message="uniq" translate>campaigns.create.errors.title.uniq</div>
-            <div ng-message="minlength" translate>campaigns.create.errors.title.short</div>
+            <div ng-message="required" translate>campaigns.errors.title.blank</div>
+            <div ng-message="uniq" translate>campaigns.errors.title.uniq</div>
+            <div ng-message="minlength" translate>campaigns.errors.title.short</div>
           </div>
         </md-input-container>
         <!-- Tags to assign to the campaign to describe its content -->

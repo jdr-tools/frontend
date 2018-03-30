@@ -7,6 +7,13 @@
       },
       "title": "Créer une nouvelle campagne"
     },
+    "errors": {
+      "title": {
+        "blank": "Vous devez entrer un titre pour cette campagne",
+        "short": "Le titre d'une campagne doit contenir au moins quatre caractères",
+        "uniq": "Vous avez déjà créé une autre campagne avec ce nom"
+      }
+    },
     "index": {
       "title": "Vos campagnes"
     },

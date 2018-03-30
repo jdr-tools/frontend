@@ -12,9 +12,9 @@
                 <label for="campaignTitle">{{'campaigns.update.tabs.informations.labels.title' | translate}}</label>
                 <input type="text" class="md-input" name="title" ng-model="vm.campaign.title" id="campaignName" required />
                 <div ng-messages="vm.campaignEditionForm.title.$error" multiple>
-                  <div ng-message="required" translate>campaigns.create.errors.title.blank</div>
-                  <div ng-message="uniq" translate>campaigns.create.errors.title.uniq</div>
-                  <div ng-message="minlength" translate>campaigns.create.errors.title.short</div>
+                  <div ng-message="required" translate>campaigns.errors.title.blank</div>
+                  <div ng-message="uniq" translate>campaigns.errors.title.uniq</div>
+                  <div ng-message="minlength" translate>campaigns.errors.title.short</div>
                 </div>
               </md-input-container>
               <md-input-container class="md-block">

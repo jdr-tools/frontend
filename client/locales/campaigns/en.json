@@ -7,6 +7,13 @@
       },
       "title": "Create a new campaign"
     },
+    "errors": {
+      "title": {
+        "blank": "You must enter a title for this campaign",
+        "short": "The title of a campaign must be at least 4 characters long",
+        "uniq": "You have another campaign with this title"
+      }
+    },
     "index": {
       "title": "Your campaigns"
     },
