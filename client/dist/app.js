@@ -1105,7 +1105,7 @@ var campaignsCreateComponent = function campaignsCreateComponentFunction($localS
       return $mdDialog.hide();
     };
     $scope.handleErrors = function (response) {
-      return ErrorsService.append(vm.campaignCreationForm, response);
+      return ErrorsService.append($scope.campaignCreationForm, response);
     };
     $scope.validate = function () {
       return campaignsFactory.create($scope.campaign, $scope.closeAndRefresh, $scope.handleErrors);
