@@ -5,12 +5,17 @@
       <md-tab>
         <md-tab-label>{{'campaigns.update.tabs.informations.title' | translate}}</md-tab-label>
         <md-tab-body>
-          <form ng-submit="vm.update()">
+          <form ng-submit="vm.update()" name="vm.campaignEditionForm">
             <h1 translate class="main-title md-display-1">{{'campaigns.update.tabs.informations.subtitles.infos' | translate}}</h1>
             <md-content class="md-padding">
               <md-input-container class="md-block">
                 <label for="campaignTitle">{{'campaigns.update.tabs.informations.labels.title' | translate}}</label>
-                <input type="text" class="md-input" ng-model="vm.campaign.title" id="campaignName" required />
+                <input type="text" class="md-input" name="title" ng-model="vm.campaign.title" id="campaignName" required />
+                <div ng-messages="vm.campaignEditionForm.title.$error" multiple>
+                  <div ng-message="required" translate>campaigns.create.errors.title.blank</div>
+                  <div ng-message="uniq" translate>campaigns.create.errors.title.uniq</div>
+                  <div ng-message="minlength" translate>campaigns.create.errors.title.short</div>
+                </div>
               </md-input-container>
               <md-input-container class="md-block">
                 <label for="campaignDescription">{{'campaigns.update.tabs.informations.labels.description' | translate}}</label>

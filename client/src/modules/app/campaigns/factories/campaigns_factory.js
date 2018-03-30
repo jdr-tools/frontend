@@ -19,8 +19,11 @@ const campaignsFactory = function campaignsFactoryFunction (Api) {
     Api.get('/campaigns', {}, {successCallback: callback})
   }
 
-  service.update = (campaign_id, parameters, callback) => {
-    Api.put(`/campaigns/${campaign_id}`, parameters, {successCallback: callback})
+  service.update = (campaign_id, parameters, success, failure) => {
+    Api.put(`/campaigns/${campaign_id}`, parameters, {
+      successCallback: success,
+      errorCallback: failure
+    })
   }
 
   return service

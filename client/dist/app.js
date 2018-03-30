@@ -1161,20 +1161,25 @@ var campaignsEditController = function campaignsEditControllerFunction($mdToast,
 
   var vm = this;
 
+  vm.failure = function (response) {
+    return ErrorsService.append(vm.campaignEditionForm, response);
+  };
+
   vm.initialize = function () {
     campaignsFactory.get($state.params.id, function (campaign) {
       vm.campaign = campaign;
     });
   };
 
+  vm.success = function () {
+    var toast = $mdToast.simple().position('bottom right').textContent('Campagne mise à jour avec succès').hideDelay(2000);
+    $mdToast.show(toast);
+    vm.initialize();
+  };
+
   vm.update = function () {
     var parameters = _.pick(vm.campaign, ['title', 'description', 'tags', 'is_private']);
-    campaignsFactory.update($state.params.id, parameters, function () {
-      var toast = $mdToast.simple().position('bottom right').textContent('Campagne mise à jour avec succès').hideDelay(2000);
-      console.log(toast);
-      $mdToast.show(toast);
-      vm.initialize();
-    });
+    campaignsFactory.update($state.params.id, parameters, vm.success, vm.failure);
   };
 
   vm.initialize();
@@ -1209,8 +1214,11 @@ var campaignsFactory = function campaignsFactoryFunction(Api) {
     Api.get('/campaigns', {}, { successCallback: callback });
   };
 
-  service.update = function (campaign_id, parameters, callback) {
-    Api.put('/campaigns/' + campaign_id, parameters, { successCallback: callback });
+  service.update = function (campaign_id, parameters, success, failure) {
+    Api.put('/campaigns/' + campaign_id, parameters, {
+      successCallback: success,
+      errorCallback: failure
+    });
   };
 
   return service;
