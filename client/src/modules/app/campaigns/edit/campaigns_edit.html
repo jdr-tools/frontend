@@ -10,7 +10,7 @@
             <md-content class="md-padding">
               <md-input-container class="md-block">
                 <label for="campaignTitle">{{'campaigns.update.tabs.informations.labels.title' | translate}}</label>
-                <input type="text" class="md-input" name="title" ng-model="vm.campaign.title" id="campaignName" required />
+                <input type="text" class="md-input" name="title" ng-model="vm.campaign.title" id="campaignName" required minlength="4" />
                 <div ng-messages="vm.campaignEditionForm.title.$error" multiple>
                   <div ng-message="required" translate>campaigns.errors.title.blank</div>
                   <div ng-message="uniq" translate>campaigns.errors.title.uniq</div>
