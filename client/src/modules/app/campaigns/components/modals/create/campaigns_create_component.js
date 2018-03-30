@@ -16,8 +16,13 @@ const campaignsCreateComponent = function campaignsCreateComponentFunction ($loc
     $scope.close = () => $mdDialog.cancel()
     /** Closes the modal and broadcasts the campaign.created event to refresh the campaigns list. */
     $scope.closeAndRefresh = () => $mdDialog.hide()
+    /**
+     * Handles the errors by appending it to the form.
+     * @param {Object} response - the response of the API.
+     */
+    $scope.handleErrors = (response) => ErrorsService.append(vm.campaignCreationForm, response)
     /** Closes the modal and creates the campaign. */
-    $scope.validate = () => campaignsFactory.create($scope.campaign, $scope.closeAndRefresh)
+    $scope.validate = () => campaignsFactory.create($scope.campaign, $scope.closeAndRefresh, $scope.handleErrors)
   }
 
   /**

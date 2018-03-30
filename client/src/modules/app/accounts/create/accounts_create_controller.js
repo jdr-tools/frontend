@@ -2,7 +2,7 @@
  * Controller for the registration page. It handles actions about creating an account, and the feedbacks to the user.
  * @author Vincent Courtois <courtois.vincent@outlook.com>
  */
-const accountsCreateController = function accountsCreateControllerFunction (Api, $translate) {
+const accountsCreateController = function accountsCreateControllerFunction ($translate, Api, ErrorsService) {
   'ngInject'
 
   const vm = this
@@ -37,14 +37,7 @@ const accountsCreateController = function accountsCreateControllerFunction (Api,
    * When the registration fails, this method displays a list of error concerning the process.
    * @return {Array<String>} a list of error string keys returned by the api. These keys should be translated.
    */
-  vm.displayErrors = (response) => {
-    if (_.has(response, 'errors')) {
-      _.each(response.errors, (error) => {
-        const split = _.split(error, '.')
-        vm.accountCreationForm[split[1]].$setValidity(split[2], false)
-      })
-    }
-  }
+  vm.displayErrors = (response) => ErrorsService.append(vm.accountCreationForm, response)
 }
 
 export default accountsCreateController
