@@ -3,8 +3,11 @@ const campaignsFactory = function campaignsFactoryFunction (Api) {
 
   const service = this
 
-  service.create = (campaign, callback) => {
-    Api.post('/campaigns', campaign, {successCallback: callback})
+  service.create = (campaign, success, failure) => {
+    Api.post('/campaigns', campaign, {
+      successCallback: success,
+      errorCallback: failure
+    })
   }
 
   service.delete = (campaign_id, callback) => {
