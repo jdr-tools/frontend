@@ -9,10 +9,12 @@
       "brand": "Arkaan",
       "items": {
         "accounts": "Comptes utilisateur",
+        "admin": "Panneau d'administration",
         "campaigns": "Campagnes",
         "dashboard": "Tableau de bord",
         "login": "Se connecter",
         "logout": "Se déconnecter",
+        "profile": "Mon profil",
         "register": "Créer un compte",
         "rights": "Droits"
       }

@@ -23,3 +23,6 @@ a, input[type=submit] {
 
 .campaign-tags .md-chips {
   box-shadow: none !important; }
+
+.md-fab {
+  position: fixed !important; }
