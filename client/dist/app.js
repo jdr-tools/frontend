@@ -1086,7 +1086,7 @@ exports.default = campaignsComponents;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var campaignsCreateComponent = function campaignsCreateComponentFunction($localStorage, $mdDialog, $rootScope, campaignsFactory) {
+var campaignsCreateComponent = function campaignsCreateComponentFunction($localStorage, $mdDialog, $rootScope, campaignsFactory, ErrorsService) {
   'ngInject';
 
   var vm = this;
@@ -1105,7 +1105,8 @@ var campaignsCreateComponent = function campaignsCreateComponentFunction($localS
       return $mdDialog.hide();
     };
     $scope.handleErrors = function (response) {
-      return ErrorsService.append($scope.campaignCreationForm, response);
+      console.log(response);
+      ErrorsService.append($scope.campaignCreationForm, response);
     };
     $scope.validate = function () {
       return campaignsFactory.create($scope.campaign, $scope.closeAndRefresh, $scope.handleErrors);
@@ -1198,8 +1199,11 @@ var campaignsFactory = function campaignsFactoryFunction(Api) {
 
   var service = this;
 
-  service.create = function (campaign, callback) {
-    Api.post('/campaigns', campaign, { successCallback: callback });
+  service.create = function (campaign, success, failure) {
+    Api.post('/campaigns', campaign, {
+      successCallback: success,
+      errorCallback: failure
+    });
   };
 
   service.delete = function (campaign_id, callback) {

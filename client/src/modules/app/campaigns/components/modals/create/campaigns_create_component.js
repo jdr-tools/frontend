@@ -1,4 +1,4 @@
-const campaignsCreateComponent = function campaignsCreateComponentFunction ($localStorage, $mdDialog, $rootScope, campaignsFactory) {
+const campaignsCreateComponent = function campaignsCreateComponentFunction ($localStorage, $mdDialog, $rootScope, campaignsFactory, ErrorsService) {
   'ngInject'
 
   const vm = this
