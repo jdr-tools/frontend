@@ -1090,7 +1090,7 @@ exports.default = campaignsComponents;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var campaignsCreateComponent = function campaignsCreateComponentFunction($localStorage, $mdDialog, $rootScope, campaignsFactory) {
+var campaignsCreateComponent = function campaignsCreateComponentFunction($localStorage, $mdDialog, $rootScope, campaignsFactory, ErrorsService) {
   'ngInject';
 
   var vm = this;
@@ -1109,7 +1109,8 @@ var campaignsCreateComponent = function campaignsCreateComponentFunction($localS
       return $mdDialog.hide();
     };
     $scope.handleErrors = function (response) {
-      return ErrorsService.append(vm.campaignCreationForm, response);
+      console.log(response);
+      ErrorsService.append($scope.campaignCreationForm, response);
     };
     $scope.validate = function () {
       return campaignsFactory.create($scope.campaign, $scope.closeAndRefresh, $scope.handleErrors);
@@ -1165,20 +1166,25 @@ var campaignsEditController = function campaignsEditControllerFunction($mdToast,
 
   var vm = this;
 
+  vm.failure = function (response) {
+    return ErrorsService.append(vm.campaignEditionForm, response);
+  };
+
   vm.initialize = function () {
     campaignsFactory.get($state.params.id, function (campaign) {
       vm.campaign = campaign;
     });
   };
 
+  vm.success = function () {
+    var toast = $mdToast.simple().position('bottom right').textContent('Campagne mise à jour avec succès').hideDelay(2000);
+    $mdToast.show(toast);
+    vm.initialize();
+  };
+
   vm.update = function () {
     var parameters = _.pick(vm.campaign, ['title', 'description', 'tags', 'is_private']);
-    campaignsFactory.update($state.params.id, parameters, function () {
-      var toast = $mdToast.simple().position('bottom right').textContent('Campagne mise à jour avec succès').hideDelay(2000);
-      console.log(toast);
-      $mdToast.show(toast);
-      vm.initialize();
-    });
+    campaignsFactory.update($state.params.id, parameters, vm.success, vm.failure);
   };
 
   vm.initialize();
@@ -1197,8 +1203,11 @@ var campaignsFactory = function campaignsFactoryFunction(Api) {
 
   var service = this;
 
-  service.create = function (campaign, callback) {
-    Api.post('/campaigns', campaign, { successCallback: callback });
+  service.create = function (campaign, success, failure) {
+    Api.post('/campaigns', campaign, {
+      successCallback: success,
+      errorCallback: failure
+    });
   };
 
   service.delete = function (campaign_id, callback) {
@@ -1213,8 +1222,11 @@ var campaignsFactory = function campaignsFactoryFunction(Api) {
     Api.get('/campaigns', {}, { successCallback: callback });
   };
 
-  service.update = function (campaign_id, parameters, callback) {
-    Api.put('/campaigns/' + campaign_id, parameters, { successCallback: callback });
+  service.update = function (campaign_id, parameters, success, failure) {
+    Api.put('/campaigns/' + campaign_id, parameters, {
+      successCallback: success,
+      errorCallback: failure
+    });
   };
 
   return service;
