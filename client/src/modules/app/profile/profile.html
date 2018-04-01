@@ -1,1 +1,59 @@
-{{vm.account}}
+<md-content layout="row">
+  <div flex-gt-xs="25" hide-xs></div>
+  <div flex-gt-xs="50" flex-xs="100">
+    <h1 translate class="main-title md-display-2">accounts.edit.title</h1>
+    <form name="vm.profileEditionForm" ng-submit="vm.submit()" class="md-padding">
+      <md-input-container class="md-block">
+        <label for="usernameInput" translate>accounts.create.labels.username</label>
+        <input id="usernameInput" type="text" class="md-input" name="username" ng-model="vm.account.username" required minlength="6" />
+        <div ng-messages="vm.profileEditionForm.username.$error">
+          <div ng-message="required" translate>accounts.edit.errors.username.blank</div>
+          <div ng-message="minlength" translate>accounts.edit.errors.username.short</div>
+          <div ng-message="uniq" translate>accounts.edit.errors.username.uniq</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label for="emailInput" translate>accounts.create.labels.email</label>
+        <input type="text" id="emailInput" name="email" class="form-control" ng-model="vm.account.email" required ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/" />
+        <div ng-messages="vm.profileEditionForm.email.$error" multiple">
+          <div ng-message="required" translate>accounts.edit.errors.email.blank</div>
+          <div ng-message="pattern" translate>accounts.edit.errors.email.format</div>
+          <div ng-message="uniq" translate>accounts.edit.errors.email.uniq</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label for="passwordInput" translate>accounts.create.labels.password</label>
+        <input type="password" id="passwordInput" name="password" class="md-input" ng-model="vm.account.password" ng-required="vm.account.password_confirmation != undefined && vm.account.password_confirmation != ''" />
+        <div ng-messages="vm.profileEditionForm.password.$error">
+          <div ng-message="required" translate>accounts.edit.errors.password.blank</div>
+          <div ng-message="confirmation" translate>accounts.edit.errors.password.confirmation</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label for="passwordConfirmInput" translate>accounts.create.labels.password_confirmation</label>
+        <input type="password" id="passwordConfirmInput" name="password_confirmation" class="md-input" ng-model="vm.account.password_confirmation" />
+        <div ng-messages="vm.profileEditionForm.password_confirmation.$error">
+          <div ng-message="required" translate>accounts.edit.errors.password_confirmation.blank</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label for="lastnameInput" translate>accounts.create.labels.lastname</label>
+        <input type="test" id="lastnameInput" class="md-input" name="lastname" ng-model="vm.account.lastname" />
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label for="firstnameInput" translate>accounts.create.labels.firstname</label>
+        <input type="test" id="firstnameInput" class="md-input" name="firstname" ng-model="vm.account.firstname" />
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label for="birthdateInput" translate>accounts.create.labels.birthdate</label>
+        <md-datepicker ng-model="vm.account.birthdate" name="birthdate" md-max-date="vm.currentDate"></md-datepicker>
+        <div ng-messages="vm.profileEditionForm.birthdate.$error">
+          <div ng-message="maxdate" translate>accounts.edit.errors.birthdate.maxdate</div>
+        </div>
+      </md-input-container>
+        <input type="submit" translate translate-attr-value="accounts.edit.buttons.submit" class="md-button md-raised" />
+      </md-content>
+    </form>
+  </div>
+  <div flex-gt-xs="25" hide-xs></div>
+</md-content>

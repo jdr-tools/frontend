@@ -15,6 +15,10 @@ const errorsService = function errorServiceFunction () {
         form[split[1]].$setValidity(split[2], false)
       })
     }
+    else if (_.has(response, 'message') && response.message.indexOf('missing.') >= 0) {
+      const split = _.split(response.message, '.')
+      form[split[1]].$setValidity('required', false)
+    }
   }
 
   return service

@@ -27,7 +27,7 @@
         "birthdate": "Birth date",
         "email": "Email address",
         "firstname": "First name",
-        "lastname": "Last namee",
+        "lastname": "Last name",
         "password": "Password",
         "password_confirmation": "Password confirmation",
         "username": "Username"
@@ -52,6 +52,34 @@
       "titles": {
         "main": "Registration"
       }
+    },
+    "edit": {
+      "buttons": {
+        "submit": "Update"
+      },
+      "errors": {
+        "birthdate": {
+          "maxdate": "You can't be born in the future. Or can you ?"
+        },
+        "email": {
+          "blank": "You must provide a valid email address",
+          "pattern": "You must provide a valid email address (eg: example@test.com)",
+          "uniq": "This email address is already used by another user"
+        },
+        "password": {
+          "blank": "You must enter a password to confirm it",
+          "confirmation": "Password and confirmation must be identical"
+        },
+        "password_confirmation": {
+          "blank": "Please fill the password confirmation field"
+        },
+        "username": {
+          "blank": "Please fill the username field",
+          "minlength": "A username must be at least 6 characters long",
+          "uniq": "This username is already taken"
+        }
+      },
+      "title": "Edit my profile"
     }
   }
 }

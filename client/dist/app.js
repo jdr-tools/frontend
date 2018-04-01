@@ -1109,8 +1109,7 @@ var campaignsCreateComponent = function campaignsCreateComponentFunction($localS
       return $mdDialog.hide();
     };
     $scope.handleErrors = function (response) {
-      console.log(response);
-      ErrorsService.append($scope.campaignCreationForm, response);
+      return ErrorsService.append($scope.campaignCreationForm, response);
     };
     $scope.validate = function () {
       return campaignsFactory.create($scope.campaign, $scope.closeAndRefresh, $scope.handleErrors);
@@ -1419,15 +1418,41 @@ exports.default = profile;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var profileController = function profileControllerFunction(Api) {
+var profileController = function profileControllerFunction($mdToast, Api, ErrorsService) {
   'ngInject';
 
   var vm = this;
+
+  vm.currentDate = new Date();
+
+  vm.cleanAccount = function () {
+    var account = angular.copy(vm.account);
+    if (account.password == '') delete account.password;
+    if (account.password_confirmation == '') delete account.password_confirmation;
+    return account;
+  };
 
   vm.initialize = function () {
     Api.get('/accounts/own', {}, { successCallback: function successCallback(response) {
         vm.account = _.omit(response.account, 'rights');
       } });
+  };
+
+  vm.handleErrors = function (response) {
+    ErrorsService.append(vm.profileEditionForm, response);
+  };
+
+  vm.success = function () {
+    var toast = $mdToast.simple().position('bottom right').textContent('Compte mis à jour avec succès').hideDelay(2000);
+    $mdToast.show(toast);
+    vm.initialize();
+  };
+
+  vm.submit = function () {
+    Api.put('/accounts/own', vm.cleanAccount(), {
+      successCallback: vm.success,
+      errorCallback: vm.handleErrors
+    });
   };
 
   vm.initialize();
@@ -1683,6 +1708,9 @@ var errorsService = function errorServiceFunction() {
         var split = _.split(error, '.');
         form[split[1]].$setValidity(split[2], false);
       });
+    } else if (_.has(response, 'message') && response.message.indexOf('missing.') >= 0) {
+      var split = _.split(response.message, '.');
+      form[split[1]].$setValidity('required', false);
     }
   };
 

@@ -52,6 +52,34 @@
       "titles": {
         "main": "Inscription"
       }
+    },
+    "edit": {
+      "buttons": {
+        "submit": "Mettre à jour"
+      },
+      "errors": {
+        "birthdate": {
+          "maxdate": "You can't be born in the future. Or can you ?"
+        },
+        "email": {
+          "blank": "Une adresse email est requise",
+          "pattern": "Vous devez fournir une adresse email dans un format valide (ex: example@test.com)",
+          "uniq": "Cette adresse email est déjà associée à un autre utilisateur"
+        },
+        "password": {
+          "blank": "Vous devez fournir un mot de passe pour le confirmer",
+          "confirmation": "Le mot de passe et sa confirmation doivent être identique"
+        },
+        "password_confirmation": {
+          "blank": "Vous devez confirmer votre mot de passe pour le mettre à jour"
+        },
+        "username": {
+          "blank": "Vous devez entrer un nom d'utilisateur",
+          "minlength": "Un nom d'utilisateur doit faire au minimum 6 caractères",
+          "uniq": "Ce nom d'utilisateur est déjà employé"
+        }
+      },
+      "title": "Editer mon profil"
     }
   }
 }
