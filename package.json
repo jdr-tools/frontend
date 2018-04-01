@@ -45,7 +45,7 @@
   },
   "scripts": {
     "postinstall": "gulp build && gulp sass",
-    "start": ""
+    "start": "node app.js"
   },
   "peerDependencies": {}
 }
