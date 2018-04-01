@@ -44,7 +44,7 @@
     "watchify": "^3.9.0"
   },
   "scripts": {
-    "start": "gulp build && gulp sass"
+    "postinstall": "gulp build && gulp sass"
   },
   "peerDependencies": {}
 }

@@ -17,7 +17,7 @@ const rightsRoute = function ($stateProvider) {
   $stateProvider.state('rightsList', {
     url: '/rights',
     parent: 'rights',
-    templateUrl: 'src/modules/admin/rights/list/rights_list.html',
+    templateUrl: 'client/src/modules/admin/rights/list/rights_list.html',
     controller: 'rightsListController as vm',
     resolve: {
       right: (Permissions) => {

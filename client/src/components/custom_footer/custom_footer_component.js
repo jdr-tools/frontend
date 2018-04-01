@@ -19,7 +19,7 @@ const customMenuController = class customFooter {
 const mainMenuComponent = {
   controller: customMenuController,
   controllerAs: 'vm',
-  templateUrl: '/src/components/custom_footer/custom_footer.html'
+  templateUrl: 'client/src/components/custom_footer/custom_footer.html'
 }
 
 export default mainMenuComponent

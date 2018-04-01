@@ -15,13 +15,13 @@ const campaignsRoute = function ($stateProvider) {
   /** Concrete state for displaying a list of groups. */
   $stateProvider.state('campaigns.index', {
     url: '/campaigns',
-    templateUrl: 'src/modules/app/campaigns/index/campaigns_list.html',
+    templateUrl: 'client/src/modules/app/campaigns/index/campaigns_list.html',
     controller: 'campaignsListController as vm'
   })
 
   $stateProvider.state('campaigns.edit', {
     url: '/campaigns/{id}',
-    templateUrl: 'src/modules/app/campaigns/edit/campaigns_edit.html',
+    templateUrl: 'client/src/modules/app/campaigns/edit/campaigns_edit.html',
     controller: 'campaignsEditController as vm'
   })
 }

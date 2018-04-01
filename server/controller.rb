@@ -4,7 +4,7 @@
 class Controller < Sinatra::Base
 
   set :root, File.join(File.dirname(__FILE__), '..')
-  set :public_folder, File.join(settings.root, 'client')
+  set :public_folder, settings.root
   set :views, settings.public_folder
 
   configure do
@@ -28,7 +28,7 @@ class Controller < Sinatra::Base
   end
 
   get '/' do
-    erb :index
+    erb :'client/index'
   end
 
   post '/api' do

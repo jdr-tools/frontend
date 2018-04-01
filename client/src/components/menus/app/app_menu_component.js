@@ -33,7 +33,7 @@ const appMenuController = class MainMenu {
 const appMenuComponent = {
   controller: appMenuController,
   controllerAs: 'vm',
-  templateUrl: '/src/components/menus/app/app_menu.html'
+  templateUrl: 'client/src/components/menus/app/app_menu.html'
 }
 
 export default appMenuComponent

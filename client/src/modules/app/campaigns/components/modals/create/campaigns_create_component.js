@@ -40,7 +40,7 @@ const campaignsCreateComponent = function campaignsCreateComponentFunction ($loc
   vm.createCampaign = (event) => {
     $mdDialog.show({
       controller: dialogController,
-      templateUrl: '/src/modules/app/campaigns/components/modals/create/campaigns_create_modal.html',
+      templateUrl: 'client/src/modules/app/campaigns/components/modals/create/campaigns_create_modal.html',
       parent: angular.element(document.body),
       targetEvent: event,
       clickOutsideToClose:true
@@ -52,5 +52,5 @@ const campaignsCreateComponent = function campaignsCreateComponentFunction ($loc
 export default {
   controller: campaignsCreateComponent,
   controllerAs: 'vm',
-  templateUrl: '/src/modules/app/campaigns/components/modals/create/campaigns_create.html'
+  templateUrl: 'client/src/modules/app/campaigns/components/modals/create/campaigns_create.html'
 }

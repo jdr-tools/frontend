@@ -5,7 +5,7 @@ const dashboardRoute = function ($stateProvider) {
   $stateProvider.state('dashboard', {
     url: '/dashboard',
     parent: 'app',
-    templateUrl: 'src/modules/app/dashboard/dashboard.html',
+    templateUrl: 'client/src/modules/app/dashboard/dashboard.html',
     controller: 'dashboardController as vm'
   })
 }

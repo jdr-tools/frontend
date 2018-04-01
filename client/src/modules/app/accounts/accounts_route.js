@@ -17,14 +17,14 @@ const accountsRoute = function ($stateProvider) {
   $stateProvider.state('accountsList', {
     url: '/accounts',
     parent: 'accounts',
-    templateUrl: 'src/modules/app/accounts/list/accounts_list.html',
+    templateUrl: 'client/src/modules/app/accounts/list/accounts_list.html',
     controller: 'accountsListController as vm'
   })
 
   /** Concrete state for creating an account. */
   $stateProvider.state('accountsCreate', {
     url: '/accounts/new',
-    templateUrl: 'src/modules/app/accounts/create/accounts_create.html',
+    templateUrl: 'client/src/modules/app/accounts/create/accounts_create.html',
     controller: 'accountsCreateController as vm',
     resolve: {
       /** If the user is already authenticated, he shouldn't be able to access the account creation screen. */

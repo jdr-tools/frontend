@@ -5,7 +5,7 @@ const adminDashboardRoute = function ($stateProvider) {
   $stateProvider.state('adminDashboard', {
     url: '/admin',
     parent: 'admin',
-    templateUrl: 'src/modules/admin/dashboard/admin_dashboard.html',
+    templateUrl: 'client/src/modules/admin/dashboard/admin_dashboard.html',
     controller: 'adminDashboardController as vm'
   })
 }

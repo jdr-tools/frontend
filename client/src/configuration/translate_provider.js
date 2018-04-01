@@ -13,7 +13,7 @@ const configTranslateProvider = function configTranslateProviderFunction ($trans
   $translatePartialLoaderProvider.addPart('components/custom_footer');
   
   $translateProvider.useLoader('$translatePartialLoader', {
-    urlTemplate: '/locales/{part}/{lang}.json'
+    urlTemplate: '/client/locales/{part}/{lang}.json'
   })
   $translateProvider.preferredLanguage('fr')
 }
