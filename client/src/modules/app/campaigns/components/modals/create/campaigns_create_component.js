@@ -1,4 +1,4 @@
-const campaignsCreateComponent = function campaignsCreateComponentFunction ($localStorage, $mdDialog, $rootScope, campaignsFactory, ErrorsService) {
+const campaignsCreateComponent = function campaignsCreateComponentFunction ($localStorage, $mdDialog, $rootScope, CampaignsFactory, ErrorsService) {
   'ngInject'
 
   const vm = this
@@ -22,7 +22,7 @@ const campaignsCreateComponent = function campaignsCreateComponentFunction ($loc
      */
     $scope.handleErrors = (response) => ErrorsService.append($scope.campaignCreationForm, response)
     /** Closes the modal and creates the campaign. */
-    $scope.validate = () => campaignsFactory.create($scope.campaign, $scope.closeAndRefresh, $scope.handleErrors)
+    $scope.validate = () => CampaignsFactory.create($scope.campaign, $scope.closeAndRefresh, $scope.handleErrors)
   }
 
   /**

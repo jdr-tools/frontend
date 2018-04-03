@@ -1,4 +1,4 @@
-const campaignsFactory = function campaignsFactoryFunction (Api) {
+const CampaignsFactory = function CampaignsFactoryFunction (Api) {
   'ngInject'
 
   const service = this
@@ -43,4 +43,4 @@ const campaignsFactory = function campaignsFactoryFunction (Api) {
   return service
 }
 
-export default campaignsFactory
+export default CampaignsFactory

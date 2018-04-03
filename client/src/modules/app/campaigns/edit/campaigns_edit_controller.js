@@ -1,11 +1,11 @@
-const campaignsEditController = function campaignsEditControllerFunction ($mdToast, $state, campaignsFactory) {
+const campaignsEditController = function campaignsEditControllerFunction ($mdToast, $state, CampaignsFactory) {
   'ngInject'
 
   const vm = this
 
   /** Method called when submitting the form to add a new player to the game. */
   vm.addPlayer = () => {
-    campaignsFactory.addPlayer($state.params.id, vm.playername, vm.refreshInvitations, vm.invitationErrors)
+    CampaignsFactory.addPlayer($state.params.id, vm.playername, vm.refreshInvitations, vm.invitationErrors)
   }
 
   /**
@@ -15,7 +15,7 @@ const campaignsEditController = function campaignsEditControllerFunction ($mdToa
   vm.failure = (response) => ErrorsService.append(vm.campaignEditionForm, response)
 
   vm.get = (campaign_id) => {
-    campaignsFactory.get(campaign_id, (campaign) => {
+    CampaignsFactory.get(campaign_id, (campaign) => {
       vm.campaign = campaign
     })
   }
@@ -54,7 +54,7 @@ const campaignsEditController = function campaignsEditControllerFunction ($mdToa
    * - accepted (the player can access the campaign and play in it)
    */
   vm.refreshInvitations = () => {
-    campaignsFactory.invitations($state.params.id, (response) => {
+    CampaignsFactory.invitations($state.params.id, (response) => {
       vm.invitations = response
     })
   }
@@ -72,7 +72,7 @@ const campaignsEditController = function campaignsEditControllerFunction ($mdToa
   /** The submit of the update form. */
   vm.update = () => {
     const parameters = _.pick(vm.campaign, ['title', 'description', 'tags', 'is_private'])
-    campaignsFactory.update($state.params.id, parameters, vm.success, vm.failure)
+    CampaignsFactory.update($state.params.id, parameters, vm.success, vm.failure)
   }
 
   vm.initialize()

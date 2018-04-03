@@ -1,14 +1,14 @@
-const campaignsListController = function campaignsListControllerFunction ($mdDialog, $rootScope, campaignsFactory) {
+const campaignsListController = function campaignsListControllerFunction ($mdDialog, $rootScope, CampaignsFactory) {
   'ngInject'
 
   const vm = this
 
   vm.getAllCampaigns = () => {
-    campaignsFactory.list((campaigns) => { vm.campaigns = campaigns })
+    CampaignsFactory.list((campaigns) => { vm.campaigns = campaigns })
   }
 
   vm.deleteCampaign = (campaign_id) => {
-    campaignsFactory.delete(campaign_id, vm.getAllCampaigns)
+    CampaignsFactory.delete(campaign_id, vm.getAllCampaigns)
   }
 
   $rootScope.$on('campaign.created', vm.getAllCampaigns)
