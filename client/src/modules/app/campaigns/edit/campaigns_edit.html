@@ -2,6 +2,7 @@
   <div flex-gt-xs="25" hide-xs></div>
   <div flex-gt-xs="50" flex-xs="100">
     <md-tabs md-dynamic-height>
+      <!-- First tab containg the informations about the campaign (title, description, etc.) -->
       <md-tab>
         <md-tab-label>{{'campaigns.update.tabs.informations.title' | translate}}</md-tab-label>
         <md-tab-body>
@@ -44,11 +45,22 @@
           </form>
         </md-tab-body>
       </md-tab>
+      <!-- Second tab containing the players, and the field to invite new players. -->
       <md-tab>
         <md-tab-label>{{'campaigns.update.tabs.players.title' | translate}}</md-tab-label>
         <md-tab-body>
-          <md-content class="md-padding">
-            COMING SOON
+          <md-content class="md-padding" layout="row">
+            <div flex="50">
+              <h2 class="md-headline">Invitations en cours</h2>
+              <form ng-submit="vm.addPlayer()" name="vm.addPlayerForm">
+                <md-input-container class="md-block">
+                  <label for="playername">Player name</label>
+                  <input type="text" name="playername" ng-model="vm.playername" />
+                  <div class="hint">Enter a name and press the Enter key</div>
+                </md-input-container>
+              </form>
+            </div>
+            <div flex="50"><h2 class="md-headline">Joueurs</h2></div>
           </md-content>
         </md-tab-body>
       </md-tab>

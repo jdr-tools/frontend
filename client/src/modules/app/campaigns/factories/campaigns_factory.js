@@ -3,6 +3,13 @@ const campaignsFactory = function campaignsFactoryFunction (Api) {
 
   const service = this
 
+  service.addPlayer = (campaign_id, username, success, failure) => {
+    Api.post('/invitations', {username: username, campaign_id: campaign_id}, {
+      successCallback: success,
+      errorCallback: failure
+    })
+  }
+
   service.create = (campaign, success, failure) => {
     Api.post('/campaigns', campaign, {
       successCallback: success,
@@ -16,6 +23,10 @@ const campaignsFactory = function campaignsFactoryFunction (Api) {
 
   service.get = (campaign_id, callback) => {
     Api.get(`/campaigns/${campaign_id}`, {}, {successCallback: callback})
+  }
+
+  service.invitations = (campaign_id, callback) => {
+    Api.get(`/campaigns/${campaign_id}/invitations`, {}, {successCallback: callback})
   }
 
   service.list = (callback) => {
