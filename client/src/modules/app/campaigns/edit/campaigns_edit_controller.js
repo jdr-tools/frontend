@@ -1,11 +1,14 @@
-const campaignsEditController = function campaignsEditControllerFunction ($mdToast, $state, CampaignsFactory) {
+const campaignsEditController = function campaignsEditControllerFunction ($localStorage, $mdToast, $state, CampaignsFactory, ErrorsService) {
   'ngInject'
 
   const vm = this
+  
+    console.log(vm.invitationForm)
 
   /** Method called when submitting the form to add a new player to the game. */
   vm.addPlayer = () => {
-    CampaignsFactory.addPlayer($state.params.id, vm.playername, vm.refreshInvitations, vm.invitationErrors)
+    ErrorsService.resetErrors(vm.invitationForm)
+    CampaignsFactory.addPlayer($state.params.id, vm.account, vm.refreshInvitations, vm.invitationErrors)
   }
 
   /**
@@ -36,6 +39,8 @@ const campaignsEditController = function campaignsEditControllerFunction ($mdToa
     }
     /** The name of the player you want to invite in the dedicated field. */
     vm.playername = ''
+    /** Current username of the connected account. */
+    vm.currentUsername = $localStorage.account.username
     /** Fill the informations for the campaign. */
     vm.get($state.params.id)
     /** Gets the invitations (accepted or not) for this campaign. */
@@ -46,7 +51,9 @@ const campaignsEditController = function campaignsEditControllerFunction ($mdToa
    * This method handles and appends errors for the invitation of a player (usually the player does not exist).
    * @param {Object} response - the body of the response returned by the API.
    */
-  vm.invitationErrors = (response) => ErrorsService.append(vm.addPlayerForm, response)
+  vm.invitationErrors = (response) => {
+    ErrorsService.append(vm.invitationForm, response)
+  }
 
   /**
    * Gets the invitations linked to this campaign. An invitation can be :

@@ -17,6 +17,29 @@
     "index": {
       "title": "Vos campagnes"
     },
+    "invitations": {
+      "errors": {
+        "accepted": "Ce joueur a déjà accepté une invitation dans cette campagne",
+        "blank": "Vous devez entrer un nom d'utilisateur",
+        "not_found": "Ce nom d'utilisateur n'existe pas",
+        "pending": "Ce joueur a déjà une invitation en attente dans cette campagne"
+      },
+      "hints": {
+        "username": "Entrez un nom d'utilisateur et appuyez sur Entrée"
+      },
+      "labels": {
+        "created_by": "Créée par",
+        "username": "Nom du joueur"
+      },
+      "placeholders": {
+        "accepted": "Aucun joueur",
+        "pending": "Aucune invitation"
+      },
+      "titles": {
+        "accepted": "Joueurs",
+        "pending": "Invitations"
+      }
+    },
     "update": {
       "tabs": {
         "informations": {

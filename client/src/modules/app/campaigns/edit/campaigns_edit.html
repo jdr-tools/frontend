@@ -49,18 +49,48 @@
       <md-tab>
         <md-tab-label>{{'campaigns.update.tabs.players.title' | translate}}</md-tab-label>
         <md-tab-body>
-          <md-content class="md-padding" layout="row">
+          <md-content layout="row" class="wrap">
+            <form flex class="without-margin" ng-submit="vm.addPlayer()" name="vm.invitationForm" ng-if="vm.currentUsername == vm.campaign.creator.username">
+              <md-input-container class="md-block">
+                <label for="account" translate>campaigns.invitations.labels.username</label>
+                <input type="text" name="account" ng-model="vm.account" required />
+                <div class="hint" ng-if="!vm.invitationForm.$submitted" translate>campaigns.invitations.hints.username</div>
+                <div ng-messages="vm.invitationForm.account.$error" ng-if="vm.invitationForm.$submitted">
+                  <div ng-message="already_pending" translate>campaigns.invitations.errors.pending</div>
+                  <div ng-message="already_accepted" translate>campaigns.invitations.errors.accepted</div>
+                  <div ng-message="not_found" translate>campaigns.invitations.errors.not_found</div>
+                  <div ng-message="required" translate>campaigns.invitations.errors.blank</div>
+                </div>
+              </md-input-container>
+            </form>
+          </md-content>
+          <md-content layout="row">
             <div flex="50">
-              <h2 class="md-headline">Invitations en cours</h2>
-              <form ng-submit="vm.addPlayer()" name="vm.addPlayerForm">
-                <md-input-container class="md-block">
-                  <label for="playername">Player name</label>
-                  <input type="text" name="playername" ng-model="vm.playername" />
-                  <div class="hint">Enter a name and press the Enter key</div>
-                </md-input-container>
-              </form>
+              <h2 class="md-headline" translate>campaigns.invitations.titles.pending</h2>
+              <div ng-if="vm.invitations.pending.count == 0" translate>campaigns.invitations.placeholders.pending</div>
+              <md-list ng-if="vm.invitations.pending.count > 0">
+                <md-list-item ng-repeat="invitation in vm.invitations.pending.items" class="md-2-line">
+                  <md-icon class="md-avatar-icon">face</md-icon>
+                  <div class="md-list-item-text" layout="column">
+                    <h3>{{invitation.username}}</h3>
+                    <p>{{'campaigns.invitations.labels.created_by' | translate}} : {{invitation.creator}}</p>
+                  </div>
+                </md-list-item>
+              </md-list>
             </div>
-            <div flex="50"><h2 class="md-headline">Joueurs</h2></div>
+            <div flex="50" class="md-padding">
+              <h2 class="md-headline" translate>campaigns.invitations.titles.accepted</h2>
+              <div ng-if="vm.invitations.accepted.count == 0" translate>campaigns.invitations.placeholders.accepted</div>
+                <md-list ng-if="vm.invitations.accepted.count > 0">
+                  <md-list-item ng-repeat="invitation in vm.invitations.accepted.items" class="md-2-line">
+                    <md-icon class="md-avatar-icon">face</md-icon>
+                    <div class="md-list-item-text" layout="column">
+                      <h3>{{invitation.username}}</h3>
+                      <p>{{'campaigns.invitations.labels.created_by' | translate}} : {{invitation.creator}}</p>
+                    </div>
+                  </md-list-item>
+                </md-list>
+            </div>
           </md-content>
         </md-tab-body>
       </md-tab>

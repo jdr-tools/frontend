@@ -17,6 +17,29 @@
     "index": {
       "title": "Your campaigns"
     },
+    "invitations": {
+      "errors": {
+        "accepted": "This player is already playing in this campaign",
+        "blank": "You must enter a username",
+        "not_found": "This username does not exist",
+        "pending": "This player is already invited to this campaign"
+      },
+      "hints": {
+        "username": "Enter a username and press enter"
+      },
+      "labels": {
+        "created_by": "Created by",
+        "username": "Player name"
+      },
+      "placeholders": {
+        "accepted": "No players yet",
+        "pending": "No pending invitations"
+      },
+      "titles": {
+        "accepted": "Players",
+        "pending": "Invitations"
+      }
+    },
     "update": {
       "tabs": {
         "informations": {
