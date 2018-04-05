@@ -1,4 +1,4 @@
-const campaignsEditController = function campaignsEditControllerFunction ($localStorage, $mdToast, $state, CampaignsFactory, ErrorsService) {
+const campaignsEditController = function campaignsEditControllerFunction ($localStorage, $mdToast, $rootScope, $state, CampaignsFactory, ErrorsService) {
   'ngInject'
 
   const vm = this
@@ -17,6 +17,10 @@ const campaignsEditController = function campaignsEditControllerFunction ($local
    */
   vm.failure = (response) => ErrorsService.append(vm.campaignEditionForm, response)
 
+  /**
+   * Gets the informations about a campaign.
+   * @param {String} campaign_id - the unique identifier of the campaign.
+   */
   vm.get = (campaign_id) => {
     CampaignsFactory.get(campaign_id, (campaign) => {
       vm.campaign = campaign
@@ -83,6 +87,8 @@ const campaignsEditController = function campaignsEditControllerFunction ($local
   }
 
   vm.initialize()
+
+  $rootScope.$on('invitations.reset', vm.refreshInvitations)
 }
 
 export default campaignsEditController

@@ -68,28 +68,12 @@
             <div flex="50">
               <h2 class="md-headline" translate>campaigns.invitations.titles.pending</h2>
               <div ng-if="vm.invitations.pending.count == 0" translate>campaigns.invitations.placeholders.pending</div>
-              <md-list ng-if="vm.invitations.pending.count > 0">
-                <md-list-item ng-repeat="invitation in vm.invitations.pending.items" class="md-2-line">
-                  <md-icon class="md-avatar-icon">face</md-icon>
-                  <div class="md-list-item-text" layout="column">
-                    <h3>{{invitation.username}}</h3>
-                    <p>{{'campaigns.invitations.labels.created_by' | translate}} : {{invitation.creator}}</p>
-                  </div>
-                </md-list-item>
-              </md-list>
+              <invitations collection="vm.invitations.pending" icons="true"></invitations>
             </div>
             <div flex="50" class="md-padding">
               <h2 class="md-headline" translate>campaigns.invitations.titles.accepted</h2>
               <div ng-if="vm.invitations.accepted.count == 0" translate>campaigns.invitations.placeholders.accepted</div>
-                <md-list ng-if="vm.invitations.accepted.count > 0">
-                  <md-list-item ng-repeat="invitation in vm.invitations.accepted.items" class="md-2-line">
-                    <md-icon class="md-avatar-icon">face</md-icon>
-                    <div class="md-list-item-text" layout="column">
-                      <h3>{{invitation.username}}</h3>
-                      <p>{{'campaigns.invitations.labels.created_by' | translate}} : {{invitation.creator}}</p>
-                    </div>
-                  </md-list-item>
-                </md-list>
+              <invitations collection="vm.invitations.accepted"></invitations>
             </div>
           </md-content>
         </md-tab-body>

@@ -2,7 +2,7 @@
  * This service handles all actions regarding the construction, destruction, and checking of the user sessions.
  * @author Vincent Courtois <courtois.vincent@outlook.com>
  */
-const Authentication = function authenticationFunction (Api, AccountsFactory, $localStorage, $rootScope, $state) {
+const Authentication = function authenticationFunction ($localStorage, $rootScope, $state, $timeout, Api, AccountsFactory) {
     'ngInject'
 
     const vm = this
@@ -71,19 +71,19 @@ const Authentication = function authenticationFunction (Api, AccountsFactory, $l
       successCallback: () => {
         delete $localStorage.account
         delete $localStorage.token
-        $state.go('sessionsCreate')
+        $timeout(() => $state.go('sessionsCreate'))
       }
     })
   }
 
   vm.sessionCreationSuccess = (session_response) => {
-    /** The username is remembered only if the user wants to remember it. */
-    if (remember) $localStorage.remember = username
     $localStorage.token = session_response.token
-    AccountsFactory.get(session_response.account_id, (account_response) => {
-      $localStorage.account = account_response.account
-      $rootScope.$broadcast('loginSuccessful')
-      $state.go('dashboard', {}, {reload: true})
+    $timeout(() => {
+      AccountsFactory.own((account_response) => {
+        $localStorage.account = account_response.account
+        $rootScope.$broadcast('loginSuccessful')
+        $state.go('dashboard', {}, {reload: true})
+      })
     })
   }
 }
