@@ -10,7 +10,7 @@
           <input step="any" type="text" id="usernameInput" name="username" class="md-input" ng-model="vm.account.username" required autocomplete="off" minlength="6" />
           <div ng-messages="vm.accountCreationForm.username.$error">
             <div ng-message="required" translate>accounts.create.errors.username.blank</div>
-            <div ng-message="minlength" translate>accounts.create.errors.username.short</div>
+            <div ng-message="minlength" translate>accounts.create.errors.username.minlength</div>
             <div ng-message="uniq" translate>accounts.create.errors.username.uniq</div>
           </div>
         </md-input-container>

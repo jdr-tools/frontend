@@ -7,6 +7,7 @@
       "errors": {
         "email": {
           "blank": "Please fill the email address field",
+          "minlength": "A username must have more than six characters",
           "pattern": "You must provide a valid email address (eg: example@test.com)",
           "uniq": "This email address is already used"
         },

@@ -7,6 +7,7 @@
       "errors": {
         "email": {
           "blank": "Une adresse email est requise pour l'inscription",
+          "minlength": "Un nom d'utilisateur doit faire au minimum six caractères",
           "pattern": "Vous devez fournir une adresse email dans un format valide (ex: example@test.com)",
           "uniq": "Cette adresse email est déjà associée à un autre utilisateur"
         },
