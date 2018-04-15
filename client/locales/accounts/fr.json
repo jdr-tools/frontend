@@ -11,11 +11,11 @@
           "uniq": "Cette adresse email est déjà associée à un autre utilisateur"
         },
         "password": {
-          "blank": "Vous devez fournir un mot de passe pour sécuriser l'accès à votre compte",
-          "confirmation": "Le mot de passe et sa confirmation doivent être identique"
+          "blank": "Vous devez fournir un mot de passe pour sécuriser l'accès à votre compte"
         },
         "password_confirmation": {
-          "blank": "Vous devez confirmer votre mot de passe avant de finir l'inscription"
+          "blank": "Vous devez confirmer votre mot de passe avant de finir l'inscription",
+          "confirmation": "Le mot de passe et sa confirmation doivent être identique"
         },
         "username": {
           "blank": "Vous devez entrer un nom d'utilisateur afin de vous identifier sur l'application",

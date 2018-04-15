@@ -11,11 +11,11 @@
           "uniq": "This email address is already used"
         },
         "password": {
-          "blank": "Please fill the password field",
-          "confirmation": "Password and confirmation must be identical"
+          "blank": "Please fill the password field"
         },
         "password_confirmation": {
-          "blank": "Please fill the password confirmation field"
+          "blank": "Please fill the password confirmation field",
+          "confirmation": "Password and confirmation must be identical"
         },
         "username": {
           "blank": "Please fill the username field",
