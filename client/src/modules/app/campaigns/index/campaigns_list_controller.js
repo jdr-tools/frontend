@@ -1,14 +1,22 @@
-const campaignsListController = function campaignsListControllerFunction ($mdDialog, $rootScope, CampaignsFactory) {
+const campaignsListController = function campaignsListControllerFunction ($mdDialog, $rootScope, CampaignsFactory, InvitationsFactory) {
   'ngInject'
 
   const vm = this
 
-  vm.getAllCampaigns = () => {
-    CampaignsFactory.list((campaigns) => { vm.campaigns = campaigns })
+  vm.campaigns = {
+    public: [],
+    own: []
   }
 
-  vm.deleteCampaign = (campaign_id) => {
-    CampaignsFactory.delete(campaign_id, vm.getAllCampaigns)
+  vm.invitations = {
+    pending: [],
+    accepted: []
+  }
+
+  vm.getAllCampaigns = () => {
+    CampaignsFactory.list((campaigns) => { vm.campaigns.public = campaigns.items })
+    CampaignsFactory.own((campaigns) => { vm.campaigns.own = campaigns.items })
+    InvitationsFactory.own((invitations) => { vm.invitations = invitations; console.log(invitations) })
   }
 
   $rootScope.$on('campaign.created', vm.getAllCampaigns)

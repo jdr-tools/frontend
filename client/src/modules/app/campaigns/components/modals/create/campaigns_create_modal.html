@@ -28,13 +28,13 @@
         >
         </md-chips>
         <!-- Switch to make the campaign private (TRUE) or public (FALSE) -->
-        <md-switch ng-model="campaign.isPrivate">
+        <md-switch ng-model="campaign.isPrivate" name="is_private">
           <span ng-if="campaign.isPrivate">{{'common.private.f' | translate}}</span>
           <span ng-if="!campaign.isPrivate">{{'common.public.f' | translate}}</span>
         </md-switch>
         <md-input-container class="md-block no-margin-bottom">
           <label translate>campaigns.create.labels.description</label>
-          <textarea class="campaign-description" ng-model="campaign.description"></textarea>
+          <textarea class="campaign-description" name="description" ng-model="campaign.description"></textarea>
         </md-input-container>
       </md-content>
     </md-dialog-content>

@@ -6,11 +6,11 @@
       },
       "errors": {
         "password": {
-          "blank": "Veuillez fournir votre mot de passe pour vous connecter",
-          "credentials": "Les identifiants entrés semblent incorrects"
+          "blank": "Veuillez fournir votre mot de passe pour vous connecter"
         },
         "username": {
-          "blank": "Veuillez entrer votre nom d'utilisateur pour vous connecter"
+          "blank": "Veuillez entrer votre nom d'utilisateur pour vous connecter",
+          "credentials": "Les identifiants entrés semblent incorrects"
         }
       },
       "labels": {

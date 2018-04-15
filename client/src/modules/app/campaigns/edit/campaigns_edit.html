@@ -52,10 +52,10 @@
           <md-content layout="row" class="wrap">
             <form flex class="without-margin" ng-submit="vm.addPlayer()" name="vm.invitationForm" ng-if="vm.currentUsername == vm.campaign.creator.username">
               <md-input-container class="md-block">
-                <label for="account" translate>campaigns.invitations.labels.username</label>
-                <input type="text" name="account" ng-model="vm.account" required />
+                <label for="username" translate>campaigns.invitations.labels.username</label>
+                <input type="text" name="username" ng-model="vm.account" required />
                 <div class="hint" ng-if="!vm.invitationForm.$submitted" translate>campaigns.invitations.hints.username</div>
-                <div ng-messages="vm.invitationForm.account.$error" ng-if="vm.invitationForm.$submitted">
+                <div ng-messages="vm.invitationForm.username.$error" ng-if="vm.invitationForm.$submitted">
                   <div ng-message="already_pending" translate>campaigns.invitations.errors.pending</div>
                   <div ng-message="already_accepted" translate>campaigns.invitations.errors.accepted</div>
                   <div ng-message="not_found" translate>campaigns.invitations.errors.not_found</div>

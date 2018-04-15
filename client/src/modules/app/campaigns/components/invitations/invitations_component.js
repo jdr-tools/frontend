@@ -1,4 +1,4 @@
-const invitationsComponent = function invitationsComponentFunction ($rootScope, Api) {
+const invitationsComponent = function invitationsComponentFunction ($localStorage, $rootScope, Api) {
   'ngInject'
 
   const vm = this
@@ -13,6 +13,10 @@ const invitationsComponent = function invitationsComponentFunction ($rootScope, 
     Api.delete(`/invitations/${invitation.id}`, {
       successCallback: () => $rootScope.$broadcast('invitations.reset')
     })
+  }
+
+  vm.showAccept = (invitation) => {
+    return $localStorage.account.username == invitation.username
   }
 }
 

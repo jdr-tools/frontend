@@ -8,14 +8,8 @@ const campaignsEditController = function campaignsEditControllerFunction ($local
   /** Method called when submitting the form to add a new player to the game. */
   vm.addPlayer = () => {
     ErrorsService.resetErrors(vm.invitationForm)
-    CampaignsFactory.addPlayer($state.params.id, vm.account, vm.refreshInvitations, vm.invitationErrors)
+    CampaignsFactory.addPlayer($state.params.id, vm.invitationForm, vm.account, vm.refreshInvitations)
   }
-
-  /**
-   * Method called when the campaign is tnot correctly updated, appending the errors to the form.
-   * @param {Object} response - the response of the API, containing the errors.
-   */
-  vm.failure = (response) => ErrorsService.append(vm.campaignEditionForm, response)
 
   /**
    * Gets the informations about a campaign.
@@ -52,14 +46,6 @@ const campaignsEditController = function campaignsEditControllerFunction ($local
   }
 
   /**
-   * This method handles and appends errors for the invitation of a player (usually the player does not exist).
-   * @param {Object} response - the body of the response returned by the API.
-   */
-  vm.invitationErrors = (response) => {
-    ErrorsService.append(vm.invitationForm, response)
-  }
-
-  /**
    * Gets the invitations linked to this campaign. An invitation can be :
    * - pending (the player is not yet participating to the campaign)
    * - accepted (the player can access the campaign and play in it)
@@ -83,7 +69,7 @@ const campaignsEditController = function campaignsEditControllerFunction ($local
   /** The submit of the update form. */
   vm.update = () => {
     const parameters = _.pick(vm.campaign, ['title', 'description', 'tags', 'is_private'])
-    CampaignsFactory.update($state.params.id, parameters, vm.success, vm.failure)
+    CampaignsFactory.update($state.params.id, vm.campaignEditionForm, parameters, vm.success)
   }
 
   vm.initialize()

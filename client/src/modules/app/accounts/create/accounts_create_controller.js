@@ -23,7 +23,7 @@ const accountsCreateController = function accountsCreateControllerFunction ($tra
   vm.createAccount = () => {
     Api.post('/accounts', vm.account, {
       successCallback: vm.confirm,
-      errorCallback: vm.displayErrors
+      errorsForm: vm.accountCreationForm
     })
   }
 
@@ -32,12 +32,6 @@ const accountsCreateController = function accountsCreateControllerFunction ($tra
     vm.confirmation = true
     vm.errors = false
   }
-
-  /**
-   * When the registration fails, this method displays a list of error concerning the process.
-   * @return {Array<String>} a list of error string keys returned by the api. These keys should be translated.
-   */
-  vm.displayErrors = (response) => ErrorsService.append(vm.accountCreationForm, response)
 }
 
 export default accountsCreateController

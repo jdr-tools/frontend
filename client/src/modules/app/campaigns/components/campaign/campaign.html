@@ -1,0 +1,21 @@
+<md-card flex-gt-sm="25" flex-xs="auto">
+  <md-card-title flex="nogrow">
+    <md-card-title-text>
+      <span class="md-headline">{{vm.item.title}}</span>
+      <span class="md-subhead" ng-if="vm.item.is_private" translate>common.private.f</span>
+      <span class="md-subhead" ng-if="!vm.item.is_private" translate>common.public.f</span>
+    </md-card-title-text>
+  </md-card-title>
+  <md-card-content flex="noshrink">
+    <div>{{vm.item.description}}</div>
+    <md-chips class="campaign-tags" ng-if="vm.item.tags.length > 0" ng-model="vm.item.tags" readonly="true"></md-chips>
+  </md-card-content>
+  <md-card-actions layout="row" layout-align="end center">
+    <md-button class="md-icon-button" ui-sref="campaigns.edit({id: vm.item.id})">
+      <md-icon>mode_edit</md-icon>
+    </md-button>
+    <md-button class="md-icon-button" ng-click="vm.deleteCampaign(vm.item.id)">
+      <md-icon>delete</md-icon>
+    </md-button>
+  </md-card-actions>
+</md-card>

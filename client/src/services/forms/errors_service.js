@@ -26,10 +26,11 @@ const errorsService = function errorServiceFunction () {
    * @param {Object} form - an angular form object to reset the fields of.
    */
   service.resetErrors = (form) => {
-    form.account.$valid = true
     _.each(form.$$controls, (control) => {
-      const errorKeys = _.keys(form[control.$name].$error)
-      _.each(errorKeys, (key) => form[control.$name].$setValidity(key, true))
+      if (control.$name != '' && form[control.$name] != undefined) {
+        const errorKeys = _.keys(form[control.$name].$error)
+        _.each(errorKeys, (key) => form[control.$name].$setValidity(key, true))
+      }
     })
   }
 
