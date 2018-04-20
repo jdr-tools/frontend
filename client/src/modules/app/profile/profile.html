@@ -44,13 +44,6 @@
         <label for="firstnameInput" translate>accounts.create.labels.firstname</label>
         <input type="test" id="firstnameInput" class="md-input" name="firstname" ng-model="vm.account.firstname" />
       </md-input-container>
-      <md-input-container class="md-block">
-        <label for="birthdateInput" translate>accounts.create.labels.birthdate</label>
-        <md-datepicker ng-model="vm.account.birthdate" name="birthdate" md-max-date="vm.currentDate"></md-datepicker>
-        <div ng-messages="vm.profileEditionForm.birthdate.$error">
-          <div ng-message="maxdate" translate>accounts.edit.errors.birthdate.maxdate</div>
-        </div>
-      </md-input-container>
         <input type="submit" translate translate-attr-value="accounts.edit.buttons.submit" class="md-button md-raised" />
       </md-content>
     </form>
