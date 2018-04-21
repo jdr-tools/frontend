@@ -1,9 +1,7 @@
-const campaignsEditController = function campaignsEditControllerFunction ($localStorage, $mdToast, $rootScope, $state, CampaignsFactory, ErrorsService) {
+const campaignsEditController = function campaignsEditControllerFunction ($localStorage, $mdToast, $rootScope, $state, $timeout, CampaignsFactory, ErrorsService) {
   'ngInject'
 
   const vm = this
-  
-    console.log(vm.invitationForm)
 
   /** Method called when submitting the form to add a new player to the game. */
   vm.addPlayer = () => {
@@ -17,7 +15,15 @@ const campaignsEditController = function campaignsEditControllerFunction ($local
    */
   vm.get = (campaign_id) => {
     CampaignsFactory.get(campaign_id, (campaign) => {
-      vm.campaign = campaign
+      $timeout(() => {
+        if (campaign.creator.username == $localStorage.account.username) {
+          vm.initialized = true
+          vm.campaign = campaign
+        }
+        else {
+          vm.unauthorized = true
+        }
+      }, 250)
     })
   }
 
@@ -43,6 +49,10 @@ const campaignsEditController = function campaignsEditControllerFunction ($local
     vm.get($state.params.id)
     /** Gets the invitations (accepted or not) for this campaign. */
     vm.refreshInvitations()
+    /** Flag indicating that the user has not the right to edit this campaign. */
+    vm.unauthorized = false
+    /** This flag is used when the request is successfully done, and stops the spinner. */
+    vm.initialized = false
   }
 
   /**

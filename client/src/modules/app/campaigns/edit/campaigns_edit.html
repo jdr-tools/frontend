@@ -1,7 +1,13 @@
 <md-content layout="row">
   <div flex-gt-xs="25" hide-xs></div>
   <div flex-gt-xs="50" flex-xs="100">
-    <md-tabs md-dynamic-height>
+    <div layout="row" layout-sm="column" layout-align="space-around" class="md-padding" ng-if="!vm.initialized && !vm.unauthorized">
+      <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+    <div ng-if="vm.unauthorized">
+      Pas autorisé
+    </div>
+    <md-tabs md-dynamic-height ng-if="vm.initialized">
       <!-- First tab containg the informations about the campaign (title, description, etc.) -->
       <md-tab>
         <md-tab-label>{{'campaigns.update.tabs.informations.title' | translate}}</md-tab-label>

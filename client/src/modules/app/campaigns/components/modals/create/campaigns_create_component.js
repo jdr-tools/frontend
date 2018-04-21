@@ -7,7 +7,7 @@ const campaignsCreateComponent = function campaignsCreateComponentFunction ($loc
     /** The structure for the campaign to create. */
     $scope.campaign = {
       title: '',
-      isPrivate: true,
+      is_private: true,
       description: '',
       tags: [],
       creator_id: $localStorage.account.id

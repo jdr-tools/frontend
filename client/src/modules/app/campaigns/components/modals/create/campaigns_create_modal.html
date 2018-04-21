@@ -28,9 +28,9 @@
         >
         </md-chips>
         <!-- Switch to make the campaign private (TRUE) or public (FALSE) -->
-        <md-switch ng-model="campaign.isPrivate" name="is_private">
-          <span ng-if="campaign.isPrivate">{{'common.private.f' | translate}}</span>
-          <span ng-if="!campaign.isPrivate">{{'common.public.f' | translate}}</span>
+        <md-switch ng-model="campaign.is_private" name="is_private">
+          <span ng-if="campaign.is_private">{{'common.private.f' | translate}}</span>
+          <span ng-if="!campaign.is_private">{{'common.public.f' | translate}}</span>
         </md-switch>
         <md-input-container class="md-block no-margin-bottom">
           <label translate>campaigns.create.labels.description</label>
