@@ -13,9 +13,11 @@
     </md-card-content>
     <md-card-actions layout="row" layout-align="end center">
       <md-button ng-if="vm.isCreator(campaign)" class="md-icon-button" ui-sref="campaigns.edit({id: campaign.id})">
+        <md-tooltip md-direction="top">Editer</md-tooltip>
         <md-icon>mode_edit</md-icon>
       </md-button>
       <md-button ng-if="vm.isCreator(campaign)" class="md-icon-button" ng-click="vm.deleteCampaign(campaign)">
+        <md-tooltip md-direction="top">Supprimer</md-tooltip>
         <md-icon>delete</md-icon>
       </md-button>
     </md-card-actions>

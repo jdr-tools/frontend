@@ -60,11 +60,11 @@
               <md-input-container class="md-block">
                 <label for="username" translate>campaigns.invitations.labels.username</label>
                 <input type="text" name="username" ng-model="vm.account" required />
-                <div class="hint" ng-if="!vm.invitationForm.$submitted" translate>campaigns.invitations.hints.username</div>
-                <div ng-messages="vm.invitationForm.username.$error" ng-if="vm.invitationForm.$submitted">
+                <div class="hint" ng-if="vm.invitationForm.username.$valid || vm.invitationForm.username.$untouched" translate>campaigns.invitations.hints.username</div>
+                <div ng-messages="vm.invitationForm.username.$error" ng-if="vm.invitationForm.username.$touched">
                   <div ng-message="already_pending" translate>campaigns.invitations.errors.pending</div>
                   <div ng-message="already_accepted" translate>campaigns.invitations.errors.accepted</div>
-                  <div ng-message="not_found" translate>campaigns.invitations.errors.not_found</div>
+                  <div ng-message="unknown" translate>campaigns.invitations.errors.not_found</div>
                   <div ng-message="required" translate>campaigns.invitations.errors.blank</div>
                 </div>
               </md-input-container>
