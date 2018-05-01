@@ -1,4 +1,4 @@
-const CampaignsFactory = function CampaignsFactoryFunction (Api) {
+const CampaignsFactory = function CampaignsFactoryFunction (Api, $localStorage, $rootScope) {
   'ngInject'
 
   const service = this
@@ -7,6 +7,12 @@ const CampaignsFactory = function CampaignsFactoryFunction (Api) {
     Api.post('/invitations', {username: username, campaign_id: campaign_id}, {
       successCallback: success,
       errorsForm: form
+    })
+  }
+
+  service.requestAccess = (campaign, callback) => {
+    Api.post('/invitations', {username: $localStorage.account.username, campaign_id: campaign.id}, {
+      successCallback: callback
     })
   }
 
@@ -34,7 +40,7 @@ const CampaignsFactory = function CampaignsFactoryFunction (Api) {
   }
 
   service.own = (callback) => {
-    Api.get('/campaigns/own', {}, {successCallback: callback})
+    Api.get('/campaigns/creations', {}, {successCallback: callback})
   }
 
   service.update = (campaign_id, form, parameters, success) => {

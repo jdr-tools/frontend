@@ -6,6 +6,31 @@
     <span flex></span>
     <span>
       <md-menu>
+        <md-button ng-click="$mdMenu.open($event)" class="md-icon-button">
+          <md-icon ng-if="vm.invitations.length > 0" md-colors="{color: 'blue'}">person</md-icon>
+          <md-icon ng-if="vm.invitations.length == 0">person_outline</md-icon>
+        </md-button>
+        <md-menu-content>
+          <div md-colors="{color: 'grey-500'}" ng-if="vm.invitations.length == 0" class="md-padding md-caption">
+            Pas de notifications
+          </div>
+          <md-list flex ng-if="vm.invitations.length > 0">
+            <md-list-item class="md-2-line" ng-repeat="invitation in vm.invitations">
+              <div class="md-list-item-text">
+                <h3>{{invitation.campaign.creator.username}}</h3>
+                <p>{{invitation.campaign.title}}</p>
+              </div>
+              <md-button class="md-secondary md-icon-button" ng-click="vm.accept(invitation.id)">
+                <md-icon>check</md-icon>
+              </md-button>
+              <md-button class="md-secondary md-icon-button" ng-click="vm.refuse(invitation.id)">
+                <md-icon>close</md-icon>
+              </md-button>
+            </md-list-item>
+          </md-list>
+        </md-menu-content>
+      </md-menu>
+      <md-menu>
         <md-button ng-click="$mdMenu.open($event)">{{vm.username}}</md-button>
         <md-menu-content>
           <md-menu-item>

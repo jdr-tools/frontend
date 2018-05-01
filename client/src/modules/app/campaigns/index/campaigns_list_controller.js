@@ -8,9 +8,12 @@ const campaignsListController = function campaignsListControllerFunction ($mdDia
     own: []
   }
 
+  vm.acceptedInvitations = false
+
   vm.getAllCampaigns = () => {
     CampaignsFactory.list((campaigns) => { vm.campaigns.public = campaigns.items })
     CampaignsFactory.own((campaigns) => { vm.campaigns.own = campaigns.items })
+    InvitationsFactory.own((invitations) => { vm.acceptedInvitations = _.map(invitations.accepted.items, 'campaign') })
   }
 
   $rootScope.$on('campaign.created', vm.getAllCampaigns)

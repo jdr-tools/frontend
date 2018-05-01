@@ -10,6 +10,12 @@ const campaignsComponent = function campaignsComponentFunction ($localStorage, $
   vm.isCreator = (campaign) => {
     return campaign.creator.username == $localStorage.account.username
   }
+
+  vm.request = (campaign) => {
+    CampaignsFactory.requestAccess(campaign, (response) => {
+      console.log(response)
+    })
+  }
 }
 
 export default {

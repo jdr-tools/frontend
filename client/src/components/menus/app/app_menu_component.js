@@ -2,32 +2,53 @@
  * This component handles the top menu of the application and the related logic.
  * @author Vincent Courtois <courtois.vincent@outlook.com>
  */
-const appMenuController = class MainMenu {
-  constructor (Authentication, $localStorage, $rootScope) {
-    'ngInject'
-    this.auth = Authentication
-    this.authenticated = Authentication.checkSessionKeysPresence(false)
-    this.storage = $localStorage
-    this.setUsername()
+const appMenuController = function appMenuControllerFunction(Authentication, $localStorage, $rootScope, InvitationsFactory) {
+  'ngInject'
 
-    const me = this
-    $rootScope.$on('loginSuccessful', () => {
-      me.authenticated = true
-      me.setUsername()
-    })
+  const vm = this
+
+  vm.auth = Authentication
+  vm.authenticated = Authentication.checkSessionKeysPresence(false)
+  vm.storage = $localStorage
+  vm.invitations = []
+
+  $rootScope.$on('loginSuccessful', () => {
+    vm.authenticated = true
+    vm.setUsername()
+  })
+
+  vm.accept = (invitation_id) => {
+    InvitationsFactory.changeStatus(invitation_id, 'accepted', vm.getInvitations)
+  }
+
+  vm.getInvitations = () => {
+    if (vm.authenticated) {
+      InvitationsFactory.own((response) => {
+        vm.invitations = response.pending.items
+        console.log(response)
+      })
+    }
   }
 
   /** Logs the user out of the application and redirects him to the main page. */
-  logout () {
-    this.authenticated = false
-    this.auth.destroyUserSession()
+  vm.logout = () => {
+    vm.authenticated = false
+    vm.auth.destroyUserSession()
   }
 
-  setUsername () {
-    if (this.authenticated) {
-      this.username = this.storage.account.username
+  vm.refuse = (invitation_id) => {
+    InvitationsFactory.changeStatus(invitation_id, 'refused', vm.getInvitations)
+  }
+
+  vm.setUsername = () => {
+    if (vm.authenticated) {
+      vm.username = vm.storage.account.username
     }
   }
+
+  vm.setUsername()
+
+  vm.getInvitations()
 }
 
 const appMenuComponent = {

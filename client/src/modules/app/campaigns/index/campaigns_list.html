@@ -4,7 +4,7 @@
     <campaigns title="campaigns.index.title" item="vm.campaigns.own"></campaigns>
     <md-tab-label>Mes création</md-tab-label>
     <md-tab-body>
-      <h1 translate class="main-title md-display-2">campaigns.index.title</h1>
+      <h1 translate class="main-title md-display-2">Mes créations</h1>
       <campaigns items="vm.campaigns.own"></campaigns>
     </md-tab-body>
   </md-tab>
@@ -12,8 +12,16 @@
   <md-tab>
     <md-tab-label>Campagnes publiques</md-tab-label>
     <md-tab-body>
-      <h1 translate class="main-title md-display-2">campaigns.index.title</h1>
+      <h1 translate class="main-title md-display-2">Campagnes publiques</h1>
       <campaigns items="vm.campaigns.public"></campaigns>
+    </md-tab-body>
+  </md-tab>
+
+  <md-tab>
+    <md-tab-label>Mes parties</md-tab-label>
+    <md-tab-body>
+      <h1 translate class="main-title md-display-2">Mes parties</h1>
+      <campaigns items="vm.acceptedInvitations"></campaigns>
     </md-tab-body>
   </md-tab>
 </md-tabs>
