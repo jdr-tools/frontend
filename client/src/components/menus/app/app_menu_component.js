@@ -11,6 +11,7 @@ const appMenuController = function appMenuControllerFunction(Authentication, $lo
   vm.authenticated = Authentication.checkSessionKeysPresence(false)
   vm.storage = $localStorage
   vm.invitations = []
+  vm.hasInvitations = false
 
   $rootScope.$on('loginSuccessful', () => {
     vm.authenticated = true
@@ -18,14 +19,19 @@ const appMenuController = function appMenuControllerFunction(Authentication, $lo
   })
 
   vm.accept = (invitation_id) => {
-    InvitationsFactory.changeStatus(invitation_id, 'accepted', vm.getInvitations)
+    InvitationsFactory.changeStatus(invitation_id, 'accepted', () => {
+      vm.getInvitations()
+      $rootScope.$broadcast('invitation.accepted')
+    })
   }
 
   vm.getInvitations = () => {
     if (vm.authenticated) {
       InvitationsFactory.own((response) => {
-        vm.invitations = response.pending.items
-        console.log(response)
+        vm.invitations = response
+        const requests = _.filter(response.request.items, (inv) => inv.username != $localStorage.account.username)
+        vm.invitations.request = {count: requests.length, items: requests}
+        vm.hasInvitations = vm.invitations.pending.count > 0 || vm.invitations.request.count > 0
       })
     }
   }

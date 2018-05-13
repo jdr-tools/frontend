@@ -11,6 +11,10 @@ const invitationsFactory = function invitationsFactoryFunction (Api) {
     Api.put(`/invitations/${invitation_id}`, {status: status}, {successCallback: callback})
   }
 
+  vm.delete = (invitation_id, callback) => {
+    Api.delete(`/invitations/${invitation_id}`, {successCallback: callback})
+  }
+
   return vm
 }
 

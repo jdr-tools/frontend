@@ -1,22 +1,14 @@
-const invitationsComponent = function invitationsComponentFunction ($localStorage, $rootScope, Api) {
+const invitationsComponent = function invitationsComponentFunction ($localStorage, $rootScope, InvitationsFactory) {
   'ngInject'
 
   const vm = this
 
   vm.accept = (invitation) => {
-    Api.put(`/invitations/${invitation.id}`, {accepted: 'true'}, {
-      successCallback: () => $rootScope.$broadcast('invitations.reset')
-    })
+    InvitationsFactory.changeStatus(invitation.id, 'accepted', () => $rootScope.$broadcast('invitations.reset'))
   }
 
-  vm.refuse = (invitation) => {
-    Api.delete(`/invitations/${invitation.id}`, {
-      successCallback: () => $rootScope.$broadcast('invitations.reset')
-    })
-  }
-
-  vm.showAccept = (invitation) => {
-    return $localStorage.account.username == invitation.username
+  vm.delete = (invitation) => {
+    InvitationsFactory.delete(invitation.id, () => $rootScope.$broadcast('invitations.reset'))
   }
 }
 

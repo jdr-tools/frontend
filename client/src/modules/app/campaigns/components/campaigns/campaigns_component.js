@@ -8,12 +8,18 @@ const campaignsComponent = function campaignsComponentFunction ($localStorage, $
   }
 
   vm.isCreator = (campaign) => {
-    return campaign.creator.username == $localStorage.account.username
+    console.log($localStorage.account.username)
+    console.log(campaign.creator)
+    return $localStorage.account && campaign.creator == $localStorage.account.username
+  }
+
+  vm.display = (campaign) => {
+    return !campaign.invitation || _.includes(['refused', 'request', 'pending', 'left', 'expelled'], campaign.invitation.status)
   }
 
   vm.request = (campaign) => {
     CampaignsFactory.requestAccess(campaign, (response) => {
-      console.log(response)
+      campaign.invitation = Object.assign(response.item, {status: 'request'})
     })
   }
 }
