@@ -27,6 +27,8 @@ const campaignsListController = function campaignsListControllerFunction ($mdDia
   /** Gets all invitations you're subject to (waiting requests, requests made to you, pending and accepted invitations). */
   vm.getInvitations = () => InvitationsFactory.own((invitations) => { vm.invitations = invitations })
 
+  vm.leave = (invitation) => InvitationsFactory.changeStatus(invitation.id, 'left', vm.getAllCampaigns)
+
   vm.request = (campaign) => CampaignsFactory.requestAccess(campaign, (result) => {
     campaign.invitation = Object.assign(result.item, {status: 'request'})
   })

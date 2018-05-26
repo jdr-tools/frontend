@@ -3,12 +3,14 @@ const invitationsComponent = function invitationsComponentFunction ($localStorag
 
   const vm = this
 
+  vm.currentUsername = $localStorage.account.username
+
   vm.accept = (invitation) => {
     InvitationsFactory.changeStatus(invitation.id, 'accepted', () => $rootScope.$broadcast('invitations.reset'))
   }
 
-  vm.delete = (invitation) => {
-    InvitationsFactory.delete(invitation.id, () => $rootScope.$broadcast('invitations.reset'))
+  vm.expel = (invitation) => {
+    InvitationsFactory.changeStatus(invitation.id, 'expelled', () => $rootScope.$broadcast('invitations.reset'))
   }
 }
 
@@ -18,6 +20,6 @@ export default {
   templateUrl: 'client/src/modules/app/campaigns/components/invitations/invitations.html',
   bindings: {
     collection: '=',
-    icons: '='
+    status: '@'
   }
 }
