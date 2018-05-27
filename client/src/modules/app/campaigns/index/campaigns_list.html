@@ -1,8 +1,11 @@
 <campaigns-create></campaigns-create>
+
+<countdown start-value="vm.countdownDuration" class="countdown-container"></countdown>
+
 <md-tabs md-dynamic-height>
   <!-- First tab gathering all the campaigns the player has joined (status == accepted) -->
   <md-tab>
-    <md-tab-label>Mes parties</md-tab-label>
+    <md-tab-label>{{'campaigns.index.titles.my_games' | translate}}</md-tab-label>
     <md-tab-body>
       <div class="md-padding" layout="row" layout-xs="column">
         <md-card flex-gt-sm="25" flex-xs="auto" ng-repeat="invitation in vm.invitations.accepted.items">
@@ -19,11 +22,11 @@
           </md-card-content>
           <md-card-actions layout="row" layout-align="end center">
             <md-button ng-click="" ng-disabled="true" class="md-icon-button">
-              <md-tooltip md-direction="top">Jouer</md-tooltip>
+              <md-tooltip md-direction="top">{{'campaigns.index.tooltips.play' | translate}}</md-tooltip>
               <md-icon>play_arrow</md-icon>
             </md-button>
             <md-button ng-click="vm.leave(invitation)" class="md-icon-button">
-              <md-tooltip md-direction="top">Quitter</md-tooltip>
+              <md-tooltip md-direction="top">{{'campaigns.index.tooltips.leave' | translate}}</md-tooltip>
               <md-icon>no_meeting_room</md-icon>
             </md-button>
           </md-card-actions>
@@ -34,7 +37,7 @@
 
   <!-- Second tab, gathering all the campaigns created by the current user -->
   <md-tab>
-    <md-tab-label>Mes créations</md-tab-label>
+    <md-tab-label>{{'campaigns.index.titles.my_creations' | translate}}</md-tab-label>
     <md-tab-body>
       <div class="md-padding" layout="row" layout-xs="column">
         <md-card flex-gt-sm="25" flex-xs="auto" ng-repeat="campaign in vm.createdCampaigns.items">
@@ -51,15 +54,15 @@
           </md-card-content>
           <md-card-actions layout="row" layout-align="end center">
             <md-button ng-click="" ng-disabled="true" class="md-icon-button">
-              <md-tooltip md-direction="top">Jouer</md-tooltip>
+              <md-tooltip md-direction="top">{{'campaigns.index.tooltips.play' | translate}}</md-tooltip>
               <md-icon>play_arrow</md-icon>
             </md-button>
             <md-button ui-sref="campaigns.edit({id: campaign.id})" class="md-icon-button">
-              <md-tooltip md-direction="top">Editer</md-tooltip>
+              <md-tooltip md-direction="top">{{'campaigns.index.tooltips.edit' | translate}}</md-tooltip>
               <md-icon>edit</md-icon>
             </md-button>
             <md-button ng-click="vm.delete(campaign)" class="md-icon-button">
-              <md-tooltip md-direction="top">Supprimer</md-tooltip>
+              <md-tooltip md-direction="top">{{'campaigns.index.tooltips.delete' | translate}}</md-tooltip>
               <md-icon>delete_forever</md-icon>
             </md-button>
           </md-card-actions>
@@ -70,10 +73,10 @@
 
   <!-- Third tab, gathering the public campaigns you can join -->
   <md-tab>
-    <md-tab-label>Campagnes publiques</md-tab-label>
+    <md-tab-label>{{'campaigns.index.titles.public' | translate}}</md-tab-label>
     <md-tab-body>
       <div class="md-padding" layout="row" layout-xs="column">
-        <md-card flex-gt-sm="25" flex-xs="auto" ng-repeat="campaign in vm.publicCampaigns.items">
+        <md-card flex-gt-sm="25" flex-xs="auto" ng-repeat="campaign in vm.publicCampaigns.items" ng-if="campaign.invitation.status != 'accepted'">
           <md-card-title flex="nogrow">
             <md-card-title-text>
               <span class="md-headline">{{campaign.title}}</span>
@@ -87,11 +90,11 @@
           </md-card-content>
           <md-card-actions layout="row" layout-align="end center">
             <md-button ng-click="vm.delete(campaign.invitation)" ng-if="campaign.invitation && campaign.invitation.status == 'request'" class="md-icon-button">
-              <md-tooltip md-direction="top" ng-if="campaign.invitation">annuler l'invitation</md-tooltip>
+              <md-tooltip md-direction="top" ng-if="campaign.invitation">{{'campaigns.index.tooltips.cancel' | translate}}</md-tooltip>
               <md-icon>cancel</md-icon>
             </md-button>
             <md-button ng-click="vm.request(campaign)" ng-if="!campaign.invitation" class="md-icon-button">
-              <md-tooltip md-direction="top" ng-if="!campaign.invitation">Rejoindre</md-tooltip>
+              <md-tooltip md-direction="top" ng-if="!campaign.invitation">{{'campaigns.index.tooltips.join' | translate}}</md-tooltip>
               <md-icon>group_add</md-icon>
             </md-button>
           </md-card-actions>

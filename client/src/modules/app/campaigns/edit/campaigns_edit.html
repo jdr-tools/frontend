@@ -4,9 +4,7 @@
     <div layout="row" layout-sm="column" layout-align="space-around" class="md-padding" ng-if="!vm.initialized && !vm.unauthorized">
       <md-progress-circular md-mode="indeterminate"></md-progress-circular>
     </div>
-    <div ng-if="vm.unauthorized">
-      Pas autorisé
-    </div>
+    <div ng-if="vm.unauthorized">{{'campaigns.update.unauthorized' | translate}}</div>
     <md-tabs md-dynamic-height ng-if="vm.initialized">
       <!-- First tab containg the informations about the campaign (title, description, etc.) -->
       <md-tab>

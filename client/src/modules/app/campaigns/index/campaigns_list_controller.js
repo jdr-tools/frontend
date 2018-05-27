@@ -1,4 +1,4 @@
-const campaignsListController = function campaignsListControllerFunction ($mdDialog, $rootScope, CampaignsFactory, InvitationsFactory) {
+const campaignsListController = function campaignsListControllerFunction ($interval, $mdDialog, $rootScope, CampaignsFactory, InvitationsFactory) {
   'ngInject'
 
   const vm = this
@@ -13,6 +13,7 @@ const campaignsListController = function campaignsListControllerFunction ($mdDia
     vm.publicCampaigns = vm.emptyList()
     vm.createdCampaigns = vm.emptyList()
     vm.invitations = {accepted: vm.emptyList(), pending: vm.emptyList(), request: vm.emptyList()}
+    vm.initializeCountdown()
     vm.getAllCampaigns()
   }
 
@@ -27,6 +28,11 @@ const campaignsListController = function campaignsListControllerFunction ($mdDia
   /** Gets all invitations you're subject to (waiting requests, requests made to you, pending and accepted invitations). */
   vm.getInvitations = () => InvitationsFactory.own((invitations) => { vm.invitations = invitations })
 
+  vm.initializeCountdown = () => {
+    vm.countdownDuration = 5
+    $interval(vm.getAllCampaigns, vm.countdownDuration * 1000)
+  }
+
   vm.leave = (invitation) => InvitationsFactory.changeStatus(invitation.id, 'left', vm.getAllCampaigns)
 
   vm.request = (campaign) => CampaignsFactory.requestAccess(campaign, (result) => {
@@ -34,7 +40,6 @@ const campaignsListController = function campaignsListControllerFunction ($mdDia
   })
 
   vm.delete = (invitation) => {
-    console.log(invitation)
     InvitationsFactory.delete(invitation.id, () => vm.getPublicCampaigns())
   }
 
