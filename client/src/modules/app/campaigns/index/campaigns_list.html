@@ -10,10 +10,12 @@
       <div class="md-padding" layout="row" layout-xs="column">
         <md-card flex-gt-sm="25" flex-xs="auto" ng-repeat="invitation in vm.invitations.accepted.items">
           <md-card-title flex="nogrow">
-            <md-card-title-text>
-              <span class="md-headline">{{invitation.campaign.title}}</span>
-              <span class="md-subhead" ng-if="invitation.campaign.is_private" translate>common.private.f</span>
-              <span class="md-subhead" ng-if="!invitation.campaign.is_private" translate>common.public.f</span>
+            <md-card-title-text class="wrapped">
+              <span class="md-headline ellipsis">
+                <md-icon ng-if="invitation.campaign.is_private" md-colors="{color: 'red-700'}">lock</md-icon>
+                <md-icon ng-if="!invitation.campaign.is_private" md-colors="{color: 'green-700'}">lock_open</md-icon>
+                {{invitation.campaign.title}}
+              </span>
             </md-card-title-text>
           </md-card-title>
           <md-card-content flex="noshrink">
@@ -42,10 +44,12 @@
       <div class="md-padding" layout="row" layout-xs="column">
         <md-card flex-gt-sm="25" flex-xs="auto" ng-repeat="campaign in vm.createdCampaigns.items">
           <md-card-title flex="nogrow">
-            <md-card-title-text>
-              <span class="md-headline">{{campaign.title}}</span>
-              <span class="md-subhead" ng-if="campaign.is_private" translate>common.private.f</span>
-              <span class="md-subhead" ng-if="!campaign.is_private" translate>common.public.f</span>
+            <md-card-title-text class="wrapped">
+              <span class="md-headline ellipsis">
+                <md-icon ng-if="invitation.campaign.is_private" md-colors="{color: 'red-700'}">lock</md-icon>
+                <md-icon ng-if="!invitation.campaign.is_private" md-colors="{color: 'green-700'}">lock_open</md-icon>
+                {{campaign.title}}
+              </span>
             </md-card-title-text>
           </md-card-title>
           <md-card-content flex="noshrink">
@@ -78,10 +82,12 @@
       <div class="md-padding" layout="row" layout-xs="column">
         <md-card flex-gt-sm="25" flex-xs="auto" ng-repeat="campaign in vm.publicCampaigns.items" ng-if="campaign.invitation.status != 'accepted'">
           <md-card-title flex="nogrow">
-            <md-card-title-text>
-              <span class="md-headline">{{campaign.title}}</span>
-              <span class="md-subhead" ng-if="campaign.is_private" translate>common.private.f</span>
-              <span class="md-subhead" ng-if="!campaign.is_private" translate>common.public.f</span>
+            <md-card-title-text class="wrapped">
+              <span class="md-headline ellipsis">
+                <md-icon ng-if="invitation.campaign.is_private" md-colors="{color: 'red-700'}">lock</md-icon>
+                <md-icon ng-if="!invitation.campaign.is_private" md-colors="{color: 'green-700'}">lock_open</md-icon>
+                {{campaign.title}}
+              </span>
             </md-card-title-text>
           </md-card-title>
           <md-card-content flex="noshrink">
