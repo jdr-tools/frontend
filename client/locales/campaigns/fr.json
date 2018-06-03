@@ -5,7 +5,10 @@
         "description": "Description",
         "title": "Titre"
       },
-      "title": "Créer une nouvelle campagne"
+      "title": "Créer une nouvelle campagne",
+      "tooltips": {
+        "button": "Créer une campagne"
+      }
     },
     "errors": {
       "title": {
