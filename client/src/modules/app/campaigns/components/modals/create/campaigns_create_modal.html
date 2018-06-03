@@ -28,10 +28,9 @@
         >
         </md-chips>
         <!-- Switch to make the campaign private (TRUE) or public (FALSE) -->
-        <md-switch ng-model="campaign.is_private" name="is_private">
-          <span ng-if="campaign.is_private">{{'common.private.f' | translate}}</span>
-          <span ng-if="!campaign.is_private">{{'common.public.f' | translate}}</span>
-        </md-switch>
+        <md-checkbox class="campaign-checkbox" ng-true-value="false" ng-false-value="true" ng-model="campaign.is_private" name="is_private">
+          {{'campaigns.create.labels.make_public' | translate}}
+        </md-checkbox>
         <md-input-container class="md-block no-margin-bottom">
           <label translate>campaigns.create.labels.description</label>
           <textarea class="campaign-description" name="description" ng-model="campaign.description"></textarea>

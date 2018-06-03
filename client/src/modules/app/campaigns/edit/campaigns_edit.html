@@ -26,10 +26,9 @@
                 <label for="campaignDescription">{{'campaigns.update.tabs.informations.labels.description' | translate}}</label>
                 <textarea class="campaign-description" ng-model="vm.campaign.description"></textarea>
               </md-input-container>
-              <md-switch ng-model="vm.campaign.is_private">
-                <span ng-if="vm.campaign.is_private">{{'common.private.f' | translate}}</span>
-                <span ng-if="!vm.campaign.is_private">{{'common.public.f' | translate}}</span>
-              </md-switch>
+              <md-checkbox class="campaign-checkbox" ng-true-value="false" ng-false-value="true" ng-model="vm.campaign.is_private" name="is_private">
+                {{'campaigns.create.labels.make_public' | translate}}
+              </md-checkbox>
             </md-content>
             <h1 translate class="main-title md-display-1">{{'campaigns.update.tabs.informations.subtitles.tags' | translate}}</h1>
             <md-content class="md-padding">

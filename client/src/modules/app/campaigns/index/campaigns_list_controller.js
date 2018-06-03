@@ -39,7 +39,7 @@ const campaignsListController = function campaignsListControllerFunction ($inter
     campaign.invitation = Object.assign(result.item, {status: 'request'})
   })
 
-  vm.delete = (invitation) => {
+  vm.deleteInvitation = (invitation) => {
     InvitationsFactory.delete(invitation.id, () => vm.getPublicCampaigns())
   }
 

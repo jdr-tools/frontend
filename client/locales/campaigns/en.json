@@ -3,6 +3,7 @@
     "create": {
       "labels": {
         "description": "Description",
+        "make_public": "Make this campaign public",
         "title": "Title"
       },
       "title": "Create a new campaign",

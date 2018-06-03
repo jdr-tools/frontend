@@ -3,6 +3,7 @@
     "create": {
       "labels": {
         "description": "Description",
+        "make_public": "Rendre cette campagne publique",
         "title": "Titre"
       },
       "title": "Créer une nouvelle campagne",

@@ -46,8 +46,8 @@
           <md-card-title flex="nogrow">
             <md-card-title-text class="wrapped">
               <span class="md-headline ellipsis">
-                <md-icon ng-if="invitation.campaign.is_private" md-colors="{color: 'red-700'}">lock</md-icon>
-                <md-icon ng-if="!invitation.campaign.is_private" md-colors="{color: 'green-700'}">lock_open</md-icon>
+                <md-icon ng-if="campaign.is_private" md-colors="{color: 'red-700'}">lock</md-icon>
+                <md-icon ng-if="!campaign.is_private" md-colors="{color: 'green-700'}">lock_open</md-icon>
                 {{campaign.title}}
               </span>
             </md-card-title-text>
@@ -84,8 +84,8 @@
           <md-card-title flex="nogrow">
             <md-card-title-text class="wrapped">
               <span class="md-headline ellipsis">
-                <md-icon ng-if="invitation.campaign.is_private" md-colors="{color: 'red-700'}">lock</md-icon>
-                <md-icon ng-if="!invitation.campaign.is_private" md-colors="{color: 'green-700'}">lock_open</md-icon>
+                <md-icon ng-if="campaign.is_private" md-colors="{color: 'red-700'}">lock</md-icon>
+                <md-icon ng-if="!campaign.is_private" md-colors="{color: 'green-700'}">lock_open</md-icon>
                 {{campaign.title}}
               </span>
             </md-card-title-text>
@@ -95,7 +95,7 @@
             <md-chips class="campaign-tags" ng-if="campaign.tags.length > 0" ng-model="campaign.tags" readonly="true"></md-chips>
           </md-card-content>
           <md-card-actions layout="row" layout-align="end center">
-            <md-button ng-click="vm.delete(campaign.invitation)" ng-if="campaign.invitation && campaign.invitation.status == 'request'" class="md-icon-button">
+            <md-button ng-click="vm.deleteInvitation(campaign.invitation)" ng-if="campaign.invitation && campaign.invitation.status == 'request'" class="md-icon-button">
               <md-tooltip md-direction="top" ng-if="campaign.invitation">{{'campaigns.index.tooltips.cancel' | translate}}</md-tooltip>
               <md-icon>cancel</md-icon>
             </md-button>
