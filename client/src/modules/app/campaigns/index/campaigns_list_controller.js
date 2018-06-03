@@ -29,7 +29,7 @@ const campaignsListController = function campaignsListControllerFunction ($inter
   vm.getInvitations = () => InvitationsFactory.own((invitations) => { vm.invitations = invitations })
 
   vm.initializeCountdown = () => {
-    vm.countdownDuration = 500
+    vm.countdownDuration = 5
     $interval(vm.getAllCampaigns, vm.countdownDuration * 1000)
   }
 
