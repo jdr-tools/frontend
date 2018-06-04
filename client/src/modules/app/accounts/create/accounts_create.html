@@ -8,9 +8,9 @@
         <md-input-container class="md-block">
           <label for="usernameInput" translate>accounts.create.labels.username</label>
           <input step="any" type="text" id="usernameInput" name="username" class="md-input" ng-model="vm.account.username" required autocomplete="off" minlength="6" />
-          <div ng-messages="vm.accountCreationForm.username.$error" multiple">
+          <div ng-messages="vm.accountCreationForm.username.$error">
             <div ng-message="required" translate>accounts.create.errors.username.blank</div>
-            <div ng-message="minlength" translate>accounts.create.errors.username.short</div>
+            <div ng-message="minlength" translate>accounts.create.errors.username.minlength</div>
             <div ng-message="uniq" translate>accounts.create.errors.username.uniq</div>
           </div>
         </md-input-container>
@@ -19,7 +19,6 @@
           <input type="password" id="passwordInput" name="password" class="md-input" ng-model="vm.account.password" required autocomplete="off" />
           <div ng-messages="vm.accountCreationForm.password.$error">
             <div ng-message="required" translate>accounts.create.errors.password.blank</div>
-            <div ng-message="confirmation" translate>accounts.create.errors.password.confirmation</div>
           </div>
         </md-input-container>
         <md-input-container class="md-block">
@@ -27,14 +26,15 @@
           <input type="password" id="passwordConfirmInput" name="password_confirmation" class="md-input" ng-model="vm.account.password_confirmation" required autocomplete="off" ng-keyup="vm.onConfirmationChange()" />
           <div ng-messages="vm.accountCreationForm.password_confirmation.$error">
             <div ng-message="required" translate>accounts.create.errors.password_confirmation.blank</div>
+            <div ng-message="confirmation" translate>accounts.create.errors.password_confirmation.confirmation</div>
           </div>
         </md-input-container>
         <md-input-container class="md-block">
           <label for="emailInput" translate>accounts.create.labels.email</label>
           <input type="text" id="emailInput" name="email" class="form-control" ng-model="vm.account.email" required autocomplete="off" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/" />
-          <div ng-messages="vm.accountCreationForm.email.$error" multiple">
+          <div ng-messages="vm.accountCreationForm.email.$error">
             <div ng-message="required" translate>accounts.create.errors.email.blank</div>
-            <div ng-message="pattern" translate>accounts.create.errors.email.format</div>
+            <div ng-message="pattern" translate>accounts.create.errors.email.pattern</div>
             <div ng-message="uniq" translate>accounts.create.errors.email.uniq</div>
           </div>
         </md-input-container>

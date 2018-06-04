@@ -2,38 +2,65 @@
  * This component handles the top menu of the application and the related logic.
  * @author Vincent Courtois <courtois.vincent@outlook.com>
  */
-const appMenuController = class MainMenu {
-  constructor (Authentication, $localStorage, $rootScope) {
-    'ngInject'
-    this.auth = Authentication
-    this.authenticated = Authentication.checkSessionKeysPresence(false)
-    this.storage = $localStorage
-    this.setUsername()
+const appMenuController = function appMenuControllerFunction(Authentication, $interval, $localStorage, $rootScope, InvitationsFactory) {
+  'ngInject'
 
-    const me = this
-    $rootScope.$on('loginSuccessful', () => {
-      me.authenticated = true
-      me.setUsername()
+  const vm = this
+
+  vm.auth = Authentication
+  vm.authenticated = Authentication.checkSessionKeysPresence(false)
+  vm.storage = $localStorage
+  vm.invitations = []
+  vm.hasInvitations = false
+
+  $rootScope.$on('loginSuccessful', () => {
+    vm.authenticated = true
+    vm.setUsername()
+  })
+
+  vm.accept = (invitation_id) => {
+    InvitationsFactory.changeStatus(invitation_id, 'accepted', () => {
+      vm.getInvitations()
+      $rootScope.$broadcast('invitation.accepted')
     })
   }
 
-  /** Logs the user out of the application and redirects him to the main page. */
-  logout () {
-    this.authenticated = false
-    this.auth.destroyUserSession()
-  }
-
-  setUsername () {
-    if (this.authenticated) {
-      this.username = this.storage.account.username
+  vm.getInvitations = () => {
+    if (vm.authenticated) {
+      InvitationsFactory.own((response) => {
+        vm.invitations = response
+        const requests = _.filter(response.request.items, (inv) => inv.username != $localStorage.account.username)
+        vm.invitations.request = {count: requests.length, items: requests}
+        vm.hasInvitations = vm.invitations.pending.count > 0 || vm.invitations.request.count > 0
+      })
     }
   }
+
+  /** Logs the user out of the application and redirects him to the main page. */
+  vm.logout = () => {
+    vm.authenticated = false
+    vm.auth.destroyUserSession()
+  }
+
+  vm.refuse = (invitation_id) => {
+    InvitationsFactory.changeStatus(invitation_id, 'refused', vm.getInvitations)
+  }
+
+  vm.setUsername = () => {
+    if (vm.authenticated) {
+      vm.username = vm.storage.account.username
+    }
+  }
+
+  vm.setUsername()
+
+  $interval(vm.getInvitations, 2000)
 }
 
 const appMenuComponent = {
   controller: appMenuController,
   controllerAs: 'vm',
-  templateUrl: '/src/components/menus/app/app_menu.html'
+  templateUrl: 'client/src/components/menus/app/app_menu.html'
 }
 
 export default appMenuComponent

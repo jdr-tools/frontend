@@ -3,9 +3,6 @@ const profileController = function profileControllerFunction ($mdToast, Api, Err
 
   const vm = this
 
-  /** The current date is used as a max date for the birth date datepicker. */
-  vm.currentDate = new Date()
-
   vm.cleanAccount = () => {
     const account = angular.copy(vm.account)
     if (account.password == '') delete account.password

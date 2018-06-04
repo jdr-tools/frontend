@@ -6,11 +6,11 @@
       },
       "errors": {
         "password": {
-          "blank": "Please fill the username field to log in",
-          "credentials": "You seem to have entered wrong credentials"
+          "blank": "Please fill the username field to log in"
         },
         "username": {
-          "blank": "Please fill the password field to log in"
+          "blank": "Please fill the password field to log in",
+          "credentials": "You seem to have entered wrong credentials"
         }
       },
       "labels": {

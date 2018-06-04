@@ -5,7 +5,7 @@ const profileRoute = function ($stateProvider) {
   $stateProvider.state('profile', {
     parent: 'app',
     url: '/profile',
-    templateUrl: 'src/modules/app/profile/profile.html',
+    templateUrl: 'client/src/modules/app/profile/profile.html',
     controller: 'profileController as vm',
     resolve: {
       /** Redirects the user to the login page if he's not yet connected. */

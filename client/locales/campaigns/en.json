@@ -3,9 +3,13 @@
     "create": {
       "labels": {
         "description": "Description",
+        "make_public": "Make this campaign public",
         "title": "Title"
       },
-      "title": "Create a new campaign"
+      "title": "Create a new campaign",
+      "tooltips": {
+        "button": "Créer une campagne"
+      }
     },
     "errors": {
       "title": {
@@ -15,7 +19,42 @@
       }
     },
     "index": {
-      "title": "Your campaigns"
+      "titles": {
+        "my_creations": "My creations",
+        "my_games": "My games",
+        "public": "Public games"
+      },
+      "tooltips": {
+        "cancel": "Cancel invitation",
+        "delete": "Delete",
+        "edit": "Edit",
+        "join": "Join",
+        "leave": "Leave",
+        "play": "Play"
+      }
+    },
+    "invitations": {
+      "errors": {
+        "accepted": "This player is already playing in this campaign",
+        "blank": "You must enter a username",
+        "not_found": "This username does not exist",
+        "pending": "This player is already invited to this campaign"
+      },
+      "hints": {
+        "username": "Enter a username and press enter"
+      },
+      "labels": {
+        "created_by": "Created by",
+        "username": "Player name"
+      },
+      "placeholders": {
+        "accepted": "No players yet",
+        "pending": "No pending invitations"
+      },
+      "titles": {
+        "accepted": "Players",
+        "pending": "Invitations"
+      }
     },
     "update": {
       "tabs": {
@@ -33,7 +72,8 @@
         "players": {
           "title": "Players"
         }
-      }
+      },
+      "unauthorized": "You're not allowed to edit this campaign"
     }
   }
 }

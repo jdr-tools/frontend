@@ -3,9 +3,13 @@
     "create": {
       "labels": {
         "description": "Description",
+        "make_public": "Rendre cette campagne publique",
         "title": "Titre"
       },
-      "title": "Créer une nouvelle campagne"
+      "title": "Créer une nouvelle campagne",
+      "tooltips": {
+        "button": "Créer une campagne"
+      }
     },
     "errors": {
       "title": {
@@ -15,7 +19,42 @@
       }
     },
     "index": {
-      "title": "Vos campagnes"
+      "titles": {
+        "my_creations": "Mes créations",
+        "my_games": "Mes parties",
+        "public": "Parties publiques"
+      },
+      "tooltips": {
+        "cancel": "Annuler l'invitation",
+        "delete": "Supprimer",
+        "edit": "Editer",
+        "join": "Rejoindre",
+        "leave": "Quitter",
+        "play": "Jouer"
+      }
+    },
+    "invitations": {
+      "errors": {
+        "accepted": "Ce joueur a déjà accepté une invitation dans cette campagne",
+        "blank": "Vous devez entrer un nom d'utilisateur",
+        "not_found": "Ce nom d'utilisateur n'existe pas",
+        "pending": "Ce joueur a déjà une invitation en attente dans cette campagne"
+      },
+      "hints": {
+        "username": "Entrez un nom d'utilisateur et appuyez sur Entrée"
+      },
+      "labels": {
+        "created_by": "Créée par",
+        "username": "Nom du joueur"
+      },
+      "placeholders": {
+        "accepted": "Aucun joueur",
+        "pending": "Aucune invitation"
+      },
+      "titles": {
+        "accepted": "Joueurs",
+        "pending": "Invitations"
+      }
     },
     "update": {
       "tabs": {
@@ -33,7 +72,8 @@
         "players": {
           "title": "Joueurs"
         }
-      }
+      },
+      "unauthorized": "Vous n'êtes pas autorisé à éditer cette campagne"
     }
   }
 }

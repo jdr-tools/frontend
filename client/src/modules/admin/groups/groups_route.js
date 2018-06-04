@@ -15,7 +15,7 @@ const groupsRoute = function ($stateProvider) {
   /** Concrete state for displaying a list of groups. */
   $stateProvider.state('groups.index', {
     url: '/groups',
-    templateUrl: 'src/modules/admin/groups/index/groups_list.html',
+    templateUrl: 'client/src/modules/admin/groups/index/groups_list.html',
     controller: 'groupsListController as vm'
   })
 }

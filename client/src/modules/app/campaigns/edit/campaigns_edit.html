@@ -1,7 +1,12 @@
 <md-content layout="row">
   <div flex-gt-xs="25" hide-xs></div>
   <div flex-gt-xs="50" flex-xs="100">
-    <md-tabs md-dynamic-height>
+    <div layout="row" layout-sm="column" layout-align="space-around" class="md-padding" ng-if="!vm.initialized && !vm.unauthorized">
+      <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+    <div ng-if="vm.unauthorized">{{'campaigns.update.unauthorized' | translate}}</div>
+    <md-tabs md-dynamic-height ng-if="vm.initialized">
+      <!-- First tab containg the informations about the campaign (title, description, etc.) -->
       <md-tab>
         <md-tab-label>{{'campaigns.update.tabs.informations.title' | translate}}</md-tab-label>
         <md-tab-body>
@@ -21,10 +26,9 @@
                 <label for="campaignDescription">{{'campaigns.update.tabs.informations.labels.description' | translate}}</label>
                 <textarea class="campaign-description" ng-model="vm.campaign.description"></textarea>
               </md-input-container>
-              <md-switch ng-model="vm.campaign.is_private">
-                <span ng-if="vm.campaign.is_private">{{'common.private.f' | translate}}</span>
-                <span ng-if="!vm.campaign.is_private">{{'common.public.f' | translate}}</span>
-              </md-switch>
+              <md-checkbox class="campaign-checkbox" ng-true-value="false" ng-false-value="true" ng-model="vm.campaign.is_private" name="is_private">
+                {{'campaigns.create.labels.make_public' | translate}}
+              </md-checkbox>
             </md-content>
             <h1 translate class="main-title md-display-1">{{'campaigns.update.tabs.informations.subtitles.tags' | translate}}</h1>
             <md-content class="md-padding">
@@ -44,11 +48,36 @@
           </form>
         </md-tab-body>
       </md-tab>
+      <!-- Second tab containing the players, and the field to invite new players. -->
       <md-tab>
         <md-tab-label>{{'campaigns.update.tabs.players.title' | translate}}</md-tab-label>
         <md-tab-body>
-          <md-content class="md-padding">
-            COMING SOON
+          <md-content layout="row" class="wrap">
+            <form flex class="without-margin" ng-submit="vm.addPlayer()" name="vm.invitationForm" ng-if="vm.currentUsername == vm.campaign.creator.username">
+              <md-input-container class="md-block">
+                <label for="username" translate>campaigns.invitations.labels.username</label>
+                <input type="text" name="username" ng-model="vm.account" required />
+                <div class="hint" ng-if="vm.invitationForm.username.$valid || vm.invitationForm.username.$untouched" translate>campaigns.invitations.hints.username</div>
+                <div ng-messages="vm.invitationForm.username.$error" ng-if="vm.invitationForm.username.$touched">
+                  <div ng-message="already_pending" translate>campaigns.invitations.errors.pending</div>
+                  <div ng-message="already_accepted" translate>campaigns.invitations.errors.accepted</div>
+                  <div ng-message="unknown" translate>campaigns.invitations.errors.not_found</div>
+                  <div ng-message="required" translate>campaigns.invitations.errors.blank</div>
+                </div>
+              </md-input-container>
+            </form>
+          </md-content>
+          <md-content layout="row">
+            <div flex="50">
+              <h2 class="md-headline" translate>campaigns.invitations.titles.pending</h2>
+              <div ng-if="vm.invitations.pending.count == 0" translate>campaigns.invitations.placeholders.pending</div>
+              <invitations collection="vm.invitations.pending" icons="true"></invitations>
+            </div>
+            <div flex="50" class="md-padding">
+              <h2 class="md-headline" translate>campaigns.invitations.titles.accepted</h2>
+              <div ng-if="vm.invitations.accepted.count == 0" translate>campaigns.invitations.placeholders.accepted</div>
+              <invitations collection="vm.invitations.accepted" status="accepted"></invitations>
+            </div>
           </md-content>
         </md-tab-body>
       </md-tab>

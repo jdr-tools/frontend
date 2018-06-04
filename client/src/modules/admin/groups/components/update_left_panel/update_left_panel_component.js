@@ -60,7 +60,7 @@ const updateLeftPanel = function updateLeftPanelFunction ($mdSidenav, $rootScope
 }
 
 export default {
-  templateUrl: 'src/modules/admin/groups/components/update_left_panel/update_left_panel.html',
+  templateUrl: 'client/src/modules/admin/groups/components/update_left_panel/update_left_panel.html',
   controller: updateLeftPanel,
   controllerAs: 'vm',
   bindings: {

@@ -13,7 +13,7 @@ const adminMenuController = class MainMenu {
 const adminMenuComponent = {
   controller: adminMenuController,
   controllerAs: 'vm',
-  templateUrl: '/src/components/menus/admin/admin_menu.html'
+  templateUrl: 'client/src/components/menus/admin/admin_menu.html'
 }
 
 export default adminMenuComponent

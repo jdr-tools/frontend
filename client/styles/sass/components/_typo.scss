@@ -1,0 +1,10 @@
+.ellipsis {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wrapped {
+  max-width: 100%;
+}
