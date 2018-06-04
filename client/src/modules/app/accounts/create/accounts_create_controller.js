@@ -33,6 +33,11 @@ const accountsCreateController = function accountsCreateControllerFunction ($tra
     vm.errors = false
   }
 
+  vm.onConfirmationChange = () => {
+    vm.accountCreationForm['password'].$setTouched()
+    vm.accountCreationForm['password'].$setValidity('confirmation', vm.account['password'] === vm.account['password_confirmation'])
+  }
+
   /**
    * When the registration fails, this method displays a list of error concerning the process.
    * @return {Array<String>} a list of error string keys returned by the api. These keys should be translated.

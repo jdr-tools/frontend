@@ -24,7 +24,7 @@
         </md-input-container>
         <md-input-container class="md-block">
           <label for="passwordConfirmInput" translate>accounts.create.labels.password_confirmation</label>
-          <input type="password" id="passwordConfirmInput" name="password_confirmation" class="md-input" ng-model="vm.account.password_confirmation" required autocomplete="off" />
+          <input type="password" id="passwordConfirmInput" name="password_confirmation" class="md-input" ng-model="vm.account.password_confirmation" required autocomplete="off" ng-keyup="vm.onConfirmationChange()" />
           <div ng-messages="vm.accountCreationForm.password_confirmation.$error">
             <div ng-message="required" translate>accounts.create.errors.password_confirmation.blank</div>
           </div>

@@ -950,6 +950,11 @@ var accountsCreateController = function accountsCreateControllerFunction($transl
     vm.errors = false;
   };
 
+  vm.onConfirmationChange = function () {
+    vm.accountCreationForm['password'].$setTouched();
+    vm.accountCreationForm['password'].$setValidity('confirmation', vm.account['password'] === vm.account['password_confirmation']);
+  };
+
   vm.displayErrors = function (response) {
     return ErrorsService.append(vm.accountCreationForm, response);
   };
