@@ -34,7 +34,6 @@ const accountsCreateController = function accountsCreateControllerFunction ($mdT
     $mdToast.show(toast)
     $state.go('sessionsCreate')
   }
-<<<<<<< HEAD
 
   vm.onConfirmationChange = () => {
     vm.accountCreationForm['password'].$setTouched()
@@ -46,8 +45,6 @@ const accountsCreateController = function accountsCreateControllerFunction ($mdT
    * @return {Array<String>} a list of error string keys returned by the api. These keys should be translated.
    */
   vm.displayErrors = (response) => ErrorsService.append(vm.accountCreationForm, response)
-=======
->>>>>>> fa60330d57126e56b33605300e2c0a61925adb05
 }
 
 export default accountsCreateController

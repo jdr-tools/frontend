@@ -44,7 +44,9 @@
     "watchify": "^3.9.0"
   },
   "scripts": {
-    "postinstall": "gulp build && gulp sass"
+    "postinstall": "npm run-script build && npm run-script build-css",
+    "build": "browserify ./client/src/app.js -o dist/app.js -t [ babelify --presets [ es2015 ] ] -d -v",
+    "build-css": "sass ./client/styles/sass/style.scss dist/style.css"
   },
   "peerDependencies": {}
 }
