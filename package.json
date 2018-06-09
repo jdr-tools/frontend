@@ -30,7 +30,7 @@
   },
   "scripts": {
     "postinstall": "npm-run-all --parallel build:*",
-    "build:js": "browserify ./client/src/app.js -o dist/app.js -t [ babelify --presets [ es2015 ] ] -d -v",
+    "build:js": "browserify ./client/src/app.js -o dist/app.js -t [ babelify --presets [ es2015 ] ]",
     "build:css": "sass ./client/styles/sass/style.scss dist/style.css"
   },
   "peerDependencies": {}

@@ -2,6 +2,7 @@
   "common": {
     "actions": "Actions",
     "cancel": "Annuler",
+    "confirm": "Confirmer",
     "private": {
       "f": "Privée",
       "m": "Privé",

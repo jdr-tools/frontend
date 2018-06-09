@@ -8,6 +8,7 @@ const configTranslateProvider = function configTranslateProviderFunction ($trans
   $translatePartialLoaderProvider.addPart('errors');
   /** This adds the translations for the common elements used throughout the whole application. */
   $translatePartialLoaderProvider.addPart('common');
+  $translatePartialLoaderProvider.addPart('confirmations');
 
   $translatePartialLoaderProvider.addPart('components/main_menu');
   $translatePartialLoaderProvider.addPart('components/custom_footer');

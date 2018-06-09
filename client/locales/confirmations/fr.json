@@ -1,0 +1,12 @@
+{
+  "confirmations": {
+    "campaign": {
+      "delete": "Voulez vous réellement supprimer la campagne : {{title}}"
+    }
+  },
+  "confirmation_titles": {
+    "campaign": {
+      "delete": "Confirmation de suppression"
+    }
+  }
+}

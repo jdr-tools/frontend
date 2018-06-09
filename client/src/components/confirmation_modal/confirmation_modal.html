@@ -1,0 +1,16 @@
+<md-dialog class="campaigns-edit-modal">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>{{title | translate}}</h2>
+    </div>
+  </md-toolbar>
+  <form ng-submit="validate()" class="no-margin-bottom" name="campaignCreationForm">
+    <md-dialog-content>
+      <md-content class="md-padding">{{translation | translate : data}}</md-content>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <md-button ng-click="confirm()">{{'common.confirm' | translate}}</md-button>
+      <md-button ng-click="close()">{{'common.cancel' | translate}}</md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

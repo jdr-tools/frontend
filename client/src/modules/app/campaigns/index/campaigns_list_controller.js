@@ -17,7 +17,7 @@ const campaignsListController = function campaignsListControllerFunction ($inter
     vm.getAllCampaigns()
   }
 
-  vm.delete = (campaign) => CampaignsFactory.delete(campaign.id, () => vm.getOwnCampaigns())
+  vm.delete = (campaign) => $rootScope.$broadcast('confirmation.show', 'campaign.delete', campaign)
 
   /** Gets the public campaigns (whether you joined it or not). */
   vm.getPublicCampaigns = () => CampaignsFactory.list((campaigns) => { vm.publicCampaigns = campaigns })
@@ -52,6 +52,8 @@ const campaignsListController = function campaignsListControllerFunction ($inter
   $rootScope.$on('campaign.created', vm.getOwnCampaigns)
 
   $rootScope.$on('invitation.accepted', vm.getInvitations)
+
+  $rootScope.$on('campaign.delete', (e, campaign) => CampaignsFactory.delete(campaign.id, () => vm.getOwnCampaigns()))
   
   vm.initialize()
 }
