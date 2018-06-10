@@ -1,4 +1,4 @@
-const campaignsListController = function campaignsListControllerFunction ($interval, $mdDialog, $rootScope, CampaignsFactory, InvitationsFactory) {
+const campaignsListController = function campaignsListControllerFunction ($interval, $mdDialog, $rootScope, CampaignsFactory, Confirmation, InvitationsFactory) {
   'ngInject'
 
   const vm = this
@@ -17,7 +17,7 @@ const campaignsListController = function campaignsListControllerFunction ($inter
     vm.getAllCampaigns()
   }
 
-  vm.delete = (campaign) => $rootScope.$broadcast('confirmation.show', 'campaign.delete', campaign)
+  vm.delete = (campaign) => Confirmation.trigger('campaign.delete', campaign)
 
   /** Gets the public campaigns (whether you joined it or not). */
   vm.getPublicCampaigns = () => CampaignsFactory.list((campaigns) => { vm.publicCampaigns = campaigns })
