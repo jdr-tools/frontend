@@ -4,14 +4,10 @@
  */
 const configTranslateProvider = function configTranslateProviderFunction ($translateProvider, $translatePartialLoaderProvider) {
   'ngInject'
-  /** This adds the translations for all the possible errors from the api. */
-  $translatePartialLoaderProvider.addPart('errors');
-  /** This adds the translations for the common elements used throughout the whole application. */
-  $translatePartialLoaderProvider.addPart('common');
-  $translatePartialLoaderProvider.addPart('confirmations');
 
-  $translatePartialLoaderProvider.addPart('components/main_menu');
-  $translatePartialLoaderProvider.addPart('components/custom_footer');
+  const loadedParts = ["errors", "common", "confirmations", "components/main_menu", "components/custom_footer", "components/countdown"]
+
+  loadedParts.forEach((part) => $translatePartialLoaderProvider.addPart(part))
   
   $translateProvider.useLoader('$translatePartialLoader', {
     urlTemplate: '/client/locales/{part}/{lang}.json'
