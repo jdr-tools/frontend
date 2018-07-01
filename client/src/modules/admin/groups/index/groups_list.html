@@ -10,9 +10,13 @@
 <update-left-panel collection="vm.services" loop-key="routes"></update-left-panel>
 
 <div class="collapse mt-2 mb-2" id="collapseCreateGroup">
-  <form class="form-inline" ng-submit="vm.createGroup()">
-    <div class="input-group">
-      <input type="text" class="form-control" ng-model="vm.group.slug" required translate translate-attr-placeholder="groups.create.placeholders.slug" />
+  <form class="form-inline" name="vm.groupCreationForm" ng-submit="vm.createGroup()">
+    <div class="input-group mr-2">
+      <input type="text" class="form-control" name="groupSlug" ng-model="vm.group.slug" required translate translate-attr-placeholder="groups.create.placeholders.slug" />
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" ng-model="vm.group.is_default" id="isDefaultCheck" />
+      <label class="form-check-label" for="isDefaultCheck" translate>groups.list.form.is_default</label>
     </div>
     <input type="submit" class="btn btn-primary ml-2" translate translate-attr-value="groups.buttons.validate" />
   </form>
@@ -25,6 +29,7 @@
         <th translate>groups.list.headers.id</th>
         <th translate>groups.list.headers.rights</th>
         <th translate>groups.list.headers.routes</th>
+        <th translate>groups.list.headers.is_default</th>
         <th translate>common.actions</th>
       </tr>
     </thead>
@@ -33,6 +38,7 @@
         <td><span class="text-muted">{{group.id}}</span>&nbsp;-&nbsp;{{group.slug}}</td>
         <td>{{group.rights}}</td>
         <td>{{group.routes}}</td>
+        <td><span ng-if="group.is_default" class="text-success" translate>common.yes</span></td>
         <td>
           <a ng-click="vm.editElements('routes', group)"><i class="fa fa-road"></i></a>&nbsp;
           <a ng-click="vm.editElements('rights', group)"><i class="fa fa-lock"></i></a>&nbsp;

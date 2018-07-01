@@ -3,6 +3,7 @@
     "actions": "Actions",
     "cancel": "Cancel",
     "confirm": "Confirm",
+    "no": "No",
     "private": {
       "f": "Private",
       "m": "Private",
@@ -14,6 +15,7 @@
       "n": "Public"
     },
     "update": "Update",
-    "validate": "Validate"
+    "validate": "Validate",
+    "yes": "Yes"
   }
 }

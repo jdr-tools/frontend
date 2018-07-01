@@ -10,8 +10,12 @@
       }
     },
     "list": {
+      "form": {
+        "is_default": "Groupe par défaut"
+      },
       "headers": {
         "id": "ID - Nom du groupe",
+        "is_default": "Groupe par défaut",
         "rights": "Droits associés",
         "routes": "Routes associées"
       },

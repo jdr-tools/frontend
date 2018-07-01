@@ -6,7 +6,7 @@ const updateGroupController = function updateGroupControllerFunction ($mdSidenav
   /** The groups displayed in the list. */
   vm.groups = []
   /** The group pattern containing the fields sent when creating a group. */
-  vm.group = {slug: ''}
+  vm.group = {slug: '', is_default: false}
   /** List of services, containing the routes. */
   vm.services = []
   /** List of categories, containing the rights. */
@@ -15,7 +15,10 @@ const updateGroupController = function updateGroupControllerFunction ($mdSidenav
   vm.typeCorrespondance = {'routes': 'services', 'rights': 'categories'}
 
   vm.createGroup = () => {
-    GroupsFactory.create(vm.group, vm.getGroups)
+    GroupsFactory.create(vm.group, () => {
+      vm.getGroups()
+      vm.group = {slug: '', is_default: false}
+    })
   }
 
   vm.deleteGroup = (group_id) => {

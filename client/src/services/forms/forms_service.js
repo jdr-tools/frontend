@@ -22,7 +22,9 @@ const formsService = function formsServiceFunction () {
     _.each(form.$$controls, (control) => {
       if (control.$name != '' && form[control.$name] != undefined) {
         const errorKeys = _.keys(form[control.$name].$error)
-        _.each(errorKeys, (key) => form[control.$name].$setValidity(key, true))
+        _.each(errorKeys, (key) => {
+          form[control.$name].$setValidity(key, true)
+        })
       }
     })
   }

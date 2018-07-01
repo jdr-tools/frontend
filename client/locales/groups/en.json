@@ -10,8 +10,12 @@
       }
     },
     "list": {
+      "form": {
+        "is_default": "Default group"
+      },
       "headers": {
         "id": "ID - Name",
+        "is_default": "Default group",
         "rights": "Linked rights",
         "routes": "Linked routes"
       },
