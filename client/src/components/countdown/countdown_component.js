@@ -6,7 +6,6 @@ const countdownController = function countdownControllerFunction ($interval, $ro
   vm.initialized = false
 
   $rootScope.$watch('vm.startValue', () => {
-    console.log(vm.startValue)
     if (vm.startValue != undefined && !vm.initialized) {
       vm.currentValue = vm.startValue
       $interval(vm.setCountdownValue, 1000)

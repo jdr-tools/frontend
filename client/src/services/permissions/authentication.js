@@ -34,7 +34,7 @@ const Authentication = function authenticationFunction ($localStorage, $rootScop
    * - the sessions API return a session with a different username that the one stored in the locale storage
    */
   vm.checkForInvalidSession = () => {
-    Api.get(`/sessions/${$localStorage.token}`, {
+    Api.get(`/sessions/${$localStorage.token}`, {}, {
       successCallback: vm.checkForHijackedSession,
       errorCallback: vm.destroyUserSession
     })
@@ -46,7 +46,7 @@ const Authentication = function authenticationFunction ($localStorage, $rootScop
    * @param {Object} response - the response from the sessions API.
    */
   vm.checkForHijackedSession = (response) => {
-    if (response.username != $localStorage.account.username) vm.destroyUserSession()
+    if (response.account_id != $localStorage.account.id) vm.destroyUserSession()
   }
 
   /**
@@ -67,11 +67,15 @@ const Authentication = function authenticationFunction ($localStorage, $rootScop
    * Destroys the current session and therefore disconnects the user.
    */
   vm.destroyUserSession = () => {
+    const destroyLocalSession = () => {
+      delete $localStorage.account
+      delete $localStorage.token
+      $timeout(() => $state.reload())
+    }
     Api.delete(`/sessions/${$localStorage.token}`, {
-      successCallback: () => {
-        delete $localStorage.account
-        delete $localStorage.token
-        $timeout(() => $state.go('sessionsCreate'))
+      successCallback: destroyLocalSession,
+      errorCallback: (response) => {
+        if (response.status === 404) destroyLocalSession()
       }
     })
   }

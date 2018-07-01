@@ -8,8 +8,6 @@ const campaignsComponent = function campaignsComponentFunction ($localStorage, $
   }
 
   vm.isCreator = (campaign) => {
-    console.log($localStorage.account.username)
-    console.log(campaign.creator)
     return $localStorage.account && campaign.creator == $localStorage.account.username
   }
 
