@@ -52,6 +52,8 @@ const appMenuController = function appMenuControllerFunction(Authentication, $in
     }
   }
 
+  $rootScope.$on('disconnect', () => { vm.authenticated = false })
+
   vm.setUsername()
 
   $interval(vm.getInvitations, 2000)

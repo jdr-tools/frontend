@@ -70,14 +70,20 @@ const Authentication = function authenticationFunction ($localStorage, $rootScop
     const destroyLocalSession = () => {
       delete $localStorage.account
       delete $localStorage.token
-      $timeout(() => $state.reload())
+      $rootScope.$broadcast('disconnect')
+      $timeout(() => $state.go('sessionsCreate'))
     }
-    Api.delete(`/sessions/${$localStorage.token}`, {
-      successCallback: destroyLocalSession,
-      errorCallback: (response) => {
-        if (response.status === 404) destroyLocalSession()
-      }
-    })
+    if ($localStorage.token === undefined) {
+      destroyLocalSession()
+    }
+    else {
+      Api.delete(`/sessions/${$localStorage.token}`, {
+        successCallback: destroyLocalSession,
+        errorCallback: (response) => {
+          if (response.status === 404) destroyLocalSession()
+        }
+      })
+    }
   }
 
   vm.sessionCreationSuccess = (session_response) => {
