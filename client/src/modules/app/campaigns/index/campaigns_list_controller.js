@@ -21,7 +21,7 @@ const campaignsListController = function campaignsListControllerFunction ($inter
   vm.getOwnCampaigns = () => CampaignsFactory.own((campaigns) => { vm.creations = campaigns })
 
   /** Gets all invitations you're subject to (waiting requests, requests made to you, pending and accepted invitations). */
-  vm.getInvitations = () => InvitationsFactory.own((invitations) => { console.log(invitations); vm.invitations = invitations.accepted })
+  vm.getInvitations = () => InvitationsFactory.own((invitations) => { vm.invitations = invitations.accepted })
 
   vm.initializeCountdown = () => {
     vm.countdownDuration = 5

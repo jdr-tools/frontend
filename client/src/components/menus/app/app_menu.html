@@ -7,15 +7,16 @@
     <span flex></span>
     <span>
       <md-menu>
-        <md-button ng-click="$mdMenu.open($event)" class="md-icon-button">
-          <md-icon ng-if="vm.hasInvitations" md-colors="{color: 'blue'}">person</md-icon>
+        <md-button ng-click="$mdMenu.open($event)" class="md-icon-button requests-count-wrapper">
+          <md-icon ng-if="vm.hasInvitations" md-colors="{color: 'red'}">person</md-icon>
           <md-icon ng-if="!vm.hasInvitations">person_outline</md-icon>
+          <div class="requests-count" md-colors="{background: 'red'}" ng-if="vm.hasInvitations">{{vm.requestsCount}}</div>
         </md-button>
         <md-menu-content>
           <div md-colors="{color: 'grey-500'}" ng-if="!vm.hasInvitations" class="md-padding md-caption">
             Pas de nouvelles notifications
           </div>
-          <md-list flex ng-if="vm.invitations.pending.count > 0">
+          <md-list flex ng-if="vm.hasInvitations">
             <md-subheader class="md-no-sticky">Invitations en attente</md-subheader>
             <md-list-item class="md-2-line" ng-repeat="invitation in vm.invitations.pending.items">
               <div class="md-list-item-text">
