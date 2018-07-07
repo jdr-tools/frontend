@@ -57,7 +57,7 @@ const appMenuController = function appMenuControllerFunction(Authentication, $in
 
   vm.setUsername()
 
-  // $interval(vm.getInvitations, 2000)
+  $interval(vm.getInvitations, 2000)
 }
 
 const appMenuComponent = {
