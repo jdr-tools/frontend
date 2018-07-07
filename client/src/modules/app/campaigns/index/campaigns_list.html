@@ -15,6 +15,9 @@
                 <md-icon ng-if="invitation.campaign.is_private" md-colors="{color: 'red-700'}">lock</md-icon>
                 <md-icon ng-if="!invitation.campaign.is_private" md-colors="{color: 'green-700'}">lock_open</md-icon>
                 {{invitation.campaign.title}}
+                <span md-colors="{color: 'grey-500'}">
+                  {{campaign.current_players}} / {{campaign.max_players}}
+                </span>
               </span>
             </md-card-title-text>
           </md-card-title>
@@ -49,6 +52,9 @@
                 <md-icon ng-if="campaign.is_private" md-colors="{color: 'red-700'}">lock</md-icon>
                 <md-icon ng-if="!campaign.is_private" md-colors="{color: 'green-700'}">lock_open</md-icon>
                 {{campaign.title}}
+                <span md-colors="{color: 'grey-500'}">
+                  {{campaign.current_players}} / {{campaign.max_players}}
+                </span>
               </span>
             </md-card-title-text>
           </md-card-title>
