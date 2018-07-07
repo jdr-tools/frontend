@@ -19,6 +19,12 @@ const campaignsRoute = function ($stateProvider) {
     controller: 'campaignsListController as vm'
   })
 
+  $stateProvider.state('campaigns.search', {
+    url: '/campaigns/search',
+    templateUrl: 'client/src/modules/app/campaigns/search/campaigns_search.html',
+    controller: 'campaignsSearchController as vm'
+  })
+
   $stateProvider.state('campaigns.edit', {
     url: '/campaigns/{id}/edit',
     templateUrl: 'client/src/modules/app/campaigns/edit/campaigns_edit.html',

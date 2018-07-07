@@ -10,13 +10,14 @@
       "items": {
         "accounts": "Accounts",
         "admin": "Admin panel",
-        "campaigns": "Campaigns",
         "dashboard": "Dashboard",
         "login": "Log in",
         "logout": "Log out",
+        "play": "Play",
         "profile": "My profile",
         "register": "Register",
-        "rights": "Rights"
+        "rights": "Rights",
+        "search": "Search"
       }
     }
   }
