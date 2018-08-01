@@ -1,6 +1,7 @@
 import campaignsListController from './index/campaigns_list_controller'
 import campaignsEditController from './edit/campaigns_edit_controller'
 import campaignsPlayController from './play/campaigns_play_controller'
+import campaignsSearchController from './search/campaigns_search_controller'
 import campaignsRoute from './campaigns_route'
 import campaignsComponents from './components'
 
@@ -8,6 +9,7 @@ const campaigns = angular.module('arkaan.frontend.campaigns', [campaignsComponen
   .controller('campaignsListController', campaignsListController)
   .controller('campaignsEditController', campaignsEditController)
   .controller('campaignsPlayController', campaignsPlayController)
+  .controller('campaignsSearchController', campaignsSearchController)
   .config(campaignsRoute)
   .run(($translatePartialLoader) => $translatePartialLoader.addPart('campaigns'))
   .name

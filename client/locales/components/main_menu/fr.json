@@ -14,9 +14,11 @@
         "dashboard": "Tableau de bord",
         "login": "Se connecter",
         "logout": "Se déconnecter",
+        "play": "Jouer",
         "profile": "Mon profil",
         "register": "Créer un compte",
-        "rights": "Droits"
+        "rights": "Droits",
+        "search": "Rechercher"
       }
     }
   }

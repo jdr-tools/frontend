@@ -29,6 +29,7 @@ const appMenuController = function appMenuControllerFunction(Api, Authentication
     if (vm.authenticated) {
       InvitationsFactory.own((response) => {
         vm.invitations = response
+        vm.requestsCount = response.request.count + response.pending.count
         const requests = _.filter(response.request.items, (inv) => inv.username != $localStorage.account.username)
         vm.invitations.request = {count: requests.length, items: requests}
         vm.hasInvitations = vm.invitations.pending.count > 0 || vm.invitations.request.count > 0
@@ -56,7 +57,9 @@ const appMenuController = function appMenuControllerFunction(Api, Authentication
 
   vm.setUsername()
 
-  // $interval(vm.getInvitations, 2000)
+  $interval(vm.getInvitations, 2000)
+
+  vm.getInvitations()
 }
 
 const appMenuComponent = {

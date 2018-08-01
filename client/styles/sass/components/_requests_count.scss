@@ -1,0 +1,18 @@
+.requests-count-wrapper {
+  position: relative;
+  overflow: visible;
+  
+  .requests-count {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    line-height: 15px;
+    border-radius: 9px;
+    border: 2px solid white;
+    font-weight: bolder;
+    color: white;
+    font-size: 13px;
+  }
+}

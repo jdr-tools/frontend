@@ -1,0 +1,32 @@
+<campaigns-create></campaigns-create>
+
+<div class="md-padding" layout="row" layout-xs="column">
+  <md-card flex-gt-sm="25" flex-xs="auto" ng-repeat="campaign in vm.campaigns.items" ng-if="campaign.invitation.status != 'accepted'">
+    <md-card-title flex="nogrow">
+      <md-card-title-text class="wrapped">
+        <span class="md-headline ellipsis">
+          <md-icon ng-if="campaign.is_private" md-colors="{color: 'red-700'}">lock</md-icon>
+          <md-icon ng-if="!campaign.is_private" md-colors="{color: 'green-700'}">lock_open</md-icon>
+          {{campaign.title}}
+          <span md-colors="{color: 'grey-500'}">
+            {{campaign.current_players}} / {{campaign.max_players}}
+          </span>
+        </span>
+      </md-card-title-text>
+    </md-card-title>
+    <md-card-content flex="noshrink">
+      <div>{{campaign.description}}</div>
+      <md-chips class="campaign-tags" ng-if="campaign.tags.length > 0" ng-model="campaign.tags" readonly="true"></md-chips>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button ng-click="vm.deleteInvitation(campaign.invitation)" ng-if="campaign.invitation && campaign.invitation.status == 'request'" class="md-icon-button">
+        <md-tooltip md-direction="top" ng-if="campaign.invitation">{{'campaigns.index.tooltips.cancel' | translate}}</md-tooltip>
+        <md-icon>cancel</md-icon>
+      </md-button>
+      <md-button ng-click="vm.request(campaign)" ng-if="!campaign.invitation" class="md-icon-button">
+        <md-tooltip md-direction="top" ng-if="!campaign.invitation">{{'campaigns.index.tooltips.join' | translate}}</md-tooltip>
+        <md-icon>group_add</md-icon>
+      </md-button>
+    </md-card-actions>
+  </md-card>
+</div>
