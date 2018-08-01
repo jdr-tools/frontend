@@ -31,6 +31,10 @@ class Controller < Sinatra::Base
     erb :'client/index'
   end
 
+  get '/websocket' do
+    halt 200, {url: Arkaan::Monitoring::Websocket.pluck(:url).sample}.to_json
+  end
+
   post '/api' do
     @body = parse_body
     @url = @body.delete('url')

@@ -2,7 +2,7 @@
  * This component handles the top menu of the application and the related logic.
  * @author Vincent Courtois <courtois.vincent@outlook.com>
  */
-const appMenuController = function appMenuControllerFunction(Authentication, $interval, $localStorage, $rootScope, InvitationsFactory) {
+const appMenuController = function appMenuControllerFunction(Api, Authentication, $interval, $localStorage, $rootScope, InvitationsFactory) {
   'ngInject'
 
   const vm = this
@@ -56,7 +56,7 @@ const appMenuController = function appMenuControllerFunction(Authentication, $in
 
   vm.setUsername()
 
-  $interval(vm.getInvitations, 2000)
+  // $interval(vm.getInvitations, 2000)
 }
 
 const appMenuComponent = {
