@@ -16,19 +16,24 @@ class Controller < Sinatra::Base
     def csrf_tag; Rack::Csrf.tag(env); end
   end
 
-  attr_reader :connection
+  attr_accessor :connection
 
-  def initialize
-    super
-    @connection = Faraday.new(Arkaan::Monitoring::Gateway.all.sample.url) do |faraday|
-      faraday.request  :url_encoded
-      faraday.response :logger
-      faraday.adapter  Faraday.default_adapter
+  before do
+    if connection.nil?
+      @connection = Faraday.new(Arkaan::Monitoring::Gateway.all.sample.url) do |faraday|
+        faraday.request  :url_encoded
+        faraday.response :logger
+        faraday.adapter  Faraday.default_adapter
+      end
     end
   end
 
   get '/' do
     erb :'client/index'
+  end
+
+  get '/admin' do
+    erb :'admin/index'
   end
 
   get '/websocket' do
