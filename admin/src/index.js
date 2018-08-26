@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import App from './App.jsx';
+import registerServiceWorker from './utils/registerServiceWorker';
 import $ from 'jquery'
 
 $(() => {

@@ -32,8 +32,8 @@ class Controller < Sinatra::Base
     erb :'client/index'
   end
 
-  get '/admin' do
-    erb :'admin/index'
+  get '/admin/:page' do
+    erb :'admin/index', locals: {page: params[:page]}
   end
 
   get '/websocket' do
