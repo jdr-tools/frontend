@@ -8,7 +8,10 @@ const appMenuController = function appMenuControllerFunction(Api, Authentication
   const vm = this
 
   vm.authenticated = Authentication.checkSessionKeysPresence(false)
-  vm.invitations = []
+  vm.invitations = {
+    pending: {count: 0, items: []},
+    request: {count: 0, items: []}
+  }
   vm.hasInvitations = false
 
   vm.accept = (invitation_id) => {
@@ -31,7 +34,9 @@ const appMenuController = function appMenuControllerFunction(Api, Authentication
   }
 
   vm.addInvitation = (invitation) => {
-    vm.invitations.push(invitation)
+    const key = invitation.campaign.creator == $localStorage.account.username ? 'request' : 'pending'
+    vm.invitations[key].items.push(invitation)
+    vm.invitations[key].count++
     vm.hasInvitations = true
   }
 
@@ -61,6 +66,8 @@ const appMenuController = function appMenuControllerFunction(Api, Authentication
   })
 
   vm.setUsername()
+
+  vm.getInvitations()
 }
 
 const appMenuComponent = {
