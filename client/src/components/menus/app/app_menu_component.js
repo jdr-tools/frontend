@@ -7,16 +7,9 @@ const appMenuController = function appMenuControllerFunction(Api, Authentication
 
   const vm = this
 
-  vm.auth = Authentication
   vm.authenticated = Authentication.checkSessionKeysPresence(false)
-  vm.storage = $localStorage
   vm.invitations = []
   vm.hasInvitations = false
-
-  $rootScope.$on('loginSuccessful', () => {
-    vm.authenticated = true
-    vm.setUsername()
-  })
 
   vm.accept = (invitation_id) => {
     InvitationsFactory.changeStatus(invitation_id, 'accepted', () => {
@@ -37,10 +30,15 @@ const appMenuController = function appMenuControllerFunction(Api, Authentication
     }
   }
 
+  vm.addInvitations = (invitation) => {
+    vm.invitations.push(invitation)
+    vm.hasInvitations = true
+  }
+
   /** Logs the user out of the application and redirects him to the main page. */
   vm.logout = () => {
     vm.authenticated = false
-    vm.auth.destroyUserSession()
+    Authentication.destroyUserSession()
   }
 
   vm.refuse = (invitation_id) => {
@@ -49,17 +47,20 @@ const appMenuController = function appMenuControllerFunction(Api, Authentication
 
   vm.setUsername = () => {
     if (vm.authenticated) {
-      vm.username = vm.storage.account.username
+      vm.username = $localStorage.account.username
     }
   }
 
   $rootScope.$on('disconnect', () => { vm.authenticated = false })
 
+  $rootScope.$on('invitation.creation', (event, invitation) => vm.addInvitation(invitation))
+
+  $rootScope.$on('loginSuccessful', () => {
+    vm.authenticated = true
+    vm.setUsername()
+  })
+
   vm.setUsername()
-
-  $interval(vm.getInvitations, 2000)
-
-  vm.getInvitations()
 }
 
 const appMenuComponent = {

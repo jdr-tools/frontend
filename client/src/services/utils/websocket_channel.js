@@ -23,7 +23,7 @@ const websocketChannel = function websocketChannelFunction ($http, $interval, $t
    * @param {Object} event - the event containing the message and all associated informations.
    */
   vm.onWsMessage = (event) => {
-    const body = JSON.parse(e.data)
+    const body = JSON.parse(event.data)
     const message = body.message
     const data = body.data
     websocketMessages.handle(message, data)
@@ -31,6 +31,7 @@ const websocketChannel = function websocketChannelFunction ($http, $interval, $t
 
   /** Function called when creating the websocket, initializing the keep alive pings. */
   vm.onWsOpen = () => {
+    console.log("Création du websocket")
     vm.keepAlive = $interval(() => vm.websocket.send('REFRESH_PING'), 20000)
   }
 

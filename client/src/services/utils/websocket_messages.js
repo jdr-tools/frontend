@@ -2,7 +2,7 @@
  * This service handles messages sent from the server throughout a websocket channel.
  * @author Vincent Courtois <courtois.vincent@outlook.com>
  */
-const websocketMessages = function websocketMessagesFunction () {
+const websocketMessages = function websocketMessagesFunction ($rootScope) {
   'ngInject'
 
   const vm = this
@@ -13,7 +13,12 @@ const websocketMessages = function websocketMessagesFunction () {
    * @param {Object} data - additionnal data passed to the message and enriching it.
    */
   vm.handle = (message, data) => {
-    console.log(message, data)
+    switch(message) {
+      case 'invitation_creation':
+      console.log("Création d'invitation")
+        $rootScope.$broadcast('invitation.creation', data)
+        break
+    }
   }
 }
 

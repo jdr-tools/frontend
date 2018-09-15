@@ -1,5 +1,5 @@
 import api from "./api"
-import form from "./forms"
+import forms from "./forms"
 import permissions from "./permissions"
 import utils from "./utils"
 

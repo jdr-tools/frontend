@@ -39,6 +39,10 @@ namespace :db do
       puts 'Adding the first account to the superuser group'
       admin_group.accounts << account
     end
+    if Arkaan::Monitoring::Route.count > 0
+      puts 'Adding routes to the admin group'
+      admin_group.routes = Arkaan::Monitoring::Route.all
+    end
     admin_group.save
     puts 'Creation successful' if admin_group.persisted?
   end
