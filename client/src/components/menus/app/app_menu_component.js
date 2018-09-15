@@ -38,6 +38,7 @@ const appMenuController = function appMenuControllerFunction(Api, Authentication
     vm.invitations[key].items.push(invitation)
     vm.invitations[key].count++
     vm.hasInvitations = true
+    vm.requestsCount++
   }
 
   /** Logs the user out of the application and redirects him to the main page. */
