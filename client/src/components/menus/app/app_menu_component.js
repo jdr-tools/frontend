@@ -30,7 +30,7 @@ const appMenuController = function appMenuControllerFunction(Api, Authentication
     }
   }
 
-  vm.addInvitations = (invitation) => {
+  vm.addInvitation = (invitation) => {
     vm.invitations.push(invitation)
     vm.hasInvitations = true
   }
