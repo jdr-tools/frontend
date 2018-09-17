@@ -8,32 +8,16 @@
     <span>
       <md-menu>
         <md-button ng-click="$mdMenu.open($event)" class="md-icon-button requests-count-wrapper">
-          <md-icon ng-if="vm.hasInvitations" md-colors="{color: 'red'}">person</md-icon>
-          <md-icon ng-if="!vm.hasInvitations">person_outline</md-icon>
-          <div class="requests-count" md-colors="{background: 'red'}" ng-if="vm.hasInvitations">{{vm.requestsCount}}</div>
+          <md-icon ng-if="vm.invitations.length" md-colors="{color: 'red'}">person</md-icon>
+          <md-icon ng-if="!vm.invitations.length">person_outline</md-icon>
+          <div class="requests-count" md-colors="{background: 'red'}" ng-if="vm.invitations.length">{{vm.invitations.length}}</div>
         </md-button>
         <md-menu-content>
-          <div md-colors="{color: 'grey-500'}" ng-if="!vm.hasInvitations" class="md-padding md-caption">
+          <div md-colors="{color: 'grey-500'}" ng-if="!vm.invitations.length" class="md-padding md-caption">
             Pas de nouvelles notifications
           </div>
-          <md-list flex ng-if="vm.hasInvitations">
-            <md-subheader class="md-no-sticky">Invitations en attente</md-subheader>
-            <md-list-item class="md-2-line" ng-repeat="invitation in vm.invitations.pending.items">
-              <div class="md-list-item-text">
-                <h3>{{invitation.campaign.creator.username}}</h3>
-                <p>{{invitation.campaign.title}}</p>
-              </div>
-              <md-button class="md-secondary md-icon-button" ng-click="vm.accept(invitation.id)">
-                <md-icon>check</md-icon>
-              </md-button>
-              <md-button class="md-secondary md-icon-button" ng-click="vm.refuse(invitation.id)">
-                <md-icon>close</md-icon>
-              </md-button>
-            </md-list-item>
-          </md-list>
-          <md-list flex ng-if="vm.invitations.request.count > 0">
-            <md-subheader class="md-no-sticky">Requêtes en attente</md-subheader>
-            <md-list-item class="md-2-line" ng-repeat="invitation in vm.invitations.request.items">
+          <md-list flex ng-if="vm.invitations.length">
+            <md-list-item class="md-2-line" ng-repeat="invitation in vm.invitations">
               <div class="md-list-item-text">
                 <h3>{{invitation.campaign.creator.username}}</h3>
                 <p>{{invitation.campaign.title}}</p>

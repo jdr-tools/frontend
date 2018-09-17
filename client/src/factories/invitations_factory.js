@@ -4,7 +4,7 @@ const invitationsFactory = function invitationsFactoryFunction (Api) {
   const vm = this
 
   vm.own = (callback) => {
-    Api.get('/invitations/own', {}, {successCallback: callback})
+    Api.get('/invitations', {}, {successCallback: callback})
   }
 
   vm.changeStatus = (invitation_id, status, callback) => {

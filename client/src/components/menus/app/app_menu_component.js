@@ -8,10 +8,7 @@ const appMenuController = function appMenuControllerFunction(Api, Authentication
   const vm = this
 
   vm.authenticated = Authentication.checkSessionKeysPresence(false)
-  vm.invitations = {
-    pending: {count: 0, items: []},
-    request: {count: 0, items: []}
-  }
+  vm.invitations = []
   vm.hasInvitations = false
 
   vm.accept = (invitation_id) => {
@@ -24,21 +21,22 @@ const appMenuController = function appMenuControllerFunction(Api, Authentication
   vm.getInvitations = () => {
     if (vm.authenticated) {
       InvitationsFactory.own((response) => {
-        vm.invitations = response
-        vm.requestsCount = response.request.count + response.pending.count
-        const requests = _.filter(response.request.items, (inv) => inv.username != $localStorage.account.username)
-        vm.invitations.request = {count: requests.length, items: requests}
-        vm.hasInvitations = vm.invitations.pending.count > 0 || vm.invitations.request.count > 0
+        vm.invitations = _.filter(response, (inv) => {
+          const isCampaignCreator = inv.username === $localStorage.account.username
+          return inv.status === 'pending' || (inv.status === 'request' && !isCampaignCreator)
+        })
+        vm.sortInvitations()
       })
     }
   }
 
   vm.addInvitation = (invitation) => {
-    const key = invitation.campaign.creator == $localStorage.account.username ? 'request' : 'pending'
-    vm.invitations[key].items.push(invitation)
-    vm.invitations[key].count++
-    vm.hasInvitations = true
-    vm.requestsCount++
+    vm.invitations.push(invitation)
+    vm.sortInvitations()
+  }
+
+  vm.sortInvitations = () => {
+    vm.invitations = _.sortBy(vm.invitations, ['status', 'created_at'])
   }
 
   /** Logs the user out of the application and redirects him to the main page. */
