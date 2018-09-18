@@ -10,7 +10,7 @@ const campaignsListController = function campaignsListControllerFunction ($inter
 
   vm.initialize = () => {
     vm.creations = vm.emptyList()
-    vm.invitations = vm.emptyList()
+    vm.invitations = []
     // vm.initializeCountdown()
     vm.getAllCampaigns()
   }
