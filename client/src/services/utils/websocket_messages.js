@@ -15,9 +15,11 @@ const websocketMessages = function websocketMessagesFunction ($rootScope) {
   vm.handle = (message, data) => {
     switch(message) {
       case 'invitation_creation':
-      console.log("Création d'invitation")
         $rootScope.$broadcast('invitation.creation', data)
         break
+      case 'invitation_update':
+        $rootScope.$broadcast('invitation.update', data)
+        break;
     }
   }
 }

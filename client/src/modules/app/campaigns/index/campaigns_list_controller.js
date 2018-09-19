@@ -44,6 +44,12 @@ const campaignsListController = function campaignsListControllerFunction ($inter
 
   $rootScope.$on('campaign.delete', (e, campaign) => CampaignsFactory.delete(campaign.id, () => vm.getOwnCampaigns()))
   
+  $rootScope.$on('invitation.update', (event, invitation) => {
+    if (invitation.status === 'accepted') {
+      vm.invitations.push(invitation)
+    }
+  })
+
   vm.initialize()
 }
 

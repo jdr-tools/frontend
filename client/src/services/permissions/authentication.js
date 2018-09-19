@@ -2,7 +2,7 @@
  * This service handles all actions regarding the construction, destruction, and checking of the user sessions.
  * @author Vincent Courtois <courtois.vincent@outlook.com>
  */
-const Authentication = function authenticationFunction ($localStorage, $rootScope, $state, $timeout, Api, AccountsFactory) {
+const Authentication = function authenticationFunction ($localStorage, $rootScope, $state, $timeout, Api, AccountsFactory, WebsocketChannel) {
     'ngInject'
 
     const vm = this
@@ -93,6 +93,7 @@ const Authentication = function authenticationFunction ($localStorage, $rootScop
         $localStorage.account = account_response.account
         $rootScope.$broadcast('loginSuccessful')
         $state.go('dashboard', {}, {reload: true})
+        WebsocketChannel.setup()
       })
     })
   }
