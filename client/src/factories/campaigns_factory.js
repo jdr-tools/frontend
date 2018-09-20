@@ -5,7 +5,7 @@ const CampaignsFactory = function CampaignsFactoryFunction (Api, $localStorage, 
 
   service.addPlayer = (campaign_id, form, username, success, failure) => {
     Api.post('/invitations', {username: username, campaign_id: campaign_id}, {
-      successCallback: success,
+      successCallback: (response) => success(response.item),
       errorsForm: form
     })
   }

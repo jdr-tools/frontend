@@ -1,12 +1,17 @@
-const campaignsEditController = function campaignsEditControllerFunction ($localStorage, $mdToast, $rootScope, $state, $timeout, CampaignsFactory, ErrorsService) {
+const campaignsEditController = function campaignsEditControllerFunction ($localStorage, $mdToast, $rootScope, $scope, $state, $timeout, CampaignsFactory, ErrorsService) {
   'ngInject'
 
   const vm = this
 
+  vm.addInvitation = (invitation) => {
+    _.remove(vm.invitations, {id: invitation.id})
+    vm.invitations.push(invitation)
+  }
+
   /** Method called when submitting the form to add a new player to the game. */
   vm.addPlayer = () => {
     ErrorsService.resetErrors(vm.invitationForm)
-    CampaignsFactory.addPlayer($state.params.id, vm.invitationForm, vm.account, vm.refreshInvitations)
+    CampaignsFactory.addPlayer($state.params.id, vm.invitationForm, vm.account, vm.addInvitation)
   }
 
   /**
@@ -15,15 +20,13 @@ const campaignsEditController = function campaignsEditControllerFunction ($local
    */
   vm.get = (campaign_id) => {
     CampaignsFactory.get(campaign_id, (campaign) => {
-      $timeout(() => {
-        if (campaign.creator.username == $localStorage.account.username) {
-          vm.initialized = true
-          vm.campaign = campaign
-        }
-        else {
-          vm.unauthorized = true
-        }
-      }, 250)
+     if (campaign.creator.username == $localStorage.account.username) {
+        vm.initialized = true
+        vm.campaign = campaign
+      }
+      else {
+        vm.unauthorized = true
+      }
     })
   }
 
@@ -37,10 +40,7 @@ const campaignsEditController = function campaignsEditControllerFunction ($local
       tags: []
     }
     /** The structure holding the list of invitations. */
-    vm.invitations = {
-      accepted: {count: 0, items: []},
-      pending: {count: 0, items: []}
-    }
+    vm.invitations = []
     /** The name of the player you want to invite in the dedicated field. */
     vm.playername = ''
     /** Current username of the connected account. */
@@ -82,35 +82,15 @@ const campaignsEditController = function campaignsEditControllerFunction ($local
     CampaignsFactory.update($state.params.id, vm.campaignEditionForm, parameters, vm.success)
   }
 
-  vm.removeFromList = (list, invitation) => {
-    if (vm.invitations[list] !== undefined) {
-      const removed = _.remove(vm.invitations[list].items, {id: invitation.id})
-      if (removed.length > 0) vm.invitations[list].count--
-    }
-  }
-
   vm.initialize()
 
-  $rootScope.$on('invitations.reset', vm.refreshInvitations)
+  $rootScope.$on('invitations.remove', (event, invitation) => vm.addInvitation(invitation))
+
+  $rootScope.$on('invitation.creation', (event, invitation) => vm.addInvitation(invitation))
 
   $rootScope.$on('invitation.update', (event, invitation) => {
     if (invitation.campaign.id === vm.campaign.id) {
-      vm.removeFromList('pending', invitation)
-      if (invitation.status === 'accepted') {
-        if (vm.invitations.accepted === undefined) {
-          vm.invitations.accepted = {
-            count: 1,
-            items: [invitation]
-          }
-        }
-        else {
-          vm.invitations.accepted.items.push(invitation)
-          vm.invitations.accepted.count++
-        }
-      }
-      else {
-        vm.removeFromList('accepted', invitation)
-      }
+      vm.addInvitation(invitation)
     }
   })
 }

@@ -1,5 +1,5 @@
-<md-list ng-if="vm.collection.count > 0">
-  <md-list-item ng-repeat="invitation in vm.collection.items" class="md-2-line">
+<md-list>
+  <md-list-item ng-repeat="invitation in (vm.collection | filter:{status:vm.status})" class="md-2-line">
     <md-icon class="md-avatar-icon">face</md-icon>
     <div class="md-list-item-text" layout="column">
       <h3>{{invitation.username}}</h3>

@@ -18,7 +18,8 @@
         "register": "Register",
         "rights": "Rights",
         "search": "Search"
-      }
+      },
+      "no_invitations": "No new invitations/requests"
     }
   }
 }

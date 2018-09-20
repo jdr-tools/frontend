@@ -5,7 +5,7 @@
       <md-progress-circular md-mode="indeterminate"></md-progress-circular>
     </div>
     <div ng-if="vm.unauthorized">{{'campaigns.update.unauthorized' | translate}}</div>
-    <md-tabs md-dynamic-height ng-if="vm.initialized">
+    <md-tabs md-dynamic-height ng-if="vm.initialized && !vm.unauthorized">
       <!-- First tab containg the informations about the campaign (title, description, etc.) -->
       <md-tab>
         <md-tab-label>{{'campaigns.update.tabs.informations.title' | translate}}</md-tab-label>
@@ -71,12 +71,12 @@
             <div flex="50">
               <h2 class="md-headline" translate>campaigns.invitations.titles.pending</h2>
               <div ng-if="vm.invitations.pending.count == 0" translate>campaigns.invitations.placeholders.pending</div>
-              <invitations collection="vm.invitations.pending" icons="true"></invitations>
+              <invitations collection="vm.invitations" status="pending" icons="true"></invitations>
             </div>
-            <div flex="50" class="md-padding">
+            <div flex="100" class="md-padding">
               <h2 class="md-headline" translate>campaigns.invitations.titles.accepted</h2>
               <div ng-if="vm.invitations.accepted.count == 0" translate>campaigns.invitations.placeholders.accepted</div>
-              <invitations collection="vm.invitations.accepted" status="accepted"></invitations>
+              <invitations collection="vm.invitations" status="accepted"></invitations>
             </div>
           </md-content>
         </md-tab-body>

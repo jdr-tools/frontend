@@ -14,7 +14,7 @@
         </md-button>
         <md-menu-content>
           <div md-colors="{color: 'grey-500'}" ng-if="!vm.invitations.length" class="md-padding md-caption">
-            Pas de nouvelles notifications
+            {{'components.main_menu.no_invitations' | translate}}
           </div>
           <md-list flex ng-if="vm.invitations.length">
             <md-list-item class="md-2-line" ng-repeat="invitation in vm.invitations">
