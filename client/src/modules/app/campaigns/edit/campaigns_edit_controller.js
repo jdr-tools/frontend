@@ -82,9 +82,37 @@ const campaignsEditController = function campaignsEditControllerFunction ($local
     CampaignsFactory.update($state.params.id, vm.campaignEditionForm, parameters, vm.success)
   }
 
+  vm.removeFromList = (list, invitation) => {
+    if (vm.invitations[list] !== undefined) {
+      const removed = _.remove(vm.invitations[list].items, {id: invitation.id})
+      if (removed.length > 0) vm.invitations[list].count--
+    }
+  }
+
   vm.initialize()
 
   $rootScope.$on('invitations.reset', vm.refreshInvitations)
+
+  $rootScope.$on('invitation.update', (event, invitation) => {
+    if (invitation.campaign.id === vm.campaign.id) {
+      vm.removeFromList('pending', invitation)
+      if (invitation.status === 'accepted') {
+        if (vm.invitations.accepted === undefined) {
+          vm.invitations.accepted = {
+            count: 1,
+            items: [invitation]
+          }
+        }
+        else {
+          vm.invitations.accepted.items.push(invitation)
+          vm.invitations.accepted.count++
+        }
+      }
+      else {
+        vm.removeFromList('accepted', invitation)
+      }
+    }
+  })
 }
 
 export default campaignsEditController
