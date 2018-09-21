@@ -3,15 +3,10 @@ const campaignsEditController = function campaignsEditControllerFunction ($local
 
   const vm = this
 
-  vm.addInvitation = (invitation) => {
-    _.remove(vm.invitations, {id: invitation.id})
-    vm.invitations.push(invitation)
-  }
-
   /** Method called when submitting the form to add a new player to the game. */
   vm.addPlayer = () => {
     ErrorsService.resetErrors(vm.invitationForm)
-    CampaignsFactory.addPlayer($state.params.id, vm.invitationForm, vm.account, vm.addInvitation)
+    CampaignsFactory.addPlayer($state.params.id, vm.invitationForm, vm.account, vm.updateInvitation)
   }
 
   /**
@@ -53,6 +48,10 @@ const campaignsEditController = function campaignsEditControllerFunction ($local
     vm.unauthorized = false
     /** This flag is used when the request is successfully done, and stops the spinner. */
     vm.initialized = false
+    /** Events linked to the modification of the list of events for this campaign. */
+    _.each(['remove', 'creation', 'update'], (event) => {
+      $rootScope.$on(`invitation.${event}`, vm.updateInvitationFromEvent)
+    })
   }
 
   /**
@@ -82,17 +81,25 @@ const campaignsEditController = function campaignsEditControllerFunction ($local
     CampaignsFactory.update($state.params.id, vm.campaignEditionForm, parameters, vm.success)
   }
 
-  vm.initialize()
-
-  $rootScope.$on('invitations.remove', (event, invitation) => vm.addInvitation(invitation))
-
-  $rootScope.$on('invitation.creation', (event, invitation) => vm.addInvitation(invitation))
-
-  $rootScope.$on('invitation.update', (event, invitation) => {
+  /**
+   * Updates an invitation in the list, retrieving it by its ID.
+   * @param {Object} invitation - the invitation to update in the list, replacing it with the new value.
+   */
+  vm.updateInvitation = (invitation) => {
     if (invitation.campaign.id === vm.campaign.id) {
-      vm.addInvitation(invitation)
+      _.remove(vm.invitations, {id: invitation.id})
+      vm.invitations.push(invitation)
     }
-  })
+  }
+
+  /**
+   * Handler for the invitation list modification events.
+   * @param {Object} event - the AngularJS event automatically added.
+   * @param {Object} invitation - the invitation to modify in the list.
+   */
+  vm.updateInvitationFromEvent = (event, invitation) => vm.updateInvitation(invitation)
+
+  vm.initialize()
 }
 
 export default campaignsEditController
