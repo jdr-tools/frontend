@@ -18,8 +18,14 @@
           </div>
           <md-list flex ng-if="vm.invitations.length">
             <md-list-item class="md-2-line" ng-repeat="invitation in vm.invitations">
-              <div class="md-list-item-text">
-                <h3>{{invitation.campaign.creator.username}}</h3>
+              <div ng-if="invitation.status === 'request'" class="md-list-item-text">
+                <h3>{{'components.main_menu.requests.title' | translate}}</h3>
+                <h4>{{'components.main_menu.requests.text' | translate:invitation}}</h4>
+                <p>{{invitation.campaign.title}}</p>
+              </div>
+              <div ng-if="invitation.status === 'pending'" class="md-list-item-text">
+                <h3>{{'components.main_menu.invitations.title' | translate}}</h3>
+                <h4>{{'components.main_menu.invitations.text' | translate:invitation}}</h4>
                 <p>{{invitation.campaign.title}}</p>
               </div>
               <md-button class="md-secondary md-icon-button" ng-click="vm.accept(invitation.id)">

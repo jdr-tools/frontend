@@ -19,7 +19,14 @@
         "rights": "Rights",
         "search": "Search"
       },
-      "no_invitations": "No new invitations/requests"
+        "text": "{{campaign.creator}} invited you in his campaign",
+        "title": "Invitation"
+      },
+      "no_invitations": "No new invitations/requests",
+      "requests": {
+        "text": "{{username}} would like to join your campaign",
+        "title": "Request"
+      }
     }
   }
 }

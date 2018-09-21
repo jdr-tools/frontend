@@ -20,7 +20,15 @@
         "rights": "Droits",
         "search": "Rechercher"
       },
-      "no_invitations": "Pas de nouvelles invitations/requêtes"
+      "invitations": {
+        "text": "{{campaign.creator}} vous a invité au sein de sa campagne",
+        "title": "Invitation"
+      },
+      "no_invitations": "Pas de nouvelles invitations/requêtes",
+      "requests": {
+        "text": "{{username}} souhaiterait rejoindre votre campagne",
+        "title": "Requête"
+      }
     }
   }
 }
