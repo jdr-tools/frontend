@@ -1,5 +1,8 @@
-<app-menu></app-menu>
-<div ui-view></div>
+<div class="layout-container" layout="column" layout-align="center stretch">
+  <app-menu flex="none"></app-menu>
+  <ui-view flex="grow" layout="row" layout-align="center stretch"></ui-view>
+</div>
+
 <confirmation-modal></confirmation-modal>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">

@@ -1,1 +1,14 @@
-<div>Interface de jeu de la campagne {{vm.campaign_id}}</div>
+<md-content class="full-size">
+  <md-sidenav md-component-id="chat-sidenav" class="md-sidenav-right" layout="column" layout-align="center stretch">
+    <md-content flex="grow">
+      Contenu des messages
+    </md-content>
+    <form ng-submit="vm.sendMessage()" class="chatroom-form" flex="none">
+      <md-input-container class="md-block">
+        <label>Message</label>
+        <input ng-model="vm.message" />
+      </md-input-container>
+    </form>
+  </md-sidenav>
+  <md-button ng-click="vm.openChatroom()">Open chatroom</md-button>
+</md-content>

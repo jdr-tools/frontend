@@ -2,7 +2,7 @@
  * Service used to manage websockets throughout the application.
  * @author Vincent Courtois <courtois.vincent@outlook.com>
  */
-const websocketChannel = function websocketChannelFunction ($http, $interval, $timeout, $localStorage, websocketMessages) {
+const websocketChannel = function websocketChannelFunction (Api, $interval, $timeout, $localStorage, websocketMessages) {
   'ngInject'
 
   const vm = this
@@ -42,13 +42,19 @@ const websocketChannel = function websocketChannelFunction ($http, $interval, $t
   vm.setup = () => {
     if (vm.websocket === null) {
       /** Gets the address of the websocket service by requesting the load balancer. */
-      $http.get('/websocket').then((response) => {
-        /** Create a websocket connection to the given address. */
-        vm.websocket = new WebSocket(`${response.data.url}/websockets?session_id=${$localStorage.token}`)
-        /** Assigns the handlers to the dedicated actions on the websocket. */
-        vm.websocket.onopen = vm.onWsOpen
-        vm.websocket.onmessage = vm.onWsMessage
-        vm.websocket.onclose = vm.onWsClose
+      Api.get('/repartitor/url', {}, {
+        successCallback: response => {
+          console.log(response)
+          /** Create a websocket connection to the given address. */
+          vm.websocket = new WebSocket(`${response.url}?session_id=${$localStorage.token}`)
+          /** Assigns the handlers to the dedicated actions on the websocket. */
+          vm.websocket.onopen = vm.onWsOpen
+          vm.websocket.onmessage = vm.onWsMessage
+          vm.websocket.onclose = vm.onWsClose
+        },
+        errorCallback: response => {
+          console.log(response)
+        }
       })
     }
   }

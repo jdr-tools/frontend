@@ -1,9 +1,11 @@
-const campaignsPlayController = function campaignsPlayControllerFunction ($state) {
+const campaignsPlayController = function campaignsPlayControllerFunction ($mdSidenav, $state) {
   'ngInject'
 
   const vm = this
 
-  vm.campaign_id = $state.params.id
+  vm.openChatroom = () => {
+    $mdSidenav('chat-sidenav').toggle();
+  }
 }
 
 export default campaignsPlayController
