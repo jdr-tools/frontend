@@ -2,7 +2,7 @@
  * Service used to manage websockets throughout the application.
  * @author Vincent Courtois <courtois.vincent@outlook.com>
  */
-const websocketChannel = function websocketChannelFunction (Api, $interval, $timeout, $localStorage) {
+const websocketChannel = function websocketChannelFunction (Api, $rootScope, $interval, $timeout, $localStorage) {
   'ngInject'
 
   const vm = this
@@ -24,6 +24,7 @@ const websocketChannel = function websocketChannelFunction (Api, $interval, $tim
    */
   vm.onWsMessage = (event) => {
     const body = JSON.parse(event.data)
+    console.log(body)
     $rootScope.$broadcast(body.message, body.data)
   }
 
@@ -42,7 +43,7 @@ const websocketChannel = function websocketChannelFunction (Api, $interval, $tim
       /** Gets the address of the websocket service by requesting the load balancer. */
       Api.get('/repartitor/url', {}, {
         successCallback: response => {
-          console.log(response)
+          console.log(`URL : ${response.url}`)
           /** Create a websocket connection to the given address. */
           vm.websocket = new WebSocket(`${response.url}?session_id=${$localStorage.token}`)
           /** Assigns the handlers to the dedicated actions on the websocket. */
