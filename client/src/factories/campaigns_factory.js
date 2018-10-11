@@ -1,11 +1,14 @@
-const CampaignsFactory = function CampaignsFactoryFunction (Api, $localStorage, $rootScope) {
+const CampaignsFactory = function CampaignsFactoryFunction (Api, $localStorage, $rootScope, WebsocketNotifier) {
   'ngInject'
 
   const service = this
 
   service.addPlayer = (campaign_id, form, username, success, failure) => {
     Api.post('/invitations', {username: username, campaign_id: campaign_id}, {
-      successCallback: (response) => success(response.item),
+      successCallback: (response) => {
+        success(response.item)
+        WebsocketNotifier.sendToUsername(username, 'invitation.creation', response.item)
+      },
       errorsForm: form
     })
   }

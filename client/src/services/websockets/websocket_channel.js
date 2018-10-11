@@ -24,9 +24,7 @@ const websocketChannel = function websocketChannelFunction (Api, $interval, $tim
    */
   vm.onWsMessage = (event) => {
     const body = JSON.parse(event.data)
-    const message = body.message
-    const data = body.data
-    websocketMessages.handle(message, data)
+    $rootScope.$broadcast(body.message, body.data)
   }
 
   /** Function called when creating the websocket, initializing the keep alive pings. */
