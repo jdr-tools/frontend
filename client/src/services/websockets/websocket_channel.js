@@ -2,7 +2,7 @@
  * Service used to manage websockets throughout the application.
  * @author Vincent Courtois <courtois.vincent@outlook.com>
  */
-const websocketChannel = function websocketChannelFunction (Api, $interval, $timeout, $localStorage, websocketMessages) {
+const websocketChannel = function websocketChannelFunction (Api, $interval, $timeout, $localStorage) {
   'ngInject'
 
   const vm = this
