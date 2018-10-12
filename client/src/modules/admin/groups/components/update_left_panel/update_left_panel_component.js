@@ -14,7 +14,7 @@ const updateLeftPanel = function updateLeftPanelFunction ($mdSidenav, $rootScope
 
   /** we can declare the watcher only when the bindings are initialized. */
   $scope.$watch('vm.loopKey', () => {
-    $rootScope.$on(`update_${vm.loopKey}`, (event, groupId) => {
+    $scope.$on(`update_${vm.loopKey}`, (event, groupId) => {
       vm.groupId = groupId
       GroupsFactory.get(groupId, vm.selectElements)
     })

@@ -1,4 +1,4 @@
-const updateGroupController = function updateGroupControllerFunction ($mdSidenav, $rootScope, CategoriesFactory, GroupsFactory, ServicesFactory) {
+const updateGroupController = function updateGroupControllerFunction ($mdSidenav, $rootScope, $scope, CategoriesFactory, GroupsFactory, ServicesFactory) {
   'ngInject'
 
   const vm = this
@@ -37,7 +37,7 @@ const updateGroupController = function updateGroupControllerFunction ($mdSidenav
     vm.groups = groups.items
   }
 
-  $rootScope.$on('refreshGroupsList', vm.getGroups)
+  $scope.$on('refreshGroupsList', vm.getGroups)
 
   /** Loads the list of services to display in the dedicated left panel. */
   ServicesFactory.list(services => { vm.services = services.items })

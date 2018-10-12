@@ -1,4 +1,4 @@
-const campaignsSearchController = function campaignsSearchControllerFunction ($rootScope, CampaignsFactory, InvitationsFactory) {
+const campaignsSearchController = function campaignsSearchControllerFunction ($scope, CampaignsFactory, InvitationsFactory) {
   'ngInject'
 
   const vm = this
@@ -19,7 +19,7 @@ const campaignsSearchController = function campaignsSearchControllerFunction ($r
    * An invitation update is an update message sent by the websockets service to the user
    * to warn him that one of its invitation has been modified (mainly accepted)
    */
-  $rootScope.$on('invitation.update', (event, invitation) => {
+  $scope.$on('invitation.update', (event, invitation) => {
     const index = _.findIndex(vm.campaigns.items, {id: invitation.campaign.id})
     if (index > -1 ) {
       vm.campaigns.items[index].invitation = invitation

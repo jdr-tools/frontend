@@ -6,7 +6,7 @@ const invitationsComponent = function invitationsComponentFunction ($localStorag
   vm.currentUsername = $localStorage.account.username
 
   vm.expel = (invitation) => {
-    InvitationsFactory.changeStatus(invitation.id, 'expelled', (response) => {
+    InvitationsFactory.changeStatus(invitation, 'expelled', (response) => {
       const returnedInvitation = Object.assign({}, invitation, {status: 'expelled'})
       $rootScope.$broadcast('invitations.remove', returnedInvitation)
     })

@@ -1,4 +1,4 @@
-const campaignsEditController = function campaignsEditControllerFunction ($localStorage, $mdToast, $rootScope, $scope, $state, $timeout, CampaignsFactory, ErrorsService) {
+const campaignsEditController = function campaignsEditControllerFunction ($localStorage, $mdToast, $scope, $state, $timeout, CampaignsFactory, ErrorsService) {
   'ngInject'
 
   const vm = this
@@ -50,7 +50,7 @@ const campaignsEditController = function campaignsEditControllerFunction ($local
     vm.initialized = false
     /** Events linked to the modification of the list of events for this campaign. */
     _.each(['remove', 'creation', 'update'], (event) => {
-      $rootScope.$on(`invitation.${event}`, vm.updateInvitationFromEvent)
+      $scope.$on(`invitation.${event}`, vm.updateInvitationFromEvent)
     })
   }
 

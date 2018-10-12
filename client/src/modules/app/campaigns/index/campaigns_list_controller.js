@@ -1,4 +1,4 @@
-const campaignsListController = function campaignsListControllerFunction ($interval, $mdDialog, $rootScope, CampaignsFactory, Confirmation, InvitationsFactory) {
+const campaignsListController = function campaignsListControllerFunction ($interval, $mdDialog, $scope, CampaignsFactory, Confirmation, InvitationsFactory) {
   'ngInject'
 
   const vm = this
@@ -30,7 +30,7 @@ const campaignsListController = function campaignsListControllerFunction ($inter
     $interval(vm.getAllCampaigns, vm.countdownDuration * 1000)
   }
 
-  vm.leave = (invitation) => InvitationsFactory.changeStatus(invitation.id, 'left', vm.getAllCampaigns)
+  vm.leave = (invitation) => InvitationsFactory.changeStatus(invitation, 'left', vm.getAllCampaigns)
 
   /**
    * Returns an empty campaigns list for the variables initializations.
@@ -38,13 +38,13 @@ const campaignsListController = function campaignsListControllerFunction ($inter
    */
   vm.emptyList = () => { return {count: 0, items: []} }
 
-  $rootScope.$on('campaign.created', vm.getOwnCampaigns)
+  $scope.$on('campaign.created', vm.getOwnCampaigns)
 
-  $rootScope.$on('invitation.accepted', vm.getInvitations)
+  $scope.$on('invitation.accepted', vm.getInvitations)
 
-  $rootScope.$on('campaign.delete', (e, campaign) => CampaignsFactory.delete(campaign.id, () => vm.getOwnCampaigns()))
+  $scope.$on('campaign.delete', (e, campaign) => CampaignsFactory.delete(campaign.id, () => vm.getOwnCampaigns()))
   
-  $rootScope.$on('invitation.update', (event, invitation) => {
+  $scope.$on('invitation.update', (event, invitation) => {
     if (invitation.status === 'accepted') {
       vm.invitations.push(invitation)
     }
