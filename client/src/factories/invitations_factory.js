@@ -1,4 +1,4 @@
-const invitationsFactory = function invitationsFactoryFunction (Api) {
+const invitationsFactory = function invitationsFactoryFunction (Api, WebsocketNotifier) {
   'ngInject'
   
   const vm = this
@@ -8,7 +8,10 @@ const invitationsFactory = function invitationsFactoryFunction (Api) {
   }
 
   vm.changeStatus = (invitation_id, status, callback) => {
-    Api.put(`/invitations/${invitation_id}`, {status: status}, {successCallback: callback})
+    Api.put(`/invitations/${invitation_id}`, {status: status}, {successCallback: (response) => {
+      WebsocketNotifier.sendToCampaign(invitation.campaign.id, 'invitation.update', response.item)
+      callback()
+    }})
   }
 
   vm.delete = (invitation_id, callback) => {
