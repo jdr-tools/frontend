@@ -54,6 +54,7 @@
                   {{campaign.current_players}} / {{campaign.max_players}}
                 </span>
               </span>
+              <span ng-if="campaign.waiting_players > 0" class="md-subhead">{{campaign.waiting_players}} en attente</span>
             </md-card-title-text>
           </md-card-title>
           <md-card-content flex="noshrink">

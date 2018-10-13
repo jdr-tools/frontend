@@ -8,7 +8,7 @@ const campaignsSearchController = function campaignsSearchControllerFunction ($s
   vm.getCampaigns = () => CampaignsFactory.list((campaigns) => { vm.campaigns = campaigns })
 
   vm.request = (campaign) => CampaignsFactory.requestAccess(campaign, (result) => {
-    campaign.invitation = Object.assign(result.item, {status: 'request'})
+    campaign.invitation = Object.assign(result, {status: 'request'})
   })
 
   vm.deleteInvitation = (invitation) => {

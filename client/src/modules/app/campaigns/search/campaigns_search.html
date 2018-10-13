@@ -15,7 +15,7 @@
       </md-card-title-text>
     </md-card-title>
     <md-card-content flex="noshrink">
-      <div>{{campaign.description}}</div>
+      <div>{{campaign.}}</div>
       <md-chips class="campaign-tags" ng-if="campaign.tags.length > 0" ng-model="campaign.tags" readonly="true"></md-chips>
     </md-card-content>
     <md-card-actions layout="row" layout-align="end center">
@@ -23,7 +23,7 @@
         <md-tooltip md-direction="top" ng-if="campaign.invitation">{{'campaigns.index.tooltips.cancel' | translate}}</md-tooltip>
         <md-icon>cancel</md-icon>
       </md-button>
-      <md-button ng-click="vm.request(campaign)" ng-if="!campaign.invitation" class="md-icon-button">
+      <md-button ng-click="vm.request(campaign)" ng-if="!campaign.invitation || campaign.invitation.status != 'request'" class="md-icon-button">
         <md-tooltip md-direction="top" ng-if="!campaign.invitation">{{'campaigns.index.tooltips.join' | translate}}</md-tooltip>
         <md-icon>group_add</md-icon>
       </md-button>

@@ -3,7 +3,7 @@ const CampaignsFactory = function CampaignsFactoryFunction (Api, $localStorage, 
 
   const service = this
 
-  service.addPlayer = (campaign_id, form, username, success, failure) => {
+  service.addPlayer = (campaign_id, form, username, success) => {
     Api.post('/invitations', {username: username, campaign_id: campaign_id}, {
       successCallback: (response) => {
         success(response.item)
@@ -15,7 +15,10 @@ const CampaignsFactory = function CampaignsFactoryFunction (Api, $localStorage, 
 
   service.requestAccess = (campaign, callback) => {
     Api.post('/invitations', {username: $localStorage.account.username, campaign_id: campaign.id}, {
-      successCallback: callback
+      successCallback: (response) => {
+        callback(response.item)
+        WebsocketNotifier.sendToUsername(campaign.creator.username, 'invitation.creation', response.item)
+      }
     })
   }
 

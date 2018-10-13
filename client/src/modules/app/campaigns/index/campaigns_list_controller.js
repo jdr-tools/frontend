@@ -11,7 +11,6 @@ const campaignsListController = function campaignsListControllerFunction ($inter
   vm.initialize = () => {
     vm.creations = vm.emptyList()
     vm.invitations = []
-    // vm.initializeCountdown()
     vm.getAllCampaigns()
   }
 
@@ -24,11 +23,6 @@ const campaignsListController = function campaignsListControllerFunction ($inter
   vm.getInvitations = () => InvitationsFactory.own((invitations) => {
     vm.invitations = _.filter(invitations, (inv) => inv.status === 'accepted')
   })
-
-  vm.initializeCountdown = () => {
-    vm.countdownDuration = 5
-    $interval(vm.getAllCampaigns, vm.countdownDuration * 1000)
-  }
 
   vm.leave = (invitation) => InvitationsFactory.changeStatus(invitation, 'left', vm.getAllCampaigns)
 
