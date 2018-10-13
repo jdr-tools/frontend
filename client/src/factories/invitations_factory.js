@@ -14,8 +14,8 @@ const invitationsFactory = function invitationsFactoryFunction (Api, WebsocketNo
     }})
   }
 
-  vm.delete = (invitation_id, callback) => {
-    Api.delete(`/invitations/${invitation_id}`, {successCallback: callback})
+  vm.delete = (invitation, callback) => {
+    Api.delete(`/invitations/${invitation.id}`, {successCallback: callback})
   }
 
   return vm
