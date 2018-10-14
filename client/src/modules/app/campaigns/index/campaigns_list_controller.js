@@ -1,4 +1,4 @@
-const campaignsListController = function campaignsListControllerFunction ($interval, $mdDialog, $scope, CampaignsFactory, Confirmation, InvitationsFactory) {
+const campaignsListController = function campaignsListControllerFunction ($interval, $localStorage, $mdDialog, $scope, CampaignsFactory, Confirmation, InvitationsFactory) {
   'ngInject'
 
   const vm = this
@@ -41,11 +41,42 @@ const campaignsListController = function campaignsListControllerFunction ($inter
   $scope.$on('campaign.delete', (e, campaign) => CampaignsFactory.delete(campaign.id, () => vm.getOwnCampaigns()))
   
   $scope.$on('invitation.update', (event, invitation) => {
-    if (invitation.status === 'accepted') {
-      vm.invitations.push(invitation)
+    if (invitation.campaign.creator === $localStorage.account.username) {
+      const creation = _.find(vm.creations.items, _.pick(invitation.campaign, 'id'))
+      if (creation !== undefined) {
+        switch (invitation.status) {
+          case 'accepted':
+            creation.current_players = creation.current_players + 1
+            creation.waiting_players = creation.waiting_players - 1
+            break
+          case 'refused':
+            creation.waiting_players = creation.waiting_players - 1
+            break
+        }
+      }
     }
-    else if (invitation.status === 'expelled') {
-      _.remove(vm.invitations, _.pick(invitation, 'id'))
+    else {
+      switch (invitation.status) {
+        case 'accepted':
+          vm.invitations.push(invitation); break
+        case 'refused':
+          _.remove(vm.invitations, _.pick(invitation, 'id')); break
+      }
+    }
+  })
+
+  $scope.$on('invitation.creation', (event, invitation) => {
+    if (invitation.campaign.creator === $localStorage.account.username) {
+      const creation = _.find(vm.creations.items, _.pick(invitation.campaign, 'id'))
+      if (creation !== undefined) {
+        creation.waiting_players = creation.waiting_players + 1
+      }
+    }
+    else {
+      const updatedInvitation = _.find(vm.invitations, _.pick(invitation, 'id'))
+      if (updatedInvitation !== undefined) {
+        updatedInvitation.waiting_players = updatedInvitation.waiting_players + 1
+      }
     }
   })
 
