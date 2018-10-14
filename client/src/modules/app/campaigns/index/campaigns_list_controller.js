@@ -24,7 +24,11 @@ const campaignsListController = function campaignsListControllerFunction ($inter
     vm.invitations = _.filter(invitations, (inv) => inv.status === 'accepted')
   })
 
-  vm.leave = (invitation) => InvitationsFactory.changeStatus(invitation, 'left', vm.getAllCampaigns)
+  vm.leave = (invitation) => {
+    InvitationsFactory.changeStatus(invitation, 'left', (invitation) => {
+      _.remove(vm.invitations, {id: invitation.id})
+    })
+  }
 
   /**
    * Returns an empty campaigns list for the variables initializations.

@@ -9,8 +9,8 @@ const invitationsFactory = function invitationsFactoryFunction (Api, WebsocketNo
 
   vm.changeStatus = (invitation, status, callback) => {
     Api.put(`/invitations/${invitation.id}`, {status: status}, {successCallback: response => {
-      WebsocketNotifier.sendToCampaign(invitation.campaign.id, 'invitation.update', invitation)
-      callback(response)
+      WebsocketNotifier.sendToCampaign(invitation.campaign.id, 'invitation.update', response.item)
+      callback(response.item)
     }})
   }
 
