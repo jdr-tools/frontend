@@ -7,8 +7,7 @@ const invitationsComponent = function invitationsComponentFunction ($localStorag
 
   vm.expel = (invitation) => {
     InvitationsFactory.changeStatus(invitation, 'expelled', (response) => {
-      const returnedInvitation = Object.assign({}, invitation, {status: 'expelled'})
-      $rootScope.$broadcast('invitations.remove', returnedInvitation)
+      $rootScope.$broadcast('invitations.remove', response)
     })
   }
 }
