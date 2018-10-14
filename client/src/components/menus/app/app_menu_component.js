@@ -12,10 +12,7 @@ const appMenuController = function appMenuControllerFunction(Api, Authentication
   vm.hasInvitations = false
 
   vm.accept = (invitation) => {
-    InvitationsFactory.changeStatus(invitation, 'accepted', () => {
-      vm.getInvitations()
-      $rootScope.$broadcast('invitation.accepted')
-    })
+    InvitationsFactory.changeStatus(invitation, 'accepted', vm.remove)
   }
 
   vm.getInvitations = () => {
@@ -46,7 +43,11 @@ const appMenuController = function appMenuControllerFunction(Api, Authentication
   }
 
   vm.refuse = (invitation) => {
-    InvitationsFactory.changeStatus(invitation, 'refused', vm.getInvitations)
+    InvitationsFactory.changeStatus(invitation, 'refused', vm.remove)
+  }
+
+  vm.remove = (invitation) => {
+    _.remove(vm.invitations, _.pick(invitation, 'id'))
   }
 
   vm.setUsername = () => {

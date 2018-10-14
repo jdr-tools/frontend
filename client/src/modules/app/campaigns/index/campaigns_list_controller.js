@@ -38,13 +38,14 @@ const campaignsListController = function campaignsListControllerFunction ($inter
 
   $scope.$on('campaign.created', vm.getOwnCampaigns)
 
-  $scope.$on('invitation.accepted', vm.getInvitations)
-
   $scope.$on('campaign.delete', (e, campaign) => CampaignsFactory.delete(campaign.id, () => vm.getOwnCampaigns()))
   
   $scope.$on('invitation.update', (event, invitation) => {
     if (invitation.status === 'accepted') {
       vm.invitations.push(invitation)
+    }
+    else if (invitation.status === 'expelled') {
+      _.remove(vm.invitations, _.pick(invitation, 'id'))
     }
   })
 
