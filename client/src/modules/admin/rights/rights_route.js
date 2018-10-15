@@ -18,13 +18,7 @@ const rightsRoute = function ($stateProvider) {
     url: '/rights',
     parent: 'rights',
     templateUrl: 'client/src/modules/admin/rights/list/rights_list.html',
-    controller: 'rightsListController as vm',
-    resolve: {
-      right: (Permissions) => {
-        'ngInject'
-        Permissions.checkAndRedirect('administration.rights', 'adminDashboard')
-      }
-    }
+    controller: 'rightsListController as vm'
   })
 }
 

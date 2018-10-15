@@ -1,0 +1,80 @@
+<h1>Informations</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Clé</th>
+      <th>Valeur</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ID</td>
+      <td>{{vm.service.id}}</td>
+    </tr>
+    <tr>
+      <td>Path</td>
+      <td>{{vm.service.path}}</td>
+    </tr>
+    <tr>
+      <td>Clé</td>
+      <td>{{vm.service.key}}</td>
+    </tr>
+    <tr>
+      <td>Active</td>
+      <td>{{vm.service.active}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div ng-if="vm.service.routes.length > 0">
+  <h1>Routes</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Verbe</th>
+        <th>Chemin</th>
+        <th>Authenticated</th>
+        <th>premium</th>
+        <th>active</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="route in vm.service.routes">
+        <td>{{route.verb}}</td>
+        <td>{{route.path}}</td>
+        <td>{{route.authenticated}}</td>
+        <td>{{route.premium}}</td>
+        <td>{{route.active}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div ng-id="vm.service.instances.length > 0">
+  <h1>Instances</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>URL</th>
+        <th>running</th>
+        <th>active</th>
+        <th>type</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="instance in vm.service.instances">
+        <td>{{instance.url}}</td>
+        <td>{{instance.running}}</td>
+        <td>{{instance.active}}</td>
+        <td>{{instance.type}}</td>
+        <td>
+          <a ng-click="vm.service.reboot(instance)">
+            <i class="fa fa-power-off"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
