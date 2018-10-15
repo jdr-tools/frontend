@@ -22,7 +22,10 @@
     </tr>
     <tr>
       <td>Active</td>
-      <td>{{vm.service.active}}</td>
+      <td>
+        <div class="text-success" ng-if="vm.service.active">Oui</div>
+        <div class="text-danger" ng-if="!vm.service.active">Non</div>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -37,15 +40,44 @@
         <th>Authenticated</th>
         <th>premium</th>
         <th>active</th>
+        <th>actions</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="route in vm.service.routes">
         <td>{{route.verb}}</td>
         <td>{{route.path}}</td>
-        <td>{{route.authenticated}}</td>
-        <td>{{route.premium}}</td>
-        <td>{{route.active}}</td>
+        <td>
+          <div class="text-success" ng-if="route.authenticated">Oui</div>
+          <div class="text-warning" ng-if="!route.authenticated">Non</div>
+        </td>
+        <td>
+          <div class="text-success" ng-if="route.premium">Oui</div>
+          <div class="text-danger" ng-if="!route.premium">Non</div>
+        </td>
+        <td>
+          <div class="text-success" ng-if="route.active">Oui</div>
+          <div class="text-danger" ng-if="!route.active">Non</div>
+        </td>
+        <td>
+          <a class="text-dark" ng-click="vm.service.toggleRouteFlag(route, 'authenticated')">
+            <i ng-class="{fa: true, 'fa-unlock': route.authenticated, 'fa-lock': !route.authenticated}"></i>
+          </a>
+          &nbsp;
+          <a class="text-dark" ng-click="vm.service.toggleRouteFlag(route, 'premium')">
+            <i ng-class="{fa: true, 'fa-arrow-down': route.premium, 'fa-arrow-up': !route.premium}"></i>
+          </a>
+          &nbsp;
+          <a
+            ng-click="vm.service.toggleRouteFlag(route, 'active')"
+            ng-class="{'text-success': !route.active, 'text-danger': route.active}"
+            data-toggle="tooltip"
+            data-placement="bottom"
+            title="{{route.active ? 'Deactivate' : 'Activate'}}"
+          >
+            <i class="fa fa-toggle-off"></i>
+          </a>
+        </td>
       </tr>
     </tbody>
   </table>

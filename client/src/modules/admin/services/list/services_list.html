@@ -7,6 +7,7 @@
       <th>Chemin</th>
       <th>Nombre de routes</th>
       <th>Nombre d'instances</th>
+      <th>Active</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -17,7 +18,30 @@
       <td>{{service.routes.length}}</td>
       <td>{{service.instances.length}}</td>
       <td>
-        <a ui-sref="services.edit({id: service.id})"><i class="fa fa-pencil"></i></a>
+        <div class="text-success" ng-if="service.active">Oui</div>
+        <div class="text-danger" ng-if="!service.active">Non</div>
+      </td>
+      <td>
+        <a
+          ui-sref="services.edit({id: service.id})"
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title="Accéder au service"
+          class="text-dark"
+        >
+          <i class="fa fa-pencil"></i>
+        </a>
+        &nbsp;
+        <a
+          ng-click="vm.servicesList.toggleActiveState(service)"
+          ng-class="{'text-success': !service.active, 'text-danger': service.active}"
+          ng-if="service.key != 'services'"
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title="{{service.active ? 'Deactivate' : 'Activate'}}"
+        >
+          <i class="fa fa-toggle-off"></i>
+        </a>
       </td>
     </tr>
   </tbody>

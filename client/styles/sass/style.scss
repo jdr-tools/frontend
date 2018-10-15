@@ -66,3 +66,7 @@ ui-view, .full-size {
   height: 100%;
   width: 100%;
 }
+
+body > ui-view {
+  overflow-y: auto;
+}

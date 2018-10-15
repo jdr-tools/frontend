@@ -13,6 +13,7 @@ const dependencies = [
   'ngMessages',
   'pascalprecht.translate',
   'ui.router',
+  'uiSwitch',
   components,
   configuration,
   directives,
