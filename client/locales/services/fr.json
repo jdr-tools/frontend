@@ -1,5 +1,19 @@
 {
   "services": {
-    
+    "list": {
+      "headers": {
+        "active": "Statut",
+        "instances": "Instances",
+        "key": "Clé",
+        "path": "Chemin",
+        "routes": "Routes"
+      },
+      "title": "List des services"
+    },
+    "tooltips": {
+      "access": "Accéder au service",
+      "activate": "Activer",
+      "deactivate": "Désactiver"
+    }
   }
 }

@@ -1,32 +1,32 @@
-<h1 translate>Liste des services</h1>
+<h1 translate>services.list.title</h1>
 
 <table ng-if="vm.servicesList.services.length > 0" class="table">
   <thead>
     <tr>
-      <th>Clé</th>
-      <th>Chemin</th>
-      <th>Nombre de routes</th>
-      <th>Nombre d'instances</th>
-      <th>Active</th>
-      <th>Actions</th>
+      <th translate>services.list.headers.key</th>
+      <th translate>services.list.headers.path</th>
+      <th translate>services.list.headers.routes</th>
+      <th translate>services.list.headers.instances</th>
+      <th translate>common.active.f</th>
+      <th translate>common.actions</th>
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="service in vm.servicesList.services">
+    <tr ng-repeat="service in vm.servicesList.services | orderBy: 'key'">
       <td>{{service.key}}</td>
-      <td>{{service.path}}</td>
+      <td><pre class="without-margin">{{service.path}}</pre></td>
       <td>{{service.routes.length}}</td>
       <td>{{service.instances.length}}</td>
       <td>
-        <div class="text-success" ng-if="service.active">Oui</div>
-        <div class="text-danger" ng-if="!service.active">Non</div>
+        <div class="text-success" ng-if="service.active" translate>common.yes</div>
+        <div class="text-danger" ng-if="!service.active" translate>common.no</div>
       </td>
       <td>
         <a
           ui-sref="services.edit({id: service.id})"
           data-toggle="tooltip"
           data-placement="bottom"
-          title="Accéder au service"
+          title="{{'services.tooltips.access' | translate}}"
           class="text-dark"
         >
           <i class="fa fa-pencil"></i>
@@ -38,7 +38,7 @@
           ng-if="service.key != 'services'"
           data-toggle="tooltip"
           data-placement="bottom"
-          title="{{service.active ? 'Deactivate' : 'Activate'}}"
+          title="{{'services.tooltips.' + (service.active ? 'deactivate' : 'activate') | translate}}"
         >
           <i class="fa fa-toggle-off"></i>
         </a>

@@ -18,6 +18,15 @@ export default function serviceFactory (Api) {
       }})
     }
 
+    toggleInstanceFlag(instance, flag) {
+      const vm = this
+      const url = `/services/${this.id}/instances/${instance.id}`
+      const params = {[flag]: !instance[flag]}
+      Api.put(url, params, {successCallback: (response) => {
+        instance[flag] = !instance[flag]
+      }})
+    }
+
     reboot (instance) {
       Api.post(`/services/${this.id}/instances/${instance.id}/actions`, {type: 'restart'}, {successCallback: (response) => {
         console.log(response)

@@ -99,11 +99,24 @@
       <tr ng-repeat="instance in vm.service.instances">
         <td>{{instance.url}}</td>
         <td>{{instance.running}}</td>
-        <td>{{instance.active}}</td>
+        <td>
+          <div class="text-success" ng-if="instance.active">Oui</div>
+          <div class="text-danger" ng-if="!instance.active">Non</div>
+        </td>
         <td>{{instance.type}}</td>
         <td>
           <a ng-click="vm.service.reboot(instance)">
             <i class="fa fa-power-off"></i>
+          </a>
+          &nbsp;
+          <a
+            ng-click="vm.service.toggleInstanceFlag(instance, 'active')"
+            ng-class="{'text-success': !instance.active, 'text-danger': instance.active}"
+            data-toggle="tooltip"
+            data-placement="bottom"
+            title="{{instance.active ? 'Deactivate' : 'Activate'}}"
+          >
+            <i class="fa fa-toggle-off"></i>
           </a>
         </td>
       </tr>

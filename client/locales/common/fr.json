@@ -1,8 +1,18 @@
 {
   "common": {
     "actions": "Actions",
+    "active": {
+      "f": "Active",
+      "m": "Actif",
+      "n": "Actif·ve"
+    },
     "cancel": "Annuler",
     "confirm": "Confirmer",
+    "inactive": {
+      "f": "Inactive",
+      "m": "Inactif",
+      "n": "Inactif·ve"
+    },
     "no": "Non",
     "private": {
       "f": "Privée",
