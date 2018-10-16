@@ -1,5 +1,37 @@
 {
   "services": {
-    
+    "edit": {
+      "headers": {
+        "authenticated": "Authenticated",
+        "id": "ID",
+        "key": "Key",
+        "path": "Path",
+        "premium": "Premium",
+        "running": "Running",
+        "type": "Type",
+        "url": "URL",
+        "verb": "Verb"
+      },
+      "titles": {
+        "informations": "Informations",
+        "instances": "Instances",
+        "routes": "Routes"
+      }
+    },
+    "list": {
+      "headers": {
+        "active": "Active",
+        "instances": "Instances",
+        "key": "Key",
+        "path": "Path",
+        "routes": "Routes"
+      },
+      "title": "Services list"
+    },
+    "tooltips": {
+      "access": "Go to service",
+      "activate": "Activate",
+      "deactivate": "Deactivate"
+    }
   }
 }

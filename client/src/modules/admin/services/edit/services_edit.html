@@ -1,46 +1,46 @@
-<h1>Informations</h1>
+<h1 translate>services.edit.titles.informations</h1>
 
 <table class="table">
   <thead>
     <tr>
-      <th>Clé</th>
-      <th>Valeur</th>
+      <th translate>common.key</th>
+      <th translate>common.value</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>ID</td>
+      <td translate>services.edit.headers.id</td>
       <td>{{vm.service.id}}</td>
     </tr>
     <tr>
-      <td>Path</td>
+      <td translate>services.edit.headers.path</td>
       <td>{{vm.service.path}}</td>
     </tr>
     <tr>
-      <td>Clé</td>
+      <td translate>services.edit.headers.key</td>
       <td>{{vm.service.key}}</td>
     </tr>
     <tr>
-      <td>Active</td>
+      <td translate>common.active.f</td>
       <td>
-        <div class="text-success" ng-if="vm.service.active">Oui</div>
-        <div class="text-danger" ng-if="!vm.service.active">Non</div>
+        <div class="text-success" ng-if="vm.service.active" translate>common.yes</div>
+        <div class="text-danger" ng-if="!vm.service.active" translate>common.no</div>
       </td>
     </tr>
   </tbody>
 </table>
 
 <div ng-if="vm.service.routes.length > 0">
-  <h1>Routes</h1>
+  <h1 translate>services.edit.titles.routes</h1>
   <table class="table">
     <thead>
       <tr>
-        <th>Verbe</th>
-        <th>Chemin</th>
-        <th>Authenticated</th>
-        <th>premium</th>
-        <th>active</th>
-        <th>actions</th>
+        <th translate>services.edit.headers.verb</th>
+        <th translate>services.edit.headers.path</th>
+        <th translate>services.edit.headers.authenticated</th>
+        <th translate>services.edit.headers.premium</th>
+        <th translate>common.active.f</th>
+        <th translate>common.actions</th>
       </tr>
     </thead>
     <tbody>
@@ -48,16 +48,16 @@
         <td>{{route.verb}}</td>
         <td>{{route.path}}</td>
         <td>
-          <div class="text-success" ng-if="route.authenticated">Oui</div>
-          <div class="text-warning" ng-if="!route.authenticated">Non</div>
+          <div class="text-success" ng-if="route.authenticated" translate>common.yes</div>
+          <div class="text-warning" ng-if="!route.authenticated" translate>common.no</div>
         </td>
         <td>
-          <div class="text-success" ng-if="route.premium">Oui</div>
-          <div class="text-danger" ng-if="!route.premium">Non</div>
+          <div class="text-success" ng-if="route.premium" translate>common.yes</div>
+          <div class="text-danger" ng-if="!route.premium" translate>common.no</div>
         </td>
         <td>
-          <div class="text-success" ng-if="route.active">Oui</div>
-          <div class="text-danger" ng-if="!route.active">Non</div>
+          <div class="text-success" ng-if="route.active" translate>common.yes</div>
+          <div class="text-danger" ng-if="!route.active" translate>common.no</div>
         </td>
         <td>
           <a class="text-dark" ng-click="vm.service.toggleRouteFlag(route, 'authenticated')">
@@ -73,7 +73,7 @@
             ng-class="{'text-success': !route.active, 'text-danger': route.active}"
             data-toggle="tooltip"
             data-placement="bottom"
-            title="{{route.active ? 'Deactivate' : 'Activate'}}"
+            title="{{'services.tooltips.' + (route.active ? 'deactivate' : 'activate') | translate}}"
           >
             <i class="fa fa-toggle-off"></i>
           </a>
@@ -84,15 +84,15 @@
 </div>
 
 <div ng-id="vm.service.instances.length > 0">
-  <h1>Instances</h1>
+  <h1 translate>services.edit.titles.instances</h1>
   <table class="table">
     <thead>
       <tr>
-        <th>URL</th>
-        <th>running</th>
-        <th>active</th>
-        <th>type</th>
-        <th>Actions</th>
+        <th translate>services.edit.headers.url</th>
+        <th translate>services.edit.headers.running</th>
+        <th translate>common.active.f</th>
+        <th translate>services.edit.headers.type</th>
+        <th translate>common.actions</th>
       </tr>
     </thead>
     <tbody>
@@ -100,8 +100,8 @@
         <td>{{instance.url}}</td>
         <td>{{instance.running}}</td>
         <td>
-          <div class="text-success" ng-if="instance.active">Oui</div>
-          <div class="text-danger" ng-if="!instance.active">Non</div>
+          <div class="text-success" ng-if="instance.active" translate>common.yes</div>
+          <div class="text-danger" ng-if="!instance.active" translate>common.no</div>
         </td>
         <td>{{instance.type}}</td>
         <td>
@@ -114,7 +114,7 @@
             ng-class="{'text-success': !instance.active, 'text-danger': instance.active}"
             data-toggle="tooltip"
             data-placement="bottom"
-            title="{{instance.active ? 'Deactivate' : 'Activate'}}"
+            title="{{'services.tooltips.' + (instance.active ? 'deactivate' : 'activate') | translate}}"
           >
             <i class="fa fa-toggle-off"></i>
           </a>

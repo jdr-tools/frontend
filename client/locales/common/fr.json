@@ -13,6 +13,7 @@
       "m": "Inactif",
       "n": "Inactif·ve"
     },
+    "key": "Clé",
     "no": "Non",
     "private": {
       "f": "Privée",
@@ -26,6 +27,7 @@
     },
     "update": "Mettre à jour",
     "validate": "Valider",
+    "value": "Valeur",
     "yes": "Oui"
   }
 }

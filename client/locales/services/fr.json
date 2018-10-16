@@ -1,8 +1,25 @@
 {
   "services": {
+    "edit": {
+      "headers": {
+        "authenticated": "Authentifiée",
+        "id": "ID",
+        "key": "Clé",
+        "path": "Chemin",
+        "premium": "Premium",
+        "running": "En fonctionnement",
+        "type": "Type",
+        "url": "URL",
+        "verb": "Méthode"
+      },
+      "titles": {
+        "informations": "Informations",
+        "instances": "Instances",
+        "routes": "Routes"
+      }
+    },
     "list": {
       "headers": {
-        "active": "Statut",
         "instances": "Instances",
         "key": "Clé",
         "path": "Chemin",
