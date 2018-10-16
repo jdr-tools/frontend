@@ -20,7 +20,6 @@
     },
     "list": {
       "headers": {
-        "active": "Active",
         "instances": "Instances",
         "key": "Key",
         "path": "Path",
