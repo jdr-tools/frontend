@@ -70,3 +70,28 @@ ui-view, .full-size {
 body > ui-view {
   overflow-y: auto;
 }
+
+.md-chatroom-header {
+  padding: 5px;
+}
+
+.md-chatroom-content {
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.md-chatroom-form {
+  padding: 0px 10px;
+  margin-top: 15px !important;
+}
+
+.message-wrapper {
+  .message-container {
+    padding: 10px;
+    border-radius: 20px;
+    margin-bottom: 5px;
+    &.self {
+      border-bottom-left-radius: 0px;
+    }
+  }
+}

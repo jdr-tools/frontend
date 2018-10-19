@@ -1,12 +1,20 @@
 <md-content class="full-size">
-  <md-sidenav md-component-id="chat-sidenav" class="md-sidenav-right" layout="column" layout-align="center stretch">
-    <md-content flex="grow">
-      Contenu des messages
+  <md-sidenav md-component-id="chat-sidenav" class="md-sidenav-right wrap" layout="column" layout-align="center stretch" md-disable-backdrop md-whiteframe="4">
+    <div class="md-chatroom-header" layout="row" layout-align="end center">
+      <a ng-click="vm.closeChatroom()"><i class="fa fa-times"></i></a>
+    </div>
+    <md-content flex="grow" class="md-chatroom-content">
+      <div ng-repeat="message in vm.campaign.messages track by $index" class="message-wrapper">
+        <div ng-if="message.username == vm.username" class="message-container self" md-colors="{'background': 'grey-300'}">
+          <div class="md-body-2 md-chatroom-username">{{message.username}}</div>
+          <div>{{message.content}}</div>
+        </div>
+      </div>
     </md-content>
-    <form ng-submit="vm.sendMessage()" class="chatroom-form" flex="none">
-      <md-input-container class="md-block">
-        <label>Message</label>
-        <input ng-model="vm.message" />
+    <form ng-submit="vm.sendMessage()" class="md-chatroom-form without-margin" flex="none">
+      <md-input-container class="md-block without-margin">
+        <label for="message">Message</label>
+        <input type="text" id="message" name="message" ng-model="vm.message" />
       </md-input-container>
     </form>
   </md-sidenav>
