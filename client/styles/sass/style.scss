@@ -93,5 +93,8 @@ body > ui-view {
     &.self {
       border-bottom-left-radius: 0px;
     }
+    &.other {
+      border-bottom-right-radius: 0px;
+    }
   }
 }

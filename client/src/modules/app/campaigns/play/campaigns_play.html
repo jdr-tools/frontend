@@ -5,7 +5,11 @@
     </div>
     <md-content flex="grow" class="md-chatroom-content">
       <div ng-repeat="message in vm.campaign.messages track by $index" class="message-wrapper">
-        <div ng-if="message.username == vm.username" class="message-container self" md-colors="{'background': 'grey-300'}">
+        <div ng-if="message.username === vm.username" class="message-container self" md-colors="{'background': 'grey-300'}">
+          <div class="md-body-2 md-chatroom-username">{{message.username}}</div>
+          <div>{{message.content}}</div>
+        </div>
+        <div ng-if="message.username !== vm.username" class="message-container other" md-colors="{'background': 'blue-100'}">
           <div class="md-body-2 md-chatroom-username">{{message.username}}</div>
           <div>{{message.content}}</div>
         </div>

@@ -1,4 +1,4 @@
-const campaignsPlayController = function campaignsPlayControllerFunction ($localStorage, $mdSidenav, $state, Api, Campaign) {
+const campaignsPlayController = function campaignsPlayControllerFunction ($localStorage, $mdSidenav, $scope, $state, Api, Campaign) {
   'ngInject'
 
   const vm = this
@@ -16,6 +16,12 @@ const campaignsPlayController = function campaignsPlayControllerFunction ($local
   }
 
   vm.sendMessage = () => vm.campaign.addMessage(vm.message)
+
+  $scope.$on('message.created', (event, data) => {
+    if (data.campaign_id === $state.params.id) {
+      vm.campaign.insertMessage(_.pick(data, ['username', 'content']))
+    }
+  })
 }
 
 export default campaignsPlayController

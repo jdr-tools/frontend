@@ -1,4 +1,4 @@
-export default function campaignFactory ($localStorage, Api) {
+export default function campaignFactory ($localStorage, Api, WebsocketNotifier) {
   'ngInject'
 
   return class Campaign {
@@ -12,12 +12,20 @@ export default function campaignFactory ($localStorage, Api) {
       })
     }
 
+    insertMessage (message) {
+      this.messages.push(message)
+    }
+
     addMessage (content)  {
       const vm = this
       const params = {content: content}
       const options = {
         successCallback: (response) => {
-          vm.messages.push({username: $localStorage.account.username, content: content})
+          WebsocketNotifier.sendToCampaign(vm.id, 'message.created', {
+            campaign_id: vm.id,
+            username: $localStorage.account.username,
+            content: content
+          })
         }
       }
       Api.post(`/campaigns/${vm.id}/messages`, params, options)
