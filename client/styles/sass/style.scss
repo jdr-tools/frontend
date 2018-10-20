@@ -90,11 +90,17 @@ body > ui-view {
     padding: 10px;
     border-radius: 20px;
     margin-bottom: 5px;
+    width: 90%;
     &.self {
       border-bottom-left-radius: 0px;
     }
     &.other {
+      float: right;
       border-bottom-right-radius: 0px;
     }
   }
+}
+
+md-sidenav.sidenav-chatroom {
+  min-width: 600px;
 }

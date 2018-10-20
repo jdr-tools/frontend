@@ -21,11 +21,7 @@ export default function campaignFactory ($localStorage, Api, WebsocketNotifier) 
       const params = {content: content}
       const options = {
         successCallback: (response) => {
-          WebsocketNotifier.sendToCampaign(vm.id, 'message.created', {
-            campaign_id: vm.id,
-            username: $localStorage.account.username,
-            content: content
-          })
+          WebsocketNotifier.sendToCampaign(vm.id, 'message.created', Object.assign(response.item, {campaign_id: vm.id}))
         }
       }
       Api.post(`/campaigns/${vm.id}/messages`, params, options)
