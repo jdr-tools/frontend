@@ -86,6 +86,8 @@ body > ui-view {
 }
 
 .message-wrapper {
+  overflow: hidden;
+  
   .message-container {
     padding: 10px;
     border-radius: 20px;
