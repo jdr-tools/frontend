@@ -5,6 +5,12 @@
 @import 'lib/material-icons';
 @import 'partials/hints';
 
+body {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
 .container.centered {
   margin: 0 auto;
 }
@@ -65,6 +71,22 @@ ui-view, .full-size {
   display: block;
   height: 100%;
   width: 100%;
+  max-height: 100%;
+  max-width: 100%;
+
+  &.scrollable {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+ui-view, .full-size {
+  display: block;
+  height: 100%;
+  width: 100%;
+  &.flex-view {
+    display: flex !important;
+  }
 }
 
 body > ui-view {
@@ -105,4 +127,9 @@ body > ui-view {
 
 md-sidenav.sidenav-chatroom {
   min-width: 600px;
+}
+
+.main-content-container {
+  overflow: auto;
+  max-height: calc(100% - 48px)
 }

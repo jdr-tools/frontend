@@ -1,6 +1,8 @@
 <div class="layout-container" layout="column" layout-align="center stretch">
-  <app-menu flex="none"></app-menu>
-  <ui-view flex="grow" layout="row" layout-align="center stretch"></ui-view>
+  <app-menu flex="auto"></app-menu>
+  <div class="main-content-container" flex="grow" colors="{background: 'red'}">
+    <ui-view flex="grow" layout="row" layout-align="center stretch"></ui-view>
+  </div>
 </div>
 
 <confirmation-modal></confirmation-modal>

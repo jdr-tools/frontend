@@ -1,4 +1,26 @@
 <md-content class="full-size">
+  <div class="full-size flex-view wrap" layout="column" layout-align="center stretch">
+    <div flex class="playground">
+      <div class="full-size scrollable">
+        Future interface de jeu (construction en cours)<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        Future interface de jeu (construction en cours)<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        Future interface de jeu (construction en cours)<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        Future interface de jeu (construction en cours)<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        Future interface de jeu (construction en cours)<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        Future interface de jeu (construction en cours)<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        Future interface de jeu (construction en cours)<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        Future interface de jeu (construction en cours)<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+      </div>
+    </div>
+    <md-toolbar>
+      <md-fab-actions class="md-toolbar-tools">
+        <md-button aria-label="messages" class="md-icon-button" ng-click="vm.openChatroom()">
+          <md-icon>message</md-icon>
+        </md-button>
+      </md-fab-actions>
+    </md-toolbar>
+  </div>
+
   <md-sidenav md-component-id="chat-sidenav" class="md-sidenav-right sidenav-chatroom wrap" layout="column" layout-align="center stretch" md-disable-backdrop md-whiteframe="4">
     <div class="md-chatroom-header" layout="row" layout-align="end center">
       <a ng-click="vm.closeChatroom()"><i class="fa fa-times"></i></a>
@@ -28,5 +50,4 @@
       </md-input-container>
     </form>
   </md-sidenav>
-  <md-button ng-click="vm.openChatroom()">Open chatroom</md-button>
 </md-content>
