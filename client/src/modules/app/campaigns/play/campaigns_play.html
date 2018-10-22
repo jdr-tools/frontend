@@ -3,50 +3,6 @@
     <div flex class="playground-container scrollable">
       <div class="full-size playground">
         <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
-        <h3>Interface en construction</h3>
       </div>
     </div>
     <md-toolbar>
@@ -64,14 +20,23 @@
     </div>
     <md-content flex="grow" class="md-chatroom-content">
       <div ng-repeat="message in vm.campaign.messages track by $index" class="message-wrapper">
-        <div ng-if="message.username === vm.username" class="message-container self" md-colors="{'background': 'grey-300'}">
+        <div ng-if="message.type == 'diceroll'" class="message-container" md-colors="{'background': 'green-200'}">
+          <div layout="row">
+            <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
+            <div flex="none" class="md-caption">{{message.created_at | date:'HH:mm'}}</div>
+          </div>
+          <div>
+            {{message.results.join(' + ')}} <span ng-if="message.modifier > 0">+ {{message.modifier}} </span>= {{vm.getTotal(message)}}
+          </div>
+        </div>
+        <div ng-if="message.type == 'text' && message.username === vm.username" class="message-container self" md-colors="{'background': 'grey-300'}">
           <div layout="row">
             <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
             <div flex="none" class="md-caption">{{message.created_at | date:'HH:mm'}}</div>
           </div>
           <div >{{message.content}}</div>
         </div>
-        <div ng-if="message.username !== vm.username" class="message-container other" md-colors="{'background': 'blue-100'}">
+        <div ng-if="message.type == 'text' && message.username !== vm.username" class="message-container other" md-colors="{'background': 'blue-100'}">
           <div layout="row">
             <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
             <div flex="none" class="md-caption">{{message.created_at | date:'HH:mm'}}</div>

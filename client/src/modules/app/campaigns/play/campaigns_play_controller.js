@@ -25,6 +25,10 @@ const campaignsPlayController = function campaignsPlayControllerFunction ($local
     }, 100)
   }
 
+  vm.getTotal = (message) => {
+    return _.sum(message.results) + message.modifier
+  }
+
   $scope.$on('message.created', (event, message) => {
     if (message.campaign_id === $state.params.id) {
       vm.campaign.insertMessage(message)
