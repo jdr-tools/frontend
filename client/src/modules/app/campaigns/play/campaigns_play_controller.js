@@ -26,7 +26,7 @@ const campaignsPlayController = function campaignsPlayControllerFunction ($local
   }
 
   vm.getTotal = (message) => {
-    return _.sum(message.results) + message.modifier
+    return _.sum(message.data.results) + message.data.modifier
   }
 
   $scope.$on('message.created', (event, message) => {

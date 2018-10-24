@@ -4,6 +4,7 @@ export default function campaignFactory ($localStorage, Api, WebsocketNotifier) 
   return class Campaign {
     constructor (id) {
       const vm = this
+      vm.commandRegex = /^\/[a-z]+( .*)?$/
       Api.get(`/campaigns/${id}`, {}, {successCallback: (response) => Object.assign(vm, response)})
       Api.get(`/campaigns/${id}/messages`, {}, {
         successCallback: (response) => {
@@ -16,7 +17,7 @@ export default function campaignFactory ($localStorage, Api, WebsocketNotifier) 
       this.messages.push(message)
     }
 
-    addMessage (content)  {
+    addMessage (content) {
       const vm = this
       const params = {content: content}
       const options = {
@@ -24,7 +25,15 @@ export default function campaignFactory ($localStorage, Api, WebsocketNotifier) 
           WebsocketNotifier.sendToCampaign(vm.id, 'message.created', Object.assign(response.item, {campaign_id: vm.id}))
         }
       }
-      Api.post(`/campaigns/${vm.id}/messages`, params, options)
+      if (vm.commandRegex.test(content)) {
+        const splittedCommand = content.split(' ', 2)
+        params.command = _.trim(splittedCommand[0], '/')
+        if (splittedCommand[1] !== '') params.content = splittedCommand[1]
+        Api.post(`/campaigns/${vm.id}/commands`, params, options)
+      }
+      else {
+        Api.post(`/campaigns/${vm.id}/messages`, params, options)
+      }
     }
   }
 }
