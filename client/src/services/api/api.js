@@ -2,7 +2,7 @@
  * This class is made to query the server side of the application to forward API calls.
  * @author Vincent Courtois <courtois.vincent@outlook.com>
  */
-const Api = function ApiFunction($http, $localStorage, $window, FormService) {
+const Api = function ApiFunction($http, $localStorage, $rootScope, $window, FormService) {
   'ngInject'
 
   const vm = this
@@ -82,6 +82,7 @@ const Api = function ApiFunction($http, $localStorage, $window, FormService) {
     const errorCallback = (response) => {
       if(options.errorsForm) FormService.error(options.errorsForm, response)
       if(options.errorCallback) options.errorCallback(response.data)
+      if(options.errorBroadcast) $rootScope.$broadcast(options.errorBroadcast, response)
     }
     return $http(configuration).then(successCallback, errorCallback)
   }

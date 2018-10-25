@@ -26,6 +26,7 @@ export default function campaignFactory ($localStorage, Api, WebsocketNotifier) 
         }
       }
       if (vm.commandRegex.test(content)) {
+        options.errorBroadcast = 'command.failed'
         const splittedCommand = content.split(' ', 2)
         params.command = _.trim(splittedCommand[0], '/')
         if (splittedCommand[1] !== '') params.content = splittedCommand[1]

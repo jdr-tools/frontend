@@ -56,6 +56,12 @@
         "pending": "Invitations"
       }
     },
+    "messages": {
+      "errors": {
+        "command": "The command is invalid.",
+        "content": "Command's arguments are invalid"
+      }
+    },
     "update": {
       "tabs": {
         "informations": {

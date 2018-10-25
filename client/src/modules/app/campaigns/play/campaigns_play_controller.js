@@ -1,4 +1,4 @@
-const campaignsPlayController = function campaignsPlayControllerFunction ($localStorage, $mdSidenav, $scope, $state, $timeout, Api, Campaign) {
+const campaignsPlayController = function campaignsPlayControllerFunction ($localStorage, $mdSidenav, $scope, $state, $timeout, Api, Campaign, FormService) {
   'ngInject'
 
   const vm = this
@@ -31,10 +31,16 @@ const campaignsPlayController = function campaignsPlayControllerFunction ($local
 
   $scope.$on('message.created', (event, message) => {
     if (message.campaign_id === $state.params.id) {
+      FormService.reset(vm.sendMessageForm)
       vm.campaign.insertMessage(message)
       vm.message = ''
       vm.scrollMessages()
     }
+  })
+
+  $scope.$on('command.failed', (event, error) => {
+    FormService.reset(vm.sendMessageForm)
+    vm.sendMessageForm.message.$setValidity(error.data.field, false)
   })
 }
 

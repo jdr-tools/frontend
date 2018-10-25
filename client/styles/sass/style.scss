@@ -115,12 +115,16 @@ body > ui-view {
     border-radius: 20px;
     margin-bottom: 5px;
     width: 90%;
+    box-sizing: border-box;
     &.self {
       border-bottom-left-radius: 0px;
     }
     &.other {
       float: right;
       border-bottom-right-radius: 0px;
+    }
+    &.command {
+      width: 100%;
     }
   }
 }

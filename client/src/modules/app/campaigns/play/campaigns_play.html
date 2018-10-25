@@ -18,7 +18,7 @@
     </div>
     <md-content flex="grow" class="md-chatroom-content">
       <div ng-repeat="message in vm.campaign.messages track by $index" class="message-wrapper">
-        <div ng-if="message.type == 'command' && message.data.command == 'roll'" class="message-container" md-colors="{'background': 'green-200'}">
+        <div ng-if="message.type == 'command' && message.data.command == 'roll'" class="message-container command" md-colors="{'background': 'green-200'}">
           <div layout="row">
             <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
             <div flex="none" class="md-caption">{{message.created_at | date:'HH:mm'}}</div>
@@ -43,10 +43,14 @@
         </div>
       </div>
     </md-content>
-    <form ng-submit="vm.sendMessage()" class="md-chatroom-form without-margin" flex="none">
+    <form name="vm.sendMessageForm" ng-submit="vm.sendMessage()" class="md-chatroom-form without-margin" flex="none">
       <md-input-container class="md-block without-margin">
         <label for="message">Message</label>
         <input type="text" id="message" name="message" ng-model="vm.message" autocomplete="off" />
+        <div ng-messages="vm.sendMessageForm.message.$error">
+          <div ng-message="content" translate>campaigns.messages.errors.content</div>
+          <div ng-message="command" translate>campaigns.messages.errors.command</div>
+        </div>
       </md-input-container>
     </form>
   </md-sidenav>
