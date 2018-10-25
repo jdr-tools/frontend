@@ -1,11 +1,11 @@
-const campaignsEditController = function campaignsEditControllerFunction ($localStorage, $mdToast, $scope, $state, $timeout, CampaignsFactory, ErrorsService) {
+const campaignsEditController = function campaignsEditControllerFunction ($localStorage, $mdToast, $scope, $state, $timeout, CampaignsFactory, FormsService) {
   'ngInject'
 
   const vm = this
 
   /** Method called when submitting the form to add a new player to the game. */
   vm.addPlayer = () => {
-    ErrorsService.resetErrors(vm.invitationForm)
+    FormsService.reset(vm.invitationForm)
     CampaignsFactory.addPlayer($state.params.id, vm.invitationForm, vm.account, vm.updateInvitation)
   }
 

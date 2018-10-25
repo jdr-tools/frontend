@@ -1,4 +1,4 @@
-const profileController = function profileControllerFunction ($mdToast, Api, ErrorsService) {
+const profileController = function profileControllerFunction ($mdToast, Api) {
   'ngInject'
 
   const vm = this
@@ -16,10 +16,6 @@ const profileController = function profileControllerFunction ($mdToast, Api, Err
     }})
   }
 
-  vm.handleErrors = (response) => {
-    ErrorsService.append(vm.profileEditionForm, response)
-  }
-
   vm.success = () => {
     const toast = $mdToast.simple()
       .position('bottom right')
@@ -32,7 +28,7 @@ const profileController = function profileControllerFunction ($mdToast, Api, Err
   vm.submit = () => {
     Api.put('/accounts/own', vm.cleanAccount(), {
       successCallback: vm.success,
-      errorCallback: vm.handleErrors
+      errorForm: vm.profileEditionForm
     })
   }
 
