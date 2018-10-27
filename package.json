@@ -39,12 +39,9 @@
   },
   "scripts": {
     "build:client": "npm-run-all --parallel build:client:*",
-    "build:admin": "npm-run-all --parallel build:admin:*",
     "build:client:css": "sass ./client/styles/sass/style.scss dist/style.css",
     "build:client:js": "browserify ./client/src/app.js -o dist/app.js -d -t [ babelify --presets [ es2015 ] ]",
-    "postinstall": "npm-run-all --parallel build:*",
-    "build:admin:js": "browserify ./admin/src/index.js -o dist/admin.js -d -t [ babelify --presets [ es2015 ] ]",
-    "build:admin:css": "sass ./admin/style/style.scss dist/admin.css"
+    "postinstall": "npm-run-all --parallel build:*"
   },
   "peerDependencies": {}
 }

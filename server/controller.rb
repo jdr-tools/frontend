@@ -10,30 +10,15 @@ class Controller < Sinatra::Base
   configure do
     use Rack::Session::Cookie, secret: ENV['SESSION_SECRET']
     use Rack::Csrf, raise: true
+    set :logger, Logger.new(STDOUT)
   end
 
   helpers do
     def csrf_tag; Rack::Csrf.tag(env); end
   end
 
-  attr_accessor :connection
-
-  before do
-    if connection.nil?
-      @connection = Faraday.new(Arkaan::Monitoring::Gateway.all.sample.url) do |faraday|
-        faraday.request  :url_encoded
-        faraday.response :logger
-        faraday.adapter  Faraday.default_adapter
-      end
-    end
-  end
-
   get '/' do
     erb :'client/index'
-  end
-
-  get '/admin/:page' do
-    erb :'admin/index', locals: {page: params[:page]}
   end
 
   get '/websocket' do
@@ -44,7 +29,8 @@ class Controller < Sinatra::Base
     @body = parse_body
     @url = @body.delete('url')
     @verb = @body.delete('method').downcase || 'get'
-    @forwarded = connection.send(@verb) do |forwarded_request|
+
+    @forwarded = get_connection.send(@verb) do |forwarded_request|
       if ['get', 'delete'].include? @verb
         forwarded_request.url @url, @body
       else
@@ -65,5 +51,29 @@ class Controller < Sinatra::Base
     body = JSON.parse(request.body.read.to_s) rescue {}
     body['app_key'] = ENV['INIT_APPKEY']
     return body
+  end
+
+  def get_connection
+    return Faraday.new(get_gateway_url) do |faraday|
+      faraday.request  :url_encoded
+      faraday.response :logger
+      faraday.adapter  Faraday.default_adapter
+    end
+  end
+
+  def get_random_gateway
+    Arkaan::Monitoring::Gateway.where(:enum_type.ne => :local, running: true, active: true).sample
+  end
+
+
+  def get_gateway_url
+    if ENV['USE_TEST_GATEWAYS'] == 'true'
+      gateway = Arkaan::Monitoring::Gateway.where(enum_type: :local, running: true, active: true).first
+      gateway = get_random_gateway if gateway.nil?
+      logger.info "URL GATEWAY ::: #{gateway.url}"
+      return gateway.url
+    else
+      return get_random_gateway.url
+    end
   end
 end
