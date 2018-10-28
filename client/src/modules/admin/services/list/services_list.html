@@ -1,8 +1,13 @@
 <h1 translate>services.list.title</h1>
 
+<div>
+  <md-button ng-disabled="!vm.hasServiceSelected()" ng-click="vm.restartSelected()">Redémarrer</md-button>
+</div>
+
 <table ng-if="vm.servicesList.services.length > 0" class="table">
   <thead>
     <tr>
+      <th>&nbsp;</th>
       <th translate>services.list.headers.key</th>
       <th translate>services.list.headers.path</th>
       <th translate>services.list.headers.routes</th>
@@ -13,6 +18,9 @@
   </thead>
   <tbody>
     <tr ng-repeat="service in vm.servicesList.services | orderBy: 'key'">
+      <td>
+        <md-checkbox class="without-margin" ng-model="service.selected" ng-if="service.key != 'services'"></md-checkbox>
+      </td>
       <td>{{service.key}}</td>
       <td><pre class="without-margin">{{service.path}}</pre></td>
       <td>{{service.routes.length}}</td>

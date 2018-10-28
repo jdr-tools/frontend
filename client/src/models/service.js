@@ -26,11 +26,5 @@ export default function serviceFactory (Api) {
         instance[flag] = !instance[flag]
       }})
     }
-
-    reboot (instance) {
-      Api.post(`/services/${this.id}/instances/${instance.id}/actions`, {type: 'restart'}, {successCallback: (response) => {
-        console.log(response)
-      }})
-    }
   }
 }

@@ -105,10 +105,6 @@
         </td>
         <td>{{instance.type}}</td>
         <td>
-          <a ng-click="vm.service.reboot(instance)">
-            <i class="fa fa-power-off"></i>
-          </a>
-          &nbsp;
           <a
             ng-click="vm.service.toggleInstanceFlag(instance, 'active')"
             ng-class="{'text-success': !instance.active, 'text-danger': instance.active}"
