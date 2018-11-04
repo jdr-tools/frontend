@@ -142,3 +142,17 @@ md-sidenav.sidenav-chatroom {
 .playground {
   padding: 10px;
 }
+
+.hidden {
+  display: none !important;
+}
+
+.uploader-wrapper {
+  .uploader-filename-wrapper {
+    line-height: 48px;
+  }
+}
+
+.file-upload-modal {
+  min-width: 400px;
+}

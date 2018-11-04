@@ -8,6 +8,7 @@
         <md-button aria-label="messages" class="md-icon-button" ng-click="vm.openChatroom()">
           <md-icon>message</md-icon>
         </md-button>
+        <upload-button campaign="vm.campaign" ng-if="vm.isCreator()"></upload-button>
       </md-fab-actions>
     </md-toolbar>
   </div>

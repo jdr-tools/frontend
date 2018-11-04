@@ -1,0 +1,10 @@
+<div class="uploader-wrapper">
+  <input type="file" name="{{vm.inputName}}" class="hidden" ng-init="vm.initializedInput()" />
+  <div class="fake-uploader-wrapper" layout="row">
+    <md-button flex="none" ng-click="vm.triggerUpload()">Parcourir</md-button>
+    <div flex class="uploader-filename-wrapper">
+      <span ng-if="vm.uploadObject.content.name === undefined">Pas de fichier sélectionné</span>
+      <span ng-if="vm.uploadObject.content.name !== undefined">{{vm.uploadObject.content.name}}</span>
+    </div>
+  </div>
+</div>

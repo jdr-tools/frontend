@@ -29,6 +29,14 @@ const campaignsPlayController = function campaignsPlayControllerFunction ($local
     return _.sum(message.data.results) + message.data.modifier
   }
 
+  vm.isCreator = () => {
+    return _.get(vm, 'campaign.creator.username') == vm.username
+  }
+
+  vm.openUploadModal = () => {
+    $rootScope.$broadcast('modals.upload.open')
+  }
+
   $scope.$on('message.created', (event, message) => {
     if (message.campaign_id === $state.params.id) {
       FormService.reset(vm.sendMessageForm)
