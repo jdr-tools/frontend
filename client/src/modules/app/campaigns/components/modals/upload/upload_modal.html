@@ -1,13 +1,13 @@
 <md-dialog class="file-upload-modal">
   <md-toolbar>
     <div class="md-toolbar-tools">
-      <h2 translate>truite molle</h2>
+      <h2 translate>Ajouter un fichier</h2>
     </div>
   </md-toolbar>
   <form ng-submit="validate()">
     <md-dialog-content class="md-padding">
       <md-input-container class="md-block">
-        <uploader input-name="content" upload-object="file", upload-key="content"></uploader>
+        <uploader input-name="content" upload-object="file", upload-key="content" accepted-types="mimeTypes"></uploader>
       </md-input-container>
     </md-dialog-content>
     <md-dialog-actions layout="row">

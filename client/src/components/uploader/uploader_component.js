@@ -3,6 +3,8 @@ const uploaderController = function uploaderControllerFunction ($scope, $timeout
 
   const vm = this
 
+  vm.mimeTypeError = false
+
   vm.triggerUpload = () => {
     rawInput().click()
   }
@@ -14,8 +16,22 @@ const uploaderController = function uploaderControllerFunction ($scope, $timeout
   vm.initializedInput = () => {
     $timeout(() => {
       rawInput().change(() => {
-        vm.uploadObject[vm.uploadKey] = rawInput()[0].files[0]
+        const file = rawInput()[0].files[0]
+        if ( vm.acceptedTypes == undefined || vm.isValidMimeType(file)) {
+          vm.mimeTypeError = false
+          vm.uploadObject[vm.uploadKey] = file
+        }
+        else {
+          vm.mimeTypeError = true
+        }
       })
+    })
+  }
+
+  vm.isValidMimeType = (file) => {
+    return _.some(vm.acceptedTypes.split(','), (mimeType) => {
+      const regex = new RegExp(`^${mimeType.replace('*', '(.+)')}`)
+      return (file.type.match(regex) !== null)
     })
   }
 }
@@ -27,6 +43,7 @@ export default {
   bindings: {
     inputName: '@',
     uploadKey: '@',
-    uploadObject: '='
+    uploadObject: '=',
+    acceptedTypes: '='
   }
 }
