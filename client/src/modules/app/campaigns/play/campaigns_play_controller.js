@@ -11,9 +11,15 @@ const campaignsPlayController = function campaignsPlayControllerFunction ($local
     $mdSidenav('chat-sidenav').close()
   }
 
-  vm.openChatroom = () => {
-    $mdSidenav('chat-sidenav').toggle()
+  vm.openPanel = (panelType) => {
+    if (!$mdSidenav('chat-sidenav').isOpen()) {
+      $mdSidenav('chat-sidenav').toggle()
+    }
+    vm.displayedPanel = panelType
+    vm.panelURL = `/client/src/modules/app/campaigns/play/panels/${panelType}.html`
+    if (panelType == 'chatroom') {
       vm.scrollMessages()
+    }
   }
 
   vm.sendMessage = () => vm.campaign.addMessage(vm.message)

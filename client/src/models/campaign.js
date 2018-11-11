@@ -11,6 +11,12 @@ export default function campaignFactory ($localStorage, Api, WebsocketNotifier) 
           vm.messages = response
         }
       })
+      Api.get(`/campaigns/${id}/files`, {}, {
+        successCallback: response => {
+          console.log(response)
+          vm.files = response
+        }
+      })
     }
 
     insertMessage (message) {
