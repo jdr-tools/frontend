@@ -1,4 +1,4 @@
-<div flex="grow" layout="column" layout-align="start stretch" class="md-padding">
+<div flex="grow" layout="column" layout-align="start stretch" class="md-padding scrollable">
   <md-list>
     <md-subheader class="md-no-sticky">Liste des fichiers</md-subheader>
     <md-list-item ng-repeat="file in vm.campaign.files" class="md-3-line">
@@ -15,4 +15,7 @@
       </md-button>
     </md-list-item>
   </md-list>
+</div>
+<div flex="noshrink" class="md-padding">
+  <upload-button campaign="vm.campaign"></upload-button>
 </div>

@@ -16,16 +16,16 @@
     </md-toolbar>
   </div>
 
-  <md-sidenav md-component-id="chat-sidenav" class="md-sidenav-right sidenav-chatroom wrap" layout="column" layout-align="center stretch" md-disable-backdrop md-whiteframe="4">
-    <div class="md-chatroom-header" layout="row" layout-align="end center">
-      <md-select flex ng-model="vm.displayedPanel">
-        <md-option value="chatroom">Chatroom</md-option>
-        <md-option value="files">Fichiers</md-option>
-      </md-select>
+  <md-sidenav md-component-id="play-sidenav" class="md-sidenav-right sidenav-chatroom wrap" layout="column" layout-align="center stretch" md-disable-backdrop md-whiteframe="4">
+
+    <div class="md-chatroom-header" flex="nogrow" layout="row" layout-align="end center">
+      <a ng-click="vm.closePanel()" flex="none">
+        <md-icon>clear</md-icon>
+      </a>
     </div>
 
-    <div flex="grow" layout="column">
-      <ng-include src="vm.panelURL" flex="grow" layout="column" layout-align="start stretch"></ng-include>
+    <div flex layout="column">
+      <ng-include src="vm.panelURL" flex layout="column" layout-align="start stretch"></ng-include>
     </div>
 
   </md-sidenav>

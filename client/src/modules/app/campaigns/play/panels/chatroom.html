@@ -1,5 +1,4 @@
-<div flex="grow" layout="column" layout-align="start stretch">
-  <md-content flex="grow" class="md-chatroom-content" class="md-padding">
+<md-content flex="grow" class="md-chatroom-content" class="md-padding scrollable">
     <div ng-repeat="message in vm.campaign.messages track by $index" class="message-wrapper">
       <div ng-if="message.type == 'command' && message.data.command == 'roll'" class="message-container command" md-colors="{'background': 'green-200'}">
         <div layout="row">
@@ -25,15 +24,14 @@
         <div >{{message.data.content}}</div>
       </div>
     </div>
-  </md-content>
-  <form name="vm.sendMessageForm" ng-submit="vm.sendMessage()" class="md-chatroom-form without-margin" flex="none">
-    <md-input-container class="md-block without-margin">
-      <label for="message">Message</label>
-      <input type="text" id="message" name="message" ng-model="vm.message" autocomplete="off" />
-      <div ng-messages="vm.sendMessageForm.message.$error">
-        <div ng-message="content" translate>campaigns.messages.errors.content</div>
-        <div ng-message="command" translate>campaigns.messages.errors.command</div>
-      </div>
-    </md-input-container>
-  </form>
-</div>
+</md-content>
+<form name="vm.sendMessageForm" ng-submit="vm.sendMessage()" class="md-chatroom-form without-margin" flex="noshrink">
+  <md-input-container class="md-block without-margin">
+    <label for="message">Message</label>
+    <input type="text" id="message" name="message" ng-model="vm.message" autocomplete="off" />
+    <div ng-messages="vm.sendMessageForm.message.$error">
+      <div ng-message="content" translate>campaigns.messages.errors.content</div>
+      <div ng-message="command" translate>campaigns.messages.errors.command</div>
+    </div>
+  </md-input-container>
+</form>

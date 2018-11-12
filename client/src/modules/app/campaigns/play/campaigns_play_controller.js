@@ -7,13 +7,13 @@ const campaignsPlayController = function campaignsPlayControllerFunction ($local
 
   vm.username = $localStorage.account.username
 
-  vm.closeChatroom = () => {
-    $mdSidenav('chat-sidenav').close()
+  vm.closePanel = () => {
+    $mdSidenav('play-sidenav').close()
   }
 
   vm.openPanel = (panelType) => {
-    if (!$mdSidenav('chat-sidenav').isOpen()) {
-      $mdSidenav('chat-sidenav').toggle()
+    if (!$mdSidenav('play-sidenav').isOpen()) {
+      $mdSidenav('play-sidenav').toggle()
     }
     vm.displayedPanel = panelType
     vm.panelURL = `/client/src/modules/app/campaigns/play/panels/${panelType}.html`
