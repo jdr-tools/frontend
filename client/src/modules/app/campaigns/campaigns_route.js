@@ -4,6 +4,7 @@ const campaignsRoute = function ($stateProvider) {
   /** Virtual state for all groups-related states. */
   $stateProvider.state('campaigns', {
     parent: 'app',
+    templateUrl: 'client/src/modules/app/campaigns/index.html',
     resolve: {
       authentication: (Authentication) => {
         'ngInject'
