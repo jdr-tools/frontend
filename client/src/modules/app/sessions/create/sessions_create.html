@@ -1,25 +1,26 @@
-<form ng-submit="vm.authenticate()" name="vm.sessionCreationForm">
-  <md-content class="md-padding">
-    <md-input-container class="md-block">
-      <label for="username" translate>sessions.create.labels.username</label>
-      <input type="text" class="md-input" name="username" ng-model="vm.username" required autocomplete="off" ng-blur="vm.resetCredentialsError()" />
-      <div ng-messages="vm.sessionCreationForm.username.$error" multiple>
-        <div ng-message="required" translate>sessions.create.errors.username.blank</div>
-        <div ng-message="credentials" translate>sessions.create.errors.username.credentials</div>
-      </div>
-    </md-input-container>
-    <md-input-container class="md-block">
-      <label for="password" translate>sessions.create.labels.password</label>
-      <input type="password" class="md-input" name="password" ng-model="vm.password" required />
-      <div ng-messages="vm.sessionCreationForm.password.$error">
-        <div ng-message="required" translate>sessions.create.errors.password.blank</div>
-      </div>
-    </md-input-container>
-    <md-switch ng-model="vm.remember">
-      <span>Se souvenir de moi</a>
-    </md-switch>
-  </md-content>
-  <md-content class="md-padding">
-    <input class="md-button md-raised" type="submit" value="{{'sessions.create.buttons.submit' | translate}}" autocomplete="off" />
-  </md-content>
+<md-content layout="row">
+  <div flex-gt-xs="25" hide-xs></div>
+  <div flex-gt-xs="50" flex-xs="100">
+    <form ng-submit="vm.authenticate()" name="vm.sessionCreationForm">
+      <md-content class="md-padding">
+        <md-input-container class="md-block">
+          <label for="username" translate>sessions.create.labels.username</label>
+          <input type="text" class="md-input" name="username" ng-model="vm.username" required autocomplete="off" ng-blur="vm.resetCredentialsError()" />
+          <div ng-messages="vm.sessionCreationForm.username.$error" multiple>
+            <div ng-message="required" translate>sessions.create.errors.username.blank</div>
+            <div ng-message="credentials" translate>sessions.create.errors.username.credentials</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label for="password" translate>sessions.create.labels.password</label>
+          <input type="password" class="md-input" name="password" ng-model="vm.password" required />
+          <div ng-messages="vm.sessionCreationForm.password.$error">
+            <div ng-message="required" translate>sessions.create.errors.password.blank</div>
+          </div>
+        </md-input-container>
+        <input class="md-button md-raised" type="submit" value="{{'sessions.create.buttons.submit' | translate}}" autocomplete="off" />
+      </md-content>
+    </form>
+  </div>
+  <div flex-gt-xs="25" hide-xs></div>
 </form>
