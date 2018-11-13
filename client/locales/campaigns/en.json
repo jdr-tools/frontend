@@ -62,6 +62,12 @@
         "content": "Command's arguments are invalid"
       }
     },
+    "play": {
+      "tooltips": {
+        "chatroom": "Chatroom",
+        "files": "Files"
+      }
+    },
     "update": {
       "tabs": {
         "informations": {

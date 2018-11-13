@@ -7,20 +7,22 @@
       <md-toolbar flew="nogrow">
         <md-fab-actions class="md-toolbar-tools">
           <md-button aria-label="messages" class="md-icon-button" ng-click="vm.openPanel('chatroom')">
+            <md-tooltip md-direction="top">{{'campaigns.play.tooltips.chatroom' | translate}}</md-tooltip>
             <md-icon>message</md-icon>
           </md-button>
           <md-button aria-label="messages" class="md-icon-button" ng-click="vm.openPanel('files')">
+            <md-tooltip md-direction="top">{{'campaigns.play.tooltips.files' | translate}}</md-tooltip>
             <md-icon>folder_open</md-icon>
           </md-button>
-          <!--upload-button campaign="vm.campaign" ng-click="openPanel('files')"></upload-button-->
         </md-fab-actions>
       </md-toolbar>
     </div>
 
     <md-sidenav md-component-id="play-sidenav" class="md-sidenav-right sidenav-chatroom wrap" layout="column" layout-align="center stretch" md-disable-backdrop md-whiteframe="4">
 
-      <div class="md-chatroom-header" flex="nogrow" layout="row" layout-align="end center">
+      <div class="md-chatroom-header" flex="nogrow" layout="row" layout-align="end center" md-colors="{'background': 'grey-200'}">
         <a ng-click="vm.closePanel()" flex="none">
+          <md-tooltip md-direction="left">{{'common.close' | translate}}</md-tooltip>
           <md-icon>clear</md-icon>
         </a>
       </div>

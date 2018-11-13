@@ -1,4 +1,4 @@
-export default function campaignFactory ($localStorage, Api, WebsocketNotifier) {
+export default function campaignFactory ($filter, $localStorage, Api, WebsocketNotifier) {
   'ngInject'
 
   return class Campaign {
@@ -8,19 +8,25 @@ export default function campaignFactory ($localStorage, Api, WebsocketNotifier) 
       Api.get(`/campaigns/${id}`, {}, {successCallback: (response) => Object.assign(vm, response)})
       Api.get(`/campaigns/${id}/messages`, {}, {
         successCallback: (response) => {
-          vm.messages = response
+          vm.messages = _.groupBy(response, message => {
+            return $filter('date')(message.created_at, 'yyyy-MM-dd')
+          })
         }
       })
       Api.get(`/campaigns/${id}/files`, {}, {
         successCallback: response => {
-          console.log(response)
           vm.files = response
         }
       })
     }
 
     insertMessage (message) {
-      this.messages.push(message)
+      const vm = this
+      const parsedCreatedAt = $filter('date')(message.created_at, 'yyyy-MM-dd')
+      if (!_.has(vm.messages, parsedCreatedAt)) {
+        vm.messages[parsedCreatedAt] = []
+      }
+      this.messages[parsedCreatedAt].push(message)
     }
 
     addMessage (content) {

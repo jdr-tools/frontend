@@ -1,9 +1,13 @@
 <md-content flex="grow" class="md-chatroom-content" class="md-padding scrollable">
-    <div ng-repeat="message in vm.campaign.messages track by $index" class="message-wrapper">
+
+
+  <div ng-repeat="(creation_date, messages) in vm.campaign.messages" class="message-wrapper">
+    <md-subheader>{{creation_date | date:'dd/MM/yyyy'}}</md-subheader>
+    <div ng-repeat="message in messages track by $index">
       <div ng-if="message.type == 'command' && message.data.command == 'roll'" class="message-container command" md-colors="{'background': 'green-200'}">
         <div layout="row">
           <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
-          <div flex="none" class="md-caption">{{message.created_at | date:'HH:mm'}}</div>
+          <div flex="none" class="md-caption message-creation-date">{{message.created_at | date:'HH:mm'}}</div>
         </div>
         <div>
           {{message.data.results.join(' + ')}} <span ng-if="message.data.modifier > 0">+ {{message.data.modifier}} </span>= {{vm.getTotal(message)}}
@@ -12,18 +16,19 @@
       <div ng-if="message.type == 'text' && message.username === vm.username" class="message-container self" md-colors="{'background': 'grey-300'}">
         <div layout="row">
           <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
-          <div flex="none" class="md-caption">{{message.created_at | date:'HH:mm'}}</div>
+          <div flex="none" class="md-caption message-creation-date">{{message.created_at | date:'HH:mm'}}</div>
         </div>
         <div >{{message.data.content}}</div>
       </div>
       <div ng-if="message.type == 'text' && message.username !== vm.username" class="message-container other" md-colors="{'background': 'blue-100'}">
         <div layout="row">
           <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
-          <div flex="none" class="md-caption">{{message.created_at | date:'HH:mm'}}</div>
+          <div flex="none" class="md-caption message-creation-date">{{message.created_at | date:'HH:mm'}}</div>
         </div>
         <div >{{message.data.content}}</div>
       </div>
     </div>
+  </div>
 </md-content>
 <form name="vm.sendMessageForm" ng-submit="vm.sendMessage()" class="md-chatroom-form without-margin" flex="noshrink">
   <md-input-container class="md-block without-margin">

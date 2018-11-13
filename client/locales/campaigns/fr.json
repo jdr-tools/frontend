@@ -62,6 +62,12 @@
         "content": "Les arguments passés à la commande sont invalides"
       }
     },
+    "play": {
+      "tooltips": {
+        "chatroom": "Salon de discussion",
+        "files": "Voir les fichiers"
+      }
+    },
     "update": {
       "tabs": {
         "informations": {

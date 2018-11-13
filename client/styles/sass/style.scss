@@ -94,7 +94,7 @@ body > ui-view {
 }
 
 .md-chatroom-header {
-  padding: 5px;
+  padding: 7px;
 }
 
 .md-chatroom-content {
@@ -116,6 +116,9 @@ body > ui-view {
     margin-bottom: 5px;
     width: 90%;
     box-sizing: border-box;
+    &:first-of-type {
+      margin-top: 5px;
+    }
     &.self {
       border-bottom-left-radius: 0px;
     }
@@ -125,6 +128,14 @@ body > ui-view {
     }
     &.command {
       width: 100%;
+    }
+    .message-creation-date {
+      display: none;
+    }
+    &:hover {
+      .message-creation-date {
+        display: initial;
+      }
     }
   }
 }

@@ -24,13 +24,11 @@ const websocketChannel = function websocketChannelFunction (Api, $rootScope, $in
    */
   vm.onWsMessage = (event) => {
     const body = JSON.parse(event.data)
-    console.log(body)
     $rootScope.$broadcast(body.message, body.data)
   }
 
   /** Function called when creating the websocket, initializing the keep alive pings. */
   vm.onWsOpen = () => {
-    console.log("Création du websocket")
     vm.keepAlive = $interval(() => vm.websocket.send('REFRESH_PING'), 20000)
   }
 
@@ -43,7 +41,6 @@ const websocketChannel = function websocketChannelFunction (Api, $rootScope, $in
       /** Gets the address of the websocket service by requesting the load balancer. */
       Api.get('/repartitor/url', {}, {
         successCallback: response => {
-          console.log(`URL : ${response.url}`)
           /** Create a websocket connection to the given address. */
           vm.websocket = new WebSocket(`${response.url}?session_id=${$localStorage.token}`)
           /** Assigns the handlers to the dedicated actions on the websocket. */
