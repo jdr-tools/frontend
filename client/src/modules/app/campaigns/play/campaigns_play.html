@@ -1,32 +1,34 @@
-<md-content flex layout="column" laayout-align="center stretch">
-  <div flex layout="column" layout-align="center stretch">
-    <div flex class="playground-container scrollable playground">
-      <h3>Interface en construction</h3>
-    </div>
-    <md-toolbar flew="nogrow">
-      <md-fab-actions class="md-toolbar-tools">
-        <md-button aria-label="messages" class="md-icon-button" ng-click="vm.openPanel('chatroom')">
-          <md-icon>message</md-icon>
-        </md-button>
-        <md-button aria-label="messages" class="md-icon-button" ng-click="vm.openPanel('files')">
-          <md-icon>folder_open</md-icon>
-        </md-button>
-        <!--upload-button campaign="vm.campaign" ng-click="openPanel('files')"></upload-button-->
-      </md-fab-actions>
-    </md-toolbar>
-  </div>
-
-  <md-sidenav md-component-id="play-sidenav" class="md-sidenav-right sidenav-chatroom wrap" layout="column" layout-align="center stretch" md-disable-backdrop md-whiteframe="4">
-
-    <div class="md-chatroom-header" flex="nogrow" layout="row" layout-align="end center">
-      <a ng-click="vm.closePanel()" flex="none">
-        <md-icon>clear</md-icon>
-      </a>
+<ui-view class="test-ui-view" layout="column" layout-align="center stretch">
+  <md-content flex layout="column" layout-align="center stretch">
+    <div flex layout="column" layout-align="center stretch">
+      <div flex class="playground-container scrollable playground">
+        <h3>Interface en construction</h3>
+      </div>
+      <md-toolbar flew="nogrow">
+        <md-fab-actions class="md-toolbar-tools">
+          <md-button aria-label="messages" class="md-icon-button" ng-click="vm.openPanel('chatroom')">
+            <md-icon>message</md-icon>
+          </md-button>
+          <md-button aria-label="messages" class="md-icon-button" ng-click="vm.openPanel('files')">
+            <md-icon>folder_open</md-icon>
+          </md-button>
+          <!--upload-button campaign="vm.campaign" ng-click="openPanel('files')"></upload-button-->
+        </md-fab-actions>
+      </md-toolbar>
     </div>
 
-    <div flex layout="column">
-      <ng-include src="vm.panelURL" flex layout="column" layout-align="start stretch"></ng-include>
-    </div>
+    <md-sidenav md-component-id="play-sidenav" class="md-sidenav-right sidenav-chatroom wrap" layout="column" layout-align="center stretch" md-disable-backdrop md-whiteframe="4">
 
-  </md-sidenav>
-</md-content>
+      <div class="md-chatroom-header" flex="nogrow" layout="row" layout-align="end center">
+        <a ng-click="vm.closePanel()" flex="none">
+          <md-icon>clear</md-icon>
+        </a>
+      </div>
+
+      <div flex layout="column">
+        <ng-include src="vm.panelURL" flex layout="column" layout-align="start stretch"></ng-include>
+      </div>
+
+    </md-sidenav>
+  </md-content>
+</ui-view>

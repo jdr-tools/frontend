@@ -162,3 +162,8 @@ md-sidenav.sidenav-chatroom {
 .panel-selection-input {
   margin: 5px !important;
 }
+
+ui-view:not(.custom-ui-view) {
+  height: 100%;
+  width: 100%;
+}
