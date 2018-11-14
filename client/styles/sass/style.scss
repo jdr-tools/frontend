@@ -116,13 +116,14 @@ body > ui-view {
     margin-bottom: 5px;
     width: 90%;
     box-sizing: border-box;
+    float: left;
     &:first-of-type {
       margin-top: 5px;
     }
-    &.self {
+    &.other {
       border-bottom-left-radius: 0px;
     }
-    &.other {
+    &.self {
       float: right;
       border-bottom-right-radius: 0px;
     }
