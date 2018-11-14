@@ -10,7 +10,21 @@
           <div flex="none" class="md-caption message-creation-date">{{message.created_at | date:'HH:mm'}}</div>
         </div>
         <div>
-          {{message.data.results.join(' + ')}} <span ng-if="message.data.modifier > 0">+ {{message.data.modifier}} </span>= {{vm.getTotal(message)}}
+          <span
+            ng-repeat="result in message.data.results track by $index"
+            ng-init="max = message.data.number_of_faces"
+            class="dice result"
+            md-colors="{'border-color': 'green-300'}"
+          >
+            <span ng-if="result == max" md-colors="{'color': 'green-400'}" class="critical" ng-bind="result"></span>
+            <span ng-if="result == 1" md-colors="{'color': 'red-400'}" class="critical" ng-bind="result"></span>
+            <span ng-if="result > 1 && result < max" ng-bind="result"></span>
+          </span>
+          <span ng-if="message.data.modifier > 0">
+            <span>&nbsp;+</span>
+            <span class="dice modifier" md-colors="{'border-color': 'green-300'}">{{message.data.modifier}}</span>
+          </span>
+          <span>= {{vm.getTotal(message)}}</span>
         </div>
       </div>
       <div ng-if="message.type == 'text' && message.username === vm.username" class="message-container self" md-colors="{'background': 'blue-700', 'color': 'grey-50'}">
