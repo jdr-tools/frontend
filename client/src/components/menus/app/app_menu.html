@@ -1,9 +1,28 @@
 <md-toolbar>
-  <div class="md-toolbar-tools container centered" ng-if="vm.authenticated">
-    <span>
+  <div class="md-toolbar-tools container" ng-if="vm.authenticated">
+
+    <!-- Left menu for laptop devices -->
+    <span hide-xs>
       <md-button ui-sref="campaigns.index">{{'components.main_menu.items.play' | translate}}</md-button>
       <md-button ui-sref="campaigns.search">{{'components.main_menu.items.search' | translate}}</md-button>
     </span>
+
+    <!-- Left menu for mobile devices -->
+    <md-menu hide-gt-xs>
+      <md-button class="md-icon-button" ng-click="$mdMenu.open($event)">
+        <md-icon md-menu-origin>menu</md-icon>
+      </md-button>
+      <md-menu-content>
+        <md-menu-item>
+          <md-button ui-sref="campaigns.index">{{'components.main_menu.items.play' | translate}}</md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button ui-sref="campaigns.search">{{'components.main_menu.items.search' | translate}}</md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+
+
     <span flex></span>
     <span>
       <md-menu>
@@ -54,8 +73,8 @@
       </md-menu>
     </span>
   </div>
-  <div class="md-toolbar-tools container centered" ng-if="!vm.authenticated">
-    <span flex></span>
+  <span flex></span>
+  <div class="md-toolbar-tools container" ng-if="!vm.authenticated">
     <span>
       <md-button ui-sref="sessionsCreate">{{'components.main_menu.items.login' | translate}}</md-button>
       <md-button ui-sref="accountsCreate">{{'components.main_menu.items.register' | translate}}</md-button>

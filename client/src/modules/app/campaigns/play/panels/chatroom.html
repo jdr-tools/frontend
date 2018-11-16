@@ -1,6 +1,4 @@
 <md-content flex="grow" class="md-chatroom-content" class="md-padding scrollable">
-
-
   <div ng-repeat="(creation_date, messages) in vm.campaign.messages" class="message-wrapper">
     <md-subheader>{{creation_date | date:'dd/MM/yyyy'}}</md-subheader>
     <div ng-repeat="message in messages track by $index">
