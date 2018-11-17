@@ -6,12 +6,10 @@
   </md-toolbar>
   <form ng-submit="validate()">
     <md-dialog-content class="md-padding">
-      <md-input-container class="md-block">
-        <uploader input-name="content" upload-object="file", upload-key="content" accepted-types="mimeTypes"></uploader>
-      </md-input-container>
+      <uploader input-name="content" upload-object="file", upload-key="content" accepted-types="mimeTypes"></uploader>
     </md-dialog-content>
     <md-dialog-actions layout="row">
-      <input type="submit" value="{{'common.validate' | translate}}" class="md-button" />
+      <input type="submit" value="{{'common.validate' | translate}}" class="md-button" ng-disabled="file.content.name === undefined" />
       <md-button ng-click="close()">{{'common.cancel' | translate}}</md-button>
     </md-dialog-actions>
   </form>

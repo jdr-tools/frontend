@@ -1,4 +1,4 @@
-const campaignsPlayController = function campaignsPlayControllerFunction ($localStorage, $mdSidenav, $scope, $state, $timeout, Api, Campaign, FormService) {
+const campaignsPlayController = function campaignsPlayControllerFunction ($localStorage, $mdSidenav, $scope, $state, $timeout, Api, Campaign, FormService, $rootScope) {
   'ngInject'
 
   const vm = this
@@ -57,6 +57,13 @@ const campaignsPlayController = function campaignsPlayControllerFunction ($local
       vm.campaign.insertMessage(message)
       vm.message = ''
       vm.scrollMessages()
+    }
+  })
+
+  $scope.$on('campaign.file.added', (event, file) => {
+    if (file.campaign_id === $state.params.id) {
+      vm.campaign.insertFile(file)
+      $rootScope.$broadcast('file.upload.close')
     }
   })
 

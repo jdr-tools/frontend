@@ -3,20 +3,14 @@ export default function uploader (Api) {
 
   const vm = this
 
-  vm.uploadFileObject = (url, file) => {
+  vm.uploadFileObject = (url, file, options = {}) => {
     const reader = new FileReader()
     reader.onload = (event) => {
       const parameters = {
         name: file.name,
-        size: file.size,
-        type: file.type,
         content: event.target.result
       }
-      Api.post(url, parameters, {
-        successCallback: (response) => {
-          console.log(response)
-        }
-      })
+      Api.post(url, parameters, options)
     }
     reader.readAsDataURL(file)
   }

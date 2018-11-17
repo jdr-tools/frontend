@@ -3,14 +3,15 @@
   <div class="fake-uploader-wrapper" layout="row">
     <md-button flex="none" ng-click="vm.triggerUpload()">Parcourir</md-button>
     <div flex class="uploader-filename-wrapper">
-      <span ng-if="vm.uploadObject.content.name === undefined">Pas de fichier sélectionné</span>
-      <span ng-if="vm.uploadObject.content.name !== undefined">{{vm.uploadObject.content.name}}</span>
+      <span ng-if="vm.uploadObject[vm.uploadKey].name === undefined" md-truncate>Pas de fichier sélectionné</span>
+      <span ng-if="vm.uploadObject[vm.uploadKey].name !== undefined" md-truncate>{{vm.uploadObject[vm.uploadKey].name}}</span>
     </div>
   </div>
   <div class="mime-type-errorm md-padding" ng-if="vm.mimeTypeError" md-colors="{color: 'red-A100'}">
     Le type du fichier est incorrect. Les types de fichiers supportés sont :
     <ul>
       <li>Tous fichiers images (PNG, BMP, JPG, etc.)</li>
+      <li>Les fichiers de texte brut avec une extension .txt</li>
     </ul>
   </div>
 </div>

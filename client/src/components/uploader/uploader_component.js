@@ -20,6 +20,8 @@ const uploaderController = function uploaderControllerFunction ($scope, $timeout
         if ( vm.acceptedTypes == undefined || vm.isValidMimeType(file)) {
           vm.mimeTypeError = false
           vm.uploadObject[vm.uploadKey] = file
+          /** This blur event here is designed to lose focus when using the control on mobile devices. */
+          $timeout(() => rawInput().blur())
         }
         else {
           vm.mimeTypeError = true

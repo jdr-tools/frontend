@@ -3,15 +3,19 @@ const uploadButtonController = function uploadButtonControllerFunction ($localSt
 
   const vm = this
 
-  const dialogController = ($scope, $mdDialog) => {
+  const dialogController = ($scope, $mdDialog, $state) => {
     $scope.initialize = () => {
       $scope.file = {filename: "", content: {}},
       $scope.mimeTypes = ['image/*', 'text/plain'].join(',')
     }
-    $scope.validate = () => {
-      Uploader.uploadFileObject(`/campaigns/${vm.campaign.id}/files`, $scope.file.content)
-    }
+
+    $scope.validate = () => vm.campaign.addFile($scope.file.content)
+
+    $scope.close = () => $mdDialog.cancel()
+
     $scope.initialize()
+
+    $scope.$on('file.upload.close', () => $mdDialog.cancel())
   }
 
   /**

@@ -1,4 +1,4 @@
-export default function campaignFactory ($filter, $localStorage, Api, WebsocketNotifier) {
+export default function campaignFactory ($filter, $localStorage, Api, WebsocketNotifier, Uploader) {
   'ngInject'
 
   return class Campaign {
@@ -29,6 +29,11 @@ export default function campaignFactory ($filter, $localStorage, Api, WebsocketN
       this.messages[parsedCreatedAt].push(message)
     }
 
+    insertFile (file) {
+      const vm = this
+      vm.files.push(file)
+    }
+
     addMessage (content) {
       const vm = this
       const params = {content: content}
@@ -47,6 +52,15 @@ export default function campaignFactory ($filter, $localStorage, Api, WebsocketN
       else {
         Api.post(`/campaigns/${vm.id}/messages`, params, options)
       }
+    }
+
+    addFile (content) {
+      const vm = this
+      Uploader.uploadFileObject(`/campaigns/${vm.id}/files`, content, {
+        successCallback: (response) => {
+          WebsocketNotifier.sendToCampaign(vm.id, 'campaign.file.added', Object.assign(response, {campaign_id: vm.id}))
+        }
+      })
     }
   }
 }
