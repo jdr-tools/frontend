@@ -1,0 +1,67 @@
+.md-chatroom-form {
+  padding: 0px 10px;
+  margin-top: 15px !important;
+}
+
+.message-wrapper {
+  overflow: hidden;
+  
+  .message-container {
+    padding: 10px;
+    border-radius: 20px;
+    margin-bottom: 5px;
+    width: 90%;
+    box-sizing: border-box;
+    float: left;
+    &:first-of-type {
+      margin-top: 5px;
+    }
+    &.other {
+      border-bottom-left-radius: 0px;
+    }
+    &.self {
+      float: right;
+      border-bottom-right-radius: 0px;
+    }
+    &.command {
+      width: 100%;
+    }
+    .message-creation-date {
+      display: none;
+    }
+    &:hover {
+      .message-creation-date {
+        display: initial;
+      }
+    }
+    .details {
+      .dice {
+        border: 1px solid;
+        margin-left: 5px;
+        margin-bottom: 5px;
+        display: inline-block;
+        height: 30px;;
+        width: 30px;;
+        line-height: 30px;;
+        font-size: 20px;
+        text-align: center;
+        background-color: white;
+        &.modifier {
+          border-radius: 20px;
+        }
+        &.result {
+          &.critical {
+            font-weight: bold;
+          }
+        }
+      }
+      .details-divider {
+        margin-bottom: 10px;
+        margin-top: 5px;
+      }
+      .roll-title {
+        margin-bottom: 5px;
+      }
+    }
+  }
+}

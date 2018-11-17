@@ -5,7 +5,7 @@
   </div>
   <div>
     <div layout="row" layout-align="center stretch">
-      <div flex>Résultat : {{vm.getTotal(message)}}</div>
+      <div flex>Résultat : <span class="md-body-2">{{vm.getTotal(message)}}</span></div>
       <div flex="none">
         <a ng-click="detailed = !detailed">
           <md-icon ng-if="!detailed">keyboard_arrow_down</md-icon>
@@ -19,7 +19,7 @@
         ng-init="max = roll.number_of_faces"
       >
         <md-divider class="details-divider"></md-divider>
-        <div class="roll-title">
+        <div class="roll-title md-caption">
           Lancer de {{roll.number_of_dices}} dés à {{roll.number_of_faces}} faces
         </div>
         <div ng-repeat="result in roll.results" class="dice result" md-colors="{'border-color': 'green-300'}">
@@ -30,7 +30,7 @@
       </div>
       <div ng-if="message.data.modifier > 0">
         <md-divider class="details-divider"></md-divider>
-        <div class="roll-title">Somme des modificateurs</div>
+        <div class="roll-title md-caption">Somme des modificateurs</div>
         <span class="dice modifier" md-colors="{'border-color': 'green-300'}">{{message.data.modifier}}</span>
       </div>
     </div>
