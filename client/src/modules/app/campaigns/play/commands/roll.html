@@ -1,7 +1,10 @@
 <div class="message-container command" md-colors="{'background': 'green-200'}" ng-init="detailed = false">
   <div layout="row">
     <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
-    <div flex="none" class="md-caption message-creation-date">{{message.created_at | date:'HH:mm'}}</div>
+    <div flex="none">
+      <div hide-xs class="md-caption message-creation-date">{{message.created_at | date:'HH:mm'}}</div>
+      <div hide-gt-xs class="md-caption">{{message.created_at | date:'HH:mm'}}</div>
+    </div>
   </div>
   <div>
     <div layout="row" layout-align="center stretch">

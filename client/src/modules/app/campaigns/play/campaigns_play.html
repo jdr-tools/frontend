@@ -7,11 +7,11 @@
       <md-toolbar flew="nogrow">
         <md-fab-actions class="md-toolbar-tools">
           <md-button aria-label="messages" class="md-icon-button" ng-click="vm.openPanel('chatroom')">
-            <md-tooltip md-direction="top">{{'campaigns.play.tooltips.chatroom' | translate}}</md-tooltip>
+            <md-tooltip md-direction="top" hide-xs>{{'campaigns.play.tooltips.chatroom' | translate}}</md-tooltip>
             <md-icon>message</md-icon>
           </md-button>
           <md-button aria-label="messages" class="md-icon-button" ng-click="vm.openPanel('files')">
-            <md-tooltip md-direction="top">{{'campaigns.play.tooltips.files' | translate}}</md-tooltip>
+            <md-tooltip md-direction="top" hide-xs>{{'campaigns.play.tooltips.files' | translate}}</md-tooltip>
             <md-icon>folder_open</md-icon>
           </md-button>
         </md-fab-actions>
@@ -22,7 +22,7 @@
 
       <div class="md-chatroom-header" flex="nogrow" layout="row" layout-align="end center" md-colors="{'background': 'grey-200'}">
         <a ng-click="vm.closePanel()" flex="none">
-          <md-tooltip md-direction="left">{{'common.close' | translate}}</md-tooltip>
+          <md-tooltip md-direction="left" hide-xs>{{'common.close' | translate}}</md-tooltip>
           <md-icon>clear</md-icon>
         </a>
       </div>
