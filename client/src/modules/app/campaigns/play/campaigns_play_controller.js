@@ -12,23 +12,23 @@ const campaignsPlayController = function campaignsPlayControllerFunction ($local
   }
 
   vm.openPanel = (panelType) => {
-    if (!$mdSidenav('play-sidenav').isOpen()) {
-      $mdSidenav('play-sidenav').toggle()
-    }
     vm.displayedPanel = panelType
     vm.panelURL = `/client/src/modules/app/campaigns/play/panels/${panelType}.html`
-    if (panelType == 'chatroom') {
-      vm.scrollMessages()
-    }
+    $mdSidenav('play-sidenav')
+      .open()
+      .then(() => {
+        if (panelType == 'chatroom') vm.scrollMessages()
+      })
   }
 
   vm.sendMessage = () => vm.campaign.addMessage(vm.message)
 
   vm.scrollMessages = () => {
-    $timeout(() => {
-      const element = $('.md-chatroom-content')[0]
-      element.scrollTop = element.scrollHeight
-    }, 100)
+    const elements = $('#chatroom-scroller')
+    if (elements.length > 0) {
+      elements[0].scrollTop = elements[0].scrollHeight
+    }
+    
   }
 
   vm.getRollTotal = (roll) => {
