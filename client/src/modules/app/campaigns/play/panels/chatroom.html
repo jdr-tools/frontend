@@ -4,28 +4,8 @@
   <div ng-repeat="(creation_date, messages) in vm.campaign.messages" class="message-wrapper">
     <md-subheader>{{creation_date | date:'dd/MM/yyyy'}}</md-subheader>
     <div ng-repeat="message in messages track by $index">
-      <div ng-if="message.type == 'command' && message.data.command == 'roll'" class="message-container command" md-colors="{'background': 'green-200'}">
-        <div layout="row">
-          <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
-          <div flex="none" class="md-caption message-creation-date">{{message.created_at | date:'HH:mm'}}</div>
-        </div>
-        <div>
-          <span
-            ng-repeat="result in message.data.results track by $index"
-            ng-init="max = message.data.number_of_faces"
-            class="dice result"
-            md-colors="{'border-color': 'green-300'}"
-          >
-            <span ng-if="result == max" md-colors="{'color': 'green-400'}" class="critical" ng-bind="result"></span>
-            <span ng-if="result == 1" md-colors="{'color': 'red-400'}" class="critical" ng-bind="result"></span>
-            <span ng-if="result > 1 && result < max" ng-bind="result"></span>
-          </span>
-          <span ng-if="message.data.modifier > 0">
-            <span>&nbsp;+</span>
-            <span class="dice modifier" md-colors="{'border-color': 'green-300'}">{{message.data.modifier}}</span>
-          </span>
-          <span>= {{vm.getTotal(message)}}</span>
-        </div>
+      <div ng-if="message.type == 'command'">
+        <ng-include src="vm.getCommandTemplate(message)" flex layout="column" layout-align="start stretch"></ng-include>
       </div>
       <div ng-if="message.type == 'text' && message.username === vm.username" class="message-container self" md-colors="{'background': 'blue-700', 'color': 'grey-50'}">
         <div layout="row">

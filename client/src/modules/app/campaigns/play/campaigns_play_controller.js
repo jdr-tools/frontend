@@ -31,8 +31,12 @@ const campaignsPlayController = function campaignsPlayControllerFunction ($local
     }, 100)
   }
 
+  vm.getRollTotal = (roll) => {
+    return _.sum(roll.results)
+  }
+
   vm.getTotal = (message) => {
-    return _.sum(message.data.results) + message.data.modifier
+    return _.sum(_.map(message.data.rolls, vm.getRollTotal)) + message.data.modifier
   }
 
   vm.isCreator = () => {
@@ -41,6 +45,10 @@ const campaignsPlayController = function campaignsPlayControllerFunction ($local
 
   vm.openUploadModal = () => {
     $rootScope.$broadcast('modals.upload.open')
+  }
+
+  vm.getCommandTemplate = (command) => {
+    return `/client/src/modules/app/campaigns/play/commands/${command.data.command}.html`
   }
 
   $scope.$on('message.created', (event, message) => {
