@@ -7,6 +7,8 @@ const campaignsPlayController = function campaignsPlayControllerFunction ($local
 
   vm.username = $localStorage.account.username
 
+  vm.interfaceURL = '/client/src/modules/app/campaigns/play/panels/interface.html'
+
   vm.closePanel = () => {
     $mdSidenav('play-sidenav').close()
   }
@@ -49,6 +51,15 @@ const campaignsPlayController = function campaignsPlayControllerFunction ($local
 
   vm.getCommandTemplate = (command) => {
     return `/client/src/modules/app/campaigns/play/commands/${command.data.command}.html`
+  }
+
+  vm.selectFile = (file) => {
+    Api.get(`/campaigns/${vm.campaign.id}/files/${file.id}`, {}, {
+      successCallback: (response) => {
+        vm.imageRepresentation = response
+        vm.displayFile = true
+      }
+    })
   }
 
   $scope.$on('message.created', (event, message) => {

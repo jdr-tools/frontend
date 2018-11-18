@@ -1,8 +1,8 @@
 <ui-view class="test-ui-view" layout="column" layout-align="center stretch">
   <md-content flex layout="column" layout-align="center stretch">
     <div flex layout="column" layout-align="center stretch">
-      <div flex class="playground-container scrollable playground">
-        <h3>Interface en construction</h3>
+      <div flex class="playground-container scrollable playground" layout="column">
+        <ng-include src="vm.interfaceURL" flex layout="row" layout-align="center center"></ng-include>
       </div>
       <md-toolbar flew="nogrow">
         <md-fab-actions class="md-toolbar-tools">

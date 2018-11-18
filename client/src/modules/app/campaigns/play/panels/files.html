@@ -1,17 +1,14 @@
 <div flex="grow" layout="column" layout-align="start stretch" class="md-padding scrollable">
   <md-list>
     <md-subheader class="md-no-sticky">Liste des fichiers</md-subheader>
-    <md-list-item ng-repeat="file in vm.campaign.files" class="md-3-line">
+    <md-list-item ng-repeat="file in vm.campaign.files" class="md-3-line" ng-click="vm.selectFile(file)">
       <div class="md-list-item-text" layout="column">
         <h3>{{file.name}}</h3>
         <h4>{{file.size}} bytes</h4>
         <p>{{file.type}}</p>
       </div>
       <md-button class="md-secondary md-icon-button">
-        <md-icon>remove_red_eye</md-icon>
-      </md-button>
-      <md-button class="md-secondary md-icon-button">
-        <md-icon>save_alt</md-icon>
+        <md-icon>clear</md-icon>
       </md-button>
     </md-list-item>
   </md-list>
