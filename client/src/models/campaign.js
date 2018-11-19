@@ -1,4 +1,4 @@
-export default function campaignFactory ($filter, $localStorage, Api, WebsocketNotifier, Uploader) {
+export default function campaignFactory ($filter, $rootScope, $timeout, $localStorage, Api, WebsocketNotifier, Uploader) {
   'ngInject'
 
   return class Campaign {
@@ -27,6 +27,7 @@ export default function campaignFactory ($filter, $localStorage, Api, WebsocketN
         vm.messages[parsedCreatedAt] = []
       }
       this.messages[parsedCreatedAt].push(message)
+      $timeout(() => $rootScope.$broadcast('messages.scroll'), 200)
     }
 
     insertFile (file) {

@@ -1,6 +1,6 @@
 .md-chatroom-form {
   padding: 0px 10px;
-  margin-top: 15px !important;
+  padding-top: 15px !important;
 }
 
 .message-wrapper {
@@ -27,11 +27,11 @@
       width: 100%;
     }
     .message-creation-date {
-      display: none;
+      visibility: hidden;
     }
     &:hover {
       .message-creation-date {
-        display: initial;
+        visibility: visible;
       }
     }
     .details {

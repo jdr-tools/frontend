@@ -1,4 +1,4 @@
-const chatroomController = function chatroomControllerFunction ($localStorage, $scope, $state, FormService) {
+const chatroomController = function chatroomControllerFunction ($localStorage, $scope, $state, $timeout, FormService) {
   'ngInject'
 
   const vm = this
@@ -24,7 +24,7 @@ const chatroomController = function chatroomControllerFunction ($localStorage, $
   vm.scrollMessages = () => {
     const elements = $('#chatroom-scroller')
     if (elements.length > 0) {
-      elements[0].scrollTop = elements[0].scrollHeight
+      elements.animate({scrollTop: elements[0].scrollHeight}, 500)
     }
   }
 
@@ -40,7 +40,6 @@ const chatroomController = function chatroomControllerFunction ($localStorage, $
       FormService.reset(vm.sendMessageForm)
       vm.campaign.insertMessage(message)
       vm.message = ''
-      vm.scrollMessages()
     }
   })
 

@@ -1,6 +1,6 @@
 <md-content flex="grow" class="md-padding scrollable" id="chatroom-scroller">
   <div ng-repeat="(creation_date, messages) in vm.campaign.messages">
-    <md-subheader>{{creation_date | date:'dd/MM/yyyy'}}</md-subheader>
+    <md-subheader class="md-no-sticky">{{creation_date | date:'dd/MM/yyyy'}}</md-subheader>
     <div ng-repeat="message in messages track by $index" class="message-wrapper">
       <div ng-if="message.type == 'command'">
         <ng-include src="vm.getCommandTemplate(message)" flex layout="column" layout-align="start stretch"></ng-include>
