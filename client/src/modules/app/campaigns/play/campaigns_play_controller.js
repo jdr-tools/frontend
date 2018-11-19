@@ -62,6 +62,10 @@ const campaignsPlayController = function campaignsPlayControllerFunction ($local
     })
   }
 
+  vm.deleteFile = (file) => {
+    vm.campaign.deleteFile(file)
+  }
+
   $scope.$on('message.created', (event, message) => {
     if (message.campaign_id === $state.params.id) {
       FormService.reset(vm.sendMessageForm)
@@ -75,6 +79,12 @@ const campaignsPlayController = function campaignsPlayControllerFunction ($local
     if (file.campaign_id === $state.params.id) {
       vm.campaign.insertFile(file)
       $rootScope.$broadcast('file.upload.close')
+    }
+  })
+
+  $scope.$on('campaign.file.deleted', (event, file) => {
+    if (file.campaign_id === $state.params.id) {
+      vm.campaign.removeFile(file)
     }
   })
 

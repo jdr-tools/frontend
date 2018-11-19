@@ -62,5 +62,20 @@ export default function campaignFactory ($filter, $localStorage, Api, WebsocketN
         }
       })
     }
+
+    deleteFile (file) {
+      const vm = this
+      Api.delete(`/campaigns/${vm.id}/files/${file.id}`, {
+        successCallback: (response) => {
+          WebsocketNotifier.sendToCampaign(vm.id, 'campaign.file.deleted', file)
+        }
+      })
+    }
+
+    removeFile (file) {
+      _.remove(this.files, f => {
+        return (f.id == file.id)
+      })
+    }
   }
 }
