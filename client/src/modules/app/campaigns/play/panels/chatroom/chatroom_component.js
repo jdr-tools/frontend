@@ -1,4 +1,4 @@
-const chatroomController = function chatroomControllerFunction ($localStorage, $scope, FormService) {
+const chatroomController = function chatroomControllerFunction ($localStorage, $scope, $state, FormService) {
   'ngInject'
 
   const vm = this
