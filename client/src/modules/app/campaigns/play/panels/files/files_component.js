@@ -10,8 +10,7 @@ const filesController = function filesControllerFunction (Api, $rootScope, $scop
   vm.selectFile = (file) => {
     Api.get(`/campaigns/${vm.campaign.id}/files/${file.id}`, {}, {
       successCallback: (response) => {
-        vm.imageRepresentation = response
-        vm.displayFile = true
+        $rootScope.$broadcast('file.preview.changed', file, response)
       }
     })
   }

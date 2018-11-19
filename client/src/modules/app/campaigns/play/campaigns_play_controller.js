@@ -1,4 +1,4 @@
-export default function campaignsPlayController ($localStorage, $mdSidenav, $state, Campaign, $rootScope) {
+export default function campaignsPlayController ($localStorage, $mdSidenav, $scope, $state, Campaign, $rootScope) {
   'ngInject'
 
   const vm = this
@@ -18,6 +18,11 @@ export default function campaignsPlayController ($localStorage, $mdSidenav, $sta
    * @var {String} interfaceURL
    */
   vm.interfaceURL = '/client/src/modules/app/campaigns/play/panels/interface.html'
+  /**
+   * The file currently displayed in the interface.
+   * @var {Object} displayFile
+   */
+  vm.fileContent = {}
 
   /**
    * Closes the current panel, whatever panel is currently opened.
@@ -37,4 +42,9 @@ export default function campaignsPlayController ($localStorage, $mdSidenav, $sta
         if (panelType == 'chatroom') $rootScope.$broadcast('messages.scroll')
       })
   }
+
+  $scope.$on('file.preview.changed', (event, file, fileContent) => {
+    vm.displayedFile = Object.assign({}, file, {content: fileContent})
+    vm.displayFile = true
+  })
 }
