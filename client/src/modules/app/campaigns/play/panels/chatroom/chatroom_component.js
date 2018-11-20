@@ -1,4 +1,4 @@
-const chatroomController = function chatroomControllerFunction ($localStorage, $scope) {
+const chatroomController = function chatroomControllerFunction ($localStorage, $scope, FormService) {
   'ngInject'
 
   const vm = this
@@ -42,6 +42,11 @@ const chatroomController = function chatroomControllerFunction ($localStorage, $
       vm.message = ''
       vm.scrollMessages()
     }
+  })
+
+  $scope.$on('command.failed', (event, error) => {
+    FormService.reset(vm.sendMessageForm)
+    vm.sendMessageForm.message.$setValidity(error.data.field, false)
   })
 }
 
