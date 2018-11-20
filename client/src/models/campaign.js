@@ -21,7 +21,7 @@ export default function campaignFactory ($filter, $rootScope, $timeout, $localSt
       })
       Api.get(`/campaigns/${id}/files`, {}, {
         successCallback: response => {
-          vm.files = response
+          vm.files = _.map(response, file => Object.assign({campaign_id: id}, file))
         }
       })
     }

@@ -47,9 +47,6 @@ const websocketChannel = function websocketChannelFunction (Api, $rootScope, $in
           vm.websocket.onopen = vm.onWsOpen
           vm.websocket.onmessage = vm.onWsMessage
           vm.websocket.onclose = vm.onWsClose
-        },
-        errorCallback: response => {
-          console.log(response)
         }
       })
     }

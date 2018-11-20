@@ -26,7 +26,6 @@ const filesController = function filesControllerFunction (Api, $rootScope, $scop
   $scope.$on('campaign.file.added', (event, file) => {
     if (file.campaign_id === $state.params.id) {
       vm.campaign.insertFile(file)
-      $rootScope.$broadcast('file.upload.close')
     }
   })
 

@@ -7,6 +7,9 @@
   <form ng-submit="validate()">
     <md-dialog-content class="md-padding">
       <uploader input-name="content" upload-object="file", upload-key="content" accepted-types="mimeTypes"></uploader>
+      <div layout="row" layout-sm="column" layout-align="space-around" ng-if="isUploading">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+      </div>
     </md-dialog-content>
     <md-dialog-actions layout="row">
       <input type="submit" value="{{'common.validate' | translate}}" class="md-button" ng-disabled="file.content.name === undefined" />

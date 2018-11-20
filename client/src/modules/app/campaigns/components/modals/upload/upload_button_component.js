@@ -9,13 +9,21 @@ const uploadButtonController = function uploadButtonControllerFunction ($localSt
       $scope.mimeTypes = ['image/*', 'text/plain'].join(',')
     }
 
-    $scope.validate = () => vm.campaign.addFile($scope.file.content)
+    $scope.validate = () => {
+      vm.campaign.addFile($scope.file.content)
+      $scope.isUploading = true
+    }
 
     $scope.close = () => $mdDialog.cancel()
 
     $scope.initialize()
 
-    $scope.$on('file.upload.close', () => $mdDialog.cancel())
+    $scope.$on('campaign.file.added', (event, file) => {
+      if (file.campaign_id == vm.campaign.id) {
+        $scope.isUploading = false
+        $mdDialog.cancel()
+      }
+    })
   }
 
   /**

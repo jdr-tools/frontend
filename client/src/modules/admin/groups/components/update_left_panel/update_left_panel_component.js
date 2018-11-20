@@ -25,7 +25,6 @@ const updateLeftPanel = function updateLeftPanelFunction ($mdSidenav, $rootScope
    * @param [Object] group - the updated group, associated with elements of the panel.
    */
   vm.selectElements = (group) => {
-    console.log(vm.collection)
     vm.collection = vm.collection.map((item) => {
       item[vm.loopKey] = _.map(item[vm.loopKey], subitem => {
         subitem.selected = group[vm.loopKey].indexOf(subitem.id) >= 0
