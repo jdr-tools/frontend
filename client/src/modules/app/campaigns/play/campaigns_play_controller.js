@@ -15,22 +15,12 @@ const campaignsPlayController = function campaignsPlayControllerFunction ($local
 
   vm.openPanel = (panelType) => {
     vm.displayedPanel = panelType
-    vm.panelURL = `/client/src/modules/app/campaigns/play/panels/${panelType}.html`
+    vm.panelURL = `/client/src/modules/app/campaigns/play/panels/${panelType}/include.html`
     $mdSidenav('play-sidenav')
       .open()
       .then(() => {
-        if (panelType == 'chatroom') vm.scrollMessages()
+        if (panelType == 'chatroom') $rootScope.$broadcast('messages.scroll')
       })
-  }
-
-  vm.sendMessage = () => vm.campaign.addMessage(vm.message)
-
-  vm.scrollMessages = () => {
-    const elements = $('#chatroom-scroller')
-    if (elements.length > 0) {
-      elements[0].scrollTop = elements[0].scrollHeight
-    }
-    
   }
 
   vm.isCreator = () => {
@@ -39,10 +29,6 @@ const campaignsPlayController = function campaignsPlayControllerFunction ($local
 
   vm.openUploadModal = () => {
     $rootScope.$broadcast('modals.upload.open')
-  }
-
-  vm.getCommandTemplate = (command) => {
-    return `/client/src/modules/app/campaigns/play/commands/${command.data.command}/include.html`
   }
 
   vm.selectFile = (file) => {
@@ -57,15 +43,6 @@ const campaignsPlayController = function campaignsPlayControllerFunction ($local
   vm.deleteFile = (file) => {
     vm.campaign.deleteFile(file)
   }
-
-  $scope.$on('message.created', (event, message) => {
-    if (message.campaign_id === $state.params.id) {
-      FormService.reset(vm.sendMessageForm)
-      vm.campaign.insertMessage(message)
-      vm.message = ''
-      vm.scrollMessages()
-    }
-  })
 
   $scope.$on('campaign.file.added', (event, file) => {
     if (file.campaign_id === $state.params.id) {

@@ -1,0 +1,40 @@
+<md-content flex="grow" class="md-padding scrollable" id="chatroom-scroller">
+  <div ng-repeat="(creation_date, messages) in vm.campaign.messages" class="message-wrapper">
+    <md-subheader>{{creation_date | date:'dd/MM/yyyy'}}</md-subheader>
+    <div ng-repeat="message in messages track by $index">
+      <div ng-if="message.type == 'command'">
+        <ng-include src="vm.getCommandTemplate(message)" flex layout="column" layout-align="start stretch"></ng-include>
+      </div>
+      <div ng-if="message.type == 'text' && message.username === vm.username" class="message-container self" md-colors="{'background': 'blue-700', 'color': 'grey-50'}">
+        <div layout="row">
+          <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
+          <div flex="none">
+            <div hide-xs class="md-caption message-creation-date">{{message.created_at | date:'HH:mm'}}</div>
+            <div hide-gt-xs class="md-caption">{{message.created_at | date:'HH:mm'}}</div>
+          </div>
+        </div>
+        <div >{{message.data.content}}</div>
+      </div>
+      <div ng-if="message.type == 'text' && message.username !== vm.username" class="message-container other" md-colors="{'background': 'grey-300'}">
+        <div layout="row">
+          <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
+          <div flex="none">
+            <div hide-xs class="md-caption message-creation-date">{{message.created_at | date:'HH:mm'}}</div>
+            <div hide-gt-xs class="md-caption">{{message.created_at | date:'HH:mm'}}</div>
+          </div>
+        </div>
+        <div >{{message.data.content}}</div>
+      </div>
+    </div>
+  </div>
+</md-content>
+<form name="vm.sendMessageForm" ng-submit="vm.sendMessage()" class="md-chatroom-form without-margin" flex="noshrink">
+  <md-input-container class="md-block without-margin">
+    <label for="message">Message</label>
+    <input type="text" id="message" name="message" ng-model="vm.message" autocomplete="off" />
+    <div ng-messages="vm.sendMessageForm.message.$error">
+      <div ng-message="content" translate>campaigns.messages.errors.content</div>
+      <div ng-message="command" translate>campaigns.messages.errors.command</div>
+    </div>
+  </md-input-container>
+</form>
