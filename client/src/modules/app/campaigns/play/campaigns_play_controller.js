@@ -33,14 +33,6 @@ const campaignsPlayController = function campaignsPlayControllerFunction ($local
     
   }
 
-  vm.getRollTotal = (roll) => {
-    return _.sum(roll.results)
-  }
-
-  vm.getTotal = (message) => {
-    return _.sum(_.map(message.data.rolls, vm.getRollTotal)) + message.data.modifier
-  }
-
   vm.isCreator = () => {
     return _.get(vm, 'campaign.creator.username') == vm.username
   }
@@ -50,7 +42,7 @@ const campaignsPlayController = function campaignsPlayControllerFunction ($local
   }
 
   vm.getCommandTemplate = (command) => {
-    return `/client/src/modules/app/campaigns/play/commands/${command.data.command}.html`
+    return `/client/src/modules/app/campaigns/play/commands/${command.data.command}/include.html`
   }
 
   vm.selectFile = (file) => {

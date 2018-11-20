@@ -1,24 +1,24 @@
-<div class="message-container command" md-colors="{'background': 'green-200'}" ng-init="detailed = false">
+<div class="message-container command" md-colors="{'background': 'green-200'}" ng-if="vm.message !== undefined">
   <div layout="row">
-    <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
+    <div flex="grow" class="md-body-2 md-chatroom-username">{{vm.message.username}}</div>
     <div flex="none">
-      <div hide-xs class="md-caption message-creation-date">{{message.created_at | date:'HH:mm'}}</div>
-      <div hide-gt-xs class="md-caption">{{message.created_at | date:'HH:mm'}}</div>
+      <div hide-xs class="md-caption message-creation-date">{{vm.message.created_at | date:'HH:mm'}}</div>
+      <div hide-gt-xs class="md-caption">{{vm.message.created_at | date:'HH:mm'}}</div>
     </div>
   </div>
   <div>
     <div layout="row" layout-align="center stretch">
-      <div flex>Résultat : <span class="md-body-2">{{vm.getTotal(message)}}</span></div>
+      <div flex>Résultat : <span class="md-body-2">{{vm.total}}</span></div>
       <div flex="none">
-        <a ng-click="detailed = !detailed">
-          <md-icon ng-if="!detailed">keyboard_arrow_down</md-icon>
-          <md-icon ng-if="detailed">keyboard_arrow_up</md-icon>
+        <a ng-click="vm.toggleDetails()">
+          <md-icon ng-if="!vm.details">keyboard_arrow_down</md-icon>
+          <md-icon ng-if="vm.details">keyboard_arrow_up</md-icon>
         </a>
       </div>
     </div>
-    <div class="details" ng-show="detailed">
+    <div class="details" ng-show="vm.details">
       <div
-        ng-repeat="roll in message.data.rolls track by $index"
+        ng-repeat="roll in vm.message.data.rolls track by $index"
         ng-init="max = roll.number_of_faces"
       >
         <md-divider class="details-divider"></md-divider>
@@ -31,10 +31,10 @@
           <span ng-if="result > 1 && result < max" ng-bind="result"></span>
         </div>
       </div>
-      <div ng-if="message.data.modifier > 0">
+      <div ng-if="vm.message.data.modifier > 0">
         <md-divider class="details-divider"></md-divider>
         <div class="roll-title md-caption">Somme des modificateurs</div>
-        <span class="dice modifier" md-colors="{'border-color': 'green-300'}">{{message.data.modifier}}</span>
+        <span class="dice modifier" md-colors="{'border-color': 'green-300'}">{{vm.message.data.modifier}}</span>
       </div>
     </div>
   </div>
