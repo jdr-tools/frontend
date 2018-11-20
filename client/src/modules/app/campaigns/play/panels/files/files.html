@@ -7,12 +7,12 @@
         <h4>{{file.size}} bytes</h4>
         <p>{{file.type}}</p>
       </div>
-      <md-button class="md-secondary md-icon-button" ng-click="vm.deleteFile(file)">
+      <md-button class="md-secondary md-icon-button" ng-click="vm.deleteFile(file)" ng-if="vm.campaign.isCreator">
         <md-icon>delete</md-icon>
       </md-button>
     </md-list-item>
   </md-list>
 </div>
-<div flex="noshrink" class="md-padding">
+<div flex="noshrink" class="md-padding" ng-if="vm.campaign.isCreator">
   <upload-button campaign="vm.campaign"></upload-button>
 </div>

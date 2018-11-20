@@ -5,7 +5,13 @@ export default function campaignFactory ($filter, $rootScope, $timeout, $localSt
     constructor (id) {
       const vm = this
       vm.commandRegex = /^\/[a-z]+( .*)?$/
-      Api.get(`/campaigns/${id}`, {}, {successCallback: (response) => Object.assign(vm, response)})
+      vm.isCreator = false
+      Api.get(`/campaigns/${id}`, {}, {
+        successCallback: (response) => {
+          Object.assign(vm, response)
+          vm.isCreator = _.get($localStorage, 'account.username', false) == _.get(response, 'creator.username', true)
+        }
+      })
       Api.get(`/campaigns/${id}/messages`, {}, {
         successCallback: (response) => {
           vm.messages = _.groupBy(response, message => {
