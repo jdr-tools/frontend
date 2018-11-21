@@ -19,6 +19,12 @@
       }
     },
     "index": {
+      "buttons": {
+        "create": "Créer une campagne"
+      },
+      "placeholders": {
+        "creations": "Vous ne possédez aucune campagne dans votre bibliothèque"
+      },
       "titles": {
         "my_creations": "Mes créations",
         "my_games": "Mes parties",

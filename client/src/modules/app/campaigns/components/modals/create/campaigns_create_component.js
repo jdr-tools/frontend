@@ -1,4 +1,4 @@
-const campaignsCreateComponent = function campaignsCreateComponentFunction ($localStorage, $mdDialog, $rootScope, CampaignsFactory) {
+const campaignsCreateComponent = function campaignsCreateComponentFunction ($localStorage, $mdDialog, $rootScope, $scope, CampaignsFactory) {
   'ngInject'
 
   const vm = this
@@ -42,6 +42,10 @@ const campaignsCreateComponent = function campaignsCreateComponentFunction ($loc
     })
     .then(vm.onCreation)
   }
+
+  $scope.$on('campaign.creation.trigger', (event, clickEvent) => {
+    vm.createCampaign(clickEvent)
+  })
 }
 
 export default {

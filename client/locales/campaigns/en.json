@@ -19,6 +19,12 @@
       }
     },
     "index": {
+      "buttons": {
+        "create": "Create a campaign"
+      },
+      "placeholders": {
+        "creations": "You don't have any campaign yet"
+      },
       "titles": {
         "my_creations": "My creations",
         "my_games": "My games",

@@ -1,4 +1,4 @@
-const campaignsListController = function campaignsListControllerFunction ($interval, $localStorage, $mdDialog, $scope, CampaignsFactory, Confirmation, InvitationsFactory) {
+const campaignsListController = function campaignsListControllerFunction ($interval, $localStorage, $mdDialog, $rootScope, $scope, CampaignsFactory, Confirmation, InvitationsFactory) {
   'ngInject'
 
   const vm = this
@@ -35,6 +35,10 @@ const campaignsListController = function campaignsListControllerFunction ($inter
    * @return {Object} an object filled with the 'count' and 'items' property, respectively an integer and an array of campaigns.
    */
   vm.emptyList = () => { return {count: 0, items: []} }
+
+  vm.triggerCreationModal = (event) => {
+    $rootScope.$broadcast('campaign.creation.trigger', event)
+  }
 
   $scope.$on('campaign.created', vm.getOwnCampaigns)
 

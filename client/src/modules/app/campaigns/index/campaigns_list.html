@@ -42,7 +42,11 @@
   <md-tab>
     <md-tab-label>{{'campaigns.index.titles.my_creations' | translate}}</md-tab-label>
     <md-tab-body>
-      <div class="md-padding" layout="row" layout-xs="column">
+      <div class="md-padding" ng-if="vm.creations.items.length <= 0">
+        <p translate>campaigns.index.placeholders.creations</p>
+        <p><md-button ng-click="vm.triggerCreationModal($event)" class="">{{'campaigns.index.buttons.create' | translate}}</md-button></p>
+      </div>
+      <div ng-if="vm.creations.items.length > 0" class="md-padding" layout="row" layout-xs="column">
         <md-card flex-gt-sm="25" flex-xs="auto" ng-repeat="campaign in vm.creations.items">
           <md-card-title flex="nogrow">
             <md-card-title-text class="wrapped">
