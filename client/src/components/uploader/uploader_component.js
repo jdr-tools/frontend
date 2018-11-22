@@ -46,6 +46,7 @@ export default {
     inputName: '@',
     uploadKey: '@',
     uploadObject: '=',
-    acceptedTypes: '='
+    acceptedTypes: '=',
+    disabled: '='
   }
 }

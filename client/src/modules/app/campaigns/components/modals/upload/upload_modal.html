@@ -6,7 +6,7 @@
   </md-toolbar>
   <form ng-submit="validate()">
     <md-dialog-content class="md-padding">
-      <uploader input-name="content" upload-object="file", upload-key="content" accepted-types="mimeTypes"></uploader>
+      <uploader input-name="content" upload-object="file", upload-key="content" accepted-types="mimeTypes" disabled="isUploading"></uploader>
       <div layout="row" layout-sm="column" layout-align="space-around" ng-if="isUploading">
         <md-progress-circular md-mode="indeterminate"></md-progress-circular>
       </div>
