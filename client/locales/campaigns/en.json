@@ -78,6 +78,14 @@
           }
         }
       },
+      "labels": {
+        "messages": {
+          "message": "Message"
+        }
+      },
+      "titles": {
+        "files": "Liste des fichiers"
+      },
       "tooltips": {
         "chatroom": "Chatroom",
         "files": "Files"

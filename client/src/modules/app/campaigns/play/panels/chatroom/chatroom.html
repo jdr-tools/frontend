@@ -30,7 +30,7 @@
 </md-content>
 <form name="vm.sendMessageForm" ng-submit="vm.sendMessage()" class="md-chatroom-form without-margin" flex="noshrink">
   <md-input-container class="md-block without-margin">
-    <label for="message">Message</label>
+    <label for="message" translate>campaigns.play.labels.messages.message</label>
     <input type="text" id="message" name="message" ng-model="vm.message" autocomplete="off" />
     <div ng-messages="vm.sendMessageForm.message.$error">
       <div ng-message="content" translate>campaigns.messages.errors.content</div>
