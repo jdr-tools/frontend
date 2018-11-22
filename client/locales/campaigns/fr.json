@@ -69,6 +69,15 @@
       }
     },
     "play": {
+      "dialogs": {
+        "files": {
+          "delete": {
+            "content": "You won't be able to display it anymore",
+            "label": "File deletion",
+            "title": "Delete this file ?"
+          }
+        }
+      },
       "tooltips": {
         "chatroom": "Salon de discussion",
         "files": "Voir les fichiers"

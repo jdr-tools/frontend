@@ -69,6 +69,15 @@
       }
     },
     "play": {
+      "dialogs": {
+        "files": {
+          "delete": {
+            "content": "Vous ne pourrez plus afficher son contenu",
+            "label": "Suppression de fichier",
+            "title": "Supprimer ce fichier ?"
+          }
+        }
+      },
       "tooltips": {
         "chatroom": "Chatroom",
         "files": "Files"

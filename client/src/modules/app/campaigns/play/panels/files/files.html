@@ -7,7 +7,7 @@
         <h4>{{file.size}} bytes</h4>
         <p>{{file.type}}</p>
       </div>
-      <md-button class="md-secondary md-icon-button" ng-click="vm.deleteFile(file)" ng-if="vm.campaign.isCreator">
+      <md-button class="md-secondary md-icon-button" ng-click="vm.deleteFile(file, $event)" ng-if="vm.campaign.isCreator">
         <md-icon>delete</md-icon>
       </md-button>
     </md-list-item>

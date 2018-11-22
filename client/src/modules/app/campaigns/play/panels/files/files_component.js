@@ -1,4 +1,4 @@
-const filesController = function filesControllerFunction (Api, $rootScope, $scope, $state) {
+const filesController = function filesControllerFunction ($filter, $mdDialog, $rootScope, $scope, $state, Api) {
   'ngInject'
 
   const vm = this
@@ -19,8 +19,18 @@ const filesController = function filesControllerFunction (Api, $rootScope, $scop
    * Deletes a file and removes it from the interface.
    * @param {Object} file - the file to remove.
    */
-  vm.deleteFile = (file) => {
-    vm.campaign.deleteFile(file)
+  vm.deleteFile = (file, $event) => {
+    const t = $filter('translate')
+    const confirmDialog = $mdDialog.confirm()
+      .title(t('campaigns.play.dialogs.files.delete.title'))
+      .textContent(t('campaigns.play.dialogs.files.delete.content'))
+      .ariaLabel(t('campaigns.play.dialogs.files.delete.label'))
+      .targetEvent($event)
+      .ok(t('common.yes'))
+      .cancel(t('common.no'))
+    $mdDialog.show(confirmDialog).then(() => {
+      vm.campaign.deleteFile(file)
+    })
   }
 
   $scope.$on('campaign.file.added', (event, file) => {
