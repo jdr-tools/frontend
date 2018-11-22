@@ -12,8 +12,8 @@
       </div>
     </md-dialog-content>
     <md-dialog-actions layout="row">
-      <input type="submit" value="{{'common.validate' | translate}}" class="md-button" ng-disabled="file.content.name === undefined" />
-      <md-button ng-click="close()">{{'common.cancel' | translate}}</md-button>
+      <input type="submit" value="{{'common.validate' | translate}}" class="md-button" ng-disabled="file.content.name === undefined || isUploading" />
+      <md-button ng-click="close()">{{'common.close' | translate}}</md-button>
     </md-dialog-actions>
   </form>
 </md-dialog>

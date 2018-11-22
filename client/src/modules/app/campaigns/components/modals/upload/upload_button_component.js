@@ -4,6 +4,7 @@ const uploadButtonController = function uploadButtonControllerFunction ($localSt
   const vm = this
 
   const dialogController = ($scope, $mdDialog, $state) => {
+
     $scope.initialize = () => {
       $scope.file = {filename: "", content: {}},
       $scope.mimeTypes = ['image/*', 'text/plain'].join(',')
