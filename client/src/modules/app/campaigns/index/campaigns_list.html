@@ -5,11 +5,9 @@
   <md-tab>
     <md-tab-label>{{'campaigns.index.titles.my_games' | translate}}</md-tab-label>
     <md-tab-body>
-      <div class="tab-placeholder-wrapper" layout="column" layout-align="end center">
-        <div ng-if="vm.invitations.length <= 0" layout="column" layout-align="center center">
-          <div><md-icon class="md-big-icon" md-colors="{color: 'grey-300'}">view_module</md-icon></div>
-          <p class="md-title" md-colors="{color: 'grey-400'}">{{'campaigns.index.placeholders.invitations' | translate}}</p>
-        </div>
+      <div class="tab-placeholder-wrapper" layout="column" layout-align="end center" ng-if="vm.invitations.length <= 0">
+        <div><md-icon class="md-big-icon" md-colors="{color: 'grey-300'}">view_module</md-icon></div>
+        <p class="md-title" md-colors="{color: 'grey-400'}">{{'campaigns.index.placeholders.invitations' | translate}}</p>
       </div>
       <div class="md-padding" layout="row" layout-xs="column">
         <md-card flex-gt-sm="25" flex-xs="auto" ng-repeat="invitation in vm.invitations">
@@ -48,7 +46,7 @@
   <md-tab>
     <md-tab-label>{{'campaigns.index.titles.my_creations' | translate}}</md-tab-label>
     <md-tab-body>
-      <div ng-if="vm.creations.items.length <= 0" flex layout="column" layout-align="center center">
+      <div class="tab-placeholder-wrapper" ng-if="vm.creations.items.length <= 0" layout="column" layout-align="end center">
         <div><md-icon class="md-big-icon" md-colors="{color: 'grey-300'}">view_module</md-icon></div>
         <p class="md-title" md-colors="{color: 'grey-400'}">{{'campaigns.index.placeholders.creations' | translate}}</p>
       </div>
