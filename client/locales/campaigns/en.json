@@ -20,10 +20,14 @@
     },
     "index": {
       "buttons": {
-        "create": "Create a campaign"
+        "create": "Create a campaign",
+        "public": "Create a public campaign",
+        "search": "Search for public campaigns"
       },
       "placeholders": {
-        "creations": "You don't have any campaign yet"
+        "creations": "You don't have any campaign yet",
+        "invitations": "You haven't joined any campaign yet.",
+        "search": "There are no public campaigns yet."
       },
       "titles": {
         "my_creations": "My creations",

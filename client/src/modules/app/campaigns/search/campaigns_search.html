@@ -1,4 +1,11 @@
-<campaigns-create></campaigns-create>
+<campaigns-create is-public="vm.isPublic"></campaigns-create>
+
+<div class="md-padding" ng-if="vm.campaigns.items.length <= 0">
+  <p translate>campaigns.index.placeholders.search</p>
+  <p>
+    <md-button ng-click="vm.triggerCreationModal($event)" class="">{{'campaigns.index.buttons.public' | translate}}</md-button>
+  </p>
+</div>
 
 <div class="md-padding" layout="row" layout-xs="column">
   <md-card flex-gt-sm="25" flex-xs="auto" ng-repeat="campaign in vm.campaigns.items" ng-if="campaign.invitation.status != 'accepted'">

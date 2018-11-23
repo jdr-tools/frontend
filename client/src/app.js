@@ -11,6 +11,7 @@ const dependencies = [
   'ngStorage',
   'ngMaterial',
   'ngMessages',
+  'ngSanitize',
   'pascalprecht.translate',
   'ui.router',
   'uiSwitch',

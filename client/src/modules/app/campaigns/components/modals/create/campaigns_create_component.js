@@ -3,11 +3,13 @@ const campaignsCreateComponent = function campaignsCreateComponentFunction ($loc
 
   const vm = this
 
+  vm.isPublic = false
+
   const dialogController = ($scope, $mdDialog) => {
     /** The structure for the campaign to create. */
     $scope.campaign = {
       title: '',
-      is_private: true,
+      is_private: !vm.isPublic,
       description: '',
       tags: [],
       creator_id: $localStorage.account.id
@@ -43,8 +45,9 @@ const campaignsCreateComponent = function campaignsCreateComponentFunction ($loc
     .then(vm.onCreation)
   }
 
-  $scope.$on('campaign.creation.trigger', (event, clickEvent) => {
+  $scope.$on('campaign.creation.trigger', (event, clickEvent, isPublic = false) => {
     vm.createCampaign(clickEvent)
+    vm.isPublic = isPublic
   })
 }
 

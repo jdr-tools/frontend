@@ -5,6 +5,13 @@
   <md-tab>
     <md-tab-label>{{'campaigns.index.titles.my_games' | translate}}</md-tab-label>
     <md-tab-body>
+      <div class="md-padding" ng-if="vm.invitations.length <= 0">
+        <p translate>campaigns.index.placeholders.invitations</p>
+        <p>
+          <md-button ng-click="vm.triggerCreationModal($event)" class="">{{'campaigns.index.buttons.create' | translate}}</md-button>
+          <md-button ui-sref="campaigns.search" class="">{{'campaigns.index.buttons.search' | translate}}</md-button>
+        </p>
+      </div>
       <div class="md-padding" layout="row" layout-xs="column">
         <md-card flex-gt-sm="25" flex-xs="auto" ng-repeat="invitation in vm.invitations">
           <md-card-title flex="nogrow">

@@ -1,4 +1,4 @@
-const campaignsSearchController = function campaignsSearchControllerFunction ($scope, CampaignsFactory, InvitationsFactory) {
+const campaignsSearchController = function campaignsSearchControllerFunction ($rootScope, $scope, CampaignsFactory, InvitationsFactory) {
   'ngInject'
 
   const vm = this
@@ -13,6 +13,10 @@ const campaignsSearchController = function campaignsSearchControllerFunction ($s
 
   vm.deleteInvitation = (invitation) => {
     InvitationsFactory.delete(invitation.id, () => vm.getCampaigns())
+  }
+
+  vm.triggerCreationModal = (event) => {
+    $rootScope.$broadcast('campaign.creation.trigger', event, true)
   }
 
   /**
