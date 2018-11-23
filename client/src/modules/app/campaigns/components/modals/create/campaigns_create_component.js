@@ -1,9 +1,9 @@
-const campaignsCreateComponent = function campaignsCreateComponentFunction ($localStorage, $mdDialog, $rootScope, $scope, CampaignsFactory) {
+const campaignsCreateComponent = function campaignsCreateComponentFunction ($attrs, $localStorage, $mdDialog, $rootScope, $scope, CampaignsFactory) {
   'ngInject'
 
   const vm = this
 
-  vm.isPublic = false
+  vm.isPublic = _.has($attrs, 'public')
 
   const dialogController = ($scope, $mdDialog) => {
     /** The structure for the campaign to create. */
@@ -45,9 +45,8 @@ const campaignsCreateComponent = function campaignsCreateComponentFunction ($loc
     .then(vm.onCreation)
   }
 
-  $scope.$on('campaign.creation.trigger', (event, clickEvent, isPublic = false) => {
+  $scope.$on('campaign.creation.trigger', (event, clickEvent) => {
     vm.createCampaign(clickEvent)
-    vm.isPublic = isPublic
   })
 }
 
