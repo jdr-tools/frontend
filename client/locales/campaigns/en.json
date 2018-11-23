@@ -82,6 +82,10 @@
           "message": "Message"
         }
       },
+      "placeholders": {
+        "files": "No files yet",
+        "messages": "No message yet"
+      },
       "titles": {
         "files": "Liste des fichiers"
       },

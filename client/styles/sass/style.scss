@@ -154,3 +154,7 @@ ui-view:not(.custom-ui-view) {
   /* This height is here to align this error with the one in the search page. */
   height: calc(50% + 56px);
 }
+
+.panel-placeholder-wrapper {
+  height: calc(50% + 88px);
+}

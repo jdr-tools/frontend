@@ -1,5 +1,9 @@
 <div flex="grow" layout="column" layout-align="start stretch" class="md-padding scrollable">
-  <md-list>
+  <div ng-if="vm.campaign.files.length == 0" layout="column" layout-align="end center" class="panel-placeholder-wrapper">
+    <div><md-icon class="md-big-icon" md-colors="{color: 'grey-300'}">cloud_off</md-icon></div>
+    <p class="md-title" md-colors="{color: 'grey-400'}">{{'campaigns.play.placeholders.files' | translate}}</p>
+  </div>
+  <md-list ng-if="vm.campaign.files.length > 0">
     <md-subheader class="md-no-sticky">{{'campaigns.play.titles.files' | translate}}</md-subheader>
     <md-list-item ng-repeat="file in vm.campaign.files" class="md-3-line" ng-click="vm.selectFile(file)">
       <div class="md-list-item-text" layout="column">
@@ -13,6 +17,6 @@
     </md-list-item>
   </md-list>
 </div>
-<div flex="noshrink" class="md-padding" ng-if="vm.campaign.isCreator">
+<div flex="noshrink" class="md-padding creation-file-button-wrapper" ng-if="vm.campaign.isCreator">
   <upload-button campaign="vm.campaign"></upload-button>
 </div>

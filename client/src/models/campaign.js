@@ -6,6 +6,7 @@ export default function campaignFactory ($filter, $rootScope, $timeout, $localSt
       const vm = this
       vm.commandRegex = /^\/[a-z]+( .*)?$/
       vm.isCreator = false
+      vm.hasMessages = false
       Api.get(`/campaigns/${id}`, {}, {
         successCallback: (response) => {
           Object.assign(vm, response)
@@ -17,6 +18,7 @@ export default function campaignFactory ($filter, $rootScope, $timeout, $localSt
           vm.messages = _.groupBy(response, message => {
             return $filter('date')(message.created_at, 'yyyy-MM-dd')
           })
+          vm.hasMessages = response.length > 0
         }
       })
       Api.get(`/campaigns/${id}/files`, {}, {
