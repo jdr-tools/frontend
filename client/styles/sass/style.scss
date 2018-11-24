@@ -149,3 +149,8 @@ ui-view:not(.custom-ui-view) {
   height: 112px;
   width: 112px;
 }
+
+.tab-placeholder-wrapper {
+  /* This height is here to align this error with the one in the search page. */
+  height: calc(50% + 56px);
+}

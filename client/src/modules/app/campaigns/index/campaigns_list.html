@@ -5,9 +5,11 @@
   <md-tab>
     <md-tab-label>{{'campaigns.index.titles.my_games' | translate}}</md-tab-label>
     <md-tab-body>
-      <div ng-if="vm.invitations.length <= 0" layout="column" layout-align="center center">
-        <div><md-icon class="md-big-icon" md-colors="{color: 'grey-300'}">view_module</md-icon></div>
-        <p class="md-title" md-colors="{color: 'grey-400'}">{{'campaigns.index.placeholders.invitations' | translate}}</p>
+      <div class="tab-placeholder-wrapper" layout="column" layout-align="end center">
+        <div ng-if="vm.invitations.length <= 0" layout="column" layout-align="center center">
+          <div><md-icon class="md-big-icon" md-colors="{color: 'grey-300'}">view_module</md-icon></div>
+          <p class="md-title" md-colors="{color: 'grey-400'}">{{'campaigns.index.placeholders.invitations' | translate}}</p>
+        </div>
       </div>
       <div class="md-padding" layout="row" layout-xs="column">
         <md-card flex-gt-sm="25" flex-xs="auto" ng-repeat="invitation in vm.invitations">
