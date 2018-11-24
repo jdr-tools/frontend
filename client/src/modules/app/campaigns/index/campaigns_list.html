@@ -5,12 +5,9 @@
   <md-tab>
     <md-tab-label>{{'campaigns.index.titles.my_games' | translate}}</md-tab-label>
     <md-tab-body>
-      <div class="md-padding" ng-if="vm.invitations.length <= 0">
-        <p translate>campaigns.index.placeholders.invitations</p>
-        <p>
-          <md-button ng-click="vm.triggerCreationModal($event)" class="">{{'campaigns.index.buttons.create' | translate}}</md-button>
-          <md-button ui-sref="campaigns.search" class="">{{'campaigns.index.buttons.search' | translate}}</md-button>
-        </p>
+      <div ng-if="vm.invitations.length <= 0" layout="column" layout-align="center center">
+        <div><md-icon class="md-big-icon" md-colors="{color: 'grey-300'}">view_module</md-icon></div>
+        <p class="md-title" md-colors="{color: 'grey-400'}">{{'campaigns.index.placeholders.invitations' | translate}}</p>
       </div>
       <div class="md-padding" layout="row" layout-xs="column">
         <md-card flex-gt-sm="25" flex-xs="auto" ng-repeat="invitation in vm.invitations">
@@ -49,9 +46,9 @@
   <md-tab>
     <md-tab-label>{{'campaigns.index.titles.my_creations' | translate}}</md-tab-label>
     <md-tab-body>
-      <div class="md-padding" ng-if="vm.creations.items.length <= 0">
-        <p translate>campaigns.index.placeholders.creations</p>
-        <p><md-button ng-click="vm.triggerCreationModal($event)" class="">{{'campaigns.index.buttons.create' | translate}}</md-button></p>
+      <div ng-if="vm.creations.items.length <= 0" flex layout="column" layout-align="center center">
+        <div><md-icon class="md-big-icon" md-colors="{color: 'grey-300'}">view_module</md-icon></div>
+        <p class="md-title" md-colors="{color: 'grey-400'}">{{'campaigns.index.placeholders.creations' | translate}}</p>
       </div>
       <div ng-if="vm.creations.items.length > 0" class="md-padding" layout="row" layout-xs="column">
         <md-card flex-gt-sm="25" flex-xs="auto" ng-repeat="campaign in vm.creations.items">

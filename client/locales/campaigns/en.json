@@ -19,15 +19,10 @@
       }
     },
     "index": {
-      "buttons": {
-        "create": "Create a campaign",
-        "public": "Create a public campaign",
-        "search": "Search for public campaigns"
-      },
       "placeholders": {
-        "creations": "You don't have any campaign yet",
-        "invitations": "You haven't joined any campaign yet.",
-        "search": "There are no public campaigns yet."
+        "creations": "No created campaigns",
+        "invitations": "No games yet",
+        "search": "No public campaigns"
       },
       "titles": {
         "my_creations": "My creations",

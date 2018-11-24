@@ -19,15 +19,10 @@
       }
     },
     "index": {
-      "buttons": {
-        "create": "Créer une campagne",
-        "public": "Créer une campagne publique",
-        "search": "Rechercher une campagne publique"
-      },
       "placeholders": {
-        "creations": "Vous ne possédez aucune campagne dans votre bibliothèque.",
-        "invitations": "Vous n'avez encore intégré aucune campagne.",
-        "search": "Il n'existe encore aucune campagne publique."
+        "creations": "Aucune campagne créée",
+        "invitations": "Aucune partie en cours",
+        "search": "Aucune campagne publique"
       },
       "titles": {
         "my_creations": "Mes créations",
