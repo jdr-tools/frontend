@@ -13,14 +13,6 @@ const accountsRoute = function ($stateProvider) {
     }
   })
 
-  /** Concrete state for displaying a list of accounts. */
-  $stateProvider.state('accountsList', {
-    url: '/accounts',
-    parent: 'accounts',
-    templateUrl: 'client/src/modules/app/accounts/list/accounts_list.html',
-    controller: 'accountsListController as vm'
-  })
-
   /** Concrete state for creating an account. */
   $stateProvider.state('accountsCreate', {
     url: '/accounts/new',

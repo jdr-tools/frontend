@@ -1,7 +1,7 @@
-<md-content layout="row">
-  <div flex-gt-xs="25" hide-xs></div>
-  <div flex-gt-xs="50" flex-xs="100">
-    <h1 translate class="main-title md-display-2">accounts.edit.title</h1>
+<md-content layout="row" flex>
+  <div flex-gt-sm="25" show-gt-sm></div>
+  <div flex-gt-sm="50" flex-sm="100" flex-xs="100" class="md-padding">
+    <h1 translate class="main-title md-display-1">accounts.edit.title</h1>
     <form name="vm.profileEditionForm" ng-submit="vm.submit()" class="md-padding">
       <md-input-container class="md-block">
         <label for="usernameInput" translate>accounts.create.labels.username</label>
@@ -44,9 +44,8 @@
         <label for="firstnameInput" translate>accounts.create.labels.firstname</label>
         <input type="test" id="firstnameInput" class="md-input" name="firstname" ng-model="vm.account.firstname" />
       </md-input-container>
-        <input type="submit" translate translate-attr-value="accounts.edit.buttons.submit" class="md-button md-raised" />
-      </md-content>
+      <input type="submit" translate translate-attr-value="accounts.edit.buttons.submit" class="md-button md-raised" />
     </form>
   </div>
-  <div flex-gt-xs="25" hide-xs></div>
+  <div flex-gt-sm="25" show-gt-sm></div>
 </md-content>
