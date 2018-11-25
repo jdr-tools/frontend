@@ -9,11 +9,11 @@
 
   <campaign-card flex-gt-sm="25" flex-xs="auto" ng-repeat="campaign in vm.displayedCampaigns = (vm.campaigns.items | publicCampaigns)" campaign="campaign">
     <md-button ng-click="vm.deleteInvitation(campaign.invitation)" ng-if="campaign.invitation && campaign.invitation.status == 'request'" class="md-icon-button">
-      <md-tooltip md-direction="top" ng-if="campaign.invitation">{{'campaigns.index.tooltips.cancel' | translate}}</md-tooltip>
+      <md-tooltip md-direction="top" ng-if="campaign.invitation" hide-xs>{{'campaigns.index.tooltips.cancel' | translate}}</md-tooltip>
       <md-icon>cancel</md-icon>
     </md-button>
     <md-button ng-click="vm.request(campaign)" ng-if="!campaign.invitation || campaign.invitation.status != 'request'" class="md-icon-button">
-      <md-tooltip md-direction="top" ng-if="!campaign.invitation">{{'campaigns.index.tooltips.join' | translate}}</md-tooltip>
+      <md-tooltip md-direction="top" ng-if="!campaign.invitation" hide-xs>{{'campaigns.index.tooltips.join' | translate}}</md-tooltip>
       <md-icon>group_add</md-icon>
     </md-button>
   </campaign-card>
