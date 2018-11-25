@@ -10,34 +10,16 @@
         <p class="md-title" md-colors="{color: 'grey-400'}">{{'campaigns.index.placeholders.invitations' | translate}}</p>
       </div>
       <div class="md-padding" layout="row" layout-xs="column">
-        <md-card flex-gt-sm="25" flex-xs="auto" ng-repeat="invitation in vm.invitations">
-          <md-card-title flex="nogrow">
-            <md-card-title-text class="wrapped">
-              <span class="md-headline ellipsis">
-                <md-icon ng-if="invitation.campaign.is_private" md-colors="{color: 'red-700'}">lock</md-icon>
-                <md-icon ng-if="!invitation.campaign.is_private" md-colors="{color: 'green-700'}">lock_open</md-icon>
-                {{invitation.campaign.title}}
-                <span md-colors="{color: 'grey-500'}">
-                  {{invitation.campaign.current_players}} / {{invitation.campaign.max_players}}
-                </span>
-              </span>
-            </md-card-title-text>
-          </md-card-title>
-          <md-card-content flex="noshrink">
-            <div>{{invitation.campaign.description}}</div>
-            <md-chips class="campaign-tags" ng-if="invitation.campaign.tags.length > 0" ng-model="invitation.campaign.tags" readonly="true"></md-chips>
-          </md-card-content>
-          <md-card-actions layout="row" layout-align="end center">
-            <md-button ui-sref="campaigns.play({id: invitation.campaign.id})" class="md-icon-button">
-              <md-tooltip md-direction="top">{{'campaigns.index.tooltips.play' | translate}}</md-tooltip>
-              <md-icon>play_arrow</md-icon>
-            </md-button>
-            <md-button ng-click="vm.leave(invitation)" class="md-icon-button">
-              <md-tooltip md-direction="top">{{'campaigns.index.tooltips.leave' | translate}}</md-tooltip>
-              <md-icon>no_meeting_room</md-icon>
-            </md-button>
-          </md-card-actions>
-        </md-card>
+        <campaign-card flex-gt-sm="25" flex-xs="auto" ng-repeat="invitation in vm.invitations" campaign="invitation.campaign">
+          <md-button ui-sref="campaigns.play({id: invitation.campaign.id})" class="md-icon-button">
+            <md-tooltip md-direction="top">{{'campaigns.index.tooltips.play' | translate}}</md-tooltip>
+            <md-icon>play_arrow</md-icon>
+          </md-button>
+          <md-button ng-click="vm.leave(invitation)" class="md-icon-button">
+            <md-tooltip md-direction="top">{{'campaigns.index.tooltips.leave' | translate}}</md-tooltip>
+            <md-icon>no_meeting_room</md-icon>
+          </md-button>
+        </campaign-card>
       </div>
     </md-tab-body>
   </md-tab>
@@ -51,39 +33,20 @@
         <p class="md-title" md-colors="{color: 'grey-400'}">{{'campaigns.index.placeholders.creations' | translate}}</p>
       </div>
       <div ng-if="vm.creations.items.length > 0" class="md-padding" layout="row" layout-xs="column">
-        <md-card flex-gt-sm="25" flex-xs="auto" ng-repeat="campaign in vm.creations.items">
-          <md-card-title flex="nogrow">
-            <md-card-title-text class="wrapped">
-              <span class="md-headline ellipsis">
-                <md-icon ng-if="campaign.is_private" md-colors="{color: 'red-700'}">lock</md-icon>
-                <md-icon ng-if="!campaign.is_private" md-colors="{color: 'green-700'}">lock_open</md-icon>
-                {{campaign.title}}
-                <span md-colors="{color: 'grey-500'}">
-                  {{campaign.current_players}} / {{campaign.max_players}}
-                </span>
-              </span>
-              <span ng-if="campaign.waiting_players > 0" class="md-subhead">{{campaign.waiting_players}} en attente</span>
-            </md-card-title-text>
-          </md-card-title>
-          <md-card-content flex="noshrink">
-            <div>{{campaign.description}}</div>
-            <md-chips class="campaign-tags" ng-if="campaign.tags.length > 0" ng-model="campaign.tags" readonly="true"></md-chips>
-          </md-card-content>
-          <md-card-actions layout="row" layout-align="end center">
-            <md-button ui-sref="campaigns.play({id: campaign.id})" class="md-icon-button">
-              <md-tooltip md-direction="top">{{'campaigns.index.tooltips.play' | translate}}</md-tooltip>
-              <md-icon>play_arrow</md-icon>
-            </md-button>
-            <md-button ui-sref="campaigns.edit({id: campaign.id})" class="md-icon-button">
-              <md-tooltip md-direction="top">{{'campaigns.index.tooltips.edit' | translate}}</md-tooltip>
-              <md-icon>edit</md-icon>
-            </md-button>
-            <md-button ng-click="vm.delete(campaign)" class="md-icon-button">
-              <md-tooltip md-direction="top">{{'campaigns.index.tooltips.delete' | translate}}</md-tooltip>
-              <md-icon>delete_forever</md-icon>
-            </md-button>
-          </md-card-actions>
-        </md-card>
+        <campaign-card flex-gt-sm="25" flex-xs="auto" ng-repeat="campaign in vm.creations.items" campaign="campaign">
+          <md-button ui-sref="campaigns.play({id: campaign.id})" class="md-icon-button">
+            <md-tooltip md-direction="top">{{'campaigns.index.tooltips.play' | translate}}</md-tooltip>
+            <md-icon>play_arrow</md-icon>
+          </md-button>
+          <md-button ui-sref="campaigns.edit({id: campaign.id})" class="md-icon-button">
+            <md-tooltip md-direction="top">{{'campaigns.index.tooltips.edit' | translate}}</md-tooltip>
+            <md-icon>edit</md-icon>
+          </md-button>
+          <md-button ng-click="vm.delete(campaign)" class="md-icon-button">
+            <md-tooltip md-direction="top">{{'campaigns.index.tooltips.delete' | translate}}</md-tooltip>
+            <md-icon>delete_forever</md-icon>
+          </md-button>
+        </campaign-card>
       </div>
     </md-tab-body>
   </md-tab>

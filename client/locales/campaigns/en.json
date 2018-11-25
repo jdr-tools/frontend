@@ -24,6 +24,10 @@
         "invitations": "No games yet",
         "search": "No public campaigns"
       },
+      "subheads": {
+        "players": "{{current}} / {{max}} players",
+        "waiting": "({{count}} waiting)"
+      },
       "titles": {
         "my_creations": "My creations",
         "my_games": "My games",

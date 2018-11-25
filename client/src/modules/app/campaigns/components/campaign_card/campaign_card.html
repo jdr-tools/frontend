@@ -1,0 +1,22 @@
+<md-card>
+  <md-card-title flex="nogrow">
+    <md-card-title-text class="wrapped">
+      <span class="md-headline ellipsis">
+        <md-icon ng-if="vm.campaign.is_private" md-colors="{color: 'red-700'}">lock</md-icon>
+        <md-icon ng-if="!vm.campaign.is_private" md-colors="{color: 'green-700'}">lock_open</md-icon>
+        <span>{{vm.campaign.title}}</span>
+      </span>
+      <span class="md-subhead">
+        <span>{{'campaigns.index.subheads.players' | translate: vm.playersParameters()}}</span>
+        <span ng-if="vm.campaign.waiting_players > 0">&nbsp;{{'campaigns.index.subheads.waiting' | translate: vm.waitingParameters()}}</span>
+      </span>
+    </md-card-title-text>
+  </md-card-title>
+  <md-card-content flex="noshrink">
+    <div>{{vm.campaign.description}}</div>
+    <md-chips class="campaign-tags" ng-if="vm.campaign.tags.length > 0" ng-model="vm.campaign.tags" readonly="true"></md-chips>
+  </md-card-content>
+  <md-card-actions layout="row" layout-align="end center">
+    <ng-transclude></ng-transclude>
+  </md-card-actions>
+</md-card>

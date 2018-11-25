@@ -24,6 +24,10 @@
         "invitations": "Aucune partie en cours",
         "search": "Aucune campagne publique"
       },
+      "subheads": {
+        "players": "{{current}} / {{max}} joueurs",
+        "waiting": "({{count}} en attente)"
+      },
       "titles": {
         "my_creations": "Mes créations",
         "my_games": "Mes parties",
