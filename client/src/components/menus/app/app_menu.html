@@ -3,6 +3,9 @@
 
     <!-- Left menu for laptop devices -->
     <span hide-xs>
+      <md-button class="md-icon-button" ui-sref="dashboard">
+        <md-icon>home</md-icon>
+      </md-button>
       <md-button ui-sref="campaigns.index">{{'components.main_menu.items.play' | translate}}</md-button>
       <md-button ui-sref="campaigns.search">{{'components.main_menu.items.search' | translate}}</md-button>
     </span>
@@ -13,6 +16,9 @@
         <md-icon md-menu-origin>menu</md-icon>
       </md-button>
       <md-menu-content>
+        <md-menu-item>
+          <md-button ui-sref="dashboard">{{'components.main_menu.items.home' | translate}}</md-button>
+        </md-menu-item>
         <md-menu-item>
           <md-button ui-sref="campaigns.index">{{'components.main_menu.items.play' | translate}}</md-button>
         </md-menu-item>

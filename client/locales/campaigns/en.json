@@ -11,6 +11,23 @@
         "button": "Créer une campagne"
       }
     },
+    "dashboard": {
+      "narrate": {
+        "button": "My campaigns",
+        "description": "Use our tools to simplify your work and focus on the important thing : tell stories.",
+        "title": "Narrate"
+      },
+      "organize": {
+        "coming": "(coming soon)",
+        "description": "Create and share new contents to make your campaigns and the other player's campaigns better.",
+        "title": "Organize"
+      },
+      "play": {
+        "button": "Public campaigns",
+        "description": "Gather with other players and create groups to go on an adventure !",
+        "title": "Play"
+      }
+    },
     "errors": {
       "title": {
         "blank": "You must enter a title for this campaign",

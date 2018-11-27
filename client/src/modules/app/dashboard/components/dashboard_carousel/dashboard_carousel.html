@@ -1,0 +1,46 @@
+<!-- <div layout="column">
+  <div class="carousel-item-wrapper">
+    <img src="/client/assets/dashboard/narrate.jpg" />
+    <div class="carousel-content-wrapper md-padding" md-colors="{background: 'grey-800'}">
+      <h1>Narrate</h1>
+      <div>
+        Long texte de présentation de cet ensemble de fonctionnalités pour donner envie
+      </div>
+      <div>
+        <md-button>Accéder</md-button>
+      </div>
+    </div>
+  </div>
+</div> -->
+<div layout="row" layout-align="center center" md-colors="{background: 'grey-800'}">
+  <div flex-gt-md="20" show-gt-md></div>
+  <div flex-gt-md="60" flex-xs flex-md class="owl-carousel owl-theme dashboard-carousel">
+    <div class="item">
+      <img src="/client/assets/dashboard/narrate.jpg" />
+      <div class="carousel-text-wrapper md-padding" md-colors="{background: 'grey-800'}">
+        <h1 translate>campaigns.dashboard.narrate.title</h1>
+        <div hide-xs hide-sm class="md-padding">{{'campaigns.dashboard.narrate.description' | translate}}</div>
+        <md-button ui-sref="campaigns.index">{{'campaigns.dashboard.narrate.button' | translate}}</md-button>
+      </div>
+    </div>
+    <div class="item">
+      <img src="/client/assets/dashboard/organize.jpg" />
+      <div class="carousel-text-wrapper md-padding" md-colors="{background: 'grey-800'}">
+        <h1 translate>campaigns.dashboard.organize.title</h1>
+        <div hide-xs hide-sm class="md-padding">
+          <span>{{'campaigns.dashboard.organize.description' | translate}}</span><br />
+          <span>{{'campaigns.dashboard.organize.coming' | translate}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <img src="/client/assets/dashboard/play.jpg" />
+      <div class="carousel-text-wrapper md-padding" md-colors="{background: 'grey-800'}">
+        <h1 translate>campaigns.dashboard.play.title</h1>
+        <div hide-xs hide-sm class="md-padding">{{'campaigns.dashboard.play.description' | translate}}</div>
+        <md-button ui-sref="campaigns.search">{{'campaigns.dashboard.play.button' | translate}}</md-button>
+      </div>
+    </div>
+  </div>
+  <div flex-gt-md="20" show-gt-lg></div>
+</div>

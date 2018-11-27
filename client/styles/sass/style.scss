@@ -165,3 +165,42 @@ ui-view:not(.custom-ui-view) {
 .file-loader-wrapper {
   width: 50%;
 }
+
+.dashboard-carousel {
+  position: relative;
+  .carousel-text-wrapper {
+    z-index: 10;
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    opacity: 0.85;
+    border-radius: 30px;
+    h1 {
+      margin: 10px 20px;
+    }
+  }
+  .owl-nav {
+    z-index: 1;
+    position: absolute;
+    top: calc(50% - 25px);
+    left: 0;
+    width: 100%;
+    button {
+      display: block;
+      position: absolute;
+      text-decoration: none;
+      &.owl-prev {
+        left: 10px;
+      }
+      &.owl-next {
+        right: 10px;
+      }
+      span {
+        font-size: 50px;
+        line-height: 50px;
+        display: inline-block;
+        height: 50px;
+      }
+    }
+  }
+}

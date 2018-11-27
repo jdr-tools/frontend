@@ -11,6 +11,23 @@
         "button": "Créer une campagne"
       }
     },
+    "dashboard": {
+      "narrate": {
+        "button": "Mes campagnes",
+        "description": "Utilisez nos outils pour pouvoir vous concentrer sur l'important : raconter des histoires",
+        "title": "Raconter"
+      },
+      "organize": {
+        "coming": "(à venir)",
+        "description": "Créez et partagez de nouveaux contenus afin d'enrichir vos parties, et celles d'autres joueurs.",
+        "title": "Organiser"
+      },
+      "play": {
+        "button": "Campagnes publiques",
+        "description": "Rencontrez d'autres joueurs et formez ensemble des groupes pour vous lancer à l'aventure !",
+        "title": "Jouer"
+      }
+    },
     "errors": {
       "title": {
         "blank": "Vous devez entrer un titre pour cette campagne",
