@@ -53,7 +53,7 @@
         <md-tab-label>{{'campaigns.update.tabs.players.title' | translate}}</md-tab-label>
         <md-tab-body>
           <md-content layout="row" class="wrap">
-            <form flex class="without-margin" ng-submit="vm.addPlayer()" name="vm.invitationForm" ng-if="vm.currentUsername == vm.campaign.creator.username">
+            <form flex class="md-padding without-margin" ng-submit="vm.addPlayer()" name="vm.invitationForm" ng-if="vm.currentUsername == vm.campaign.creator.username">
               <md-input-container class="md-block">
                 <label for="username" translate>campaigns.invitations.labels.username</label>
                 <input type="text" name="username" ng-model="vm.account" required />
@@ -67,15 +67,15 @@
               </md-input-container>
             </form>
           </md-content>
-          <md-content layout="row">
-            <div flex="50">
+          <md-content layout-gt-xs="row" ng-init="pendings = (vm.invitations | filter: {status: 'pending'})">
+            <div flex-gt-xs="50" ng-class="{'md-padding': true, 'hide-xs': pendings.length == 0}">
               <h2 class="md-headline" translate>campaigns.invitations.titles.pending</h2>
-              <div ng-if="vm.invitations.pending.count == 0" translate>campaigns.invitations.placeholders.pending</div>
+              <div ng-if="pendings.length == 0" translate>campaigns.invitations.placeholders.pending</div>
               <invitations collection="vm.invitations" status="pending" icons="true"></invitations>
             </div>
-            <div flex="100" class="md-padding">
+            <div flex-gt-xs="50" class="md-padding">
               <h2 class="md-headline" translate>campaigns.invitations.titles.accepted</h2>
-              <div ng-if="vm.invitations.accepted.count == 0" translate>campaigns.invitations.placeholders.accepted</div>
+              <div ng-if="vm.invitations.accepted.length == 0" translate>campaigns.invitations.placeholders.accepted</div>
               <invitations collection="vm.invitations" status="accepted"></invitations>
             </div>
           </md-content>
