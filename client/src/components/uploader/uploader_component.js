@@ -3,8 +3,6 @@ const uploaderController = function uploaderControllerFunction ($scope, $timeout
 
   const vm = this
 
-  vm.mimeTypeError = false
-
   vm.triggerUpload = () => {
     rawInput().click()
   }
@@ -13,29 +11,45 @@ const uploaderController = function uploaderControllerFunction ($scope, $timeout
     return $(`input[name=${vm.inputName}]`)
   }
 
+  const resetErrors = () => {
+    vm.validities = {
+      type: true,
+      size: true
+    }
+  }
+
   vm.initializedInput = () => {
     $timeout(() => {
       rawInput().change(() => {
         const file = rawInput()[0].files[0]
-        if ( vm.acceptedTypes == undefined || vm.isValidMimeType(file)) {
-          vm.mimeTypeError = false
+        vm.validities = {
+          size: isValidSize(file),
+          type: isValidType(file)
+        }
+        /** We upload the file if no error is found. */
+        if (_.findKey(vm.validities, value => value === false) == undefined) {
+          resetErrors()
           vm.uploadObject[vm.uploadKey] = file
           /** This blur event here is designed to lose focus when using the control on mobile devices. */
           $timeout(() => rawInput().blur())
-        }
-        else {
-          vm.mimeTypeError = true
         }
       })
     })
   }
 
-  vm.isValidMimeType = (file) => {
+  const isValidType = (file) => {
+    if (vm.acceptedTypes == undefined) return true
     return _.some(vm.acceptedTypes.split(','), (mimeType) => {
       const regex = new RegExp(`^${mimeType.replace('*', '(.+)')}`)
       return (file.type.match(regex) !== null)
     })
   }
+
+  const isValidSize = (file) => {
+    return file.size < 20000000
+  }
+
+  resetErrors()
 }
 
 export default {
