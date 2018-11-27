@@ -1,5 +1,9 @@
-<div ng-if="vm.displayedFile.content !== undefined" flex layout="column" layout-align="center center" class="text-centered">
+<div ng-if="vm.displayedFile.content !== undefined && !vm.loadingFile" flex layout="column" layout-align="center center" class="text-centered">
   <div flex layout="column" layout-align="center center">
     <img src="{{vm.displayedFile.content}}" class="image-container" />
   </div>
+</div>
+
+<div class="file-loader-wrapper" ng-if="vm.loadingFile">
+  <md-progress-linear md-mode="indeterminate"></md-progress-linear>
 </div>

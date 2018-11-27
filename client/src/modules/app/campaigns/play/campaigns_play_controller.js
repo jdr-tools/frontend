@@ -24,6 +24,8 @@ export default function campaignsPlayController ($localStorage, $mdSidenav, $sco
    */
   vm.fileContent = {}
 
+  vm.loadingFile = false
+
   /**
    * Closes the current panel, whatever panel is currently opened.
    */
@@ -43,8 +45,12 @@ export default function campaignsPlayController ($localStorage, $mdSidenav, $sco
       })
   }
 
+  $scope.$on('file.preview.loading', () => {
+    vm.loadingFile = true
+  })
+
   $scope.$on('file.preview.changed', (event, file, fileContent) => {
     vm.displayedFile = Object.assign({}, file, {content: fileContent})
-    vm.displayFile = true
+    vm.loadingFile = false
   })
 }

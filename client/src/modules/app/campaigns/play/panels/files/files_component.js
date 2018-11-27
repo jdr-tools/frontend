@@ -1,18 +1,24 @@
-const filesController = function filesControllerFunction ($filter, $mdDialog, $rootScope, $scope, $state, Api) {
+const filesController = function filesControllerFunction ($filter, $mdDialog, $rootScope, $scope, $state, $timeout, Api) {
   'ngInject'
 
   const vm = this
+
+  vm.selectedFile = undefined
 
   /**
    * Selects the file in the list to display it in the interface.
    * @param {Object} file - the file to display in the interface.
    */
   vm.selectFile = (file) => {
-    Api.get(`/campaigns/${vm.campaign.id}/files/${file.id}`, {}, {
-      successCallback: (response) => {
-        $rootScope.$broadcast('file.preview.changed', file, response)
-      }
-    })
+    if (file.name !== vm.selectedFile) {
+      $rootScope.$broadcast('file.preview.loading')
+      Api.get(`/campaigns/${vm.campaign.id}/files/${file.id}`, {}, {
+        successCallback: (response) => {
+          $rootScope.$broadcast('file.preview.changed', file, response)
+          vm.selectedFile = file.name
+        }
+      })
+    }
   }
 
   /**
