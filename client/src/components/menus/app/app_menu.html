@@ -21,8 +21,6 @@
         </md-menu-item>
       </md-menu-content>
     </md-menu>
-
-
     <span flex></span>
     <span>
       <md-menu>
@@ -58,13 +56,13 @@
         </md-menu-content>
       </md-menu>
       <md-menu>
-        <md-button ng-click="$mdMenu.open($event)">{{vm.username}}</md-button>
+        <md-button ng-click="$mdMenu.open($event)">{{'components.main_menu.items.profile' | translate}}</md-button>
         <md-menu-content>
           <md-menu-item>
             <md-button ui-sref="adminDashboard">{{'components.main_menu.items.admin' | translate}}</md-button>
           </md-menu-item>
           <md-menu-item>
-            <md-button ui-sref="profile">{{'components.main_menu.items.profile' | translate}}</md-button>
+            <md-button ui-sref="profile">{{'components.main_menu.items.profile_edit' | translate}}</md-button>
           </md-menu-item>
           <md-menu-item>
             <md-button ng-click="vm.logout()">{{'components.main_menu.items.logout' | translate}}</md-button>
