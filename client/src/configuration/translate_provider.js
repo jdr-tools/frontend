@@ -5,7 +5,7 @@
 const configTranslateProvider = function configTranslateProviderFunction ($translateProvider, $translatePartialLoaderProvider) {
   'ngInject'
 
-  const loadedParts = ["errors", "common", "confirmations", "components/main_menu", "components/custom_footer", "components/countdown"]
+  const loadedParts = ["errors", "common", "confirmations", "components/main_menu", "components/custom_footer"]
 
   loadedParts.forEach((part) => $translatePartialLoaderProvider.addPart(part))
   
