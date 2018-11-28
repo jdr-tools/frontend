@@ -12,20 +12,20 @@
       }
     },
     "dashboard": {
-      "narrate": {
+      "play": {
         "button": "Mes campagnes",
-        "description": "Utilisez nos outils pour pouvoir vous concentrer sur l'important : raconter des histoires",
-        "title": "Raconter"
+        "description": "Utilisez nos outils pour simplifier vos tâches et vous concentrer sur l'essentiel : le jeu.",
+        "title": "Jouer"
       },
-      "organize": {
+      "create": {
         "coming": "(à venir)",
         "description": "Créez et partagez de nouveaux contenus afin d'enrichir vos parties, et celles d'autres joueuses et joueurs.",
-        "title": "Organiser"
+        "title": "Créer"
       },
-      "play": {
+      "gather": {
         "button": "Campagnes publiques",
         "description": "Rencontrez d'autres joueuses et joueurs et formez ensemble des groupes pour vous lancer à l'aventure !",
-        "title": "Jouer"
+        "title": "Rassembler"
       }
     },
     "errors": {
@@ -132,7 +132,7 @@
           "title": "Participations"
         }
       },
-      "unauthorized": "Vous n'êtes pas autorisé à éditer cette campagne"
+      "unauthorized": "Vous n'avez pas l'autorisation d'éditer cette campagne"
     }
   }
 }
