@@ -7,7 +7,7 @@
       "errors": {
         "email": {
           "blank": "Une adresse email est requise pour l'inscription",
-          "minlength": "Un nom d'utilisateur doit faire au minimum six caractères",
+          "minlength": "Un pseudonyme doit faire au minimum six caractères",
           "pattern": "Vous devez fournir une adresse email dans un format valide (ex: example@test.com)",
           "uniq": "Cette adresse email est déjà associée à un autre utilisateur"
         },
@@ -19,9 +19,9 @@
           "confirmation": "Le mot de passe et sa confirmation doivent être identique"
         },
         "username": {
-          "blank": "Vous devez entrer un nom d'utilisateur afin de vous identifier sur l'application",
-          "minlength": "Un nom d'utilisateur doit faire au minimum 6 caractères",
-          "uniq": "Ce nom d'utilisateur est déjà employé"
+          "blank": "Vous devez entrer un pseudonyme afin de vous identifier sur l'application",
+          "minlength": "Un pseudonyme doit faire au minimum 6 caractères",
+          "uniq": "Ce pseudonyme est déjà employé"
         }
       },
       "labels": {
@@ -39,7 +39,7 @@
         "credentials": "Informations de connexion"
       },
       "messages": {
-        "confirmed": "Le compte utilisateur a bien été créé"
+        "confirmed": "Votre compte a bien été créé"
       },
       "placeholders": {
         "birthdate": "Entrez une date de naissance...",
@@ -48,7 +48,7 @@
         "lastname": "Entrez votre nom de famille...",
         "password": "Entrez un mot de passe...",
         "password_confirmation": "Confirmez le mot de passe...",
-        "username": "Entrez un nom d'utilisateur..."
+        "username": "Entrez un pseudonyme..."
       },
       "titles": {
         "main": "Inscription"
@@ -60,12 +60,12 @@
       },
       "errors": {
         "birthdate": {
-          "maxdate": "You can't be born in the future. Or can you ?"
+          "maxdate": "Vous n'êtes pas né dans le futur (ou alors contactez-nous pour nous raconter)"
         },
         "email": {
           "blank": "Une adresse email est requise",
           "pattern": "Vous devez fournir une adresse email dans un format valide (ex: example@test.com)",
-          "uniq": "Cette adresse email est déjà associée à un autre utilisateur"
+          "uniq": "Cette adresse email est déjà associée à un autre compte"
         },
         "password": {
           "blank": "Vous devez fournir un mot de passe pour le confirmer",
@@ -75,9 +75,9 @@
           "blank": "Vous devez confirmer votre mot de passe pour le mettre à jour"
         },
         "username": {
-          "blank": "Vous devez entrer un nom d'utilisateur",
-          "minlength": "Un nom d'utilisateur doit faire au minimum 6 caractères",
-          "uniq": "Ce nom d'utilisateur est déjà employé"
+          "blank": "Vous devez entrer un pseudonyme",
+          "minlength": "Un pseudonyme doit faire au minimum 6 caractères",
+          "uniq": "Ce pseudonyme est déjà employé"
         }
       },
       "title": "Editer mon profil"

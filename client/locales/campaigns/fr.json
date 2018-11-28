@@ -19,12 +19,12 @@
       },
       "organize": {
         "coming": "(à venir)",
-        "description": "Créez et partagez de nouveaux contenus afin d'enrichir vos parties, et celles d'autres joueurs.",
+        "description": "Créez et partagez de nouveaux contenus afin d'enrichir vos parties, et celles d'autres joueuses et joueurs.",
         "title": "Organiser"
       },
       "play": {
         "button": "Campagnes publiques",
-        "description": "Rencontrez d'autres joueurs et formez ensemble des groupes pour vous lancer à l'aventure !",
+        "description": "Rencontrez d'autres joueuses et joueurs et formez ensemble des groupes pour vous lancer à l'aventure !",
         "title": "Jouer"
       }
     },
@@ -61,24 +61,24 @@
     },
     "invitations": {
       "errors": {
-        "accepted": "Ce joueur a déjà accepté une invitation dans cette campagne",
-        "blank": "Vous devez entrer un nom d'utilisateur",
-        "not_found": "Ce nom d'utilisateur n'existe pas",
-        "pending": "Ce joueur a déjà une invitation en attente dans cette campagne"
+        "accepted": "Ce compte a déjà accepté une invitation dans cette campagne",
+        "blank": "Vous devez entrer un pseudonyme",
+        "not_found": "Ce pseudonyme n'existe pas",
+        "pending": "Ce compte a déjà une invitation en attente dans cette campagne"
       },
       "hints": {
-        "username": "Entrez un nom d'utilisateur et appuyez sur Entrée"
+        "username": "Entrez un pseudonyme et appuyez sur Entrée"
       },
       "labels": {
         "created_by": "Créée par",
-        "username": "Nom du joueur"
+        "username": "Pseudonyme"
       },
       "placeholders": {
-        "accepted": "Aucun joueur",
+        "accepted": "Aucune invitation",
         "pending": "Aucune invitation"
       },
       "titles": {
-        "accepted": "Joueurs",
+        "accepted": "Participations",
         "pending": "Invitations"
       }
     },
@@ -92,9 +92,9 @@
       "dialogs": {
         "files": {
           "delete": {
-            "content": "You won't be able to display it anymore",
-            "label": "File deletion",
-            "title": "Delete this file ?"
+            "content": "Vous ne pourrez plus afficher ce fichier",
+            "label": "Suppression du fichier",
+            "title": "Supprimer ce fichier ?"
           }
         }
       },
@@ -129,7 +129,7 @@
           "title": "Informations générales"
         },
         "players": {
-          "title": "Joueurs"
+          "title": "Participations"
         }
       },
       "unauthorized": "Vous n'êtes pas autorisé à éditer cette campagne"

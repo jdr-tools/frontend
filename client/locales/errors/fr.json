@@ -14,9 +14,9 @@
         "blank": "Veuillez confirmer le mot de passe."
       },
       "username": {
-        "blank": "Veuillez fournir un nom d'utilisateur.",
-        "short": "Ce nom d'utilisateur est trop court, un nom d'utilisateur doit faire au moins six caractères.",
-        "uniq": "Ce nom d'utilisateur existe déjà, veuillez choisir un nom d'utilisateur disponible."
+        "blank": "Veuillez fournir un pseudonyme.",
+        "short": "Ce pseudonyme est trop court, un pseudonyme doit faire au moins six caractères.",
+        "uniq": "Ce pseudonyme existe déjà, veuillez choisir un pseudonyme disponible."
       }
     }
   }

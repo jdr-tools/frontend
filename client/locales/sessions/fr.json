@@ -9,17 +9,17 @@
           "blank": "Veuillez fournir votre mot de passe pour vous connecter"
         },
         "username": {
-          "blank": "Veuillez entrer votre nom d'utilisateur pour vous connecter",
+          "blank": "Veuillez entrer votre pseudonyme pour vous connecter",
           "credentials": "Les identifiants entrés semblent incorrects"
         }
       },
       "labels": {
         "password": "Mot de passe",
-        "username": "Nom d'utilisateur"
+        "username": "Pseudonyme"
       },
       "placeholders": {
         "password": "Entrez votre mot de passe...",
-        "username": "Entrez votre nom d'utilisateur..."
+        "username": "Entrez votre pseudonyme..."
       }
     }
   }
