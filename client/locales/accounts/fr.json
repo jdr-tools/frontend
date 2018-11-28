@@ -60,7 +60,7 @@
       },
       "errors": {
         "birthdate": {
-          "maxdate": "Vous n'êtes pas né dans le futur (ou alors contactez-nous pour nous raconter)"
+          "maxdate": "On ne peut pas naître dans le futur ! (ou alors contactez-nous pour nous raconter)"
         },
         "email": {
           "blank": "Une adresse email est requise",
