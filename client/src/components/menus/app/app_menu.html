@@ -1,4 +1,6 @@
 <md-toolbar>
+
+  <!-- Menu when logged in -->
   <div class="md-toolbar-tools container" ng-if="vm.authenticated">
 
     <!-- Left menu for laptop devices -->
@@ -27,7 +29,11 @@
         </md-menu-item>
       </md-menu-content>
     </md-menu>
+
+
+    <!-- left and right menus separator -->
     <span flex></span>
+
     <span>
       <md-menu>
         <md-button ng-click="$mdMenu.open($event)" class="md-icon-button requests-count-wrapper">
@@ -77,9 +83,39 @@
       </md-menu>
     </span>
   </div>
-  <span flex></span>
+
+  <!-- Menu when not logged in -->
   <div class="md-toolbar-tools container" ng-if="!vm.authenticated">
-    <span>
+    <!-- Offline menu on mobile devices -->
+    <md-menu hide-gt-xs>
+      <md-button class="md-icon-button" ng-click="$mdMenu.open($event)">
+        <md-icon md-menu-origin>menu</md-icon>
+      </md-button>
+      <md-menu-content>
+        <md-menu-item>
+          <md-button ui-sref="dashboard">{{'components.main_menu.items.home' | translate}}</md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button ui-sref="sessionsCreate">{{'components.main_menu.items.login' | translate}}</md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button ui-sref="accountsCreate">{{'components.main_menu.items.register' | translate}}</md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+
+    <!-- On the left on desktop, it's the "home page" button -->
+    <span hide-xs>
+      <md-button class="md-icon-button" ui-sref="dashboard">
+        <md-icon>home</md-icon>
+      </md-button>
+    </span>
+
+    <!-- This separator puts the desktop menu on the right -->
+    <span flex></span>
+
+    <!-- Desktop offline menu -->
+    <span hide-xs>
       <md-button ui-sref="sessionsCreate">{{'components.main_menu.items.login' | translate}}</md-button>
       <md-button ui-sref="accountsCreate">{{'components.main_menu.items.register' | translate}}</md-button>
     </span>
