@@ -26,8 +26,12 @@ const uploaderController = function uploaderControllerFunction ($scope, $timeout
           size: isValidSize(file),
           type: isValidType(file)
         }
+        if (vm.validities.type === false) {
+          vm.form.errors.$setValidity('mimeType', false)
+          console.log(vm.form)
+        }
         /** We upload the file if no error is found. */
-        if (_.findKey(vm.validities, value => value === false) == undefined) {
+        if (!hasErrors()) {
           resetErrors()
           vm.uploadObject[vm.uploadKey] = file
           /** This blur event here is designed to lose focus when using the control on mobile devices. */
@@ -35,6 +39,14 @@ const uploaderController = function uploaderControllerFunction ($scope, $timeout
         }
       })
     })
+  }
+
+  /**
+   * @description Checks if the current uploader has any error in its errors hash.
+   * @return {Boolean} TRUE if the uploader has an error, FALSE otherwise.
+   */
+  const hasErrors = () => {
+    return _.findKey(vm.validities, value => value === false) !== undefined
   }
 
   const isValidType = (file) => {
