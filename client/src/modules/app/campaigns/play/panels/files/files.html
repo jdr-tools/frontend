@@ -1,29 +1,28 @@
-<div flex="grow" layout="column" layout-align="start stretch" class="md-padding scrollable" ng-init="files = vm.campaign.files">
-  <div ng-if="files.inError()" flex layout="column" layout-align="center center">
+<div flex="grow" layout="column" layout-align="start stretch" class="md-padding scrollable" ng-init="files = vm.campaign.files" ng-switch on="files.state">
+  <div ng-switch-when="error" flex layout="column" layout-align="center center">
     <div class="md-padding">{{'campaigns.play.errors.files_list' | translate}}</div>
     <div><md-button ng-click="files.reload(vm.campaign.id)">{{'common.retry' | translate}}</md-button></div>
   </div>
-  <div ng-if="files.isLoading()" flex layout="column" layout-align="center center">
+  <div ng-switch-when="loading" flex layout="column" layout-align="center center">
     <md-progress-circular md-mode="indeterminate"></md-progress-circular>
   </div>
-  <div ng-if="files.isLoaded()">
-    <div ng-if="files.empty()" layout="column" layout-align="end center" class="panel-placeholder-wrapper">
-      <div><md-icon class="md-big-icon" md-colors="{color: 'grey-300'}">cloud_off</md-icon></div>
-      <p class="md-title" md-colors="{color: 'grey-400'}">{{'campaigns.play.placeholders.files' | translate}}</p>
-    </div>
-    <md-list ng-if="files.count() > 0">
-      <md-subheader class="md-no-sticky">{{'campaigns.play.titles.files' | translate}}</md-subheader>
-      <md-list-item ng-repeat="file in files.items" class="md-3-line" ng-click="vm.selectFile(file)">
-        <div class="md-list-item-text" layout="column">
-          <h3>{{file.name}}</h3>
-          <h4>{{file.size}} bytes</h4>
-          <p>{{file.type}}</p>
-        </div>
-        <md-button class="md-secondary md-icon-button" ng-click="vm.deleteFile(file, $event)" ng-if="vm.campaign.isCreator">
-          <md-icon>delete</md-icon>
-        </md-button>
-      </md-list-item>
-    </md-list>
+  <div ng-switch-when="empty" layout="column" layout-align="end center" class="panel-placeholder-wrapper">
+    <div><md-icon class="md-big-icon" md-colors="{color: 'grey-300'}">cloud_off</md-icon></div>
+    <p class="md-title" md-colors="{color: 'grey-400'}">{{'campaigns.play.placeholders.files' | translate}}</p>
+  </div>
+  <md-list ng-switch-when="loaded">
+    <md-subheader class="md-no-sticky">{{'campaigns.play.titles.files' | translate}}</md-subheader>
+    <md-list-item ng-repeat="file in files.items" class="md-3-line" ng-click="vm.selectFile(file)">
+      <div class="md-list-item-text" layout="column">
+        <h3>{{file.name}}</h3>
+        <h4>{{file.size}} bytes</h4>
+        <p>{{file.type}}</p>
+      </div>
+      <md-button class="md-secondary md-icon-button" ng-click="vm.deleteFile(file, $event)" ng-if="vm.campaign.isCreator">
+        <md-icon>delete</md-icon>
+      </md-button>
+    </md-list-item>
+  </md-list>
   </div>
 </div>
 <div flex="noshrink" class="md-padding creation-file-button-wrapper" ng-if="vm.campaign.isCreator">

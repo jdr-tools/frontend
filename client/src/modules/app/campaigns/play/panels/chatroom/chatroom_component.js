@@ -28,17 +28,16 @@ const chatroomController = function chatroomControllerFunction ($localStorage, $
     }
   }
 
-  /**
-   * Submits the form to create a new message in the current campaign.
-   */
-  vm.sendMessage = () => vm.campaign.addMessage(vm.message)
+  $scope.$watchCollection('vm.campaign.messages.items', () => {
+    $timeout(vm.scrollMessages, 200)
+  })
 
   $scope.$on('messages.scroll', vm.scrollMessages)
 
   $scope.$on('message.created', (event, message) => {
     if (message.campaign_id === $state.params.id) {
       FormService.reset(vm.sendMessageForm)
-      vm.campaign.insertMessage(message)
+      vm.campaign.messages.insert(message)
       vm.message = ''
     }
   })
