@@ -26,6 +26,8 @@ export default function campaignsPlayController ($localStorage, $mdSidenav, $sco
 
   vm.loadingFile = false
 
+  vm.previewError = undefined
+
   /**
    * Closes the current panel, whatever panel is currently opened.
    */
@@ -45,8 +47,16 @@ export default function campaignsPlayController ($localStorage, $mdSidenav, $sco
       })
   }
 
+  vm.reloadFile = (file) => $rootScope.$broadcast('file.preview.select', file)
+
+  $scope.$on('file.preview.error', (event, file) => {
+    vm.previewError = file
+    vm.loadingFile = false
+  })
+
   $scope.$on('file.preview.loading', () => {
     vm.loadingFile = true
+    vm.previewError = undefined
   })
 
   $scope.$on('file.preview.changed', (event, file, fileContent) => {

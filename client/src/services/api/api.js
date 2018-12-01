@@ -24,7 +24,7 @@ const Api = function ApiFunction($http, $localStorage, $rootScope, $window, Form
    * @param {Object} options - the options to pass to the service to change its default behaviour.
    */
   vm.get = (uri, parameters = {}, options = {}) => {
-    this.makeRequest('GET', uri, parameters, options)
+    vm.makeRequest('GET', uri, parameters, options)
   }
 
   /**
@@ -78,6 +78,7 @@ const Api = function ApiFunction($http, $localStorage, $rootScope, $window, Form
     const successCallback = (response) => {
       if(options.errorsForm) FormService.reset(options.errorsForm)
       if(options.successCallback) options.successCallback(response.data)
+      if(options.successBroadcast) $rootScope.$broadcast(options.successBroadcast, response.data)
     }
     const errorCallback = (response) => {
       if(options.errorsForm) FormService.error(options.errorsForm, response)

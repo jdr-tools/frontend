@@ -7,3 +7,8 @@
 <div class="file-loader-wrapper" ng-if="vm.loadingFile">
   <md-progress-linear md-mode="indeterminate"></md-progress-linear>
 </div>
+
+<div ng-if="!vm.loadingFile && vm.previewError !== undefined" flex layout="column" layout-align="center center" class="text-centered">
+  <div class="md-padding">{{'campaigns.play.errors.preview' | translate}}</div>
+  <div><md-button ng-click="vm.reloadFile(vm.previewError)">{{'common.retry' | translate}}</md-button></div>
+</div>

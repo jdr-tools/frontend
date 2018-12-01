@@ -98,6 +98,9 @@
           }
         }
       },
+      "errors": {
+        "preview": "Le fichier n'a pas pu être chargé"
+      },
       "labels": {
         "messages": {
           "message": "Message"

@@ -1,5 +1,6 @@
 <ui-view class="test-ui-view" layout="column" layout-align="center stretch">
   <md-content flex layout="column" layout-align="center stretch">
+  
     <div flex layout="column" layout-align="center stretch">
       <div flex class="playground-container scrollable playground" layout="column">
         <ng-include src="vm.interfaceURL" flex layout="column" layout-align="center center"></ng-include>
@@ -19,7 +20,6 @@
     </div>
 
     <md-sidenav md-component-id="play-sidenav" class="md-sidenav-right sidenav-chatroom wrap" layout="column" layout-align="center stretch" md-disable-backdrop md-whiteframe="4">
-
       <div class="md-chatroom-header" flex="nogrow" layout="row" layout-align="end center" md-colors="{'background': 'grey-200'}">
         <a ng-click="vm.closePanel()" flex="none">
           <md-tooltip md-direction="left" hide-xs>{{'common.close' | translate}}</md-tooltip>
@@ -30,7 +30,7 @@
       <div flex layout="column">
         <ng-include src="vm.panelURL" flex layout="column" layout-align="start stretch"></ng-include>
       </div>
-
     </md-sidenav>
+
   </md-content>
 </ui-view>
