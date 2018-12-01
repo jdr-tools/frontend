@@ -1,4 +1,4 @@
-export default function messagesListFactory (Api, CampaignItemsList, WebsocketNotifier) {
+export default function messagesListFactory ($localStorage, Api, CampaignItemsList, Message, WebsocketNotifier) {
   'ngInject'
 
   /**
@@ -11,7 +11,10 @@ export default function messagesListFactory (Api, CampaignItemsList, WebsocketNo
     vm.commandRegex = /^\/[a-z]+( .*)?$/
 
     vm.successCallback = response => {
-      vm.items = response
+      vm.items = _.map(response, message => {
+        const decoratedMessage = Object.assign(message, {state: 'sent'})
+        return new Message(decoratedMessage)
+      })
       vm.afterInsert()
     }
 
@@ -22,30 +25,40 @@ export default function messagesListFactory (Api, CampaignItemsList, WebsocketNo
       vm.grouped = _.groupBy(vm.items, message => (new Date(message.created_at)).toDateString())
     }
 
+    /**
+     * This method creates a new message object with the given content, and then puts it in the messages list,
+     * delegating the sending of the message to the message itself. The message will then update its internal state,
+     * and thus the display, at each step of the sending process.
+     *
+     * @param {String} content - the text content of the message.
+     */
     vm.send = (content) => {
-      const successCallback = (response) => {
-        WebsocketNotifier.sendToCampaign(vm.campaign_id, 'message.created', Object.assign(response.item, {campaign_id: vm.campaign_id}))
-      }
-      vm[vm.commandRegex.test(content) ? 'sendCommand' : 'sendText'](content, successCallback)
-    }
-
-    vm.sendText = (content, successCallback) => {
-      Api.post(`/campaigns/${vm.campaign_id}/messages`, {content: content}, {successCallback: successCallback})
-    }
-
-    vm.sendCommand = (content, successCallback) => {
-      const command = content.split(' ', 2)
-      const parameters = {
-        command: _.trim(command[0], '/'),
-        content: command[1]
-      }
-      Api.post(`/campaigns/${vm.campaign_id}/commands`, parameters, {
-        successCallback: successCallback,
-        errorBroadcast: 'command.failed'
+      const message = new Message({
+        username: $localStorage.account.username,
+        created_at: new Date(),
+        type: vm.commandRegex.test(content) ? 'command' : 'text',
+        data: {
+          content: content
+        },
+        created_at: new Date(),
+        campaign_id: vm.campaign_id
       })
+      message.send()
+      vm.insert(message)
     }
 
     CampaignItemsList.call(vm, campaign_id, 'messages')
+
+    /**
+     * Inserts the given message in the messages list, triggering the regresh of the view.
+     * @param {Object} message - the message object you want to insert in the messages list.
+     */
+    vm.insert = (message) => {
+      if (_.find(vm.items, {id: message.id}) === undefined) {
+        vm.items.push(message)
+        vm.afterInsert()
+      }
+    }
   }
 
   return (messagesList)
