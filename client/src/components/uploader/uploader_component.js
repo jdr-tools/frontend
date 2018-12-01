@@ -28,7 +28,6 @@ const uploaderController = function uploaderControllerFunction ($scope, $timeout
         }
         if (vm.validities.type === false) {
           vm.form.errors.$setValidity('mimeType', false)
-          console.log(vm.form)
         }
         /** We upload the file if no error is found. */
         if (!hasErrors()) {
