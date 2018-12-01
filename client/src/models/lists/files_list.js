@@ -1,4 +1,4 @@
-export default function filesListFactory ($timeout, Api, WebsocketNotifier) {
+export default function filesListFactory (Api, WebsocketNotifier) {
   'ngInject'
 
   const filesList = function filesListFunction (campaign) {
@@ -20,15 +20,11 @@ export default function filesListFactory ($timeout, Api, WebsocketNotifier) {
       vm.campaign_id = campaign_id
       Api.get(`/campaigns/${vm.campaign_id}/files`, {}, {
         successCallback: response => {
-          $timeout(() => {
-            vm.items = _.map(response, file => Object.assign({campaign_id: vm.campaign_id}, file))
-            vm.setState('loaded')
-          }, 1500)
+          vm.items = _.map(response, file => Object.assign({campaign_id: vm.campaign_id}, file))
+          vm.setState('loaded')
         },
         errorCallback: () => {
-          $timeout(() => {
-            vm.setState('error')
-          }, 1500)
+          vm.setState('error')
         }
       })
     }
