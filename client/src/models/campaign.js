@@ -1,4 +1,4 @@
-export default function campaignFactory ($filter, $rootScope, $timeout, $localStorage, Api, WebsocketNotifier, Uploader) {
+export default function campaignFactory ($filter, $rootScope, $timeout, $localStorage, Api, WebsocketNotifier, Uploader, FilesList) {
   'ngInject'
 
   return class Campaign {
@@ -21,11 +21,7 @@ export default function campaignFactory ($filter, $rootScope, $timeout, $localSt
           vm.hasMessages = response.length > 0
         }
       })
-      Api.get(`/campaigns/${id}/files`, {}, {
-        successCallback: response => {
-          vm.files = _.map(response, file => Object.assign({campaign_id: id}, file))
-        }
-      })
+      vm.files = new FilesList(id)
     }
 
     insertMessage (message) {
@@ -39,8 +35,7 @@ export default function campaignFactory ($filter, $rootScope, $timeout, $localSt
     }
 
     insertFile (file) {
-      const vm = this
-      vm.files.push(file)
+      this.files.insert(file)
     }
 
     addMessage (content) {
@@ -68,15 +63,6 @@ export default function campaignFactory ($filter, $rootScope, $timeout, $localSt
       Uploader.uploadFileObject(`/campaigns/${vm.id}/files`, content, {
         successCallback: (response) => {
           WebsocketNotifier.sendToCampaign(vm.id, 'campaign.file.added', Object.assign(response, {campaign_id: vm.id}))
-        }
-      })
-    }
-
-    deleteFile (file) {
-      const vm = this
-      Api.delete(`/campaigns/${vm.id}/files/${file.id}`, {
-        successCallback: (response) => {
-          WebsocketNotifier.sendToCampaign(vm.id, 'campaign.file.deleted', file)
         }
       })
     }

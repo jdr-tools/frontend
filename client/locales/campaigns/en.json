@@ -99,6 +99,7 @@
         }
       },
       "errors": {
+        "files_list": "The files couldn't be loaded",
         "preview": "The file couldn't be loaded"
       },
       "labels": {

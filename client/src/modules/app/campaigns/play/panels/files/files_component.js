@@ -35,7 +35,7 @@ const filesController = function filesControllerFunction ($filter, $mdDialog, $r
       .ok(t('common.yes'))
       .cancel(t('common.no'))
     $mdDialog.show(confirmDialog).then(() => {
-      vm.campaign.deleteFile(file)
+      vm.campaign.files.delete(file)
     })
   }
 
@@ -49,7 +49,7 @@ const filesController = function filesControllerFunction ($filter, $mdDialog, $r
 
   $scope.$on('campaign.file.deleted', (event, file) => {
     if (file.campaign_id === $state.params.id) {
-      vm.campaign.removeFile(file)
+      vm.campaign.files.remove(file)
     }
   })
 }

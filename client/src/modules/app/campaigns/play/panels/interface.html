@@ -1,4 +1,4 @@
-<div ng-if="vm.displayedFile.content !== undefined && !vm.loadingFile" flex layout="column" layout-align="center center" class="text-centered">
+<div ng-if="vm.displayedFile.content !== undefined && !vm.loadingFile && vm.previewError == undefined" flex layout="column" layout-align="center center" class="text-centered">
   <div flex layout="column" layout-align="center center">
     <img src="{{vm.displayedFile.content}}" class="image-container" />
   </div>

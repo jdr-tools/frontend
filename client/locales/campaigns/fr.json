@@ -99,6 +99,7 @@
         }
       },
       "errors": {
+        "files_list": "Les fichiers n'ont pas pu être chargés",
         "preview": "Le fichier n'a pas pu être chargé"
       },
       "labels": {
