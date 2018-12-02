@@ -10,6 +10,8 @@
     "cancel": "Annuler",
     "close": "Fermer",
     "confirm": "Confirmer",
+    "examples": "Exemples",
+    "help": "Aide",
     "inactive": {
       "f": "Inactive",
       "m": "Inactif",
@@ -17,6 +19,7 @@
     },
     "key": "Clé",
     "no": "Non",
+    "or": "ou",
     "private": {
       "f": "Privée",
       "m": "Privé",

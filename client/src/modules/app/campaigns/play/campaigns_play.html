@@ -20,16 +20,7 @@
     </div>
 
     <md-sidenav md-component-id="play-sidenav" class="md-sidenav-right sidenav-chatroom wrap" layout="column" layout-align="center stretch" md-disable-backdrop md-whiteframe="4">
-      <div class="md-chatroom-header" flex="nogrow" layout="row" layout-align="end center" md-colors="{'background': 'grey-200'}">
-        <a ng-click="vm.closePanel()" flex="none">
-          <md-tooltip md-direction="left" hide-xs>{{'common.close' | translate}}</md-tooltip>
-          <md-icon>clear</md-icon>
-        </a>
-      </div>
-
-      <div flex layout="column">
-        <ng-include src="vm.panelURL" flex layout="column" layout-align="start stretch"></ng-include>
-      </div>
+      <ng-include src="vm.panelURL" flex layout="column" layout-align="start stretch"></ng-include>
     </md-sidenav>
 
   </md-content>

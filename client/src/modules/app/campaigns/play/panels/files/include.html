@@ -1,1 +1,10 @@
-<panel-files campaign="vm.campaign" flex="grow" layout="column"></panel-files>
+<div class="md-chatroom-header" flex="nogrow" layout="row" layout-align="end center" md-colors="{'background': 'grey-200'}">
+  <a ng-click="vm.closePanel()" flex="none">
+    <md-tooltip md-direction="left" hide-xs>{{'common.close' | translate}}</md-tooltip>
+    <md-icon>clear</md-icon>
+  </a>
+</div>
+
+<div flex layout="column">
+  <panel-files campaign="vm.campaign" flex="grow" layout="column"></panel-files>
+</div>

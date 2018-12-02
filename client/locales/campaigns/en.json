@@ -103,6 +103,13 @@
         "files_list": "The files couldn't be loaded",
         "preview": "The file couldn't be loaded"
       },
+      "help": {
+        "chatroom": {
+          "roll": " This command throws one or more dices, adding one or several modifiers to it",
+          "secret_roll": "This command performs exactly the same action, but only you and the game master can see the result.",
+          "title": "You can use the following commands :"
+        }
+      },
       "labels": {
         "messages": {
           "message": "Message"

@@ -1,4 +1,4 @@
-const chatroomController = function chatroomControllerFunction ($localStorage, $scope, $state, $timeout, FormService) {
+const chatroomController = function chatroomControllerFunction ($localStorage, $mdDialog, $scope, $state, $timeout, FormService) {
   'ngInject'
 
   const vm = this
@@ -8,6 +8,19 @@ const chatroomController = function chatroomControllerFunction ($localStorage, $
    * @var {String} username
    */
   vm.username = $localStorage.account.username
+
+  vm.displayHelp = (event) => {
+    $mdDialog.show({
+      controller: function ($mdDialog, $scope) {
+        $scope.close = () => $mdDialog.cancel()
+      },
+      templateUrl: '/client/src/modules/app/campaigns/play/panels/chatroom/help.html',
+      parent: angular.element(document.body),
+      targetEvent: event,
+      clickOutsideToClose:true,
+      fullscreen: false
+    })
+  }
 
   /**
    * Returns the URL for the template corresponding to a given command.

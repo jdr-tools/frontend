@@ -1,52 +1,37 @@
-<md-content flex="grow" class="md-padding scrollable" id="chatroom-scroller" ng-switch on="vm.campaign.messages.state" layout="column">
-  <div ng-switch-when="loading" flex layout="column" layout-align="center center">
-    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-  </div>
-  <div ng-switch-when="error" flex layout="column" layout-align="center center" class="text-centered">
-    <div class="md-padding">{{'campaigns.play.errors.chatroom' | translate}}</div>
-    <div><md-button ng-click="vm.campaign.messages.reload(vm.campaign.id)">{{'common.retry' | translate}}</md-button></div>
-  </div>
-  <div ng-switch-when="empty"layout="column" layout-align="end center" class="panel-placeholder-wrapper">
-    <div><md-icon class="md-big-icon" md-colors="{color: 'grey-300'}">message</md-icon></div>
-    <p class="md-title" md-colors="{color: 'grey-400'}">{{'campaigns.play.placeholders.messages' | translate}}</p>
-  </div>
-  <div ng-switch-when="loaded">
+<div class="md-chatroom-header" flex="nogrow" layout="row" layout-align="end center" md-colors="{'background': 'grey-200'}">
+  <a ng-click="vm.displayHelp($event)">
+    <md-tooltip md-direction="left" hide-xs>{{'common.help' | translate}}</md-tooltip>
+    <md-icon>help</md-icon>
+  </a>
+  <span flex></span>
+  <a ng-click="vm.closePanel()" flex="none">
+    <md-tooltip md-direction="left" hide-xs>{{'common.close' | translate}}</md-tooltip>
+    <md-icon>clear</md-icon>
+  </a>
+</div>
 
-    <div ng-repeat="(creation_date, messages) in vm.campaign.messages.grouped">
-      <md-subheader class="md-no-sticky">{{creation_date | date:'dd/MM/yyyy'}}</md-subheader>
-      <div ng-repeat="message in messages track by $index" class="message-wrapper" ng-switch on="message.state">
+<div flex layout="column">
+  <md-content flex="grow" class="md-padding scrollable" id="chatroom-scroller" ng-switch on="vm.campaign.messages.state" layout="column">
+    <div ng-switch-when="loading" flex layout="column" layout-align="center center">
+      <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+    <div ng-switch-when="error" flex layout="column" layout-align="center center" class="text-centered">
+      <div class="md-padding">{{'campaigns.play.errors.chatroom' | translate}}</div>
+      <div><md-button ng-click="vm.campaign.messages.reload(vm.campaign.id)">{{'common.retry' | translate}}</md-button></div>
+    </div>
+    <div ng-switch-when="empty"layout="column" layout-align="end center" class="panel-placeholder-wrapper">
+      <div><md-icon class="md-big-icon" md-colors="{color: 'grey-300'}">message</md-icon></div>
+      <p class="md-title" md-colors="{color: 'grey-400'}">{{'campaigns.play.placeholders.messages' | translate}}</p>
+    </div>
+    <div ng-switch-when="loaded">
 
-        <!-- When the message is currently being sent to the API -->
-        <div ng-switch-when="sending">
-          <div class="message-container self" md-colors="{'background': 'blue-200', 'color': 'grey-50'}">
-            <div layout="row">
-              <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
-              <div flex="none">
-                <div hide-xs class="md-caption message-creation-date">{{message.created_at | date:'HH:mm'}}</div>
-                <div hide-gt-xs class="md-caption">{{message.created_at | date:'HH:mm'}}</div>
-              </div>
-            </div>
-            <div >{{message.data.content}}</div>
-          </div>
-        </div>
+      <div ng-repeat="(creation_date, messages) in vm.campaign.messages.grouped">
+        <md-subheader class="md-no-sticky">{{creation_date | date:'dd/MM/yyyy'}}</md-subheader>
+        <div ng-repeat="message in messages track by $index" class="message-wrapper" ng-switch on="message.state">
 
-        <!-- When messages have been successfully sent -->
-        <div ng-switch-when="sent" ng-switch on="message.type">
-          <div ng-switch-when="command">
-            <ng-include src="vm.getCommandTemplate(message)" flex layout="column" layout-align="start stretch"></ng-include>
-          </div>
-          <div ng-switch-when="text">
-            <div ng-if="message.username === vm.username" class="message-container self" md-colors="{'background': 'blue-700', 'color': 'grey-50'}">
-              <div layout="row">
-                <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
-                <div flex="none">
-                  <div hide-xs class="md-caption message-creation-date">{{message.created_at | date:'HH:mm'}}</div>
-                  <div hide-gt-xs class="md-caption">{{message.created_at | date:'HH:mm'}}</div>
-                </div>
-              </div>
-              <div >{{message.data.content}}</div>
-            </div>
-            <div ng-if="message.username !== vm.username" class="message-container other" md-colors="{'background': 'grey-300'}">
+          <!-- When the message is currently being sent to the API -->
+          <div ng-switch-when="sending">
+            <div class="message-container self" md-colors="{'background': 'blue-200', 'color': 'grey-50'}">
               <div layout="row">
                 <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
                 <div flex="none">
@@ -57,36 +42,65 @@
               <div >{{message.data.content}}</div>
             </div>
           </div>
-        </div>
 
-        <!-- When the sending of the message has failed and the message is in error -->
-        <div ng-switch-when="error">
-          <div class="message-container self" md-colors="{'background': 'red-100'}">
-            <div layout="row">
-              <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
-              <div flex="none">
-                <div hide-xs class="md-caption message-creation-date">{{message.created_at | date:'HH:mm'}}</div>
-                <div hide-gt-xs class="md-caption">{{message.created_at | date:'HH:mm'}}</div>
+          <!-- When messages have been successfully sent -->
+          <div ng-switch-when="sent" ng-switch on="message.type">
+            <div ng-switch-when="command">
+              <ng-include src="vm.getCommandTemplate(message)" flex layout="column" layout-align="start stretch"></ng-include>
+            </div>
+            <div ng-switch-when="text">
+              <div ng-if="message.username === vm.username" class="message-container self" md-colors="{'background': 'blue-700', 'color': 'grey-50'}">
+                <div layout="row">
+                  <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
+                  <div flex="none">
+                    <div hide-xs class="md-caption message-creation-date">{{message.created_at | date:'HH:mm'}}</div>
+                    <div hide-gt-xs class="md-caption">{{message.created_at | date:'HH:mm'}}</div>
+                  </div>
+                </div>
+                <div >{{message.data.content}}</div>
+              </div>
+              <div ng-if="message.username !== vm.username" class="message-container other" md-colors="{'background': 'grey-300'}">
+                <div layout="row">
+                  <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
+                  <div flex="none">
+                    <div hide-xs class="md-caption message-creation-date">{{message.created_at | date:'HH:mm'}}</div>
+                    <div hide-gt-xs class="md-caption">{{message.created_at | date:'HH:mm'}}</div>
+                  </div>
+                </div>
+                <div >{{message.data.content}}</div>
               </div>
             </div>
-            <div >{{message.data.content}}</div>
           </div>
-          <div>
-            <a ng-click="message.send()">Retry</a>
+
+          <!-- When the sending of the message has failed and the message is in error -->
+          <div ng-switch-when="error">
+            <div class="message-container self" md-colors="{'background': 'red-100'}">
+              <div layout="row">
+                <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
+                <div flex="none">
+                  <div hide-xs class="md-caption message-creation-date">{{message.created_at | date:'HH:mm'}}</div>
+                  <div hide-gt-xs class="md-caption">{{message.created_at | date:'HH:mm'}}</div>
+                </div>
+              </div>
+              <div >{{message.data.content}}</div>
+            </div>
+            <div>
+              <a ng-click="message.send()">Retry</a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-  </div>
-</md-content>
-<form name="vm.sendMessageForm" ng-submit="vm.campaign.messages.send(vm.message)" class="md-chatroom-form without-margin" flex="noshrink">
-  <md-input-container class="md-block without-margin">
-    <label for="message" translate>campaigns.play.labels.messages.message</label>
-    <input type="text" id="message" name="message" ng-model="vm.message" autocomplete="off" />
-    <div ng-messages="vm.sendMessageForm.message.$error">
-      <div ng-message="content" translate>campaigns.messages.errors.content</div>
-      <div ng-message="command" translate>campaigns.messages.errors.command</div>
     </div>
-  </md-input-container>
-</form>
+  </md-content>
+  <form name="vm.sendMessageForm" ng-submit="vm.campaign.messages.send(vm.message)" class="md-chatroom-form without-margin" flex="noshrink">
+    <md-input-container class="md-block without-margin">
+      <label for="message" translate>campaigns.play.labels.messages.message</label>
+      <input type="text" id="message" name="message" ng-model="vm.message" autocomplete="off" />
+      <div ng-messages="vm.sendMessageForm.message.$error">
+        <div ng-message="content" translate>campaigns.messages.errors.content</div>
+        <div ng-message="command" translate>campaigns.messages.errors.command</div>
+      </div>
+    </md-input-container>
+  </form>
+</div>

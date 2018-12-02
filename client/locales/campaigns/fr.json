@@ -103,6 +103,13 @@
         "files_list": "Les fichiers n'ont pas pu être chargés",
         "preview": "Le fichier n'a pas pu être chargé"
       },
+      "help": {
+        "chatroom": {
+          "roll": " Cette command permet de lancer un ou plusieurs dés, en leur ajoutant éventuellement un ou plusieurs modificateurs",
+          "secret_roll": "Cette command a la même fonction, à la différence prêt que seul vous et la ou le MJ voyez le résultat des jets",
+          "title": "Vous pouvez utiliser les commandes suivantes :"
+        }
+      },
       "labels": {
         "messages": {
           "message": "Message"

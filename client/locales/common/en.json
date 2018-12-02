@@ -10,6 +10,8 @@
     "cancel": "Cancel",
     "close": "Close",
     "confirm": "Confirm",
+    "examples": "Examples",
+    "help": "Help",
     "inactive": {
       "f": "Inactive",
       "m": "Inactive",
@@ -17,6 +19,7 @@
     },
     "key": "Key",
     "no": "No",
+    "or": "or",
     "private": {
       "f": "Private",
       "m": "Private",
