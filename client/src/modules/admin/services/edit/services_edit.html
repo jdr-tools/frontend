@@ -106,6 +106,15 @@
         <td>{{instance.type}}</td>
         <td>
           <a
+            ng-if="vm.service.key == 'websockets'"
+            data-toogle="tooltip"
+            data-placement="bottom"
+            title="Purge"
+            ng-click="vm.purge(instance)"
+          >
+            <i class="fa fa-eraser"></i>
+          </a>
+          <a
             ng-click="vm.service.toggleInstanceFlag(instance, 'active')"
             ng-class="{'text-success': !instance.active, 'text-danger': instance.active}"
             data-toggle="tooltip"

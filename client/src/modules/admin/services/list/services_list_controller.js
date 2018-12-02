@@ -17,7 +17,7 @@ export default function servicesListController ($mdToast, Api, ServicesList) {
     })
     const toast = $mdToast.simple()
       .position('bottom right')
-      .textContent('Acction effectuée avec succès')
+      .textContent('Action effectuée avec succès')
       .hideDelay(2000)
     $mdToast.show(toast)
   }
