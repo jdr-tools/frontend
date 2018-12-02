@@ -69,7 +69,8 @@
       </md-menu>
       <md-menu>
         <md-button ng-click="$mdMenu.open($event)">{{'components.main_menu.items.profile' | translate}}</md-button>
-        <md-menu-content>
+        <md-menu-content class="no-padding-top">
+          <md-subheader class="md-no-sticky" md-colors="{background: 'grey-400', color: 'grey-50'}">{{vm.username}}</md-subheader>
           <md-menu-item>
             <md-button ui-sref="adminDashboard">{{'components.main_menu.items.admin' | translate}}</md-button>
           </md-menu-item>
