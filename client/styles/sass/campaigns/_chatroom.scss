@@ -3,6 +3,13 @@
   padding-top: 15px !important;
 }
 
+.md-command-container {
+  margin-bottom: 15px;
+  &:last-of-type {
+    margin-bottom: 0px;
+  }
+}
+
 .message-wrapper {
   overflow: hidden;
   

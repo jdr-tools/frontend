@@ -1,19 +1,25 @@
 <md-dialog>
   <md-dialog-content>
     <div class="md-dialog-content">
-      <div>{{'campaigns.play.help.chatroom.title' | translate}}</div>
-      <div><pre>/roll&nbsp;{{'common.or' | translate}}&nbsp;/r</pre></div>
-      <div>{{'campaigns.play.help.chatroom.roll' | translate}}</div>
-      <div><pre>/roll:secret&nbsp;{{'common.or' | translate}}&nbsp;/rs</pre></div>
-      <div>{{'campaigns.play.help.chatroom.secret_roll' | translate}}</div>
-      <div>{{'common.examples' | translate}} :</div>
-      <div>
-        <ul>
-          <li><pre>/roll 1d20+5</pre></li>
-          <li><pre>/r 2d10+1d6+3</pre></li>
-          <li><pre>/roll:secret 1d20+3+1d6+5</pre></li>
-          <li><pre>/rs 3d12</pre></li>
-        </ul>
+      <div class="md-command-container">{{'campaigns.play.help.chatroom.title' | translate}}</div>
+      <div class="md-command-container md-padding" md-colors="{background: 'grey-200'}">
+        <div><pre>/roll&nbsp;{{'common.or' | translate}}&nbsp;/r</pre></div>
+        <div>{{'campaigns.play.help.chatroom.roll' | translate}}</div>
+      </div>
+      <div class="md-command-container md-padding" md-colors="{background: 'grey-200'}">
+        <div><pre>/roll:secret&nbsp;{{'common.or' | translate}}&nbsp;/rs</pre></div>
+        <div>{{'campaigns.play.help.chatroom.secret_roll' | translate}}</div>
+      </div>
+      <div class="md-padding" md-colors="{background: 'grey-200'}">
+        <div>{{'common.examples' | translate}} :</div>
+        <div>
+          <ul>
+            <li><pre>/roll 1d20+5</pre></li>
+            <li><pre>/r 2d10+1d6+3</pre></li>
+            <li><pre>/roll:secret 1d20+3+1d6+5</pre></li>
+            <li><pre>/rs 3d12</pre></li>
+          </ul>
+        </div>
       </div>
     </div>
   </md-dialog-content>
