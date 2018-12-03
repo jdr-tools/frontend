@@ -1,41 +1,36 @@
 <div class="message-container command" md-colors="{'background': 'green-200'}" ng-if="vm.message !== undefined">
-  <div layout="row">
-    <div flex="grow" class="md-body-2 md-chatroom-username">{{vm.message.username}}</div>
+  <div layout="row" layout-align="center stretch">
+    <div flex>Résultat : <span class="md-body-2">{{vm.total}}</span></div>
     <div flex="none">
-      <div hide-xs class="md-caption message-creation-date">{{vm.message.created_at | date:'HH:mm'}}</div>
-      <div hide-gt-xs class="md-caption">{{vm.message.created_at | date:'HH:mm'}}</div>
+      <a ng-click="vm.toggleDetails()">
+        <md-icon ng-if="!vm.details">keyboard_arrow_down</md-icon>
+        <md-icon ng-if="vm.details">keyboard_arrow_up</md-icon>
+      </a>
     </div>
   </div>
-  <div>
-    <div layout="row" layout-align="center stretch">
-      <div flex>Résultat : <span class="md-body-2">{{vm.total}}</span></div>
-      <div flex="none">
-        <a ng-click="vm.toggleDetails()">
-          <md-icon ng-if="!vm.details">keyboard_arrow_down</md-icon>
-          <md-icon ng-if="vm.details">keyboard_arrow_up</md-icon>
-        </a>
+  <div class="details" ng-show="vm.details">
+    <div
+      ng-repeat="roll in vm.message.data.rolls track by $index"
+      ng-init="max = roll.number_of_faces"
+    >
+      <md-divider class="details-divider"></md-divider>
+      <div class="roll-title md-caption">
+        Lancer de {{roll.number_of_dices}} dés à {{roll.number_of_faces}} faces
+      </div>
+      <div ng-repeat="result in roll.results" class="dice result" md-colors="{'border-color': 'green-300'}">
+        <span ng-if="result == max" md-colors="{'color': 'green-400'}" class="critical" ng-bind="result"></span>
+        <span ng-if="result == 1" md-colors="{'color': 'red-400'}" class="critical" ng-bind="result"></span>
+        <span ng-if="result > 1 && result < max" ng-bind="result"></span>
       </div>
     </div>
-    <div class="details" ng-show="vm.details">
-      <div
-        ng-repeat="roll in vm.message.data.rolls track by $index"
-        ng-init="max = roll.number_of_faces"
-      >
-        <md-divider class="details-divider"></md-divider>
-        <div class="roll-title md-caption">
-          Lancer de {{roll.number_of_dices}} dés à {{roll.number_of_faces}} faces
-        </div>
-        <div ng-repeat="result in roll.results" class="dice result" md-colors="{'border-color': 'green-300'}">
-          <span ng-if="result == max" md-colors="{'color': 'green-400'}" class="critical" ng-bind="result"></span>
-          <span ng-if="result == 1" md-colors="{'color': 'red-400'}" class="critical" ng-bind="result"></span>
-          <span ng-if="result > 1 && result < max" ng-bind="result"></span>
-        </div>
-      </div>
-      <div ng-if="vm.message.data.modifier > 0">
-        <md-divider class="details-divider"></md-divider>
-        <div class="roll-title md-caption">Somme des modificateurs</div>
-        <span class="dice modifier" md-colors="{'border-color': 'green-300'}">{{vm.message.data.modifier}}</span>
-      </div>
+    <div ng-if="vm.message.data.modifier > 0">
+      <md-divider class="details-divider"></md-divider>
+      <div class="roll-title md-caption">Somme des modificateurs</div>
+      <span class="dice modifier" md-colors="{'border-color': 'green-300'}">{{vm.message.data.modifier}}</span>
     </div>
   </div>
+</div>
+<div class="md-caption">
+  <span>{{vm.message.username}}</span>&nbsp;
+  <span>{{vm.message.created_at | date:'HH:mm'}}</span>
 </div>

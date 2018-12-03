@@ -34,13 +34,10 @@
             <div class="message-container self" md-colors="{'background': 'blue-200', 'color': 'grey-50'}">
               <div layout="row">
                 <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
-                <div flex="none">
-                  <div hide-xs class="md-caption message-creation-date">{{message.created_at | date:'HH:mm'}}</div>
-                  <div hide-gt-xs class="md-caption">{{message.created_at | date:'HH:mm'}}</div>
-                </div>
               </div>
               <div >{{message.data.content}}</div>
             </div>
+            <div class="md-caption">{{message.created_at | date:'HH:mm'}}</div>
           </div>
 
           <!-- When messages have been successfully sent -->
@@ -52,22 +49,20 @@
               <div ng-if="message.username === vm.username" class="message-container self" md-colors="{'background': 'blue-700', 'color': 'grey-50'}">
                 <div layout="row">
                   <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
-                  <div flex="none">
-                    <div hide-xs class="md-caption message-creation-date">{{message.created_at | date:'HH:mm'}}</div>
-                    <div hide-gt-xs class="md-caption">{{message.created_at | date:'HH:mm'}}</div>
-                  </div>
                 </div>
                 <div >{{message.data.content}}</div>
               </div>
+
               <div ng-if="message.username !== vm.username" class="message-container other" md-colors="{'background': 'grey-300'}">
                 <div layout="row">
                   <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
-                  <div flex="none">
-                    <div hide-xs class="md-caption message-creation-date">{{message.created_at | date:'HH:mm'}}</div>
-                    <div hide-gt-xs class="md-caption">{{message.created_at | date:'HH:mm'}}</div>
-                  </div>
                 </div>
                 <div >{{message.data.content}}</div>
+              </div>
+
+              <div class="md-caption" ng-class="{'text-right': message.username === vm.username}">
+                <span ng-if="vm.username !== message.username">{{message.username}}&nbsp;</span>
+                <span>{{message.created_at | date:'HH:mm'}}</span>
               </div>
             </div>
           </div>
@@ -77,13 +72,10 @@
             <div class="message-container self" md-colors="{'background': 'red-100'}">
               <div layout="row">
                 <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
-                <div flex="none">
-                  <div hide-xs class="md-caption message-creation-date">{{message.created_at | date:'HH:mm'}}</div>
-                  <div hide-gt-xs class="md-caption">{{message.created_at | date:'HH:mm'}}</div>
-                </div>
               </div>
               <div >{{message.data.content}}</div>
             </div>
+            <div class="md-caption">{{message.created_at | date:'HH:mm'}}</div>
             <div>
               <a ng-click="message.send()">Retry</a>
             </div>

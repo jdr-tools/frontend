@@ -6,6 +6,10 @@
 @import 'lib/material-icons';
 @import 'partials/hints';
 
+.text-right {
+  text-align: right;
+}
+
 body {
   height: 100vh;
   width: 100vw;
