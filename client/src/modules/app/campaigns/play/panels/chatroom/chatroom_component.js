@@ -1,4 +1,4 @@
-const chatroomController = function chatroomControllerFunction ($localStorage, $mdDialog, $scope, $state, $timeout, FormService) {
+const chatroomController = function chatroomControllerFunction ($localStorage, $mdDialog, $mdSidenav, $scope, $state, $timeout, FormService) {
   'ngInject'
 
   const vm = this
@@ -8,6 +8,11 @@ const chatroomController = function chatroomControllerFunction ($localStorage, $
    * @var {String} username
    */
   vm.username = $localStorage.account.username
+
+  /**
+   * Closes the current panel, whatever panel is currently opened.
+   */
+  vm.closePanel = () => $mdSidenav('play-sidenav').close()
 
   vm.displayHelp = (event) => {
     $mdDialog.show({
