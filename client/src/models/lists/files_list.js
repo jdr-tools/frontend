@@ -1,4 +1,4 @@
-export default function filesListFactory (Api, WebsocketNotifier, CampaignItemsList) {
+export default function filesListFactory ($rootScope, Api, Uploader, WebsocketNotifier, CampaignItemsList) {
   'ngInject'
 
   /**
@@ -24,6 +24,22 @@ export default function filesListFactory (Api, WebsocketNotifier, CampaignItemsL
       Api.delete(`/campaigns/${vm.campaign_id}/files/${file.id}`, {
         successCallback: () => {
           WebsocketNotifier.sendToCampaign(vm.campaign_id, 'campaign.file.deleted', file)
+        }
+      })
+    }
+
+    /**
+     * Makes a request to add a file given its content.
+     * @param {String} content - the content of the file you want to aadd to the list.
+     */
+    vm.add = (content) => {
+      const vm = this
+      Uploader.uploadFileObject(`/campaigns/${vm.campaign_id}/files`, content, {
+        successCallback: (response) => {
+          WebsocketNotifier.sendToCampaign(vm.campaign_id, 'campaign.file.added', Object.assign(response, {campaign_id: vm.campaign_id}))
+        },
+        errorCallback: (response) => {
+          $rootScope.$broadcast('campaign.upload.error')
         }
       })
     }

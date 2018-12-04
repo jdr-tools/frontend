@@ -20,15 +20,6 @@ export default function campaignFactory ($filter, $rootScope, $timeout, $localSt
       this.files.insert(file)
     }
 
-    addFile (content) {
-      const vm = this
-      Uploader.uploadFileObject(`/campaigns/${vm.id}/files`, content, {
-        successCallback: (response) => {
-          WebsocketNotifier.sendToCampaign(vm.id, 'campaign.file.added', Object.assign(response, {campaign_id: vm.id}))
-        }
-      })
-    }
-
     removeFile (file) {
       _.remove(this.files, f => {
         return (f.id == file.id)

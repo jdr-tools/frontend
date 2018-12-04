@@ -125,6 +125,11 @@
       "tooltips": {
         "chatroom": "Chatroom",
         "files": "Files"
+      },
+      "upload": {
+        "confirmation": "The file has been uploaded successfully",
+        "error": "An error has occurred while uploading the file",
+        "title": "Upload a file"
       }
     },
     "update": {

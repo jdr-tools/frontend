@@ -1,19 +1,29 @@
 <md-dialog class="file-upload-modal">
   <md-toolbar>
     <div class="md-toolbar-tools">
-      <h2 translate>Ajouter un fichier</h2>
+      <h2 translate>campaigns.play.upload.title</h2>
     </div>
   </md-toolbar>
   <form ng-submit="validate()">
     <md-dialog-content class="md-padding">
-      <uploader input-name="content" upload-object="file", upload-key="content" accepted-types="mimeTypes" disabled="isUploading"></uploader>
-      <div layout="row" layout-sm="column" layout-align="space-around" ng-if="isUploading">
-        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+      <div ng-switch on="state">
+        <div ng-switch-when="started|error" ng-switch-when-separator="|">
+          <uploader input-name="content" upload-object="file", upload-key="content" accepted-types="mimeTypes" disabled="state == 'uploading'"></uploader>
+        </div>
+        <div layout="row" layout-sm="column" layout-align="space-around" ng-switch-when="uploading">
+          <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+        </div>
+        <div ng-switch-when="uploaded" class="text-centered md-padding" md-colors="{background: 'green-100'}">
+          {{'campaigns.play.upload.confirmation' | translate}}
+        </div>
+        <div ng-switch-when="error" class="text-centered md-padding" md-colors="{background: 'red-100'}">
+          {{'campaigns.play.upload.error' | translate}}
+        </div>
       </div>
     </md-dialog-content>
-    <md-dialog-actions layout="row">
-      <input type="submit" value="{{'common.validate' | translate}}" class="md-button" ng-disabled="file.content.name === undefined || isUploading" />
-      <md-button ng-click="close()">{{'common.close' | translate}}</md-button>
+    <md-dialog-actions layout="row" ng-switch on="state">
+      <input type="submit" value="{{'common.validate' | translate}}" class="md-button" ng-disabled="state == 'uploading' || state == 'uploaded' || file.content.name == undefined" />
+      <md-button ng-click="close()" ng-disabled="state == 'uploading'">{{'common.close' | translate}}</md-button>
     </md-dialog-actions>
   </form>
 </md-dialog>

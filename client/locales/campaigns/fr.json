@@ -125,6 +125,11 @@
       "tooltips": {
         "chatroom": "Salon de discussion",
         "files": "Voir les fichiers"
+      },
+      "upload": {
+        "confirmation": "Le fichier a bien été mis en ligne",
+        "error": "Une erreur a eu lieu pendant la mise en ligne",
+        "title": "Ajouter un fichier"
       }
     },
     "update": {

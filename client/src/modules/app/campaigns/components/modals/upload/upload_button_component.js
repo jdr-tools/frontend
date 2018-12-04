@@ -3,7 +3,10 @@ const uploadButtonController = function uploadButtonControllerFunction ($localSt
 
   const vm = this
 
+  /** Controller use dinside the template of the modal. */
   const dialogController = ($scope, $mdDialog, $state) => {
+
+    $scope.state = 'started'
 
     $scope.initialize = () => {
       $scope.file = {filename: "", content: {}},
@@ -11,8 +14,8 @@ const uploadButtonController = function uploadButtonControllerFunction ($localSt
     }
 
     $scope.validate = () => {
-      vm.campaign.addFile($scope.file.content)
-      $scope.isUploading = true
+      $scope.state = 'uploading'
+      vm.campaign.files.add($scope.file.content)
     }
 
     $scope.close = () => $mdDialog.cancel()
@@ -21,15 +24,23 @@ const uploadButtonController = function uploadButtonControllerFunction ($localSt
 
     $scope.$on('campaign.file.added', (event, file) => {
       if (file.campaign_id == vm.campaign.id) {
-        $scope.isUploading = false
-        $mdDialog.cancel()
+        $scope.state = 'uploaded'
       }
+    })
+
+    $scope.$on('campaign.upload.error', () => {
+      $scope.state = 'error'
+      $mdToast.show(
+        $mdToast.simple()
+          .textContent($filter('translate')('campaigns.play.errors.upload'))
+          .position('bottom left')
+          .hideDelay(2000))
     })
   }
 
   /**
    * Creates the modal display the form to create a new campaign.
-   * @param {Object} event - just pass $event.
+   * @param {Object} event - just pass $event. It's the element in the DOM from which the modal will appear.
    */
   vm.openUploadModal = (event) => {
     $mdDialog.show({
@@ -37,7 +48,7 @@ const uploadButtonController = function uploadButtonControllerFunction ($localSt
       templateUrl: 'client/src/modules/app/campaigns/components/modals/upload/upload_modal.html',
       parent: angular.element(document.body),
       targetEvent: event,
-      clickOutsideToClose:true
+      clickOutsideToClose: false
     })
   }
 }
