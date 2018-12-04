@@ -37,7 +37,7 @@
               </div>
               <div >{{message.data.content}}</div>
             </div>
-            <div class="md-caption">{{message.created_at | date:'HH:mm'}}</div>
+            <div class="md-caption clear">{{message.created_at | date:'HH:mm'}}</div>
           </div>
 
           <!-- When messages have been successfully sent -->
@@ -60,7 +60,7 @@
                 <div >{{message.data.content}}</div>
               </div>
 
-              <div class="md-caption" ng-class="{'text-right': message.username === vm.username}">
+              <div class="md-caption clear" ng-class="{'text-right': message.username === vm.username}">
                 <span ng-if="vm.username !== message.username">{{message.username}}&nbsp;</span>
                 <span>{{message.created_at | date:'HH:mm'}}</span>
               </div>
@@ -75,7 +75,7 @@
               </div>
               <div >{{message.data.content}}</div>
             </div>
-            <div class="md-caption">{{message.created_at | date:'HH:mm'}}</div>
+            <div class="md-caption clear">{{message.created_at | date:'HH:mm'}}</div>
             <div>
               <a ng-click="message.send()">Retry</a>
             </div>

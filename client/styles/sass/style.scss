@@ -6,6 +6,10 @@
 @import 'lib/material-icons';
 @import 'partials/hints';
 
+.clear {
+  clear: both;
+}
+
 .text-right {
   text-align: right;
 }
