@@ -105,8 +105,8 @@
       },
       "help": {
         "chatroom": {
-          "roll": " Cette command permet de lancer un ou plusieurs dés, en leur ajoutant éventuellement un ou plusieurs modificateurs",
-          "secret_roll": "Cette command a la même fonction, à la différence prêt que seul vous et la ou le MJ voyez le résultat des jets",
+          "roll": " Cette commande permet de lancer un ou plusieurs dés, en leur ajoutant éventuellement un ou plusieurs modificateurs",
+          "secret_roll": "Cette command a la même fonction, à la différence près que seul·e vous et la ou le MJ en voyez les résultats",
           "title": "Vous pouvez utiliser les commandes suivantes :"
         }
       },
