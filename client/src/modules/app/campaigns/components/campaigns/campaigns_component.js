@@ -7,10 +7,6 @@ const campaignsComponent = function campaignsComponentFunction ($localStorage, $
     CampaignsFactory.delete(campaign.id, () => _.remove(vm.items, campaign))
   }
 
-  vm.isCreator = (campaign) => {
-    return $localStorage.account && campaign.creator == $localStorage.account.username
-  }
-
   vm.display = (campaign) => {
     return !campaign.invitation || _.includes(['refused', 'request', 'pending', 'left', 'expelled'], campaign.invitation.status)
   }

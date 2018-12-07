@@ -11,7 +11,8 @@
       <div>{{campaign.description}}</div>
       <md-chips class="campaign-tags" ng-if="campaign.tags.length > 0" ng-model="campaign.tags" readonly="true"></md-chips>
     </md-card-content>
-    <md-card-actions ng-if="!vm.campaign.isCreator" layout="row" layout-align="end center">
+    <!-- Actions available for players not creator are : joining the campaign, cancelling my request to join the campaign -->
+    <md-card-actions ng-if="!vm.campaign.isCreator()" layout="row" layout-align="end center">
       <md-button ng-if="!campaign.is_private && campaign.invitation.status == 'request'" ng-disabled="true" class="md-icon-button">
         <md-tooltip md-direction="top" hide-xs>Requête en attente</md-tooltip>
         <md-icon>help_outline</md-icon>
@@ -21,7 +22,8 @@
         <md-icon>reply</md-icon>
       </md-button>
     </md-card-actions>
-    <md-card-actions ng-if="vm.campaign.isCreator" layout="row" layout-align="end center">
+    <!-- Actions available for a campaign creator are : edit my campaign, delete my campaign -->
+    <md-card-actions ng-if="vm.campaign.isCreator()" layout="row" layout-align="end center">
       <md-button class="md-icon-button" ui-sref="campaigns.edit({id: campaign.id})">
         <md-tooltip md-direction="top" hide-xs>Editer</md-tooltip>
         <md-icon>mode_edit</md-icon>

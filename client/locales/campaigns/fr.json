@@ -86,6 +86,9 @@
       "errors": {
         "command": "La commande est invalide",
         "content": "Les arguments passés à la commande sont invalides"
+      },
+      "labels": {
+        "sending": "envoi"
       }
     },
     "play": {

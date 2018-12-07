@@ -18,6 +18,10 @@
       "n": "Inactif·ve"
     },
     "key": "Clé",
+    "languages": {
+      "english": "Anglais",
+      "french": "Français"
+    },
     "no": "Non",
     "or": "ou",
     "private": {
@@ -30,6 +34,7 @@
       "m": "Public",
       "n": "Public·que"
     },
+    "resend": "Renvoyer",
     "retry": "Réessayer",
     "update": "Mettre à jour",
     "validate": "Valider",

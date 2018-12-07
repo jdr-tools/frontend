@@ -86,6 +86,9 @@
       "errors": {
         "command": "The command is invalid.",
         "content": "Command's arguments are invalid"
+      },
+      "labels": {
+        "sending": "sending"
       }
     },
     "play": {

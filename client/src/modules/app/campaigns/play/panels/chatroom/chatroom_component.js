@@ -55,7 +55,6 @@ const chatroomController = function chatroomControllerFunction ($localStorage, $
   $scope.$on('message.created', (event, message) => {
     if (message.campaign_id === $state.params.id) {
       FormService.reset(vm.sendMessageForm)
-      vm.campaign.messages.insert(message)
       vm.message = ''
     }
   })

@@ -43,7 +43,7 @@ const filesController = function filesControllerFunction ($filter, $mdDialog, $r
 
   $scope.$on('campaign.file.added', (event, file) => {
     if (file.campaign_id === $state.params.id) {
-      vm.campaign.insertFile(file)
+      vm.campaign.files.insert(file)
     }
   })
 

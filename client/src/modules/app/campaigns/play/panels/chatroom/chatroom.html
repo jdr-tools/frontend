@@ -37,7 +37,7 @@
               </div>
               <div >{{message.data.content}}</div>
             </div>
-            <div class="md-caption clear">{{message.created_at | date:'HH:mm'}}</div>
+            <div class="md-caption clear loading self message-subheader text-right">{{'campaigns.messages.labels.sending' |translate}}</div>
           </div>
 
           <!-- When messages have been successfully sent -->
@@ -46,17 +46,11 @@
               <ng-include src="vm.getCommandTemplate(message)" flex layout="column" layout-align="start stretch"></ng-include>
             </div>
             <div ng-switch-when="text">
-              <div ng-if="message.username === vm.username" class="message-container self" md-colors="{'background': 'blue-700', 'color': 'grey-50'}">
-                <div layout="row">
-                  <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
-                </div>
+              <div ng-if="message.username === vm.username" class="message-container self" md-colors="{'background': 'blue-600', 'color': 'grey-50'}">
                 <div >{{message.data.content}}</div>
               </div>
 
-              <div ng-if="message.username !== vm.username" class="message-container other" md-colors="{'background': 'grey-300'}">
-                <div layout="row">
-                  <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
-                </div>
+              <div ng-if="message.username !== vm.username" class="message-container other" md-colors="{'background': 'grey-200'}">
                 <div >{{message.data.content}}</div>
               </div>
 
@@ -75,9 +69,9 @@
               </div>
               <div >{{message.data.content}}</div>
             </div>
-            <div class="md-caption clear">{{message.created_at | date:'HH:mm'}}</div>
-            <div>
-              <a ng-click="message.send()">Retry</a>
+            <div class="message-subheader self" layout="row">
+              <a ng-click="message.send()" flex>{{'common.resend' | translate}}</a>
+              <span class="md-caption">{{message.created_at | date:'HH:mm'}}</span>
             </div>
           </div>
         </div>

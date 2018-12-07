@@ -1,38 +1,38 @@
-export default function messageFactory ($timeout, Api, WebsocketNotifier) {
+export default function messageFactory ($rootScope, $timeout, Api, WebsocketNotifier) {
   'ngInject'
 
-  const message = function messageFunction(rawData) {
-    const vm = this
-
-    /** The state of the message can either be "sending", "sent" or "error" */
-    vm.state = 'started'
+  /**
+   * This class represents a message as displayed in a chatroom. It has its internal content, timestamps,
+   * user or state (sending, sent or error) to be displayed in the interface.
+   * @author Vincent Courtois <courtois.vincent@outlook.com>
+   */
+  const message = class MessageClass {
 
     /**
-     * Builds a message from the raw data returned by the API in a messages' list.
-     * @param {Object} rawData - a message object returned by the API.
+     * Constructor of the class.
+     * @param {Object} data - the data the message is built with.
      */
-    vm.constructor = (rawData) => {
-      Object.assign(vm, {state: 'sent'}, rawData)
+    constructor (data) {
+      Object.assign(this, {state: 'sent'}, data)
     }
 
     /**
      * Sends the content of the current message on the API, the route called depending on the
      * actual content of the message (either plain text, or a command.)
      */
-    vm.send = () => {
-      vm.state = 'sending'
+    send () {
+      this.state = 'sending'
       const successCallback = (response) => {
-        vm.state = 'sent'
-        const message = Object.assign(vm, response.item, {campaign_id: vm.campaign_id})
-        WebsocketNotifier.sendToCampaign(vm.campaign_id, 'message.created', message)
+        this.state = 'sent'
+        WebsocketNotifier.sendToCampaign(this.campaign_id, 'message.created', this)
       }
       const errorCallback = () => {
-        $timeout(() => {
-          vm.state = 'error'
-        }, 1000)
+        $rootScope.$broadcast('message.created', this)
+        this.state = 'error'
       }
-      const method = `sendAs${vm.type.charAt(0).toUpperCase() + vm.type.slice(1)}`
-      vm[method](successCallback, errorCallback)
+      const method = `sendAs${this.type.charAt(0).toUpperCase() + this.type.slice(1)}`
+      
+      this[method](successCallback, errorCallback)
     }
 
     /**
@@ -40,8 +40,8 @@ export default function messageFactory ($timeout, Api, WebsocketNotifier) {
      * @param {function} successCallback - the function called when the method succeds.
      * @param {function} errorCallback - the function called in case of error from the API.
      */
-    vm.sendAsText = (successCallback, errorCallback) => {
-      Api.post(`/campaigns/${vm.campaign_id}/messages`, {content: vm.data.content}, {
+    sendAsText (successCallback, errorCallback) {
+      Api.post(`/campaigns/${this.campaign_id}/messages`, {content: this.data.content}, {
         errorCallback: errorCallback,
         successCallback: successCallback
       })
@@ -52,20 +52,18 @@ export default function messageFactory ($timeout, Api, WebsocketNotifier) {
      * @param {function} successCallback - the function called when the method succeds.
      * @param {function} errorCallback - the function called in case of error from the API.
      */
-    vm.sendAsCommand = (successCallback, errorCallback) => {
-      const command = vm.data.content.split(' ', 2)
+    sendAsCommand (successCallback, errorCallback) {
+      const command = this.data.content.split(' ', 2)
       const parameters = {
         command: _.trim(command[0], '/'),
         content: command[1]
       }
-      Api.post(`/campaigns/${vm.campaign_id}/commands`, parameters, {
+      Api.post(`/campaigns/${this.campaign_id}/commands`, parameters, {
         successCallback: successCallback,
         errorCallback: errorCallback,
         errorBroadcast: 'command.failed'
       })
     }
-
-    vm.constructor(rawData)
   }
 
   return (message)

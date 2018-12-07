@@ -30,7 +30,7 @@ export default function filesListFactory ($rootScope, Api, Uploader, WebsocketNo
 
     /**
      * Makes a request to add a file given its content.
-     * @param {String} content - the content of the file you want to aadd to the list.
+     * @param {String} content - the content of the file you want to add to the list.
      */
     vm.add = (content) => {
       const vm = this

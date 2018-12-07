@@ -1,4 +1,4 @@
-export default function messagesListFactory ($localStorage, Api, CampaignItemsList, Message, WebsocketNotifier) {
+export default function messagesListFactory ($localStorage, $timeout, Api, CampaignItemsList, Message, WebsocketNotifier) {
   'ngInject'
 
   /**
@@ -8,6 +8,7 @@ export default function messagesListFactory ($localStorage, Api, CampaignItemsLi
   const messagesList = function messagesListFunction (campaign_id) {
     const vm = this
 
+    /** The regular expression to identify if a message is supposed to be a command or not. */
     vm.commandRegex = /^\/[a-z]+( .*)?$/
 
     vm.successCallback = response => {
@@ -33,6 +34,7 @@ export default function messagesListFactory ($localStorage, Api, CampaignItemsLi
      * @param {String} content - the text content of the message.
      */
     vm.send = (content) => {
+      console.log(vm)
       const message = new Message({
         username: $localStorage.account.username,
         created_at: new Date(),

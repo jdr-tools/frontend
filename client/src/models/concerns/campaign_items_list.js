@@ -1,6 +1,10 @@
 export default function campaignsItemsListFactory (Api) {
   'ngInject'
 
+  /**
+   * Represents a list of items possibly embedded in a campaign object, for example its messages or files.
+   * @author Vincent Courtois <courtois.vincent@outlook.com>
+   */
   const campaignItemsList = function campaignsListFunction (campaign_id, urlSuffix) {
     const vm = this
 
@@ -10,7 +14,7 @@ export default function campaignsItemsListFactory (Api) {
     vm.state = 'started'
     /** We keep the identifier of the campaign the messages are from. */
     vm.campaign_id = campaign_id
-
+    /** The suffix to add to the URL when requesting the list, eq: 'files' or 'messages' */
     vm.urlSuffix = urlSuffix
 
     /**
