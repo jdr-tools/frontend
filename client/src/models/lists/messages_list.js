@@ -34,7 +34,6 @@ export default function messagesListFactory ($localStorage, $timeout, Api, Campa
      * @param {String} content - the text content of the message.
      */
     vm.send = (content) => {
-      console.log(vm)
       const message = new Message({
         username: $localStorage.account.username,
         created_at: new Date(),

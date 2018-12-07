@@ -10,6 +10,12 @@ const chatroomController = function chatroomControllerFunction ($localStorage, $
   vm.username = $localStorage.account.username
 
   /**
+   * This list links the commands to other templates (for example roll:secret leads to the roll template)
+   * @var {Object<String, String} templatesList
+   */
+  const templatesList = {'roll:secret' : 'roll'}
+
+  /**
    * Closes the current panel, whatever panel is currently opened.
    */
   vm.closePanel = () => $mdSidenav('play-sidenav').close()
@@ -33,7 +39,8 @@ const chatroomController = function chatroomControllerFunction ($localStorage, $
    * @return {String} the URL for the template corresponding to the command.
    */
   vm.getCommandTemplate = (command) => {
-    return `/client/src/modules/app/campaigns/play/commands/${command.data.command}/include.html`
+    const commandName = _.get(templatesList, command.data.command, command.data.command)
+    return `/client/src/modules/app/campaigns/play/commands/${commandName}/include.html`
   }
 
   /**
