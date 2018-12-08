@@ -20,6 +20,10 @@ const chatroomController = function chatroomControllerFunction ($localStorage, $
    */
   vm.closePanel = () => $mdSidenav('play-sidenav').close()
 
+  /**
+   * Displays the help modal to prompt the user with the available commands.
+   * @param {Object} event - pass $event, this is used to set where the modal will open from.
+   */
   vm.displayHelp = (event) => {
     $mdDialog.show({
       controller: function ($mdDialog, $scope) {
@@ -46,18 +50,18 @@ const chatroomController = function chatroomControllerFunction ($localStorage, $
   /**
    * Scrolls the list of messages to get to the bottom of it.
    */
-  vm.scrollMessages = () => {
-    const elements = $('#chatroom-scroller')
-    if (elements.length > 0) {
-      elements.animate({scrollTop: elements[0].scrollHeight}, 500)
-    }
+  const scrollMessages = () => {
+    $timeout(() => {
+      const elements = $('#chatroom-scroller')
+      if (elements.length > 0) {
+        elements.animate({scrollTop: elements[0].scrollHeight}, 500)
+      }
+    })
   }
 
-  $scope.$watchCollection('vm.campaign.messages.items', () => {
-    $timeout(vm.scrollMessages, 200)
-  })
+  $scope.$watchCollection('vm.campaign.messages.items', scrollMessages)
 
-  $scope.$on('messages.scroll', vm.scrollMessages)
+  $scope.$on('messages.scroll', scrollMessages)
 
   $scope.$on('message.created', (event, message) => {
     if (message.campaign_id === $state.params.id) {

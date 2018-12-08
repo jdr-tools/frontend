@@ -126,6 +126,7 @@
         "files": "Liste des fichiers"
       },
       "tooltips": {
+        "chat_error": "The message could not be sent",
         "chatroom": "Chatroom",
         "files": "Files"
       },

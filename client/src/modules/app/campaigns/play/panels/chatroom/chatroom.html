@@ -32,12 +32,9 @@
           <!-- When the message is currently being sent to the API -->
           <div ng-switch-when="sending">
             <div class="message-container self" md-colors="{'background': 'blue-200', 'color': 'grey-50'}">
-              <div layout="row">
-                <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
-              </div>
               <div >{{message.data.content}}</div>
             </div>
-            <div class="md-caption clear loading self message-subheader text-right">{{'campaigns.messages.labels.sending' |translate}}</div>
+            <div class="md-caption clear loading self message-subheader">{{'campaigns.messages.labels.sending' |translate}}</div>
           </div>
 
           <!-- When messages have been successfully sent -->
@@ -63,14 +60,15 @@
 
           <!-- When the sending of the message has failed and the message is in error -->
           <div ng-switch-when="error">
-            <div class="message-container self" md-colors="{'background': 'red-100'}">
-              <div layout="row">
-                <div flex="grow" class="md-body-2 md-chatroom-username">{{message.username}}</div>
-              </div>
+            <div class="message-container self" md-colors="{'background': 'blue-200', 'color': 'grey-50'}">
               <div >{{message.data.content}}</div>
             </div>
             <div class="message-subheader self" layout="row">
-              <a ng-click="message.send()" flex>{{'common.resend' | translate}}</a>
+              <span class="alert-icon">
+                <md-tooltip md-direction="top">{{'campaigns.play.tooltips.chat_error' | translate}}</md-tooltip>
+                <md-icon md-colors="{color: 'red-300'}">warning</md-icon>
+              </span>
+              <a ng-click="message.send()" flex class="resend-message-link">{{'common.resend' | translate}}</a>
               <span class="md-caption">{{message.created_at | date:'HH:mm'}}</span>
             </div>
           </div>

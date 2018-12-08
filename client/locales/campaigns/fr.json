@@ -126,6 +126,7 @@
         "files": "Liste des fichiers"
       },
       "tooltips": {
+        "chat_error": "Le message n'a pas pu être envoyé",
         "chatroom": "Salon de discussion",
         "files": "Voir les fichiers"
       },
