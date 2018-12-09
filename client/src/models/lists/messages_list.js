@@ -1,4 +1,4 @@
-export default function messagesListFactory ($localStorage, $timeout, Api, CampaignItemsList, Message, WebsocketNotifier) {
+export default function messagesListFactory ($localStorage, $rootScope, $timeout, Api, CampaignItemsList, Message, WebsocketNotifier) {
   'ngInject'
 
   /**
@@ -46,6 +46,7 @@ export default function messagesListFactory ($localStorage, $timeout, Api, Campa
       })
       message.send()
       vm.insert(message)
+      $rootScope.$broadcast('message.form.reset')
     }
 
     CampaignItemsList.call(vm, campaign_id, 'messages')

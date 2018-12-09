@@ -59,16 +59,23 @@ const chatroomController = function chatroomControllerFunction ($localStorage, $
     })
   }
 
+  const resetForm = () => {
+    vm.message = ''
+  }
+
   $scope.$watchCollection('vm.campaign.messages.items', scrollMessages)
 
   $scope.$on('messages.scroll', scrollMessages)
 
   $scope.$on('message.created', (event, message) => {
     if (message.campaign_id === $state.params.id) {
+      vm.campaign.messages.insert(message)
       FormService.reset(vm.sendMessageForm)
-      vm.message = ''
+      resetForm()
     }
   })
+
+  $scope.$on('message.form.reset', resetForm)
 
   $scope.$on('command.failed', (event, error) => {
     FormService.reset(vm.sendMessageForm)
