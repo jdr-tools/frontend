@@ -1,4 +1,4 @@
-const running = function runningFunction ($document, $localStorage, $translate, $window, WebsocketChannel) {
+const running = function runningFunction ($document, $localStorage, $translate, $window, Authentication, WebsocketChannel) {
   'ngInject'
 
   if ($localStorage.token !== undefined) WebsocketChannel.setup()
@@ -11,6 +11,8 @@ const running = function runningFunction ($document, $localStorage, $translate, 
   $window.jQuery($document).ready(resizeMainContainer)
   /** The height of the main container should be resetted when resizing it. */
   $window.jQuery($window).resize(resizeMainContainer)
+
+  Authentication.checkAndRedirect()
 
   /** Use the stored language if it exists. */
   if (_.has($localStorage, 'account.language')) {
