@@ -38,6 +38,27 @@
             <div ng-message="uniq" translate>accounts.create.errors.email.uniq</div>
           </div>
         </md-input-container>
+        <div layout="row">
+          <div flex="50">
+            <md-input-container class="md-block">
+              <label for="languageInput" translate>accounts.create.labels.language</label>
+              <md-select ng-model="vm.account.language" name="language" id="languageInput">
+                <md-option value="en_GB">{{'common.languages.english' | translate}}</md-option>
+                <md-option value="fr_FR">{{'common.languages.french' | translate}}</md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+          <div flex="50">
+            <md-input-container class="md-block">
+              <label for="genderInput" translate>accounts.create.labels.gender</label>
+              <md-select ng-model="vm.account.gender" name="gender" id="genderInput">
+                <md-option value="female">{{'accounts.create.options.female' | translate}}</md-option>
+                <md-option value="male">{{'accounts.create.options.male' | translate}}</md-option>
+                <md-option value="neutral">{{'accounts.create.options.neutral' | translate}}</md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+        </div>
       </md-content>
       <md-content class="md-padding">
         <input type="submit" translate translate-attr-value="accounts.create.buttons.submit" class="md-button md-raised" />

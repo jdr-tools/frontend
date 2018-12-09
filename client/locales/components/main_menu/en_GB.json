@@ -10,6 +10,7 @@
       "items": {
         "accounts": "Accounts",
         "admin": "Admin panel",
+        "campaigns": "Campaigns",
         "dashboard": "Dashboard",
         "home": "Home",
         "login": "Log in",
@@ -21,6 +22,7 @@
         "rights": "Rights",
         "search": "Search"
       },
+      "invitations": {
         "text": "{{campaign.creator}} invited you in his campaign",
         "title": "Invitation"
       },

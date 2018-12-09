@@ -44,6 +44,27 @@
         <label for="firstnameInput" translate>accounts.create.labels.firstname</label>
         <input type="test" id="firstnameInput" class="md-input" name="firstname" ng-model="vm.account.firstname" />
       </md-input-container>
+      <div layout="row" layout-align="center stretch">
+        <div flex="50">
+          <md-input-container class="md-block">
+            <label for="languageInput">{{'accounts.create.labels.language' | translate}}</label>
+            <md-select ng-model="vm.account.language" name="language" id="languageInput">
+              <md-option value="en_GB">{{'common.languages.english' | translate}}</md-option>
+              <md-option value="fr_FR">{{'common.languages.french' | translate}}</md-option>
+            </md-select>
+          </md-input-container>
+        </div>
+        <div flex="50">
+          <md-input-container class="md-block">
+            <label for="genderInput">{{'accounts.create.labels.gender' | translate}}</label>
+            <md-select ng-model="vm.account.gender" name="gender" id="genderInput">
+              <md-option value="female">{{'accounts.create.options.female' | translate}}</md-option>
+              <md-option value="male">{{'accounts.create.options.male' | translate}}</md-option>
+              <md-option value="neutral">{{'accounts.create.options.neutral' | translate}}</md-option>
+            </md-select>
+          </md-input-container>
+        </div>
+      </div>
       <input type="submit" translate translate-attr-value="accounts.edit.buttons.submit" class="md-button md-raised" />
     </form>
   </div>

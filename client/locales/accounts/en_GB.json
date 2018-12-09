@@ -28,6 +28,8 @@
         "birthdate": "Birth date",
         "email": "Email address",
         "firstname": "First name",
+        "gender": "Address me",
+        "language": "Language",
         "lastname": "Last name",
         "password": "Password",
         "password_confirmation": "Password confirmation",
@@ -40,6 +42,11 @@
       },
       "messages": {
         "confirmed": "The user account has successfully been created."
+      },
+      "options": {
+        "female": "as a woman",
+        "male": "as a man",
+        "neutral": "in a neutral way"
       },
       "placeholders": {
         "birthdate": "Enter a birth date...",
@@ -80,7 +87,10 @@
           "uniq": "This username is already taken"
         }
       },
-      "title": "Edit my profile"
+      "title": "Edit my profile",
+      "toasts": {
+        "success": "Account successfully updated"
+      }
     }
   }
 }

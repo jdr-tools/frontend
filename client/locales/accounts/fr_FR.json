@@ -28,6 +28,8 @@
         "birthdate": "Date de naissance",
         "email": "Adresse e-mail",
         "firstname": "Prénom",
+        "gender": "S'adresser à moi",
+        "language": "Langage utilisé",
         "lastname": "Nom de famille",
         "password": "Mot de passe",
         "password_confirmation": "Confirmation du mot de passe",
@@ -40,6 +42,11 @@
       },
       "messages": {
         "confirmed": "Votre compte a bien été créé"
+      },
+      "options": {
+        "female": "en tant que femme",
+        "male": "en tant qu'homme",
+        "neutral": "de façon neutre"
       },
       "placeholders": {
         "birthdate": "Entrez une date de naissance...",
@@ -80,7 +87,10 @@
           "uniq": "Ce pseudonyme est déjà employé"
         }
       },
-      "title": "Editer mon profil"
+      "title": "Editer mon profil",
+      "toasts": {
+        "success": "Compte mis à jour avec succès"
+      }
     }
   }
 }

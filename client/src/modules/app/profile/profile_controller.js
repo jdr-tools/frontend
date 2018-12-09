@@ -1,4 +1,4 @@
-const profileController = function profileControllerFunction ($mdToast, Api) {
+const profileController = function profileControllerFunction ($filter, $localStorage, $mdToast, $timeout, $translate, Api) {
   'ngInject'
 
   const vm = this
@@ -17,11 +17,15 @@ const profileController = function profileControllerFunction ($mdToast, Api) {
   }
 
   vm.success = () => {
-    const toast = $mdToast.simple()
-      .position('bottom right')
-      .textContent('Compte mis à jour avec succès')
-      .hideDelay(2000)
-    $mdToast.show(toast)
+    $translate.use(vm.account.language)
+    $timeout(() => {
+      const toast = $mdToast.simple()
+        .position('bottom right')
+        .textContent($filter('translate')('accounts.edit.toasts.success'))
+        .hideDelay(2000)
+      $mdToast.show(toast)
+    })
+    $localStorage.account = vm.account
     vm.initialize()
   }
 

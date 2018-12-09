@@ -5,14 +5,15 @@
 const configTranslateProvider = function configTranslateProviderFunction ($translateProvider, $translatePartialLoaderProvider) {
   'ngInject'
 
-  const loadedParts = ["errors", "common", "confirmations", "components/main_menu", "components/custom_footer"]
+  const loadedParts = ["errors", "common", "confirmations", "components/main_menu"]
 
   loadedParts.forEach((part) => $translatePartialLoaderProvider.addPart(part))
   
   $translateProvider.useLoader('$translatePartialLoader', {
     urlTemplate: '/client/locales/{part}/{lang}.json'
   })
-  $translateProvider.preferredLanguage('fr')
+  $translateProvider.fallbackLanguage('fr_FR')
+  $translateProvider.preferredLanguage('fr_FR')
 }
 
 export default configTranslateProvider

@@ -2,7 +2,7 @@
  * This component handles the top menu of the application and the related logic.
  * @author Vincent Courtois <courtois.vincent@outlook.com>
  */
-const appMenuController = function appMenuControllerFunction(Api, Authentication, $interval, $localStorage, $rootScope, $scope, InvitationsFactory) {
+const appMenuController = function appMenuControllerFunction(Api, Authentication, $interval, $localStorage, $rootScope, $scope, $translate, InvitationsFactory) {
   'ngInject'
 
   const vm = this
@@ -40,6 +40,7 @@ const appMenuController = function appMenuControllerFunction(Api, Authentication
   vm.logout = () => {
     vm.authenticated = false
     Authentication.destroyUserSession()
+    $translate.use('fr_FR')
   }
 
   vm.refuse = (invitation) => {

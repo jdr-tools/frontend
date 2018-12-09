@@ -14,6 +14,8 @@ const accountsCreateController = function accountsCreateControllerFunction ($mdT
     email: '',
     lastname: '',
     firstname: '',
+    gender: 'neutral',
+    language: 'french',
     birthdate: new Date(1970, 0, 0)
   }
 

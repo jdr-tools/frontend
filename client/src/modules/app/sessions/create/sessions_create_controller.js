@@ -25,7 +25,6 @@ const sessionsCreateController = function sessionCreateControllerFunction ($loca
   vm.resetCredentialsError = () => {
     vm.sessionCreationForm.username.$setValidity('credentials', true)
   }
-  
 }
 
 export default sessionsCreateController
