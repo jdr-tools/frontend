@@ -9,7 +9,7 @@
           "blank": "Une adresse email est requise pour l'inscription",
           "minlength": "Un pseudonyme doit faire au minimum six caractères",
           "pattern": "Vous devez fournir une adresse email dans un format valide (ex: example@test.com)",
-          "uniq": "Cette adresse email est déjà associée à un autre utilisateur"
+          "uniq": "Cette adresse email est déjà employée"
         },
         "password": {
           "blank": "Vous devez fournir un mot de passe pour sécuriser l'accès à votre compte"
@@ -25,7 +25,6 @@
         }
       },
       "labels": {
-        "birthdate": "Date de naissance",
         "email": "Adresse e-mail",
         "firstname": "Prénom",
         "gender": "S'adresser à moi",
@@ -33,7 +32,7 @@
         "lastname": "Nom de famille",
         "password": "Mot de passe",
         "password_confirmation": "Confirmation du mot de passe",
-        "username": "Nom d'utilisateur"
+        "username": "Pseudonyme"
       },
       "legends": {
         "about": "A propos de vous",
@@ -49,7 +48,6 @@
         "neutral": "de façon neutre"
       },
       "placeholders": {
-        "birthdate": "Entrez une date de naissance...",
         "email": "Exemple : adresse-demo@arkaan.fr...",
         "firstname": "Entrez votre prénom...",
         "lastname": "Entrez votre nom de famille...",
@@ -66,13 +64,10 @@
         "submit": "Mettre à jour"
       },
       "errors": {
-        "birthdate": {
-          "maxdate": "On ne peut pas naître dans le futur ! (ou alors contactez-nous pour nous raconter)"
-        },
         "email": {
           "blank": "Une adresse email est requise",
           "pattern": "Vous devez fournir une adresse email dans un format valide (ex: example@test.com)",
-          "uniq": "Cette adresse email est déjà associée à un autre compte"
+          "uniq": "Cette adresse email est déjà employée"
         },
         "password": {
           "blank": "Vous devez fournir un mot de passe pour le confirmer",

@@ -32,7 +32,7 @@ export default function messageFactory ($rootScope, $timeout, Api, WebsocketNoti
       }
       const method = `sendAs${this.type.charAt(0).toUpperCase() + this.type.slice(1)}`
       
-      $timeout(() =>this[method](successCallback, errorCallback), 5000)
+      this[method](successCallback, errorCallback)
     }
 
     /**

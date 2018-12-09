@@ -25,7 +25,6 @@
         }
       },
       "labels": {
-        "birthdate": "Birth date",
         "email": "Email address",
         "firstname": "First name",
         "gender": "Address me",
@@ -49,7 +48,6 @@
         "neutral": "in a neutral way"
       },
       "placeholders": {
-        "birthdate": "Enter a birth date...",
         "email": "Example : adresse-demo@arkaan.fr...",
         "firstname": "Enter your first name...",
         "lastname": "Enter your last name...",
@@ -66,9 +64,6 @@
         "submit": "Update"
       },
       "errors": {
-        "birthdate": {
-          "maxdate": "You can't be born in the future. Or can you ?"
-        },
         "email": {
           "blank": "You must provide a valid email address",
           "pattern": "You must provide a valid email address (eg: example@test.com)",

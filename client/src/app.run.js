@@ -1,5 +1,6 @@
 const running = function runningFunction ($document, $localStorage, $translate, $window, WebsocketChannel) {
   'ngInject'
+
   if ($localStorage.token !== undefined) WebsocketChannel.setup()
 
   const resizeMainContainer = () => {

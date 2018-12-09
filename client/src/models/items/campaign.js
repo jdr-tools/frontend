@@ -36,6 +36,8 @@ export default function campaignFactory ($localStorage, Api, FilesList, Messages
     isCreator() {
       const username = _.get($localStorage, 'account.username', true)
       const creator = _.get(this, 'creator.username', false)
+
+      console.log(username, creator)
       return username === creator
     }
   }

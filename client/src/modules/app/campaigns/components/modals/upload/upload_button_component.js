@@ -1,4 +1,4 @@
-const uploadButtonController = function uploadButtonControllerFunction ($localStorage, $mdDialog, $rootScope, Uploader, CampaignsFactory) {
+const uploadButtonController = function uploadButtonControllerFunction ($filter, $localStorage, $mdDialog, $mdToast, $rootScope, Uploader, CampaignsFactory) {
   'ngInject'
 
   const vm = this

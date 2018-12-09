@@ -16,7 +16,10 @@ const websocketChannel = function websocketChannelFunction (Api, $rootScope, $in
   vm.keepAlive = null
 
   /** Function called when closing the websocket, cancelling the sending on pings to keep it alive. */
-  vm.onWsClose = () => $timeout.cancel(vm.keepAlive)
+  vm.onWsClose = () => {
+    console.log("fermeture du canal de synchronisation avec le serveur")
+    $timeout.cancel(vm.keepAlive)
+  }
 
   /**
    * Method called when receiving a message from the websocket, parsing and transferring it.
@@ -24,11 +27,13 @@ const websocketChannel = function websocketChannelFunction (Api, $rootScope, $in
    */
   vm.onWsMessage = (event) => {
     const body = JSON.parse(event.data)
+    console.log(`Réception d'un message ${body.message} dans le canal`)
     $rootScope.$broadcast(body.message, body.data)
   }
 
   /** Function called when creating the websocket, initializing the keep alive pings. */
   vm.onWsOpen = () => {
+    console.log("Ouverture du canal de synchronisation avec le serveur")
     vm.keepAlive = $interval(() => vm.websocket.send('REFRESH_PING'), 20000)
   }
 

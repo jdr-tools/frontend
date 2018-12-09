@@ -20,6 +20,7 @@ export default function websocketNotifier (Api) {
   }
 
   const sendNotification = (parameters, message, data) => {
+    console.log(`Envoi du message ${message}`)
     Api.post('/repartitor/messages', Object.assign(parameters, {message, data}))
   }
 }
