@@ -24,7 +24,11 @@ export default function messageFactory ($rootScope, $timeout, Api, WebsocketNoti
       this.state = 'sending'
       const successCallback = (response) => {
         this.state = 'sent'
-        WebsocketNotifier.sendToCampaign(this.campaign_id, 'message.created', this)
+        /**
+         * The message is not broadcasted to myself because the behaviour is not exactly the same for me and for the others.
+         * For me the message is "sending" then "sent" or "error". For the others it's just displayed when sent.
+         */
+        WebsocketNotifier.sendToCampaignAndNotMyself(this.campaign_id, 'message.created', this)
       }
       const errorCallback = () => {
         $rootScope.$broadcast('message.created', this)

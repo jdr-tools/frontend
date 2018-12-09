@@ -1,4 +1,4 @@
-export default function websocketNotifier (Api) {
+export default function websocketNotifier ($rootScope, Api) {
   'ngInject'
 
   const vm = this
@@ -16,6 +16,11 @@ export default function websocketNotifier (Api) {
   }
 
   vm.sendToCampaign = (campaign_id, message, data) => {
+    vm.sendToCampaignAndNotMyself(campaign_id, message, data)
+    $rootScope.$broadcast(message, data)
+  }
+
+  vm.sendToCampaignAndNotMyself = (campaign_id, message, data) => {
     sendNotification({campaign_id: campaign_id}, message, data)
   }
 
