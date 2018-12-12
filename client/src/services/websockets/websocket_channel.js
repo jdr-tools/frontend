@@ -16,7 +16,7 @@ const websocketChannel = function websocketChannelFunction (Api, $rootScope, $in
   vm.keepAlive = null
 
   /** Function called when closing the websocket, cancelling the sending on pings to keep it alive. */
-  vm.onWsClose = () => {
+  vm.onWsClose = (error) => {
     console.log("fermeture du canal de synchronisation avec le serveur")
     $timeout.cancel(vm.keepAlive)
   }
@@ -44,7 +44,7 @@ const websocketChannel = function websocketChannelFunction (Api, $rootScope, $in
   vm.setup = () => {
     if (vm.websocket === null) {
       /** Gets the address of the websocket service by requesting the load balancer. */
-      Api.get('/repartitor/url', {}, {
+      Api.get('/websockets/repartitor/url', {}, {
         successCallback: response => {
           /** Create a websocket connection to the given address. */
           vm.websocket = new WebSocket(`${response.url}?session_id=${$localStorage.token}`)
