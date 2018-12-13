@@ -37,8 +37,7 @@ export default function filesListFactory ($rootScope, Api, Uploader, WebsocketNo
       Uploader.uploadFileObject(`/campaigns/${vm.campaign_id}/files`, content, {
         successCallback: (response) => {
           const file = Object.assign(response, {campaign_id: vm.campaign_id})
-          WebsocketNotifier.sendToCampaign(vm.campaign_id, 'campaign.file.added')
-          $rootScope.$broadcast('campaign.file.added', file)
+          WebsocketNotifier.sendToCampaign(vm.campaign_id, 'campaign.file.added', file)
         },
         errorCallback: (response) => {
           $rootScope.$broadcast('campaign.upload.error')

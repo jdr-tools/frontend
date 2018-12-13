@@ -44,7 +44,7 @@ const websocketChannel = function websocketChannelFunction (Api, $rootScope, $in
   vm.setup = () => {
     if (vm.websocket === null) {
       /** Gets the address of the websocket service by requesting the load balancer. */
-      Api.get('/websockets/repartitor/url', {}, {
+      Api.get('/repartitor/url', {}, {
         successCallback: response => {
           /** Create a websocket connection to the given address. */
           vm.websocket = new WebSocket(`${response.url}?session_id=${$localStorage.token}`)
