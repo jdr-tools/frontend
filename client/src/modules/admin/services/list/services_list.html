@@ -19,7 +19,7 @@
   <tbody>
     <tr ng-repeat="service in vm.servicesList.services | orderBy: 'key'">
       <td>
-        <md-checkbox class="without-margin" ng-model="service.selected" ng-if="service.key != 'services'"></md-checkbox>
+        <md-checkbox class="without-margin" ng-model="service.selected" ng-if="service.key != 'services'" aria-label="check {{service.key}}"></md-checkbox>
       </td>
       <td>{{service.key}}</td>
       <td><pre class="without-margin">{{service.path}}</pre></td>

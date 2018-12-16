@@ -12,6 +12,9 @@ const configTranslateProvider = function configTranslateProviderFunction ($trans
   $translateProvider.useLoader('$translatePartialLoader', {
     urlTemplate: '/client/locales/{part}/{lang}.json'
   })
+
+  $translateProvider.useSanitizeValueStrategy('sceParameters')
+
   $translateProvider.fallbackLanguage('fr_FR')
   $translateProvider.preferredLanguage('fr_FR')
 }

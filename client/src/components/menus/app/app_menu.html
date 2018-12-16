@@ -36,7 +36,7 @@
 
     <span>
       <md-menu>
-        <md-button ng-click="$mdMenu.open($event)" class="md-icon-button requests-count-wrapper">
+        <md-button ng-click="$mdMenu.open($event)" class="md-icon-button requests-count-wrapper" aria-label="invitations">
           <md-icon ng-if="vm.invitations.length" md-colors="{color: 'red'}">person</md-icon>
           <md-icon ng-if="!vm.invitations.length">person_outline</md-icon>
           <div class="requests-count" md-colors="{background: 'red'}" ng-if="vm.invitations.length">{{vm.invitations.length}}</div>
