@@ -3,7 +3,9 @@
     <md-icon class="md-avatar-icon">face</md-icon>
     <div class="md-list-item-text" layout="column">
       <h3>{{invitation.username}}</h3>
-      <p>{{'campaigns.invitations.labels.created_by' | translate}} : {{invitation.creator}}</p>
+      <p>
+        {{'campaigns.invitations.labels.created_at' | translate}}  {{invitation.created_at | date : 'dd/MM/yyyy (HH:mm)'}}
+      </p>
       <md-icon ng-if="vm.status == 'accepted'" class="md-secondary md-icon-button" ng-click="vm.expel(invitation)">close</md-icon>
     </div>
   </md-list-item>

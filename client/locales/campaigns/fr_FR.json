@@ -70,7 +70,7 @@
         "username": "Entrez un pseudonyme et appuyez sur Entrée"
       },
       "labels": {
-        "created_by": "Créée par",
+        "created_at": "Créée le",
         "username": "Pseudonyme"
       },
       "placeholders": {

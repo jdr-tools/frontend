@@ -67,10 +67,10 @@
               </md-input-container>
             </form>
           </md-content>
-          <md-content layout-gt-xs="row" ng-init="pendings = (vm.invitations | filter: {status: 'pending'})">
-            <div flex-gt-xs="50" ng-class="{'md-padding': true, 'hide-xs': pendings.length == 0}">
+          <md-content layout-gt-xs="row">
+            <div flex-gt-xs="50" ng-class="{'md-padding': true, 'hide-xs': vm.pendings().length == 0}">
               <h2 class="md-headline" translate>campaigns.invitations.titles.pending</h2>
-              <div ng-if="pendings.length == 0" translate>campaigns.invitations.placeholders.pending</div>
+              <div ng-if="vm.pendings().length == 0" translate>campaigns.invitations.placeholders.pending</div>
               <invitations collection="vm.invitations" status="pending" icons="true"></invitations>
             </div>
             <div flex-gt-xs="50" class="md-padding">

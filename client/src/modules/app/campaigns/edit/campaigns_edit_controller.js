@@ -54,6 +54,8 @@ const campaignsEditController = function campaignsEditControllerFunction ($local
     })
   }
 
+  vm.pendings = () => _.filter(vm.invitations, {status: 'pending'});
+
   /**
    * Gets the invitations linked to this campaign. An invitation can be :
    * - pending (the player is not yet participating to the campaign)

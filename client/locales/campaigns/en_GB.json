@@ -70,7 +70,7 @@
         "username": "Enter a username and press enter"
       },
       "labels": {
-        "created_by": "Created by",
+        "created_at": "Created at",
         "username": "Player name"
       },
       "placeholders": {
