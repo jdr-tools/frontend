@@ -12,8 +12,6 @@ const running = function runningFunction ($document, $localStorage, $translate, 
   /** The height of the main container should be resetted when resizing it. */
   $window.jQuery($window).resize(resizeMainContainer)
 
-  Authentication.checkAndRedirect()
-
   /** Use the stored language if it exists. */
   if (_.has($localStorage, 'account.language')) {
     $translate.use($localStorage.account.language)

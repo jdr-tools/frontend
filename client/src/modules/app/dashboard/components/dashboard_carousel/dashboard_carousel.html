@@ -6,7 +6,7 @@
       <div class="carousel-text-wrapper md-padding" md-colors="{background: 'grey-800'}">
         <h1 translate>campaigns.dashboard.play.title</h1>
         <div hide-xs hide-sm class="md-padding">{{'campaigns.dashboard.play.description' | translate}}</div>
-        <md-button ui-sref="campaigns.index">{{'campaigns.dashboard.play.button' | translate}}</md-button>
+        <md-button ng-if="vm.authenticated" ui-sref="campaigns.index">{{'campaigns.dashboard.play.button' | translate}}</md-button>
       </div>
     </div>
     <div class="item">
@@ -24,7 +24,7 @@
       <div class="carousel-text-wrapper md-padding" md-colors="{background: 'grey-800'}">
         <h1 translate>campaigns.dashboard.gather.title</h1>
         <div hide-xs hide-sm class="md-padding">{{'campaigns.dashboard.gather.description' | translate}}</div>
-        <md-button ui-sref="campaigns.search">{{'campaigns.dashboard.gather.button' | translate}}</md-button>
+        <md-button ng-if="vm.authenticated" ui-sref="campaigns.search">{{'campaigns.dashboard.gather.button' | translate}}</md-button>
       </div>
     </div>
   </div>

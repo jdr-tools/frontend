@@ -1,7 +1,10 @@
 const dashboardController = class DashboardController {
   constructor(Api, $scope) {
     'ngInject'
-    this.section = $scope.section
+
+    const vm = this;
+
+    vm.section = $scope.section;
   }
 }
 

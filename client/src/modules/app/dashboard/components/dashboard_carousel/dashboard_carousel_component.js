@@ -1,5 +1,9 @@
-const carouselController = function carouselControllerFunction ($timeout) {
+const carouselController = function carouselControllerFunction ($timeout, Authentication) {
   'ngInject'
+
+  const vm = this;
+
+  vm.authenticated = Authentication.checkSessionKeysPresence(false);
 
   $timeout(() => {
     $('.owl-carousel').owlCarousel({
