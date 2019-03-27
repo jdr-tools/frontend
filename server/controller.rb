@@ -22,7 +22,7 @@ class Controller < Sinatra::Base
   end
 
   get '/websocket' do
-    halt 200, {url: Arkaan::Monitoring::Websocket.pluck(:url).sample}.to_json
+    halt 200, {url: Configuration.instance.websockets.sample}.to_json
   end
 
   post '/api' do
@@ -54,26 +54,10 @@ class Controller < Sinatra::Base
   end
 
   def get_connection
-    return Faraday.new(get_gateway_url) do |faraday|
+    return Faraday.new(Configuration.instance.gateways.sample) do |faraday|
       faraday.request  :url_encoded
       faraday.response :logger
       faraday.adapter  Faraday.default_adapter
-    end
-  end
-
-  def get_random_gateway
-    Arkaan::Monitoring::Gateway.where(:enum_type.ne => :local, running: true, active: true).sample
-  end
-
-
-  def get_gateway_url
-    if ENV['USE_TEST_GATEWAYS'] == 'true'
-      gateway = Arkaan::Monitoring::Gateway.where(enum_type: :local, running: true, active: true).first
-      gateway = get_random_gateway if gateway.nil?
-      logger.info "URL GATEWAY ::: #{gateway.url}"
-      return gateway.url
-    else
-      return get_random_gateway.url
     end
   end
 end

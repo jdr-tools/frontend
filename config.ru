@@ -4,7 +4,8 @@ Bundler.require(ENV['RACK_ENV'].to_sym || :development)
 $stdout.sync = true
 
 require './server/controller.rb'
+require './server/configuration.rb'
 
-Mongoid.load!('./config/mongoid.yml')
+Configuration.instance.load!
 
 map('/') { run Controller.new }
