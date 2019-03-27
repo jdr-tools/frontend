@@ -123,7 +123,6 @@ DEPENDENCIES
   dotenv (= 2.5.0)
   draper
   faraday (= 0.15.2)
-  mongoid (= 7.0.1)
   pry
   rack_csrf
   rake (= 12.3.1)
@@ -133,4 +132,4 @@ RUBY VERSION
    ruby 2.3.4p301
 
 BUNDLED WITH
-   1.16.1
+   1.17.1

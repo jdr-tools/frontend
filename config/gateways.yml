@@ -1,0 +1,4 @@
+development:
+  - http://localhost:9000/
+production:
+  - https://arkaan-gateway.herokuapp.com/

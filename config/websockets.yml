@@ -1,0 +1,6 @@
+development:
+  - https://arkaan-websockets.herokuapp.com/
+production:
+  - https://arkaan-websockets.herokuapp.com/
+test:
+  - https://arkaan-websockets.herokuapp.com/
