@@ -2,10 +2,16 @@
   "confirmations": {
     "campaign": {
       "delete": "Voulez vous réellement supprimer la campagne : {{title}}"
+    },
+    "invitation": {
+      "delete": "Vous-vous supprimer cette invitation ?"
     }
   },
   "confirmation_titles": {
     "campaign": {
+      "delete": "Confirmation de suppression"
+    },
+    "invitation": {
       "delete": "Confirmation de suppression"
     }
   }

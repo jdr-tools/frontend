@@ -11,7 +11,7 @@ const factories = angular.module('arkaan.frontend.factories', [])
   .factory('CampaignsFactory', CampaignsFactory)
   .factory('CategoriesFactory', categoriesFactory)
   .factory('GroupsFactory', groupsFactory)
-  .factory('InvitationsFactory', invitationsFactory)
+  .service('InvitationsFactory', invitationsFactory)
   .factory('RightsFactory', rightsFactory)
   .factory('ServicesFactory', servicesFactory)
   .name

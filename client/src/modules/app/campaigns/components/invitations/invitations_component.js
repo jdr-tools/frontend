@@ -1,15 +1,17 @@
-const invitationsComponent = function invitationsComponentFunction ($localStorage, $rootScope, InvitationsFactory) {
+const invitationsComponent = function invitationsComponentFunction ($localStorage, $rootScope, $scope, Confirmation, InvitationsFactory) {
   'ngInject'
 
   const vm = this
 
   vm.currentUsername = $localStorage.account.username
 
-  vm.expel = (invitation) => {
-    InvitationsFactory.changeStatus(invitation, 'expelled', (response) => {
-      $rootScope.$broadcast('invitations.remove', response)
-    })
+  vm.expel = expel;
+
+  function expel (invitation) {
+    return Confirmation.trigger('invitation.delete', invitation);
   }
+
+  $scope.$on('invitation.delete', (e, invitation) => InvitationsFactory.expel(invitation));
 }
 
 export default {

@@ -12,7 +12,7 @@ const campaignsSearchController = function campaignsSearchControllerFunction ($r
   })
 
   vm.deleteInvitation = (invitation) => {
-    InvitationsFactory.delete(invitation.id, () => vm.getCampaigns())
+    InvitationsFactory.remove(invitation.id, () => vm.getCampaigns())
   }
 
   vm.triggerCreationModal = (event) => {

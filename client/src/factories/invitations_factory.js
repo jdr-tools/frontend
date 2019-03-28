@@ -1,25 +1,52 @@
-const invitationsFactory = function invitationsFactoryFunction (Api, WebsocketNotifier) {
-  'ngInject'
-  
-  const vm = this
+export default class invitationsFactory {
 
-  vm.own = (callback) => {
-    Api.get('/invitations', {}, {successCallback: callback})
+  /**
+   * Constructor for the service, injecting dependencies.
+   * @param {object} Api - the Api class to make calls on the backend.
+   * @param {object} WebsocketNotifier - the notifier for the websocket to warn other players of the updates.
+   */
+  constructor (Api, WebsocketNotifier) {
+    'ngInject';
+    this.api = Api;
+    this.ws = WebsocketNotifier;
   }
 
-  vm.changeStatus = (invitation, status, callback) => {
-    Api.put(`/invitations/${invitation.id}`, {status: status}, {successCallback: response => {
+  /**
+   * Changes the status of the invitation by updating it in the database.
+   * @param {object} invitation - the invitation to update, linking a player and a campaign.
+   * @param {string} status - a valid status to update the invitation with, see the gem to know which status are accepted.
+   * @param {function} callback - an optional callback to invoke when the update is correctly done.
+   */
+  changeStatus (invitation, status, callback) {
+    return this.api.put(`/invitations/${invitation.id}`, {status: status}, {successCallback: response => {
       const invit = response.item
-      WebsocketNotifier.sendToCampaign(invit.campaign.id, 'invitation.update', invit)
-      callback(invit)
+      this.ws.sendToCampaign(invit.campaign.id, 'invitation.update', invit)
+      if (typeof callback === 'function') callback(invit)
     }})
   }
 
-  vm.delete = (invitation, callback) => {
-    Api.delete(`/invitations/${invitation.id}`, {successCallback: callback})
+  /**
+   * Updates the invitation as expelled, so that the player can no longer access the campaign.
+   * @param {object} invitation - the invitation to update.
+   */
+  expel (invitation) {
+    return changeStatus(invitation, 'expelled');
   }
 
-  return vm
-}
+  /**
+   * Gets the invitations for the currently connected user.
+   * @param {function} callback - the function to call when the list is successfully obtained.
+   */
+  own (callback) {
+    return this.api.get('/invitations', {}, {successCallback: callback})
+  }
 
-export default invitationsFactory
+  /**
+   * Removes an invitation, marking it as "refused" when it was either pending or request.
+   * @param {object} invitation - the invitation to mark as refused.
+   * @param {function} callback - the function to call when the deletion is correctly made.
+   */
+  remove (invitation, callback) {
+    return this.api.delete(`/invitations/${invitation.id}`, {successCallback: callback})
+  }
+}
