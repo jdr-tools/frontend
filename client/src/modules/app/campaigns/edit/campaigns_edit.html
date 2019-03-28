@@ -26,6 +26,9 @@
                 <label for="campaignDescription">{{'campaigns.update.tabs.informations.labels.description' | translate}}</label>
                 <textarea class="campaign-description" ng-model="vm.campaign.description"></textarea>
               </md-input-container>
+              <md-slider-container>
+                <md-slider min="0" max="20" ng-model="vm.campaign.max_players" class="md-primary" md-discrete aria-label="rating"></md-slider>
+              </md-slider-container>
               <md-checkbox class="campaign-checkbox" ng-true-value="false" ng-false-value="true" ng-model="vm.campaign.is_private" name="is_private">
                 {{'campaigns.create.labels.make_public' | translate}}
               </md-checkbox>

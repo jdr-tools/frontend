@@ -32,6 +32,7 @@ const campaignsEditController = function campaignsEditControllerFunction ($local
       title: '',
       description: '',
       is_private: true,
+      max_players: 5,
       tags: []
     }
     /** The structure holding the list of invitations. */
@@ -79,7 +80,7 @@ const campaignsEditController = function campaignsEditControllerFunction ($local
 
   /** The submit of the update form. */
   vm.update = () => {
-    const parameters = _.pick(vm.campaign, ['title', 'description', 'tags', 'is_private'])
+    const parameters = _.pick(vm.campaign, ['title', 'description', 'tags', 'is_private', 'max_players'])
     CampaignsFactory.update($state.params.id, vm.campaignEditionForm, parameters, vm.success)
   }
 

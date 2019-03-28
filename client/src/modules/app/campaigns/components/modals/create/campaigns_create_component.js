@@ -11,6 +11,7 @@ const campaignsCreateComponent = function campaignsCreateComponentFunction ($att
       title: '',
       is_private: !vm.isPublic,
       description: '',
+      max_players: 5,
       tags: [],
       creator_id: $localStorage.account.id
     }

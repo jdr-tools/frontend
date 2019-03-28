@@ -27,6 +27,10 @@
           md-enable-chip-edit="true"
         >
         </md-chips>
+        <!-- Field for the max number of players, default should be 5 players -->
+        <md-slider-container>
+          <md-slider min="0" max="20" ng-model="campaign.max_players" class="md-primary" md-discrete aria-label="rating"></md-slider>
+        </md-slider-container>
         <!-- Switch to make the campaign private (TRUE) or public (FALSE) -->
         <md-checkbox class="campaign-checkbox" ng-true-value="false" ng-false-value="true" ng-model="campaign.is_private" name="is_private">
           {{'campaigns.create.labels.make_public' | translate}}
