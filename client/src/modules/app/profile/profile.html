@@ -1,8 +1,12 @@
 <md-content layout="row" flex>
   <div flex-gt-sm="25" show-gt-sm></div>
-  <div flex-gt-sm="50" flex-sm="100" flex-xs="100" class="md-padding">
-    <h1 translate class="main-title md-display-1">accounts.edit.title</h1>
-    <form name="vm.profileEditionForm" ng-submit="vm.submit()" class="md-padding">
+  <div flex-gt-sm="50" flex-sm="100" flex-xs="100" ng-switch="vm.state">
+    <div ng-switch-when="loading" layout="column" layout-align="center center" class="full-height wrap">
+      <md-progress-circular diameter="70"></md-progress-circular>
+    </div>
+    <div ng-switch-when="loaded" class="md-padding">
+      <h1 translate class="main-title md-display-1">accounts.edit.title</h1>
+      <form name="vm.profileEditionForm" ng-submit="vm.submit()" class="md-padding">
       <md-input-container class="md-block">
         <label for="usernameInput" translate>accounts.create.labels.username</label>
         <input id="usernameInput" type="text" class="md-input" name="username" ng-model="vm.account.username" required minlength="6" />
@@ -66,7 +70,11 @@
         </div>
       </div>
       <input type="submit" translate translate-attr-value="accounts.edit.buttons.submit" class="md-button md-raised" />
-    </form>
+      </form>
+    </div>
+    <div ng-switch-when="error" layout="row" layout-align="center center" class="text-centered full-height wrap">
+      <div flex="70">{{'accounts.edit.errors.server' | translate}}</div>
+    </div>
   </div>
   <div flex-gt-sm="25" show-gt-sm></div>
 </md-content>

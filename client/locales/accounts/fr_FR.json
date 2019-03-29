@@ -76,6 +76,7 @@
         "password_confirmation": {
           "blank": "Vous devez confirmer votre mot de passe pour le mettre à jour"
         },
+        "server": "Le profil ne peut pas être chargé pour le moment, veuillez réessayer plus tard",
         "username": {
           "blank": "Vous devez entrer un pseudonyme",
           "minlength": "Un pseudonyme doit faire au minimum 6 caractères",

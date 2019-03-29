@@ -11,9 +11,17 @@ const profileController = function profileControllerFunction ($filter, $localSto
   }
 
   vm.initialize = () => {
-    Api.get('/accounts/own', {}, {successCallback: (response) => {
-      vm.account = _.omit(response.account, 'rights')
-    }})
+    vm.state = 'loading';
+    Api.get('/accounts/own', {}, {
+      successCallback: (response) => {
+        vm.account = _.omit(response.account, 'rights');
+        vm.state = 'loaded';
+      },
+      errorCallback: response => {
+        vm.state = 'error'
+        console.log(vm.state)
+      }
+    })
   }
 
   vm.success = () => {

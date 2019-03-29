@@ -76,6 +76,7 @@
         "password_confirmation": {
           "blank": "Please fill the password confirmation field"
         },
+        "server": "The profile can't currently be loaded, please try again later",
         "username": {
           "blank": "Please fill the username field",
           "minlength": "A username must be at least 6 characters long",
