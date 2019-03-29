@@ -4,6 +4,7 @@
       "labels": {
         "description": "Description",
         "make_public": "Make this campaign public",
+        "max_players": "Max number of players",
         "title": "Title"
       },
       "title": "Create a new campaign",

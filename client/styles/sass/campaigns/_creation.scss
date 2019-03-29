@@ -1,0 +1,9 @@
+.max-players-wrapper {
+  margin-top: 18px;
+
+  @media only screen and (min-width: 600px) {
+    .max-players-label {
+      padding-right: 15px;
+    }
+  }
+}
