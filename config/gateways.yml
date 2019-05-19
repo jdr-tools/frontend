@@ -1,4 +1,4 @@
 development:
-  - http://localhost:9000/
+  - http://localhost:3500/
 production:
-  - https://arkaan-gateway.herokuapp.com/
+  - http://51.15.233.214:9292/
