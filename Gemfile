@@ -1,4 +1,3 @@
-ruby '2.3.4'
 source 'https://rubygems.org/'
 
 group :development, :production, :test do
@@ -7,8 +6,12 @@ group :development, :production, :test do
   gem 'arkaan'   , '1.2.12'
   gem 'rack_csrf', '2.6.0' , require: 'rack/csrf'
   gem 'rake'     , '12.3.1'
-  gem 'dotenv'   , '2.5.0' , require: 'dotenv/load'
   gem 'draper'
+  
+  gem 'capistrano'        , '3.11.0'
+  gem 'capistrano-bundler', '1.5.0'
+  gem 'capistrano-rvm'    , '0.1.1'
+  gem 'dotenv', '2.7.2'
 end
 
 group :development, :test do
