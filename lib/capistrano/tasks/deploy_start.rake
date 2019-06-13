@@ -1,6 +1,16 @@
 namespace :deploy do
+  desc 'Install NPM dependencies and bundle the application'
+  after :finishing, :npm_install do
+    on roles(:all) do
+      within current_path do
+        execute :npm, 'install'
+        execute :npm, 'run postinstall'
+      end
+    end
+  end
+
   desc 'Start the server'
-  after :finishing, :start do
+  after :npm_install, :start do
     on roles(:all) do
       within current_path do
         pid_file = "/tmp/#{fetch(:application)}_#{fetch(:app_port)}.pid"
@@ -12,7 +22,6 @@ namespace :deploy do
           puts "Le fichier du PID n'a pas été trouvé et ne peux pas être supprimé."
         end
         execute :bundle, "exec rackup -p #{fetch(:app_port)} --env production -o 0.0.0.0 -P #{pid_file} --daemonize"
-        execute :npm, 'install'
       end
     end
   end
