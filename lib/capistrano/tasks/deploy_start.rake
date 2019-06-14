@@ -11,7 +11,7 @@ namespace :deploy do
   # end
 
   desc 'Start the server'
-  after :npm_install, :start do
+  after :finishing, :start do
     on roles(:runner) do
       within current_path do
         pid_file = "/tmp/#{fetch(:application)}_#{fetch(:app_port)}.pid"
