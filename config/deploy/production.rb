@@ -11,6 +11,8 @@ set :app_port, 80
 
 server '163.172.142.63', user: 'deploy', roles: %w{web}
 
+server '163.172.142.63', user: 'root', roles: %w{runner}
+
 # role-based syntax
 # ==================
 
