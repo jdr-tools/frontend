@@ -45,6 +45,10 @@ class Controller < Sinatra::Base
     body @forwarded.body
   end
 
+  get '/.well-kown/acme-challenge/:id' do
+    halt 200, {message: 'ACME challenge for certbot use onyl'}.to_json
+  end
+
   private
 
   def parse_body
