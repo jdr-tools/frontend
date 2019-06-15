@@ -46,7 +46,7 @@ class Controller < Sinatra::Base
   end
 
   get '/.well-known/acme-challenge/:id' do
-    halt 200, {message: 'ACME challenge for certbot use only'}.to_json
+    halt 200, params[:id]
   end
 
   private
