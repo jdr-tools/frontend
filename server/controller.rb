@@ -45,7 +45,7 @@ class Controller < Sinatra::Base
     body @forwarded.body
   end
 
-  get '/.well-kown/acme-challenge/:id' do
+  get '/.well-known/acme-challenge/:id' do
     halt 200, {message: 'ACME challenge for certbot use only'}.to_json
   end
 
