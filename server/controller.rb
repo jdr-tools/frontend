@@ -46,7 +46,7 @@ class Controller < Sinatra::Base
   end
 
   get '/.well-known/acme-challenge/:id' do
-    halt 200, params[:id]
+    halt 200, "#{params[:id]}.#{ENV['CERTBOT_THUMBPRINT']}"
   end
 
   private
