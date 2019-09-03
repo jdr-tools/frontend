@@ -1,22 +1,13 @@
-version: 2
+version: 2.1
+orbs:
+  virtuaexecutors: virtuaorbs/executors@0.1.0
+  virtuacommands: virtuaorbs/commands@0.5.1
 jobs:
   deploy-job:
-    docker:
-       - image: circleci/ruby:2.6.2-node-browsers
-       - image: mongo:4.1.4-xenial
-    working_directory: ~/repo
+    executor: virtuaexecutors/mongoruby_2-6-3
     steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "fa:fe:e6:76:13:de:d6:1b:cc:5a:3d:42:3f:60:17:01"
-      - checkout
-      - run:
-          name: Bundle Install
-          command: bundle check || bundle install
-      - run:
-          name: Deploy to Scaleway if branch is Master
-          command: bundle exec cap production deploy
-
+      - virtuacommands/perform-capistrano-command:
+          command: "deploy"
 workflows:
   version: 2
   build-deploy:
