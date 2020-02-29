@@ -110,7 +110,7 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.0.4)
       loofah (~> 2.2, >= 2.2.2)
-    rake (12.3.1)
+    rake (12.3.3)
     request_store (1.4.1)
       rack (>= 1.4)
     sinatra (2.0.1)
@@ -146,7 +146,7 @@ DEPENDENCIES
   faraday (= 0.15.2)
   pry (= 0.12.2)
   rack_csrf (= 2.6.0)
-  rake (= 12.3.1)
+  rake (= 12.3.3)
   sinatra (= 2.0.1)
 
 BUNDLED WITH

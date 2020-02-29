@@ -5,7 +5,7 @@ group :development, :production, :test do
   gem 'faraday'  , '0.15.2'
   gem 'arkaan'   , '1.2.12'
   gem 'rack_csrf', '2.6.0' , require: 'rack/csrf'
-  gem 'rake'     , '12.3.1'
+  gem 'rake'     , '12.3.3'
   gem 'draper'
   
   gem 'capistrano'        , '3.11.0'
