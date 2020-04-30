@@ -24,7 +24,7 @@
     "babelify": "^8.0.0",
     "bootstrap": "4.0.0-beta.2",
     "browserify": "^16.2.2",
-    "jquery": "^3.2.1",
+    "jquery": "^3.5.0",
     "lodash": "^4.17.5",
     "minifyify": "^7.3.5",
     "ngstorage": "^0.3.11",
