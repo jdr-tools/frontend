@@ -261,9 +261,13 @@ angular-ui-switch@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/angular-ui-switch/-/angular-ui-switch-0.1.1.tgz#2a0eecf5e6eea6419564f1c6b6aa21f4b183201e"
 
-"angular@>=1.2.26 <=1.7", angular@^1.6.7:
+"angular@>=1.2.26 <=1.7":
   version "1.7.3"
   resolved "https://registry.yarnpkg.com/angular/-/angular-1.7.3.tgz#0f25a661d079fc84d5ccc877a2ef9d7178575ddb"
+
+angular@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/angular/-/angular-1.8.0.tgz#b1ec179887869215cab6dfd0df2e42caa65b1b51"
 
 ansi-align@^2.0.0:
   version "2.0.0"
@@ -2826,7 +2830,7 @@ event-emitter@~0.3.5:
 
 event-stream@~3.3.0:
   version "3.3.4"
-  resolved "http://registry.npmjs.org/event-stream/-/event-stream-3.3.4.tgz#4ab4c9a0f5a54db9338b4c34d86bfce8f4b35571"
+  resolved "https://registry.npmjs.org/event-stream/-/event-stream-3.3.4.tgz#4ab4c9a0f5a54db9338b4c34d86bfce8f4b35571"
   dependencies:
     duplexer "~0.1.1"
     from "~0"
